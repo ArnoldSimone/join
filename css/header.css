@@ -1,0 +1,11 @@
+header {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.headerRight {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
