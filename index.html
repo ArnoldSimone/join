@@ -3,11 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="assets/img/Capa 2.png" />
+  <link rel="stylesheet" href="standard.css">
+  <link rel="stylesheet" href="css/header.css">
+  <link rel="stylesheet" href="css/sidebar.css">
+  <script src="script/include.js"></script>
   <title>Join</title>
 </head>
 
-<body>
-  <div w3-include-html="templates/header.html"></div>
+<body onload="includeHTML()">
+  <header>
+      <div w3-include-html="html/header.html"></div>
+  </header>
+
+  <main>
+    <section>
+      <div w3-include-html="html/sidebar.html"></div>
+    </section>
+  </main>
   
 </body>
 </html>
