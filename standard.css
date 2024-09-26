@@ -17,7 +17,8 @@ body {
     /* Button Technical Task*/
     --textwhite: #ffffff;
     --textblack: #000000;
-    --lightgrey: #d1d1d1;
+    --middlegrey: #d1d1d1;
+    --lightgrey: #F6F7F8;
     --red: #ff3d00;
     /* Prio urgent*/
     --green: #7ae229;
@@ -25,6 +26,10 @@ body {
     --orange: #ffa800;
     /* Prio medium*/
 }
+
+/* .example {
+    background-color: var(--blue);
+} */
 
 .btn {
     border-radius: 10px;
@@ -38,11 +43,16 @@ body {
     align-items: center;
 }
 
-a {
-    text-decoration: none;
+.d-flex-x {
+    display: flex;
+    justify-content: center;
 }
 
+.d-flex-y {
+    display: flex;
+    align-items: center;
+}
 
-/* .example {
-    background-color: var(--blue);
-} */
+.d-none {
+    display: none;
+}

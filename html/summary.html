@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="assets/img/Capa 2.png" />
+    <link rel="stylesheet" href="../standard.css">
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/sidebar.css">
+    <link rel="stylesheet" href="../styles/fonts.css">
+    <link rel="stylesheet" href="../css/summary.css">
+    <script src="../script/include.js"></script>
+    <title>Join</title>
+
+</head>
+
+<body onload="includeHTML()">
+
+    <header>
+        <div w3-include-html="header.html"></div>
+    </header>
+
+    <main>
+        <section>
+            <div w3-include-html="sidebar.html"></div>
+        </section>
+    </main>
+
+    <section class="summary">
+        <div class="headerSummary d-flex-y">
+            <h1 class="headlineSummary">Join 360</h1>
+            <div class="verticalLineBlue"></div>
+            <span class="textHeader">Key Metrics at a Glance</span>
+            <div class="horizontalLineBlue"></div>
+        </div>
+        <div class="mainSummary d-flex-y">
+            <div class="ctnTasksSummary d-flex">
+                <div class="mainSummaryTop d-flex">
+                    <div class="summaryDone d-flex ctnTasks gap20 ctnTaskMiddle">
+                        <img id="imgPencil" class="img" src="../assets/img/pencilDark.svg" alt="imagePencil">
+                        <div class="summaryTask d-flex">
+                            <span id="summaryTodoCounter" class="counter">1</span>
+                            <span class="textCounter">To-do</span>
+                        </div>
+                    </div>
+                    <div class="summaryDone d-flex ctnTasks gap20 ctnTaskMiddle">
+                        <img id="imgCheck" class="img" src="../assets/img/checkDark.svg" alt="imageCheck">
+                        <div class="summaryTask d-flex">
+                            <span id="summaryDoneCounter" class="counter">1</span>
+                            <span class="textCounter">Done</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="mainSummaryMiddle d-flex ctnTasks ctnTaskLarge">
+                    <div class="mainSummaryMiddleLeft d-flex gap20">
+                        <img id="imgCheck" class="img" src="../assets/img/urgent.svg" alt="imageUrgent">
+                        <div class="summaryTask d-flex">
+                            <span id="summaryUrgentCounter" class="counter">1</span>
+                            <span class="textCounter">Urgent</span>
+                        </div>
+                    </div>
+                    <div class="verticalLineGrey"></div>
+                    <div class="mainSummaryMiddleRight d-flex">
+                        <span class="date">Octover 16, 2022</span>
+                        <span class="deatline">Upcoming Dealine</span>
+                    </div>
+                </div>
+                <div class="mainSummaryBottom d-flex">
+                    <div class="summaryTasksinBoard d-flex ctnTasks ctnTaskSmal taskBottom">
+                        <span id="tasksinBoardCounter" class="counter">5</span>
+                        <span class="textCounter">Tasks in <br>Board</span>
+                    </div>
+                    <div class="summaryTasksinProgress d-flex  ctnTasks ctnTaskSmal taskBottom">
+                        <span id="tasksinProgressCounter" class="counter">3</span>
+                        <span class="textCounter">Tasks in<br>Progress</span>
+                    </div>
+                    <div class="summaryFeedback d-flex ctnTasks ctnTaskSmal taskBottom">
+                        <span id="feedbackCounter" class="counter">2</span>
+                        <span class="textCounter">Awaiting<br>Feedback</span>
+                    </div>
+                </div>
+            </div>
+            <div class="greetingSummary d-flex">
+                <div class="ctnGreeting d-flex">
+                    <span id="daytimeGreeting" class="daytimeGreeting">Good morning,</span>
+                    <span id="userGreeting" class="userGreeting">Simone Arnold</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</body>
+
+</html>
