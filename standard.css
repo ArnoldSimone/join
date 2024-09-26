@@ -7,16 +7,22 @@ body {
 
 :root {
     --darkblue: #2a3647;
-    --darkblueMenu: #091931;    /*Active Menu*/
+    --darkblueMenu: #091931;
+    /*Active Menu*/
     --lightblue: #29abe2;
-    --blue: #0038ff;        /* Button UserStory*/
-    --blue: #1fd7c1;        /* Button Technical Task*/
+    --blue: #0038ff;
+    /* Button UserStory*/
+    --blue: #1fd7c1;
+    /* Button Technical Task*/
     --textwhite: #ffffff;
     --textblack: #000000;
     --lightgrey: #d1d1d1;
-    --red: #ff3d00;             /* Prio urgent*/
-    --green: #7ae229;           /* Prio low*/
-    --orange: #ffa800;          /* Prio medium*/
+    --red: #ff3d00;
+    /* Prio urgent*/
+    --green: #7ae229;
+    /* Prio low*/
+    --orange: #ffa800;
+    /* Prio medium*/
 }
 
 /* .example {
