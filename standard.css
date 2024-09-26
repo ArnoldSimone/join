@@ -2,6 +2,7 @@ body {
     margin: 0;
     box-sizing: border-box;
     scroll-behavior: smooth;
+    background-color: #f6f7f8;
 }
 
 
@@ -23,6 +24,18 @@ body {
     /* Prio low*/
     --orange: #ffa800;
     /* Prio medium*/
+}
+
+.btn {
+    border-radius: 10px;
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+.d-flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 /* .example {
