@@ -3,9 +3,7 @@
     justify-content: space-between;
     align-items: center;
     height: 96px;
-    /* padding-top: 20px; */
     padding-right: 40px;
-    /* padding-bottom: 20px; */
     padding-left: 348px;
     box-shadow: 0px 4px 4px 0px #00000010;
 }
@@ -22,6 +20,11 @@
     width: 104px;
     height: 56px;
     gap: 16px;
+    cursor: pointer;
+}
+
+.headerRight img:hover {
+    transform: scale(1.2);
 }
 
 .userLetter {
@@ -32,6 +35,10 @@
     border-radius: 100%;
     width: 56px;
     height: 56px;
+}
+
+.userLetter:hover {
+    background-color: var(--lightgrey);
 }
 
 .userLetter h2 {

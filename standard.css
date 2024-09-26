@@ -38,6 +38,11 @@ body {
     align-items: center;
 }
 
+a {
+    text-decoration: none;
+}
+
+
 /* .example {
     background-color: var(--blue);
 } */
