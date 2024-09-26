@@ -1,0 +1,138 @@
+.dnone {
+    display: none;
+}
+
+.summary {
+    margin-left: 232px;
+    padding: 32px 64px;
+    background-color: var(--lightgrey);
+}
+
+.headerSummary {
+    gap: 24px;
+}
+
+.headlineSummary {
+    font-size: 60px;
+}
+
+.verticalLineBlue {
+    width: 3px;
+    height: 60px;
+    background-color: var(--lightblue);
+    border-radius: 2px;
+}
+
+.textHeader {
+    font-size: 28px;
+}
+
+.horizontalLineBlue {
+    width: 60px;
+    height: 3px;
+    background-color: var(--lightblue);
+    border-radius: 2px;
+}
+
+.verticalLineGrey {
+    width: 3px;
+    height: 90px;
+    background-color: var(--middlegrey);
+    border-radius: 2px;
+}
+
+.ctnTasksSummary {
+    flex-direction: column;
+    width: 552px;
+    gap: 24px;
+}
+
+.ctnTasks {
+    background-color: var(--textwhite);
+    border-radius: 24px;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+}
+
+.gap20 {
+    gap: 20px;
+}
+
+.ctnTaskSmal {
+    width: 168px;
+    height: 154px;
+}
+
+.ctnTaskMiddle {
+    min-width: 264px;
+    height: 154px;
+}
+
+.ctnTaskLarge {
+    width: 100%;
+    height: 154px;
+}
+
+.counter {
+    font-size: 48px;
+    font-weight: 600;
+}
+
+.mainSummaryTop {
+    gap: 24px;
+}
+
+.img {
+    width: 60px;
+}
+
+.summaryTask {
+    flex-direction: column;
+}
+
+.mainSummaryBottom {
+    width: 100%;
+    justify-content: space-between;
+    gap: 24px;
+}
+
+.taskBottom {
+    flex-direction: column;
+    gap: 8px;
+}
+
+.textCounter {
+    font-size: 20px;
+    text-align: center;
+}
+
+.mainSummaryMiddleLeft {
+    width: 264px;
+}
+
+.date {
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.mainSummaryMiddleRight {
+    flex: 1;
+    flex-direction: column;
+    gap: 12px;
+    justify-content: baseline;
+}
+
+.ctnGreeting {
+    flex-direction: column;
+    align-items: flex-start;
+    padding-left: 64px;
+}
+
+.daytimeGreeting {
+    font-size: 40px;
+}
+
+.userGreeting {
+    font-size: 48px;
+    color: var(--lightblue);
+    font-weight: 600;
+}
