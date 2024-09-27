@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="assets/img/Capa 2.png" />
+    <link rel="stylesheet" href="../standard.css">
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/sidebar.css">
+    <link rel="stylesheet" href="../css/fonts.css">
+    <link rel="stylesheet" href="../css/board.css">
+    <script src="../script/include.js"></script>
+    <title>Join</title>
+
+</head>
+
+<body onload="includeHTML()">
+
+    <header>
+        <div w3-include-html="header.html"></div>
+    </header>
+    <aside>
+        <div w3-include-html="sidebar.html"></div>
+    </aside>
+    <main>
+        <section class="board-container">
+
+            <div class="header-board d-flex-y">
+                <div class="header-board-left">
+                    <h1 class="headline">Board</h1>
+                </div>
+                <div class="header-board-right d-flex">
+                    <div class="ctn-input-search">
+                        <input id="input-search-task" class="input-field" type="text" placeholder="Find Task">
+                        <img class="search-image" src="../assets/img/search.svg" alt="imageSearch">
+                    </div>
+                    <button class="btn-dark d-flex-y">Add Task
+                        <img class="image-plus-add-task" src="../assets/img/plus-white.svg" alt="Image Plus"></button>
+                </div>
+            </div>
+
+            <div class="main-board d-flex-x">
+                <div class="ctn-cards-todo ctn-cards">
+                    <div class="header-container d-flex-y">
+                        <span>To do</span>
+                        <img class="btn-add-task-smal" src="../assets/img/plusButtonDarkBlue.svg" alt="Image Plus">
+                    </div>
+                    <div id="ctn-task-todo" class="task-box">
+                        <div id="task-todo" class="task-item">
+                            <div class="no-tasks-todo d-flex">
+                                No tasks To do
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ctn-cards-in-progress ctn-cards">
+                    <div class="header-container d-flex-y">
+                        <span>In progress</span>
+                        <img class="btn-add-task-smal" src="../assets/img/plusButtonDarkBlue.svg" alt="Image Plus">
+                    </div>
+                    <div id="ctn-task-in-progress" class="task-box">
+                        <div id="task-in-progress" class="task-item">
+                            <div class="no-tasks-todo d-flex">
+                                No tasks To do
+                            </div>
+                            <div class="ctn-task d-flex-x">
+                                <p id="task-category" class="task-category bg-user-story">User Story</p>
+                                <p id="task-title" class="task-title">Kochwelt Page & Recipe Rekommender</p>
+                                <p id="task-description" class="task-description">Build start page with recipe
+                                    recommendation ...</p>
+                                <div class="task-subtasks d-flex-y">
+                                    <progress max="3" value="2"></progress>
+                                    <span class="subtasks-count">1/3 Subtasks</span>
+                                </div>
+                                <div class="ctn-task-bottom d-flex-y">
+                                    <div class="ctn-assigned-to d-flex-y">
+                                        <div class="assignet-do d-flex bg-1">AM</div>
+                                        <div class="assignet-do d-flex bg-2">BR</div>
+                                        <div class="assignet-do d-flex bg-3">HI</div>
+                                    </div>
+                                    <img class="image-prio-board" src="../assets/img/lowsym.png" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ctn-cards-await-feedback ctn-cards">
+                    <div class="header-container d-flex-y">
+                        <span>Await feedback</span>
+                        <img class="btn-add-task-smal" src="../assets/img/plusButtonDarkBlue.svg" alt="Image Plus">
+                    </div>
+                    <div id="ctn-task-await-feedback" class="task-box">
+                        <div id="task-await-feedback" class="task-item">
+                            <div class="no-tasks-todo d-flex">
+                                No tasks To do
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="ctn-cards-done ctn-cards">
+                    <div class="header-container d-flex-y">
+                        <span>Done</span>
+                    </div>
+                    <div id="ctn-task-done" class="task-box">
+                        <div id="task-done" class="task-item">
+                            <div class="no-tasks-todo d-flex">
+                                No tasks To do
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+</body>
+
+</html>

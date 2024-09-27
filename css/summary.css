@@ -1,3 +1,7 @@
+.main {
+    max-width: 1440px;
+}
+
 .header-summary {
     gap: 24px;
 }

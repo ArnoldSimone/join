@@ -13,7 +13,7 @@ body {
     --lightblue: #29abe2;
     --blue: #0038ff;
     /* Button UserStory*/
-    --blue: #1fd7c1;
+    --bluelight: #1fd7c1;
     /* Button Technical Task*/
     --textwhite: #ffffff;
     --textblack: #000000;
@@ -82,4 +82,5 @@ a {
 main {
     margin-left: 232px;
     padding: 32px 64px;
+    max-width: 1440px;
 }
