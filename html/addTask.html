@@ -71,18 +71,24 @@
 
                         <div class="form-group">
                         <label for="subtasks">Subtasks</label>
-                            <input type="text" id="subtasks" name="subtasks" placeholder="Add new subtask">
-                            <div>
-                                <img src="../assets/img/plusicon.png" alt="">
+                            <div class="subtask-connect">
+                                    <input type="text" id="subtasks" name="subtasks" placeholder="Add new subtask">
+                                <div class="subtask-img">
+                                    <img src="../assets/img/plusicon.png" alt="">
+                                </div>
                             </div>  
-                        </div>
-                        <div class="form-actions">
-                            <button type="button" class="clear">Clear</button>
-                            <button type="submit" class="create-task">Create Task</button>
                         </div>
                     </div>
                 </form>
+                <div class="addtask-footer">
+                    <div><span class="required">*</span><span>This field is required</span></div>
+                    <div class="form-actions">
+                        <button type="button" class="clear">Clear</button>
+                        <button type="submit" class="create-task">Create Task</button>
+                    </div>
+                </div> 
             </div>
+        
         </section>
     </main>
 </body>

@@ -51,7 +51,7 @@ form {
 }
 
 label {
-    font-weight: 300;
+    font-weight: 400;
     margin-bottom: 8px;
 }
 
@@ -60,6 +60,12 @@ input, select, textarea {
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 16px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 200;
+}
+
+input:hover, select:hover, textarea:hover {
+    border: 2px solid #ababab;
 }
 
 textarea {
@@ -99,7 +105,7 @@ button.clear {
     background-color: #f6f7f8;
     border: 2px solid #2a3647;
     color: #2a3647;
-    padding: 10px 20px;
+    padding: 13px 23px;
     border-radius: 5px;
     cursor: pointer;
 }
@@ -112,7 +118,7 @@ button.clear:hover {
 button.create-task {
     background-color: #2a3647;
     color: white;
-    padding: 10px 20px;
+    padding: 13px 23px;
     border-radius: 5px;
     border: none;
     cursor: pointer;
@@ -129,5 +135,32 @@ button.create-task:hover {
 }
 
 #description {
-    height: 136px;
+    height: 112px;
+}
+
+.subtask-connect {
+    position: relative;
+}
+
+.subtask-img {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 15px;
+}
+
+.subtask-img:hover {
+    background-color: #cccaca;
+}
+
+.required {
+    color: red;
+}
+
+.addtask-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding-top: 30px;
 }
