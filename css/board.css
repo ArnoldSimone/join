@@ -1,0 +1,172 @@
+.input-field {
+    padding: 0 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 20px;
+    height: 46px;
+    width: 264px;
+    font-weight: 200;
+}
+
+.input-field::placeholder {
+    font-size: 20px;
+    color: #E7E7E7;
+}
+
+.btn-dark {
+    background-color: var(--darkblue);
+    color: var(--textwhite);
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    height: 46px;
+    gap: 10px;
+    padding: 0 24px;
+    font-weight: 600;
+}
+
+.ctn-input-search {
+    position: relative;
+}
+
+.search-image {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 16px;
+    bottom: 0;
+    height: 32px;
+}
+
+.header-board.d-flex-y {
+    justify-content: space-between;
+}
+
+.header-board-right {
+    gap: 24px;
+}
+
+.main-board {
+    gap: 32px;
+}
+
+.ctn-cards {
+    flex: 1;
+    flex-direction: column;
+}
+
+.header-container {
+    justify-content: space-between;
+}
+
+.header-container span {
+    color: #42526E;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.btn-add-task-smal {
+    cursor: pointer;
+    height: 20px;
+}
+
+.btn-add-task-smal:hover {
+    content: url('../assets/img/plusButtonLightBlue.svg');
+
+}
+
+.no-tasks-todo {
+    background-color: #E7E7E7;
+    color: gray;
+    border-radius: 10px;
+    border-style: dashed;
+    border-width: 3px;
+    border: 1px dashed rgb(199, 199, 199);
+    font-size: 16px;
+    height: 42px;
+    margin: 16px 0;
+}
+
+.ctn-task {
+    background-color: var(--textwhite);
+    border-radius: 24px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+    padding: 16px;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.ctn-task:hover {
+    cursor: pointer;
+}
+
+.ctn-task p {
+    margin: 0;
+}
+
+.task-category {
+    color: var(--textwhite);
+    font-size: 16px;
+    padding: 4px 16px;
+    width: fit-content;
+    border-radius: 8px;
+}
+
+.bg-user-story {
+    background-color: var(--blue);
+}
+
+.bg-technical-task {
+    background-color: var(--bluelight);
+}
+
+.task-title {
+    font-weight: 600;
+    color: var(--darkblue);
+}
+
+.task-description {
+    color: var(--middlegrey);
+    font-size: 16px;
+}
+
+progress {
+    max-width: 50%;
+}
+
+.task-subtasks {
+    gap: 6px;
+    font-size: 12px;
+    justify-content: space-between;
+}
+
+.assignet-do {
+    margin-right: -10px;
+    width: 32px;
+    height: 32px;
+    border-radius: 100%;
+    border: 1px solid var(--textwhite);
+    color: var(--textwhite);
+}
+
+.bg-1 {
+    background-color: aqua;
+}
+
+.bg-2 {
+    background-color: rgb(255, 96, 96);
+}
+
+.bg-3 {
+    background-color: rgb(165, 96, 255);
+}
+
+.ctn-task-bottom {
+    justify-content: space-between;
+}
+
+.image-prio-board {
+    width: 20px;
+}
