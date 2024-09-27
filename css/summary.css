@@ -14,6 +14,7 @@
 
 .headlineSummary {
     font-size: 60px;
+    font-weight: 600;
 }
 
 .verticalLineBlue {
@@ -50,7 +51,27 @@
 .ctnTasks {
     background-color: var(--textwhite);
     border-radius: 24px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
     box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+}
+
+.ctnTasks:hover {
+    cursor: pointer;
+    background-color: var(--darkblue);
+    color: white;
+    transform: scale(1.04); 
+}
+
+.ctnTasks img {
+    transition: transform 0.3s ease;
+}
+
+.ctnTasks:hover .imgPencil {
+    content: url('../assets/img/pencilLight.svg');
+
+}
+.ctnTasks:hover .imgCheck {
+    content: url('../assets/img/checkLight.svg');
 }
 
 .gap20 {
@@ -135,4 +156,37 @@
     font-size: 48px;
     color: var(--lightblue);
     font-weight: 600;
+}
+
+
+
+@media (max-width: 1280px) {
+    .greetingSummary {
+        display: none;
+    }    
+}
+
+@media (max-width: 1024px) {
+    .headerSummary {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0;
+    }
+    .verticalLineBlue {
+        display: none;
+    }
+    .horizontalLineBlue {
+        display: block;
+        margin: 12px 0;
+    }
+    .headlineSummary {
+        margin-bottom: 0;
+    }
+
+
+
+}
+
+@media (max-width: 1024px) {
+
 }
