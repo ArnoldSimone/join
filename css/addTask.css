@@ -1,0 +1,133 @@
+.add-task-h2 {
+    font-size: 60px;
+    padding-bottom: 20px;
+}
+
+.task-form-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 232px;
+}
+
+.task-container {
+    display: flex;
+    justify-content: space-between;
+    border-radius: 10px;
+    padding: 40px;
+    width: 900px;
+    flex-direction: column;
+}
+
+h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+form {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.form-left, .form-right {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 44%;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 30px;
+}
+
+label {
+    font-weight: 300;
+    margin-bottom: 8px;
+}
+
+input, select, textarea {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+textarea {
+    resize: vertical;
+}
+
+.prio-group {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    gap: 8px;
+}
+
+.prio {
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    background-color: white;
+}
+
+.prio img{
+    height: 16px;
+    width: 21px;
+}
+
+.prio-group button:hover{
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.19);
+    transform: translateY(-1px); 
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+
+button.clear {
+    background-color: #f6f7f8;
+    border: 2px solid #2a3647;
+    color: #2a3647;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button.clear:hover {
+    color: #29abe2;
+    border: 2px solid #29abe2;
+}
+
+button.create-task {
+    background-color: #2a3647;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+button.create-task:hover {
+    background-color: #29abe2;
+}
+
+.break-between {
+    width: 1px;               
+    background-color: #d1d1d1;         
+    margin: 0 20px; 
+}
+
+#description {
+    height: 136px;
+}

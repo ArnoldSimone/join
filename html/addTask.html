@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="assets/img/Capa 2.png" />
+    <link rel="stylesheet" href="../standard.css">
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/sidebar.css">
+    <link rel="stylesheet" href="../styles/fonts.css">
+    <link rel="stylesheet" href="../css/addTask.css">
+    <script src="../script/include.js"></script>
+    <title>Join</title>
+</head>
+
+<body onload="includeHTML()">
+    <header>
+        <div w3-include-html="header.html"></div>
+    </header>
+
+    <aside>
+        <div w3-include-html="sidebar.html"></div>
+    </aside>
+
+    <main>
+        <section class="task-form-section">
+            <div class="task-container">
+                <h2 class="add-task-h2">Add Task</h2>
+                <form>
+                    <div class="form-left">
+                        <div class="form-group">
+                            <label for="title">Title<span class="required">*</span></label>
+                            <input type="text" id="title" name="title" placeholder="Enter a title">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="description">Description</label>
+                            <textarea id="description" name="description" placeholder="Enter a Description"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="assigned">Assigned to</label>
+                            <select id="assigned" name="assigned">
+                                <option>Select contacts to assign</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="break-between"></div>
+                    <div class="form-right">
+                        <div class="form-group">
+                            <label for="due-date">Due date<span class="required">*</span></label>
+                            <input type="date" id="due-date" name="due-date">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Prio</label>
+                            <div class="prio-group">
+                            <button type="button" class="prio">Urgent<img src="../assets/img/urgentsym.png" alt=""></button>
+                            <button type="button" class="prio">Medium<img src="../assets/img/mediumsym.png" alt=""></button>
+                            <button type="button" class="prio">Low<img src="../assets/img/lowsym.png" alt=""></button>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="category">Category<span class="required">*</span></label>
+                            <select id="category" name="category">
+                                <option>Select task category</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                        <label for="subtasks">Subtasks</label>
+                            <input type="text" id="subtasks" name="subtasks" placeholder="Add new subtask">
+                            <div>
+                                <img src="../assets/img/plusicon.png" alt="">
+                            </div>  
+                        </div>
+                        <div class="form-actions">
+                            <button type="button" class="clear">Clear</button>
+                            <button type="submit" class="create-task">Create Task</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+</body>
+
+</html>

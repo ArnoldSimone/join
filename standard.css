@@ -8,23 +8,17 @@ body {
 
 :root {
     --darkblue: #2a3647;
-    --darkblueMenu: #091931;
-    /*Active Menu*/
+    --darkblueMenu: #091931;    /*Active Menu*/
     --lightblue: #29abe2;
-    --blue: #0038ff;
-    /* Button UserStory*/
-    --blue: #1fd7c1;
-    /* Button Technical Task*/
+    --blue: #0038ff;        /* Button UserStory*/
+    --blue: #1fd7c1;        /* Button Technical Task*/
     --textwhite: #ffffff;
     --textblack: #000000;
     --middlegrey: #d1d1d1;
-    --lightgrey: #F6F7F8;
-    --red: #ff3d00;
-    /* Prio urgent*/
-    --green: #7ae229;
-    /* Prio low*/
-    --orange: #ffa800;
-    /* Prio medium*/
+    --lightgrey: #d1d1d1;
+    --red: #ff3d00;             /* Prio urgent*/
+    --green: #7ae229;           /* Prio low*/
+    --orange: #ffa800;          /* Prio medium*/
 }
 
 /* .example {
@@ -42,6 +36,14 @@ body {
     justify-content: center;
     align-items: center;
 }
+
+.width100 {
+    width: 100%;
+}
+
+.height100 {
+    height: 100%;
+} 
 
 .d-flex-x {
     display: flex;
