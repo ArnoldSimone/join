@@ -4,20 +4,49 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="../assets/img/logo_white.png" />
   <link rel="stylesheet" href="../standard.css">
+  <link rel="stylesheet" href="../css/login.css">
   <title>Join</title>
 </head>
 
 <body>
   <section>
-    <div>
+    <div class="login-header">
       <div>
         <img src="./assets/img/logo_blue.png" alt="Logo">
       </div>
-      <div>
+      <div class="sign-up-content d-flex-y">
         <span>Not a Join user?</span>
-        <a href="#">Sign up</a>
+        <a href="./html/signUp.html">Sign up</a>
       </div>
+    </div>
+  </section>
+  <section class="d-flex width100">
+    <div class="login d-flex-x">
+      <div class="login-content width100">
+        <h1>Log in</h1>
+        <div class="underline"></div>
+      </div>
+      <div>
+        <form>
+          <input class="input" placeholder="Email" type="email" required>
+          <input class="input" placeholder="Password" type="password">
+          <div class="checkbox d-flex-y">
+            <input type="checkbox"><span>Remember me</span>
+          </div>
+          <div class="login-buttons d-flex-x">
+            <button class="login-in">Login in</button>
+            <button class="guest-log">Guest Log in</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+  <section>
+    <div class="info-notice d-flex">
+      <a href="./html/privacy.html">Privacy Policy</a>
+      <a href="./html/legalnotice.html">Legal notice</a>
     </div>
   </section>
 </body>
