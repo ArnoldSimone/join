@@ -1,4 +1,4 @@
-.headerContent {
+.header-content {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -9,13 +9,13 @@
     background-color: var(--textwhite);
 }
 
-.headerContent {
+.header-content {
     font-size: 20px;
     font-weight: 400;
     color: black;
 }
 
-.headerRight {
+.header-right {
     display: flex;
     align-items: center;
     width: 104px;
@@ -24,11 +24,11 @@
     cursor: pointer;
 }
 
-.headerRight img:hover {
+.header-right img:hover {
     transform: scale(1.2);
 }
 
-.userLetter {
+.user-letter {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -38,11 +38,11 @@
     height: 56px;
 }
 
-.userLetter:hover {
+.user-letter:hover {
     background-color: var(--lightgrey);
 }
 
-.userLetter h2 {
+.user-letter h2 {
     display: flex;
     justify-content: center;
     align-items: center;

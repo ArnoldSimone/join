@@ -1,4 +1,4 @@
-.sidebarContent {
+.sidebar-content {
   position: fixed;
   top: 0;
   display: flex;
@@ -14,21 +14,21 @@
   padding-top: 64px;
 }
 
-.sidebarMenu {
+.sidebar-menu {
   width: 100%;
   gap: 15px;
   padding: 0;
 }
 
-.menuContent {
+.menu-content {
   padding-left: 58px;
 }
 
-.menuContent:hover {
+.menu-content:hover {
   background-color: #2e3d51;
 }
 
-.menuContent a {
+.menu-content a {
   display: flex;
   align-items: center;
   color: var(--textwhite);
@@ -36,12 +36,12 @@
   width: 100%;
 }
 
-.menuContent img {
+.menu-content img {
   width: 30px;
   height: 30px;
 }
 
-.menuContent p {
+.menu-content p {
   font-size: 16px;
   font-weight: 400;
 }
