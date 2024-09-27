@@ -43,6 +43,12 @@ form {
     flex-direction: column;
 }
 
+.form-group-subtask {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
 .form-actions {
     display: flex;
     justify-content: flex-end;
@@ -140,18 +146,32 @@ button.create-task:hover {
 
 .subtask-connect {
     position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.subtask-connect input {
+    width: 100%;
+    padding-right: 40px;
+    box-sizing: border-box;
 }
 
 .subtask-img {
     position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    border-radius: 15px;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+.subtask-img img {
+    width: 20px;
+    height: 20px;
 }
 
 .subtask-img:hover {
     background-color: #cccaca;
+    border-radius: 50%;
 }
 
 .required {
