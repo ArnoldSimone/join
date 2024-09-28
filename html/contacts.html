@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="../assets/img/logo_white.png" />
+    <link rel="stylesheet" href="../standard.css">
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/sidebar.css">
+    <link rel="stylesheet" href="../css/fonts.css">
+    <link rel="stylesheet" href="../css/contact.css">
+    <script src="../script/include.js"></script>
+    <title>Join</title>
+</head>
+
+<body onload="includeHTML()">
+    <header>
+        <div w3-include-html="header.html"></div>
+    </header>
+
+    <aside>
+        <div w3-include-html="sidebar.html"></div>
+    </aside>
+
+    <main>
+        <div class="contact-container">
+            <div class="contact-list">
+                <div class="d-flex add-contact-container">
+                    <button class="add-contact-btn d-flex">Add new contact
+                        <img src="../assets/img/person_add.png" alt="">
+                    </button>
+                </div>
+                <div class="contacts">
+                    <div class="contact-group">
+                        <h2>A</h2>
+                        <hr>
+                        <div class="contact">
+                            <span class="avatar" style="background-color: #FF5722;">AM</span>
+                            <div class="contact-info">
+                                <span class="name">Anton Mayer</span>
+                                <span class="email">antom@gmail.com</span>
+                            </div>
+                        </div>
+                        <div class="contact">
+                            <span class="avatar" style="background-color: #9C27B0;">AS</span>
+                            <div class="contact-info">
+                                <span class="name">Anja Schulz</span>
+                                <span class="email">schulz@hotmail.com</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="contact-group">
+                        <h2>B</h2>
+                        <hr>
+                        <div class="contact">
+                            <span class="avatar" style="background-color: #03A9F4;">BZ</span>
+                            <div class="contact-info">
+                                <span class="name">Benedikt Ziegler</span>
+                                <span class="email">benedikt@gmail.com</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="contact-group">
+                        <h2>D</h2>
+                        <hr>
+                        <div class="contact">
+                            <span class="avatar" style="background-color: #E91E63;">DE</span>
+                            <div class="contact-info">
+                                <span class="name">David Eisenberg</span>
+                                <span class="email">davidberg@gmail.com</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="contact-group">
+                        <h2>E</h2>
+                        <hr>
+                        <div class="contact">
+                            <span class="avatar" style="background-color: #FFC107;">EF</span>
+                            <div class="contact-info">
+                                <span class="name">Eva Fischer</span>
+                                <span class="email">eva@gmail.com</span>
+                            </div>
+                        </div>
+                        <div class="contact">
+                            <span class="avatar" style="background-color: #00BCD4;">EM</span>
+                            <div class="contact-info">
+                                <span class="name">Emmanuel Mauer</span>
+                                <span class="email">emmanuelma@gmail.com</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex-y"></div>
+                <h1 class="headline">Contacts</h1>
+                <div class="vertical-line-blue"></div>
+                <span class="headline-right">Better with a team</span>
+                <div class="horizontal-line-blue d-none"></div>
+            </div>
+        </div>
+    </main>
+    
+    
+</body>
+
+</html>
