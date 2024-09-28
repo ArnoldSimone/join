@@ -1,15 +1,3 @@
-.add-task-h2 {
-    font-size: 60px;
-    padding-bottom: 20px;
-}
-
-.task-form-section {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-left: 232px;
-}
-
 .task-container {
     display: flex;
     justify-content: space-between;
@@ -17,12 +5,6 @@
     padding: 40px;
     width: 900px;
     flex-direction: column;
-}
-
-h2 {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 20px;
 }
 
 form {
@@ -64,14 +46,14 @@ label {
 input, select, textarea {
     padding: 10px;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 10px;
     font-size: 16px;
     font-family: 'Inter', sans-serif;
     font-weight: 200;
 }
 
 input:hover, select:hover, textarea:hover {
-    border: 2px solid #ababab;
+    border: 1px solid var(--darkblue);
 }
 
 textarea {
@@ -87,17 +69,17 @@ textarea {
 
 .prio {
     flex-grow: 1;
-    padding: 10px;
+    padding: 12px;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 10px;
     cursor: pointer;
     text-align: center;
     background-color: white;
+    font-size: 16px;
 }
 
-.prio img{
-    height: 16px;
-    width: 21px;
+.prio img {
+    margin-left: 5px;
 }
 
 .prio-group button:hover{
@@ -108,40 +90,54 @@ textarea {
 
 
 button.clear {
-    background-color: #f6f7f8;
-    border: 2px solid #2a3647;
-    color: #2a3647;
+    background-color: var(--lightgrey);
+    border: 2px solid var(--darkblue);
+    color: var(--darkblue);
     padding: 13px 23px;
-    border-radius: 5px;
+    border-radius: 10px;
     cursor: pointer;
+    font-size: 20px;
+    font-weight: 600;
 }
 
 button.clear:hover {
-    color: #29abe2;
-    border: 2px solid #29abe2;
+    color: var(--lightblue);
+    border: 2px solid var(--lightblue);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.19);
+    transform: translateY(-1px); 
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.add-task-btn {
+    display: flex;
 }
 
 button.create-task {
-    background-color: #2a3647;
+    background-color: var(--darkblue);
     color: white;
     padding: 13px 23px;
-    border-radius: 5px;
+    border-radius: 10px;
     border: none;
     cursor: pointer;
+    font-size: 20px;
+    font-weight: 600;
 }
 
 button.create-task:hover {
-    background-color: #29abe2;
+    background-color: var(--lightblue);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.19);
+    transform: translateY(-1px); 
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
 
 .break-between {
     width: 1px;               
-    background-color: #d1d1d1;         
+    background-color: var(--middlegrey);         
     margin: 0 20px; 
 }
 
 #description {
-    height: 112px;
+    height: 108px;
 }
 
 .subtask-connect {
@@ -170,7 +166,7 @@ button.create-task:hover {
 }
 
 .subtask-img:hover {
-    background-color: #cccaca;
+    background-color: var(--middlegrey);
     border-radius: 50%;
 }
 
