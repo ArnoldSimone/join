@@ -11,6 +11,8 @@
 }
 
 .logo {
+  flex-direction: column;
+  gap: 90px;
   padding-top: 64px;
 }
 
@@ -20,15 +22,11 @@
   padding: 0;
 }
 
-.menu-content {
-  padding-left: 58px;
-}
-
 .menu-content:hover {
   background-color: var(--bluegrey);
 }
 
-.menu-content a {
+.menu-content {
   display: flex;
   align-items: center;
   color: var(--textwhite);
