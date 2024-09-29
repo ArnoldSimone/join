@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="assets/img/Capa 2.png" />
+    <link rel="icon" type="image/png" href="../assets/img/logo_white.png" />
     <link rel="stylesheet" href="../standard.css">
     <link rel="stylesheet" href="../css/header.css">
     <link rel="stylesheet" href="../css/sidebar.css">
@@ -64,6 +64,8 @@
                             <div class="no-tasks-todo d-flex">
                                 No tasks To do
                             </div>
+
+
                             <div class="ctn-task d-flex-x">
                                 <p id="task-category" class="task-category bg-user-story">User Story</p>
                                 <p id="task-title" class="task-title">Kochwelt Page & Recipe Rekommender</p>
@@ -74,14 +76,16 @@
                                     <span class="subtasks-count">1/3 Subtasks</span>
                                 </div>
                                 <div class="ctn-task-bottom d-flex-y">
-                                    <div class="ctn-assigned-to d-flex-y">
-                                        <div class="assignet-do d-flex bg-1">AM</div>
-                                        <div class="assignet-do d-flex bg-2">BR</div>
-                                        <div class="assignet-do d-flex bg-3">HI</div>
+                                    <div class="ctn-assigned-to mesh d-flex-y">
+                                        <div class="assigned-to mesh d-flex bg-1">AM</div>
+                                        <div class="assigned-to mesh d-flex bg-2">BR</div>
+                                        <div class="assigned-to mesh d-flex bg-3">HI</div>
                                     </div>
                                     <img class="image-prio-board" src="../assets/img/lowsym.png" alt="">
                                 </div>
                             </div>
+
+
                         </div>
                     </div>
                 </div>
@@ -112,7 +116,69 @@
                     </div>
                 </div>
             </div>
+
+            <div class="overlay-board d-none"></div>
+
+            <div class="ctn-detail-task-board ctn-task no-hover d-flex-x">
+                <div class="ctn-category-close d-flex-y">
+                    <p id="task-category" class="task-category bg-user-story">User Story</p>
+                    <img class="btn-close-detail-task" src="../assets/img/close.svg" alt="Image Close">
+                </div>
+                <p id="task-title-detail" class="task-title-detail">Kochwelt Page & Recipe Recommender</p>
+                <p id="task-description-detail" class="task-description-detail">Build start page with recipe
+                    recommendation ... und noch mehr</p>
+                <div class="ctn-due-date d-flex-y">
+                    <p class="label">Due date:</p>
+                    <p class="due-date">10/05/2024</p>
+                </div>
+                <div class="ctn-priority d-flex-y">
+                    <p class="label">Priority:</p>
+                    <p class="prio-detail">Low</p>
+                    <img class="image-prio-detail" src="../assets/img/lowsym.png" alt="">
+                </div>
+                <p class="label">Assigned To:</p>
+                <div class="ctn-assigned-to d-flex-x">
+                    <div class="person-detail d-flex-y">
+                        <div class="assigned-to d-flex bg-1">AM</div>
+                        <p>Anton Maier</p>
+                    </div>
+                    <div class="person-detail d-flex-y">
+                        <div class="assigned-to d-flex bg-2">RB</div>
+                        <p>Rolf Bauer</p>
+                    </div>
+                    <div class="person-detail d-flex-y">
+                        <div class="assigned-to d-flex bg-3">ST</div>
+                        <p>Sabine Taube</p>
+                    </div>
+                </div>
+                <p class="label">Subtasks:</p>
+                <div class="ctn-subtasks d-flex-x">
+                    <div class="subtask-item d-flex-y">
+                        <input type="checkbox" class="subtask" name="subtask">
+                        <label for="subtask">Implement Receipe Recommendation</label>
+                    </div>
+                    <div class="subtask-item d-flex-y">
+                        <input type="checkbox" class="subtask" name="subtask">
+                        <label for="subtask">Start Page Laout</label>
+                    </div>
+                </div>
+                <div class="ctn-delete-edit d-flex-y">
+                    <img class="btn-delete-task" src="../assets/img/dustbinDarkText.svg" alt="Image Delete">
+                    <span class="vertikalLine"></span>
+                    <img class="btn-edit-task" src="../assets/img/editDarkText.svg" alt="Image Close">
+                </div>
+
+            </div>
+
+
+
+
+
+
+            </div>
+
         </section>
+
     </main>
 
 </body>

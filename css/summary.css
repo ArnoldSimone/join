@@ -1,3 +1,7 @@
+.body {
+    width: 100%;
+}
+
 .main {
     max-width: 1440px;
 }
@@ -38,7 +42,7 @@
 
 .ctn-tasks-summary {
     flex-direction: column;
-    width: 552px;
+    min-width: 552px;
     gap: 24px;
 }
 
@@ -74,12 +78,12 @@
 }
 
 .ctn-task-smal {
-    width: 168px;
+    width: 33%;
     height: 154px;
 }
 
 .ctn-task-middle {
-    width: 264px;
+    width: 50%;
     height: 154px;
 }
 
@@ -94,6 +98,7 @@
 }
 
 .main-summary-top {
+    width: 100%;
     gap: 24px;
 }
 
@@ -180,4 +185,44 @@
     .headline {
         margin-bottom: 0;
     }
+}
+
+
+@media (max-width: 920px) {
+    aside {
+        display: none;
+    }
+
+    main {
+        margin-left: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .headline {
+        margin-top: 0;
+    }
+}
+
+@media (max-width: 600px) {
+
+    .main {
+        width: 100%;
+    }
+
+    .summary-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
+
+    .main-summary {
+        justify-content: center;
+    }
+
+
+
 }

@@ -73,7 +73,6 @@
 
 .btn-add-task-smal:hover {
     content: url('../assets/img/plusButtonLightBlue.svg');
-
 }
 
 .no-tasks-todo {
@@ -142,13 +141,16 @@ progress {
     justify-content: space-between;
 }
 
-.assignet-do {
-    margin-right: -10px;
+.assigned-to {
     width: 32px;
     height: 32px;
     border-radius: 100%;
     border: 1px solid var(--textwhite);
     color: var(--textwhite);
+}
+
+.mesh {
+    margin-right: -10px;
 }
 
 .bg-1 {
@@ -169,4 +171,160 @@ progress {
 
 .image-prio-board {
     width: 20px;
+}
+
+/*overlay*/
+
+.overlay-board {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5)
+}
+
+.ctn-detail-task-board {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    padding: 24px;
+    gap: 16px;
+    max-width: 300px;
+    font-size: 14px;
+}
+
+.no-hover {
+    cursor: default !important;
+}
+
+.btn-close-detail-task {
+    height: 24px;
+    width: 24px;
+    border-radius: 50%;
+    background-color: transparent;
+    transition: background-color 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-close-detail-task:hover {
+    background-color: var(--lightgrey);
+    cursor: pointer;
+}
+
+.btn-close-detail-task {
+    width: 10px;
+    height: 10px;
+    transition: transform 0.3s ease;
+    padding: 4px;
+}
+
+.task-title-detail {
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.task-description-detail {
+    font-size: 14px;
+}
+
+.label {
+    color: var(--darkblue);
+    width: 100px;
+}
+
+.image-prio-detail {
+    width: 10px;
+    padding-left: 8px;
+}
+
+.ctn-category-close {
+    justify-content: space-between;
+}
+
+.ctn-assigned-to {
+    flex-direction: column;
+    gap: 4px;
+    padding-left: 16px;
+}
+
+.person-detail p {
+    padding-left: 16px;
+}
+
+.ctn-subtasks {
+    flex-direction: column;
+}
+
+.subtask-item {
+    gap: 16px;
+    font-size: 12px;
+    position: relative;
+}
+
+.subtask-item:hover {
+    background-color: var(--lightgrey);
+    border-radius: 4px;
+}
+
+input[type="checkbox"] {
+    width: 12px;
+    height: 12px;
+    cursor: pointer;
+    appearance: none;
+    background-color: var(--textwhite);
+    border: 1px solid var(--darkblue);
+    border-radius: 2px;
+    transition: border-color 0.3s ease;
+    position: relative;
+}
+
+input[type="checkbox"]:hover {
+    border-color: var(--darkblue);
+}
+
+input[type="checkbox"]:checked {
+    background-color: var(--textwhite);
+    border-color: var(--darkblue);
+}
+
+input[type="checkbox"]:checked::before {
+    content: "";
+    position: absolute;
+    width: 2px;
+    height: 6px;
+    border-right: 2px solid var(--darkblue);
+    border-bottom: 2px solid var(--darkblue);
+    border-radius: 1px;
+    transform: rotate(45deg);
+    top: 1px;
+    left: 4px;
+}
+
+.ctn-delete-edit {
+    gap: 4px;
+    justify-content: flex-end;
+}
+
+.ctn-delete-edit img {
+    height: 16px;
+}
+
+.vertikalLine {
+    width: 1px;
+    height: 14px;
+    background-color: var(--middlegrey);
+}
+
+.btn-delete-task:hover {
+    content: url('../assets/img/dustbinBlueText.svg');
+    cursor: pointer;
+}
+
+.btn-edit-task:hover {
+    content: url('../assets/img/editBlue.svg');
+    cursor: pointer;
 }
