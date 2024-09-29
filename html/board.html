@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="../css/fonts.css">
     <link rel="stylesheet" href="../css/board.css">
     <script src="../script/include.js"></script>
+    <script src="../script/board.js"></script>
     <title>Join</title>
 
 </head>
@@ -41,80 +42,98 @@
             </div>
 
             <div class="main-board d-flex-x">
+
                 <div class="ctn-cards-todo ctn-cards">
                     <div class="header-container d-flex-y">
                         <span>To do</span>
                         <img class="btn-add-task-smal" src="../assets/img/plusButtonDarkBlue.svg" alt="Image Plus">
                     </div>
-                    <div id="ctn-task-todo" class="task-box">
-                        <div id="task-todo" class="task-item">
-                            <div class="no-tasks-todo d-flex">
-                                No tasks To do
-                            </div>
+                    <div id="ctn-tasks-todo" class="ctn-tasks-todo tasks-box d-flex-y height drag-area">
+                        <div class="no-tasks-todo d-flex">
+                            No tasks To do
                         </div>
                     </div>
                 </div>
+
                 <div class="ctn-cards-in-progress ctn-cards">
                     <div class="header-container d-flex-y">
                         <span>In progress</span>
                         <img class="btn-add-task-smal" src="../assets/img/plusButtonDarkBlue.svg" alt="Image Plus">
                     </div>
-                    <div id="ctn-task-in-progress" class="task-box">
-                        <div id="task-in-progress" class="task-item">
-                            <div class="no-tasks-todo d-flex">
-                                No tasks To do
+                    <div id="ctn-tasks-in-progress" class="ctn-tasks-in-progress tasks-box d-flex-y height drag-area">
+                        <div class="no-tasks-todo d-flex">
+                            No tasks To do
+                        </div>
+                        <div onclick="showDetailTaskOverlay()" id="task-board" class="ctn-task d-flex-x"
+                            draggable="true" ondragstart="startDragging()">
+                            <p id="task-category" class="task-category bg-user-story">User Story</p>
+                            <p id="task-title" class="task-title">Kochwelt Page </p>
+                            <p id="task-description" class="task-description">Build start page with lakdjfkajldfj akdgjf
+                                akdjg sjg kasdjf recipe
+                                recommendation ...</p>
+                            <div class="task-subtasks d-flex-y">
+                                <progress max="3" value="2"></progress>
+                                <span class="subtasks-count">1/3 Subtasks</span>
                             </div>
-
-
-                            <div class="ctn-task d-flex-x">
-                                <p id="task-category" class="task-category bg-user-story">User Story</p>
-                                <p id="task-title" class="task-title">Kochwelt Page & Recipe Rekommender</p>
-                                <p id="task-description" class="task-description">Build start page with recipe
-                                    recommendation ...</p>
-                                <div class="task-subtasks d-flex-y">
-                                    <progress max="3" value="2"></progress>
-                                    <span class="subtasks-count">1/3 Subtasks</span>
+                            <div class="ctn-task-bottom d-flex-y">
+                                <div class="ctn-assigned-to mesh d-flex-y">
+                                    <div class="assigned-to mesh d-flex bg-1">AM</div>
+                                    <div class="assigned-to mesh d-flex bg-2">BR</div>
+                                    <div class="assigned-to mesh d-flex bg-3">HI</div>
                                 </div>
-                                <div class="ctn-task-bottom d-flex-y">
-                                    <div class="ctn-assigned-to mesh d-flex-y">
-                                        <div class="assigned-to mesh d-flex bg-1">AM</div>
-                                        <div class="assigned-to mesh d-flex bg-2">BR</div>
-                                        <div class="assigned-to mesh d-flex bg-3">HI</div>
-                                    </div>
-                                    <img class="image-prio-board" src="../assets/img/lowsym.png" alt="">
-                                </div>
+                                <img class="image-prio-board" src="../assets/img/lowsym.png" alt="">
                             </div>
-
-
                         </div>
                     </div>
+
                 </div>
+
+
                 <div class="ctn-cards-await-feedback ctn-cards">
                     <div class="header-container d-flex-y">
                         <span>Await feedback</span>
                         <img class="btn-add-task-smal" src="../assets/img/plusButtonDarkBlue.svg" alt="Image Plus">
                     </div>
-                    <div id="ctn-task-await-feedback" class="task-box">
-                        <div id="task-await-feedback" class="task-item">
-                            <div class="no-tasks-todo d-flex">
-                                No tasks To do
-                            </div>
-
+                    <div id="ctn-tasks-await-feedback"
+                        class="ctn-tasks-await-feedback tasks-box d-flex-y height drag-area">
+                        <div class="no-tasks-todo d-flex">
+                            No tasks To do
                         </div>
                     </div>
                 </div>
+
                 <div class="ctn-cards-done ctn-cards">
                     <div class="header-container d-flex-y">
                         <span>Done</span>
                     </div>
-                    <div id="ctn-task-done" class="task-box">
-                        <div id="task-done" class="task-item">
-                            <div class="no-tasks-todo d-flex">
-                                No tasks To do
+                    <div id="ctn-tasks-done" class="ctn-tasks-done tasks-box d-flex-y height drag-area">
+                        <div class="no-tasks-todo d-flex">
+                            No tasks To do
+                        </div>
+                        <div onclick="showDetailTaskOverlay()" id="task-board" class="ctn-task d-flex-x"
+                            draggable="true" ondragstart="startDragging()">
+                            <p id="task-category" class="task-category bg-user-story">User Story</p>
+                            <p id="task-title" class="task-title">Kochwelt Page </p>
+                            <p id="task-description" class="task-description">Build start page with lakdjfkajldfj akdgjf
+                                akdjg sjg kasdjf recipe
+                                recommendation ...</p>
+                            <div class="task-subtasks d-flex-y">
+                                <progress max="3" value="2"></progress>
+                                <span class="subtasks-count">1/3 Subtasks</span>
+                            </div>
+                            <div class="ctn-task-bottom d-flex-y">
+                                <div class="ctn-assigned-to mesh d-flex-y">
+                                    <div class="assigned-to mesh d-flex bg-1">AM</div>
+                                    <div class="assigned-to mesh d-flex bg-2">BR</div>
+                                    <div class="assigned-to mesh d-flex bg-3">HI</div>
+                                </div>
+                                <img class="image-prio-board" src="../assets/img/lowsym.png" alt="">
                             </div>
                         </div>
                     </div>
                 </div>
+
+
             </div>
 
             <div class="overlay-board d-none"></div>
@@ -171,14 +190,7 @@
             </div>
 
 
-
-
-
-
-            </div>
-
         </section>
-
     </main>
 
 </body>
