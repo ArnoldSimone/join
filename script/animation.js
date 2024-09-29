@@ -8,4 +8,5 @@ animation.addEventListener("animationend", (event) => {
     document.getElementById('login').classList.remove('d-none'); 
     document.getElementById('info-notice').classList.remove('d-none');
   };
+  animation.style.zIndex = '-1';
 })
