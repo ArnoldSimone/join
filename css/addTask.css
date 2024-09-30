@@ -181,7 +181,6 @@ button.create-task:hover {
     padding-top: 30px;
 }
 
-/* White background container */
 .white-background-container {
     background-color: white;
     border-radius: 15px;
@@ -207,7 +206,6 @@ button.create-task:hover {
     width: 44%;
 }
 
-/* Hover and border color adjustments for white container */
 .white-background-container input:hover, 
 .white-background-container select:hover, 
 .white-background-container textarea:hover {
