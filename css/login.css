@@ -69,6 +69,7 @@ form {
   padding: 10px 16px;
   border: 1px solid lightgrey;
   cursor: pointer;
+  outline: none;
 }
 
 input[type=email] {
@@ -81,6 +82,11 @@ input[type=password] {
   background-image: url(../assets/icon/lock.svg);
   background-repeat: no-repeat;
   background-position: right 12px center;
+}
+
+input[type=password]:focus {
+  border: 1px solid var(--bluehover);
+  background-image: url(../assets/icon/visibility_off.svg);
 }
 
 .checkbox {
