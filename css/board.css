@@ -1,3 +1,7 @@
+body {
+    box-sizing: border-box;
+}
+
 .input-field {
     padding: 0 10px;
     border: 1px solid #ccc;
@@ -18,12 +22,19 @@
     color: var(--textwhite);
     border-radius: 10px;
     border: none;
-    cursor: pointer;
     font-size: 20px;
     height: 46px;
     gap: 10px;
     padding: 0 24px;
     font-weight: 600;
+}
+
+.btn-dark:hover {
+    cursor: pointer;
+    background-color: var(--lightblue);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.19);
+    transform: translateY(-1px);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
 
 .ctn-input-search {

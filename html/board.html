@@ -12,11 +12,12 @@
     <link rel="stylesheet" href="../css/board.css">
     <script src="../script/include.js"></script>
     <script src="../script/board.js"></script>
+    <script src="../script/database.js"></script>
     <title>Join</title>
 
 </head>
 
-<body onload="includeHTML(); onloadFunc();">
+<body onload="includeHTML(); onloadFuncBoard();">
 
     <header>
         <div w3-include-html="header.html"></div>
@@ -61,6 +62,7 @@
                         <img class="btn-add-task-smal" src="../assets/img/plusButtonDarkBlue.svg" alt="Image Plus">
                     </div>
                     <div id="ctn-tasks-in-progress" class="ctn-tasks-in-progress tasks-box d-flex-y height drag-area">
+
                         <div class="no-tasks-todo d-flex">
                             No tasks To do
                         </div>
@@ -85,6 +87,7 @@
                                 <img class="image-prio-board" src="../assets/img/lowsym.png" alt="">
                             </div>
                         </div>
+
                     </div>
                 </div>
 

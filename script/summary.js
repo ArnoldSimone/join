@@ -1,6 +1,5 @@
 async function onloadFuncSummary() {
-    tasks = Object.values(await loadFromDatabase(`tasks`));
-    console.log(tasks);
+    tasks = Object.values(await loadFromDatabase(`/tasks`));
     getNumberOfTasks(tasks);
     greetingUser();
     getUpcomingDeadline();
@@ -40,8 +39,6 @@ function greetingUser() {
 
 function getUpcomingDeadline() {
     let urgentTasks = tasks.filter(task => task.priority === "urgent");
-    console.log(urgentTasks);
-
     if (urgentTasks == "") {
         document.getElementById('main-summary-middle-right').innerHTML = `<div>No upcoming Deadline</div>`;
     } else {
