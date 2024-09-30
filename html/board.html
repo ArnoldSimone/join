@@ -136,12 +136,13 @@
 
             </div>
 
-            <div class="overlay-board d-none"></div>
+            <div onclick="closeDetailTaskOverlay()" id="overlay-board" class="overlay-board d-none"></div>
 
-            <div class="ctn-detail-task-board ctn-task no-hover d-flex-x">
+            <div id="overlay-detail-task-board" class="overlay-detail-task-board ctn-task no-hover d-flex-x d-none">
                 <div class="ctn-category-close d-flex-y">
                     <p id="task-category" class="task-category bg-user-story">User Story</p>
-                    <img class="btn-close-detail-task" src="../assets/img/close.svg" alt="Image Close">
+                    <img onclick="closeDetailTaskOverlay()" class="btn-close-detail-task" src="../assets/img/close.svg"
+                        alt="Image Close">
                 </div>
                 <p id="task-title-detail" class="task-title-detail">Kochwelt Page & Recipe Recommender</p>
                 <p id="task-description-detail" class="task-description-detail">Build start page with recipe
@@ -156,7 +157,7 @@
                     <img class="image-prio-detail" src="../assets/img/lowsym.png" alt="">
                 </div>
                 <p class="label">Assigned To:</p>
-                <div class="ctn-assigned-to d-flex-x">
+                <div class="ctn-assigned-to-detail d-flex-x">
                     <div class="person-detail d-flex-y">
                         <div class="assigned-to d-flex bg-1">AM</div>
                         <p>Anton Maier</p>
