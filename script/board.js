@@ -1,5 +1,11 @@
+let currentDraggedElement;
+let tasks;
+
 async function onloadFuncBoard() {
-    tasks = Object.values(await loadFromDatabase(`/tasks`));
+    let tasksData = await loadFromDatabase(`/tasks`);
+    console.log(tasksData);
+    tasks = Object.entries(tasksData).map(([id, task]) => ({ id, ...task }));
+    console.log(tasks);
     renderTasksBoard();
 }
 
@@ -23,6 +29,36 @@ function renderTasksByProgress(progressStatus, containerId, noTaskMessage) {
     }
 }
 
+function startDragging(taskId) {
+    currentDraggedElement = taskId;
+}
+
+function allowDrop(ev) {
+    ev.preventDefault();
+    console.log("Drag over event triggered");
+}
+
+function moveTo(progress) {
+    let task = tasks.find(t => t.id === currentDraggedElement);
+    task.progress = progress;
+    updateOnDatabase(`tasks/${currentDraggedElement}`, task)
+    renderTasksBoard();
+
+    removeHighlight('highlight-todo');
+    removeHighlight('highlight-in-progress');
+    removeHighlight('highlight-await-feedback');
+    removeHighlight('highlight-done');
+
+}
+
+function highlight(containerId) {
+    document.getElementById(containerId).classList.add('drag-area-highlight');
+}
+
+function removeHighlight(containerId) {
+    document.getElementById(containerId).classList.remove('drag-area-highlight');
+}
+
 function getBoardNoTaskTemplate(message) {
     return `                        
     <div class="ctn-no-tasks d-flex">
@@ -32,7 +68,7 @@ function getBoardNoTaskTemplate(message) {
 
 function getBoardTaskTemplate(task) {
     return `
-    <div onclick="showDetailTaskOverlay()" id="task-board" class="ctn-task d-flex-x" draggable="true" ondragstart="startDragging()">
+    <div onclick="showDetailTaskOverlay('${task.id}')" id="task-${task.id}" class="ctn-task d-flex-x" draggable="true" ondragstart="startDragging('${task.id}')">
         ${getTaskCategoryTemplate(task.category)}
         <p id="task-title" class="task-title">${task.title}</p>
         <p id="task-description" class="task-description">${task.description}</p>

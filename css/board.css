@@ -67,8 +67,6 @@
 }
 
 .tasks-box {
-    height: 100vh;
-    /* background-color: #d8d8d8; */
     border-radius: 24px;
     flex-direction: column;
     gap: 12px;
@@ -97,13 +95,12 @@
 .ctn-no-tasks {
     background-color: #E7E7E7;
     color: gray;
-    border-radius: 10px;
-    border-style: dashed;
-    border-width: 3px;
+    border-radius: 12px;
     border: 1px dashed rgb(199, 199, 199);
-    font-size: 16px;
-    height: 42px;
+    font-size: 14px;
+    height: 36px;
     width: 100%;
+    min-width: 200px;
 }
 
 .ctn-task {
@@ -353,4 +350,12 @@ input[type="checkbox"]:checked::before {
 .btn-edit-task:hover {
     content: url('../assets/img/editBlue.svg');
     cursor: pointer;
+}
+
+.drag-area-highlight {
+    margin-top: 12px;
+    border-radius: 12px;
+    border-width: 3px;
+    border: 1px dashed var(--middlegrey);
+    height: 100px;
 }
