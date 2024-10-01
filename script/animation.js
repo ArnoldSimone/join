@@ -1,5 +1,5 @@
 let animation = document.getElementById('animation');
-
+// let box = document.getElementById('stop');
 
 animation.addEventListener("animationend", (event) => {
   if (event.elapsedTime > 0.2) {
@@ -10,3 +10,16 @@ animation.addEventListener("animationend", (event) => {
   };
   animation.style.zIndex = '-1';
 })
+
+
+// box.addEventListener('click', () => {
+//     animation.pause();
+// })
+
+// function stopAnimation() {
+//   document.getElementById('animation').classList.add('d-none');
+//   console.log('passt');
+//   box.style.animationPlayState = 'paused';
+//   console.log('passt');
+  
+// }

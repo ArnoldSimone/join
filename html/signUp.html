@@ -7,6 +7,9 @@
   <link rel="icon" type="image/png" href="../assets/img/logo_white.png" />
   <link rel="stylesheet" href="../standard.css">
   <link rel="stylesheet" href="../css/signUp.css">
+  <script defer src="../script/animation.js"></script>
+  <script defer src="../script.js"></script>
+  <script src="../script/database.js"></script>
   <title>Join</title>
 </head>
 
@@ -20,7 +23,7 @@
     <div class="sign-up-container d-flex-x">
       <div>
         <div class="arrow">
-          <a href="../index.html"><img src="../assets/icon/arrow-left-line.svg" alt="Back"></a>
+          <a href="../index.html"><img id="stop" src="../assets/icon/arrow-left-line.svg" alt="Back"></a>
         </div>
         <div class="content width100">
           <h1>Sign up</h1>
@@ -28,13 +31,21 @@
         </div>
       </div>
       <div>
-        <form>
-          <input class="input" placeholder="Name" type="text" required>
-          <input class="input" placeholder="Email" type="email" required>
-          <input class="input" placeholder="Password" type="password" required>
-          <input class="input" placeholder="Confirm Password" type="password" required>
+        <form onsubmit="registrationUser(); return false;">
+          <input class="input" placeholder="Name" type="text" id="name" required>
+          <input class="input" placeholder="Email" type="email" id="email" required>
+
+          <div id="inputPassword" class="input-content">
+            <input onkeyup="changePasswortImage()" class="input" minlength="5" placeholder="Password" type="password" id="password" required>
+            <img id="passwordImage" onclick="togglePasswordVisibility('password')" src="../assets/icon/lock.svg" alt="Lock">
+          </div>
+          <div id="inputPasswordConfirm" class="input-content">
+            <input onkeyup="changePasswortConfirmImage()" class="input" minlength="5" placeholder="Confirm Password" type="password" id="passwordConfirm" required>
+            <img id="passwordConfirmImage" onclick="togglePasswordVisibility('passwordConfirm')" src="../assets/icon/lock.svg" alt="Lock">
+          </div>
+
           <div class="checkbox d-flex-y">
-            <input type="checkbox"><span class="grey">I accept the</span>
+            <input id="checkbox" type="checkbox"><span class="grey">I accept the</span>
             <span><a class="blue" href="../html/privacy.html">Privacy policy</a></span>
           </div>
           <div class="d-flex-x">
