@@ -140,7 +140,8 @@
             </div>
 
             <div onclick="closeDetailTaskOverlay()" id="overlay-board" class="overlay-board d-none">
-                <div id="overlay-detail-task-board" class="overlay-detail-task-board ctn-task no-hover d-flex-x d-none">
+                <div onclick="bubblingProtection(event)" id="overlay-detail-task-board"
+                    class="overlay-detail-task-board ctn-task no-hover d-flex-x d-none">
                     <div class="ctn-category-close d-flex-y">
                         <p id="task-category" class="task-category bg-user-story">User Story</p>
                         <img onclick="closeDetailTaskOverlay()" class="btn-close-detail-task"

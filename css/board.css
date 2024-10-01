@@ -1,4 +1,4 @@
-body {
+* {
     box-sizing: border-box;
 }
 
@@ -94,7 +94,7 @@ body {
     content: url('../assets/img/plusButtonLightBlue.svg');
 }
 
-.no-tasks-todo {
+.ctn-no-tasks {
     background-color: #E7E7E7;
     color: gray;
     border-radius: 10px;
@@ -114,6 +114,8 @@ body {
     padding: 16px;
     flex-direction: column;
     gap: 8px;
+    width: 100%;
+    min-width: 200px;
 }
 
 .ctn-task:hover {
@@ -232,6 +234,8 @@ progress {
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: transform 0.3s ease;
+    padding: 5px;
 }
 
 .btn-close-detail-task:hover {
@@ -239,12 +243,6 @@ progress {
     cursor: pointer;
 }
 
-.btn-close-detail-task {
-    width: 12px;
-    height: 12px;
-    transition: transform 0.3s ease;
-    padding: 4px;
-}
 
 .task-title-detail {
     font-size: 32px;
