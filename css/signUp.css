@@ -90,6 +90,13 @@ input[type=password] {
   background-position: right 12px center;
 }
 
+.msg-box {
+  margin-top: 8px;
+  font-size: 12px;
+  border-color: var(--red) !important;
+  color: var(--red);
+}
+
 .checkbox {
   padding-left: 54px;
   gap: 8px;

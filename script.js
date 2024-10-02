@@ -4,21 +4,44 @@ async function registrationUser() {
 
 function checkPasswort() {  
   let password = document.getElementById('password').value;
-  let passwordConfirm = document.getElementById('passwordConfirm').value; 
-  if (password === passwordConfirm) {
-    checkPrivacyPolicy()
-  } else {
-   return;
-  };
+  let passwordConfirm = document.getElementById('passwordConfirm').value;
+  if (passwordConfirm.length == 0) {
+    resetInput(); 
+  } else{ if (password === passwordConfirm) {
+      // postRegistrationUser();
+      // validateForm()
+    } else {
+      passwordDontMatch();
+    }
+  }
 }
 
-function checkPrivacyPolicy() {
-  let check = document.getElementById('checkbox').checked;
-  if (check == true) {
-    postRegistrationUser();
+function passwordDontMatch() {
+  document.getElementById('error').classList.add('msg-box');
+  document.getElementById('inputPassword').classList.add('msg-box');
+  document.getElementById('inputPasswordConfirm').classList.add('msg-box');
+  document.getElementById('error').classList.remove('d-none');
+}
+
+function resetInput() {
+  document.getElementById('error').classList.remove('msg-box');
+  document.getElementById('inputPassword').classList.remove('msg-box');
+  document.getElementById('inputPasswordConfirm').classList.remove('msg-box');
+  document.getElementById('error').classList.add('d-none');
+}
+
+function validateForm() {
+  let name = document.getElementById('name').value;
+  let email = document.getElementById('email').value;
+  let password = document.getElementById('password').value;
+  let passwordConfirm = document.getElementById('passwordConfirm').value;
+  let checkbox = document.getElementById('checkbox').checked;
+  if (name && email && password && passwordConfirm && password === passwordConfirm && checkbox) {
+    document.getElementById("registrationButton").disabled = false;
   } else {
-    return;
-  };
+    document.getElementById("registrationButton").disabled = true;
+  }
+  postRegistrationUser();
 }
 
 async function postRegistrationUser() {
@@ -30,7 +53,7 @@ async function postRegistrationUser() {
   } catch (error) {
     console.error('Registration failed', error);    
   };
- await registrationSuccesful();
+  await registrationSuccesful();
 }
 
 function registrationSuccesful() {

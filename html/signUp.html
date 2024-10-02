@@ -32,24 +32,27 @@
       </div>
       <div>
         <form onsubmit="registrationUser(); return false;">
-          <input class="input" placeholder="Name" type="text" id="name" required>
-          <input class="input" placeholder="Email" type="email" id="email" required>
-
+          <input onkeyup="validateForm()" class="input" placeholder="Name" type="text" id="name" required>
+          <input onkeyup="validateForm()" class="input" placeholder="Email" type="email" id="email" required>
           <div id="inputPassword" class="input-content">
-            <input onkeyup="changePasswortImage()" class="input" minlength="5" placeholder="Password" type="password" id="password" required>
+            <input onkeyup="validateForm(); changePasswortImage()" class="input" minlength="5" placeholder="Password" type="password" id="password" required>
             <img id="passwordImage" onclick="togglePasswordVisibility('password')" src="../assets/icon/lock.svg" alt="Lock">
           </div>
-          <div id="inputPasswordConfirm" class="input-content">
-            <input onkeyup="changePasswortConfirmImage()" class="input" minlength="5" placeholder="Confirm Password" type="password" id="passwordConfirm" required>
-            <img id="passwordConfirmImage" onclick="togglePasswordVisibility('passwordConfirm')" src="../assets/icon/lock.svg" alt="Lock">
+          <div>
+            <div id="inputPasswordConfirm" class="input-content">
+              <input onkeyup="validateForm(); checkPasswort(); changePasswortConfirmImage()" class="input" minlength="5" placeholder="Confirm Password" type="password" id="passwordConfirm" required>
+              <img id="passwordConfirmImage" onclick="togglePasswordVisibility('passwordConfirm')" src="../assets/icon/lock.svg" alt="Lock">
+            </div>
+            <div id="error" class="msg-box d-none ">
+              <span>Your password don`t match. Please try again</span>
+            </div>
           </div>
-
           <div class="checkbox d-flex-y">
-            <input id="checkbox" type="checkbox"><span class="grey">I accept the</span>
+            <input onchange="validateForm()" id="checkbox" type="checkbox" required><span class="grey">I accept the</span>
             <span><a class="blue" href="../html/privacy.html">Privacy policy</a></span>
           </div>
           <div class="d-flex-x">
-            <button class="sign-up-btn">Sign up</button>
+            <button id="registrationButton" class="sign-up-btn" disabled>Sign up</button>
           </div>
         </form>
       </div>
