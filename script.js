@@ -1,3 +1,16 @@
+function validateForm() {
+  let name = document.getElementById('name').value;
+  let email = document.getElementById('email').value;
+  let password = document.getElementById('password').value;
+  let passwordConfirm = document.getElementById('passwordConfirm').value;
+  let checkbox = document.getElementById('checkbox').checked;
+  if (name && email && password && passwordConfirm && checkbox) {
+    document.getElementById("registrationButton").disabled = false;
+  } else {
+    document.getElementById("registrationButton").disabled = true;
+  }
+}
+
 async function registrationUser() {
   checkPasswort();
 }
@@ -5,22 +18,19 @@ async function registrationUser() {
 function checkPasswort() {  
   let password = document.getElementById('password').value;
   let passwordConfirm = document.getElementById('passwordConfirm').value;
-  if (passwordConfirm.length == 0) {
-    resetInput(); 
-  } else{ if (password === passwordConfirm) {
-      // postRegistrationUser();
-      // validateForm()
+  if (password === passwordConfirm) {    
+      postRegistrationUser();
     } else {
       passwordDontMatch();
     }
-  }
 }
 
 function passwordDontMatch() {
-  document.getElementById('error').classList.add('msg-box');
+  document.getElementById('error').classList.add('msg-span');
   document.getElementById('inputPassword').classList.add('msg-box');
   document.getElementById('inputPasswordConfirm').classList.add('msg-box');
   document.getElementById('error').classList.remove('d-none');
+  document.getElementById("registrationButton").disabled = true;
 }
 
 function resetInput() {
@@ -28,20 +38,6 @@ function resetInput() {
   document.getElementById('inputPassword').classList.remove('msg-box');
   document.getElementById('inputPasswordConfirm').classList.remove('msg-box');
   document.getElementById('error').classList.add('d-none');
-}
-
-function validateForm() {
-  let name = document.getElementById('name').value;
-  let email = document.getElementById('email').value;
-  let password = document.getElementById('password').value;
-  let passwordConfirm = document.getElementById('passwordConfirm').value;
-  let checkbox = document.getElementById('checkbox').checked;
-  if (name && email && password && passwordConfirm && password === passwordConfirm && checkbox) {
-    document.getElementById("registrationButton").disabled = false;
-  } else {
-    document.getElementById("registrationButton").disabled = true;
-  }
-  postRegistrationUser();
 }
 
 async function postRegistrationUser() {
@@ -78,6 +74,7 @@ function changePasswortConfirmImage() {
   let input = document.getElementById('passwordConfirm').value;  
   let image = document.getElementById('passwordConfirmImage');
   if (input.length > 0) {
+    resetInput();
     container.style.borderColor = 'var(--bluehover)';
     image.src="../assets/icon/visibility_off.svg";
   } else {

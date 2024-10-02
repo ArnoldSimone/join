@@ -91,6 +91,11 @@ input[type=password] {
 }
 
 .msg-box {
+  margin: 0px;
+  border-color: var(--red) !important;
+}
+
+.msg-span {
   margin-top: 8px;
   font-size: 12px;
   border-color: var(--red) !important;
