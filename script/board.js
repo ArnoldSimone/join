@@ -3,9 +3,7 @@ let tasks;
 
 async function onloadFuncBoard() {
     let tasksData = await loadFromDatabase(`/tasks`);
-    console.log(tasksData);
     tasks = Object.entries(tasksData).map(([id, task]) => ({ id, ...task }));
-    console.log(tasks);
     renderTasksBoard();
 }
 
@@ -35,7 +33,6 @@ function startDragging(taskId) {
 
 function allowDrop(ev) {
     ev.preventDefault();
-    console.log("Drag over event triggered");
 }
 
 function moveTo(progress) {
@@ -43,12 +40,15 @@ function moveTo(progress) {
     task.progress = progress;
     updateOnDatabase(`tasks/${currentDraggedElement}`, task)
     renderTasksBoard();
+    removeAllHighlight();
 
+}
+
+function removeAllHighlight() {
     removeHighlight('highlight-todo');
     removeHighlight('highlight-in-progress');
     removeHighlight('highlight-await-feedback');
     removeHighlight('highlight-done');
-
 }
 
 function highlight(containerId) {
@@ -118,17 +118,28 @@ function getTaskCategoryTemplate(category) {
 
 function closeDetailTaskOverlay() {
     document.getElementById('overlay-board').classList.add('d-none');
-    document.getElementById('overlay-detail-task-board').classList.add('d-none');
-}
-
-function showDetailTaskOverlay() {
-    document.getElementById('overlay-board').classList.remove('d-none');
-    document.getElementById('overlay-detail-task-board').classList.remove('d-none');
+    // document.getElementById('overlay-detail-task-board').classList.add('d-none');
 }
 
 function bubblingProtection(event) {
     event.stopPropagation();
 }
+
+function showDetailTaskOverlay(id) {
+    document.getElementById('overlay-board').classList.remove('d-none');
+    // document.getElementById('overlay-detail-task-board').classList.remove('d-none');
+    console.log(id);
+
+
+}
+
+
+
+
+// OVERLAY DETAIL-TASK
+
+
+
 
 
 
