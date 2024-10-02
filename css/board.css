@@ -195,7 +195,7 @@ progress {
 }
 
 .image-prio-board {
-    width: 15px;
+    width: 14px;
 }
 
 .overlay-board {
@@ -228,11 +228,10 @@ progress {
     width: 24px;
     border-radius: 50%;
     background-color: transparent;
-    transition: background-color 0.3s ease;
+    transition: all 0.3s ease;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: transform 0.3s ease;
     padding: 5px;
 }
 
@@ -240,7 +239,6 @@ progress {
     background-color: var(--lightgrey);
     cursor: pointer;
 }
-
 
 .task-title-detail {
     font-size: 32px;

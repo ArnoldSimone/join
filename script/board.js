@@ -86,9 +86,9 @@ function getBoardTaskTemplate(task) {
 
 function getImagePrioTemplate(priority) {
     const priortyImages = {
-        'low': '../assets/img/lowsym.png',
-        'medium': '../assets/img/mediumsym.png',
-        'urgent': '../assets/img/urgentsym.png'
+        'Low': '../assets/img/lowsym.png',
+        'Medium': '../assets/img/mediumsym.png',
+        'Urgent': '../assets/img/urgentsym.png'
     }
     return `<img class="image-prio-board" src="${priortyImages[priority]}" alt="">`
 }
@@ -118,22 +118,97 @@ function getTaskCategoryTemplate(category) {
 
 function closeDetailTaskOverlay() {
     document.getElementById('overlay-board').classList.add('d-none');
-    // document.getElementById('overlay-detail-task-board').classList.add('d-none');
 }
 
 function bubblingProtection(event) {
     event.stopPropagation();
 }
 
-function showDetailTaskOverlay(id) {
-    document.getElementById('overlay-board').classList.remove('d-none');
-    // document.getElementById('overlay-detail-task-board').classList.remove('d-none');
-    console.log(id);
+function showDetailTaskOverlay(taskId) {
+    let overlayBoardRef = document.getElementById('overlay-board');
+
+    overlayBoardRef.classList.remove('d-none');
+    overlayBoardRef.innerHTML = "";
+    let task = tasks.find(t => t.id === taskId)
+    overlayBoardRef.innerHTML = getTaskOverlayTemplate(task);
+}
+
+function renderSubtasksOverlay(task) {
+
+    let subtasksArray = task.subtasks;
+    if (!subtasksArray || subtasksArray.length === 0) {
+        return 'No subtasks in this task!';
+    } else {
+
+
+        let ctnSubtasks = "";
+
+        for (let indexSubTask = 0; indexSubTask < subtasksArray.length; indexSubTask++) {
+            ctnSubtasks += getSubtasksOverlayTemplate(indexSubTask, subtasksArray);
+        }
+        return ctnSubtasks;
+    }
+}
+
+function getSubtasksOverlayTemplate(indexSubTask, subtasksArray) {
+    return `
+        <div class="subtask-item d-flex-y">
+            <input type="checkbox" id="checkbox${indexSubTask}" class="subtask">
+            <label for="checkbox${indexSubTask}">${subtasksArray[indexSubTask].title}</label>
+        </div>
+    `
+}
+
+function getTaskOverlayTemplate(task) {
+    return `
+    <div onclick="bubblingProtection(event)" id="overlay-detail-task-board" class="overlay-detail-task-board ctn-task no-hover d-flex-x">
+        <div class="ctn-category-close d-flex-y">
+        ${getTaskCategoryTemplate(task.category)}
+            <img onclick="closeDetailTaskOverlay()" class="btn-close-detail-task" src="../assets/img/close.svg" alt="Image Close">
+        </div>
+        <div class="ctn-main-Detail-Task d-flex-x">
+            <p id="task-title-detail" class="task-title-detail">${task.title}</p>
+            <p id="task-description-detail" class="task-description-detail">${task.description}</p>
+            <div class="ctn-due-date d-flex-y">
+                <p class="label">Due date:</p>
+                <p class="due-date">${formatDate(task.dueDate)}</p>
+            </div>
+            <div class="ctn-priority d-flex-y">
+                <p class="label">Priority:</p>
+                <p class="prio-detail">${task.priority}</p>
+                ${getImagePrioTemplate(task.priority)}
+            </div>
+            <p class="label">Assigned To:</p>
+            <div class="ctn-assigned-to-detail d-flex-x">
+                <div class="person-detail d-flex-y">
+                    <div class="assigned-to d-flex bg-1">AM</div>
+                    <p>Anton Maier</p>
+                </div>
+                <div class="person-detail d-flex-y">
+                    <div class="assigned-to d-flex bg-3">ST</div>
+                    <p>Sabine Taube</p>
+                </div>
+            </div>
+            <p class="label">Subtasks:</p>
+            <div class="ctn-subtasks d-flex-x">
+                ${renderSubtasksOverlay(task)}
+            </div>
+        </div>
+        <div class="ctn-delete-edit d-flex-y">
+            <img class="btn-delete-task" src="../assets/img/dustbinDarkText.svg" alt="Image Delete">
+                <span class="vertikalLine"></span>
+                <img class="btn-edit-task" src="../assets/img/editDarkText.svg" alt="Image Close">
+                </div>
+        </div>`
+
 
 
 }
 
-
+function formatDate(dateString) {
+    let [year, month, day] = dateString.split('-');
+    return `${day}/${month}/${year}`;
+}
 
 
 // OVERLAY DETAIL-TASK
