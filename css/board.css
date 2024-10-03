@@ -2,6 +2,12 @@
     box-sizing: border-box;
 }
 
+main {
+    margin-left: 232px;
+    padding: 32px 64px;
+    max-width: 1440px;
+}
+
 .input-field {
     padding: 0 10px;
     border: 1px solid #ccc;
@@ -191,42 +197,39 @@ progress {
     position: fixed;
     top: 0;
     right: 0;
-    left: 0;
-    bottom: 0;
+    width: 100%;
+    height: 100vh;
     background-color: rgba(0, 0, 0, 0.5);
+
 }
 
-/* @keyframes slide-in {
-    from {
-        transform: translate(250%, -50%);
+@keyframes slide-in {
+    0% {
+        opacity: 0;
+        transform: translateX(1000px);
     }
 
-    to {
-        transform: translate(-50%, -50%);
+    100% {
+        opacity: 1;
+        transform: translateX(0);
     }
 }
 
-@keyframes slide-out {
-    from {
-        transform: translate(-50%, -50%);
-    }
+.slide-out {
+    animation: slide-in 0.2s ease-in-out 0s 1 reverse forwards;
+}
 
-    to {
-        transform: translate(250%, -50%);
-    }
-} */
+.slide-in {
+    animation: slide-in 0.2s ease-in-out 0s 1 normal forwards;
+}
+
 
 .overlay-detail-task-board {
-    position: fixed;
-    left: 50%;
-    top: 50%;
     padding: 24px;
     gap: 16px;
-    transform: translate(-50%, -50%);
-    max-width: 400px;
+    max-width: 360px;
     font-size: 14px;
     max-height: 70vh;
-    animation: slide-in 1s ease-in-out;
 }
 
 .no-hover {

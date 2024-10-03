@@ -133,7 +133,12 @@ function getTaskCategoryTemplate(category) {
 }
 
 function closeDetailTaskOverlay() {
-    document.getElementById('overlay-board').classList.add('d-none');
+    let overlayBoardRef = document.getElementById('overlay-board');
+    overlayBoardRef.classList.add('slide-out')
+    setTimeout(() => {
+        overlayBoardRef.classList.add('d-none');
+        overlayBoardRef.classList.remove('slide-out');
+    }, 200);
 }
 
 function bubblingProtection(event) {
@@ -143,6 +148,12 @@ function bubblingProtection(event) {
 function showDetailTaskOverlay(taskId) {
     let overlayBoardRef = document.getElementById('overlay-board');
     overlayBoardRef.classList.remove('d-none');
+    overlayBoardRef.classList.add('slide-in')
+
+    setTimeout(() => {
+        overlayBoardRef.classList.remove('slide-in');
+    }, 200);
+
     overlayBoardRef.innerHTML = "";
     let task = tasks.find(t => t.id === taskId)
     overlayBoardRef.innerHTML = getTaskOverlayTemplate(task);
