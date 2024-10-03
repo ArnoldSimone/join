@@ -166,9 +166,9 @@ progress {
 }
 
 .assigned-to {
-    width: 24px;
-    height: 24px;
-    font-size: 12px;
+    width: 32px;
+    height: 32px;
+    font-size: 10px;
     border-radius: 100%;
     border: 1px solid var(--textwhite);
     color: var(--textwhite);
@@ -178,24 +178,13 @@ progress {
     margin-right: -12px;
 }
 
-.bg-1 {
-    background-color: aqua;
-}
-
-.bg-2 {
-    background-color: rgb(255, 96, 96);
-}
-
-.bg-3 {
-    background-color: rgb(165, 96, 255);
-}
-
 .ctn-task-bottom {
     justify-content: space-between;
 }
 
 .image-prio-board {
     width: 14px;
+    margin-left: 12px;
 }
 
 .overlay-board {
@@ -252,11 +241,6 @@ progress {
 .label {
     color: var(--darkblue);
     width: 100px;
-}
-
-.image-prio-detail {
-    width: 10px;
-    padding-left: 8px;
 }
 
 .ctn-category-close {
@@ -364,4 +348,8 @@ input[type="checkbox"]:checked::before {
     border-width: 3px;
     border: 1px dashed var(--middlegrey);
     height: 100px;
+}
+
+.ctn-drag-area {
+    min-height: calc(100vh - 360px);
 }

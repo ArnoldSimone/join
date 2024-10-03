@@ -49,11 +49,13 @@
                         <span>To do</span>
                         <img class="btn-add-task-smal" src="../assets/img/plusButtonDarkBlue.svg" alt="Image Plus">
                     </div>
-                    <div id="ctn-tasks-todo" class="ctn-tasks-todo tasks-box d-flex-y height drag-area"
-                        ondrop="moveTo('todo')" ondragover="allowDrop(event); highlight('highlight-todo')"
+                    <div class="ctn-drag-area" ondrop="moveTo('todo')"
+                        ondragover="allowDrop(event); highlight('highlight-todo')"
                         ondragleave="removeHighlight('highlight-todo')">
+                        <div id="ctn-tasks-todo" class="ctn-tasks-todo tasks-box d-flex-y height drag-area">
+                        </div>
+                        <div id="highlight-todo"></div>
                     </div>
-                    <div id="highlight-todo"></div>
                 </div>
 
                 <div class="ctn-cards-in-progress ctn-cards">
@@ -61,34 +63,41 @@
                         <span>In progress</span>
                         <img class="btn-add-task-smal" src="../assets/img/plusButtonDarkBlue.svg" alt="Image Plus">
                     </div>
-                    <div id="ctn-tasks-in-progress" class="ctn-tasks-in-progress tasks-box d-flex-y height drag-area"
-                        ondrop="moveTo('in progress')" ondragover="allowDrop(event); highlight('highlight-in-progress')"
+                    <div class="ctn-drag-area" ondrop="moveTo('in progress')"
+                        ondragover="allowDrop(event); highlight('highlight-in-progress')"
                         ondragleave="removeHighlight('highlight-in-progress')">
+                        <div id="ctn-tasks-in-progress"
+                            class="ctn-tasks-in-progress tasks-box d-flex-y height drag-area">
+                        </div>
+                        <div id="highlight-in-progress"></div>
                     </div>
-                    <div id="highlight-in-progress"></div>
                 </div>
                 <div class="ctn-cards-await-feedback ctn-cards">
                     <div class="header-container d-flex-y">
                         <span>Await feedback</span>
                         <img class="btn-add-task-smal" src="../assets/img/plusButtonDarkBlue.svg" alt="Image Plus">
                     </div>
-                    <div id="ctn-tasks-await-feedback"
-                        class="ctn-tasks-await-feedback tasks-box d-flex-y height drag-area"
-                        ondrop="moveTo('await feedback')"
+                    <div class="ctn-drag-area" ondrop="moveTo('await feedback')"
                         ondragover="allowDrop(event); highlight('highlight-await-feedback')"
                         ondragleave="removeHighlight('highlight-await-feedback')">
+                        <div id="ctn-tasks-await-feedback"
+                            class="ctn-tasks-await-feedback tasks-box d-flex-y height drag-area"
+                            ondrop="moveTo('await feedback')">
+                        </div>
+                        <div id="highlight-await-feedback"></div>
                     </div>
-                    <div id="highlight-await-feedback"></div>
                 </div>
                 <div class="ctn-cards-done ctn-cards">
                     <div class="header-container d-flex-y">
                         <span>Done</span>
                     </div>
-                    <div id="ctn-tasks-done" class="ctn-tasks-done tasks-box d-flex-y height drag-area"
-                        ondrop="moveTo('done')" ondragover="allowDrop(event); highlight('highlight-done')"
+                    <div class="ctn-drag-area" ondrop="moveTo('done')"
+                        ondragover="allowDrop(event); highlight('highlight-done')"
                         ondragleave="removeHighlight('highlight-done')">
+                        <div id="ctn-tasks-done" class="ctn-tasks-done tasks-box d-flex-y height drag-area">
+                        </div>
+                        <div id="highlight-done"></div>
                     </div>
-                    <div id="highlight-done" class=""></div>
                 </div>
             </div>
 

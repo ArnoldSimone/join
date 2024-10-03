@@ -1,9 +1,12 @@
 let currentDraggedElement;
 let tasks;
+let contacts;
 
 async function onloadFuncBoard() {
     let tasksData = await loadFromDatabase(`/tasks`);
     tasks = Object.entries(tasksData).map(([id, task]) => ({ id, ...task }));
+    let contactsData = await loadFromDatabase(`/contacts`);
+    contacts = Object.entries(contactsData).map(([id, contact]) => ({ id, ...contact }));
     renderTasksBoard();
 }
 
@@ -41,7 +44,6 @@ function moveTo(progress) {
     updateOnDatabase(`tasks/${currentDraggedElement}`, task)
     renderTasksBoard();
     removeAllHighlight();
-
 }
 
 function removeAllHighlight() {
@@ -75,13 +77,27 @@ function getBoardTaskTemplate(task) {
         ${renderTaskProgressBar(task.subtasks)}
         <div class="ctn-task-bottom d-flex-y">
             <div class="ctn-assigned-to mesh d-flex-y">
-                <div class="assigned-to mesh d-flex bg-1">AM</div>
-                <div class="assigned-to mesh d-flex bg-2">BR</div>
-                <div class="assigned-to mesh d-flex bg-3">HI</div>
+                ${renderAssignedTo(task)}
             </div>
             ${getImagePrioTemplate(task.priority)}
         </div>
     </div>`;
+}
+
+function renderAssignedTo(task) {
+    let assignedToArray = Array.isArray(task.assignedTo) ? task.assignedTo : [task.assignedTo];
+    let assignedToContent = "";
+    for (let i = 0; i < assignedToArray.length; i++) {
+        let contact = contacts.find(c => c.name === assignedToArray[i]);
+        let initial = contact.avatar.initials;
+        let color = contact.avatar.color;
+        assignedToContent += getAssignedToTemplate(initial, color);
+    }
+    return assignedToContent;
+}
+
+function getAssignedToTemplate(initial, color) {
+    return `<div class="assigned-to mesh d-flex" style="background-color:${color};">${initial}</div>`
 }
 
 function getImagePrioTemplate(priority) {
@@ -126,7 +142,6 @@ function bubblingProtection(event) {
 
 function showDetailTaskOverlay(taskId) {
     let overlayBoardRef = document.getElementById('overlay-board');
-
     overlayBoardRef.classList.remove('d-none');
     overlayBoardRef.innerHTML = "";
     let task = tasks.find(t => t.id === taskId)
@@ -134,29 +149,16 @@ function showDetailTaskOverlay(taskId) {
 }
 
 function renderSubtasksOverlay(task) {
-
     let subtasksArray = task.subtasks;
     if (!subtasksArray || subtasksArray.length === 0) {
         return 'No subtasks in this task!';
     } else {
-
-
         let ctnSubtasks = "";
-
         for (let indexSubTask = 0; indexSubTask < subtasksArray.length; indexSubTask++) {
-            ctnSubtasks += getSubtasksOverlayTemplate(indexSubTask, subtasksArray);
+            ctnSubtasks += getSubtasksOverlayTemplate(indexSubTask, task);
         }
         return ctnSubtasks;
     }
-}
-
-function getSubtasksOverlayTemplate(indexSubTask, subtasksArray) {
-    return `
-        <div class="subtask-item d-flex-y">
-            <input type="checkbox" id="checkbox${indexSubTask}" class="subtask">
-            <label for="checkbox${indexSubTask}">${subtasksArray[indexSubTask].title}</label>
-        </div>
-    `
 }
 
 function getTaskOverlayTemplate(task) {
@@ -180,14 +182,7 @@ function getTaskOverlayTemplate(task) {
             </div>
             <p class="label">Assigned To:</p>
             <div class="ctn-assigned-to-detail d-flex-x">
-                <div class="person-detail d-flex-y">
-                    <div class="assigned-to d-flex bg-1">AM</div>
-                    <p>Anton Maier</p>
-                </div>
-                <div class="person-detail d-flex-y">
-                    <div class="assigned-to d-flex bg-3">ST</div>
-                    <p>Sabine Taube</p>
-                </div>
+                ${renderAssignedToOverlay(task)}
             </div>
             <p class="label">Subtasks:</p>
             <div class="ctn-subtasks d-flex-x">
@@ -200,9 +195,27 @@ function getTaskOverlayTemplate(task) {
                 <img class="btn-edit-task" src="../assets/img/editDarkText.svg" alt="Image Close">
                 </div>
         </div>`
+}
 
+function renderAssignedToOverlay(task) {
+    let assignedToArray = Array.isArray(task.assignedTo) ? task.assignedTo : [task.assignedTo];
+    let assignedToContent = "";
+    for (let i = 0; i < assignedToArray.length; i++) {
+        let contact = contacts.find(c => c.name === assignedToArray[i]);
+        let initial = contact.avatar.initials;
+        let color = contact.avatar.color;
+        let name = assignedToArray[i];
+        assignedToContent += getAssignedToTemplateOverlay(initial, color, name);
+    }
+    return assignedToContent;
+}
 
-
+function getAssignedToTemplateOverlay(initial, color, name) {
+    return `     
+        <div class="person-detail d-flex-y">
+            <div class="assigned-to d-flex bg-1" style="background-color:${color};">${initial}</div>
+            <p>${name}</p>
+        </div>`
 }
 
 function formatDate(dateString) {
@@ -210,110 +223,19 @@ function formatDate(dateString) {
     return `${day}/${month}/${year}`;
 }
 
+function getSubtasksOverlayTemplate(indexSubTask, task) {
+    let subtasksArray = task.subtasks;
+    return `
+        <div class="subtask-item d-flex-y">
+            <input onchange="updateSubtaskStatus(${indexSubTask}, '${task.id}')" type="checkbox" id="checkbox${indexSubTask}" class="subtask" ${(subtasksArray[indexSubTask].completed == true) ? "checked" : ""}>
+            <label for="checkbox${indexSubTask}">${subtasksArray[indexSubTask].title}</label>
+        </div>`
+}
 
-// OVERLAY DETAIL-TASK
-
-
-
-
-
-
-// let tasks = [
-//     {
-//         "title": "Firebase Setup",
-//         "assignedTo": ["Anton Mayer", "Eva Fischer"],
-//         "category": "User Story",
-//         "description": "Firebase anlegen für die neue App.",
-//         "dueDate": "2025-02-17",
-//         "priority": "medium",
-//         "progress": "in progress",
-//         "subtasks": [
-//             "Firebase-Projekt erstellen",
-//             "Datenbank einrichten",
-//             "Authentifizierung konfigurieren"
-//         ]
-//     },
-//     {
-//         "title": "API Development",
-//         "assignedTo": "Anton Mayer",
-//         "category": "Technical Task",
-//         "description": "API für die App entwickeln.",
-//         "dueDate": "2024-12-22",
-//         "priority": "urgent",
-//         "progress": "todo",
-//         "subtasks": [
-//             "API-Schnittstellen entwerfen",
-//             "Endpoints implementieren"
-//         ]
-//     },
-//     {
-//         "title": "Login Bug Fix",
-//         "assignedTo": "Eva Fischer",
-//         "category": "User Story",
-//         "description": "Fehler beim Login beheben.",
-//         "dueDate": "2024-10-03",
-//         "priority": "urgent",
-//         "progress": "in progress",
-//         "subtasks": [
-//             "Fehleranalyse durchführen",
-//             "Lösung implementieren",
-//             "Tests durchführen"
-//         ]
-//     },
-//     {
-//         "title": "Dashboard UI Improvements",
-//         "assignedTo": ["Anton Mayer", "John Smith"],
-//         "category": "Technical Task",
-//         "description": "UI-Verbesserungen für das Dashboard.",
-//         "dueDate": "2024-10-10",
-//         "priority": "low",
-//         "progress": "await feedback",
-//         "subtasks": [
-//             "Designvorschläge erstellen",
-//             "Änderungen im Frontend umsetzen",
-//             "Feedback einholen"
-//         ]
-//     },
-//     {
-//         "title": "Push Notifications Integration",
-//         "assignedTo": "John Smith",
-//         "category": "User Story",
-//         "description": "Integration von Push-Benachrichtigungen.",
-//         "dueDate": "2024-10-15",
-//         "priority": "medium",
-//         "progress": "done",
-//         "subtasks": [
-//             "Benachrichtigungssystem entwerfen",
-//             "Push-Services konfigurieren",
-//             "App-Benachrichtigungen testen"
-//         ]
-//     }
-// ];
-
-// async function onloadFunc() {
-//     let tasks = await getAllData("/tasks");
-//     console.table(tasks);
-//     // await pushTasks(tasks);
-// }
-
-// async function getAllData(path = "") {
-//     let tasksResponse = await fetch(BASE_URL + path + ".json");
-//     let tasksResJson = await tasksResponse.json();
-//     return tasksResJson;
-// }
-
-// async function pushTasks(tasks) {
-//     for (let i = 0; i < tasks.length; i++) {
-//         await pushTask(tasks[i]);
-//     }
-// }
-
-// async function pushTask(task) {
-//     const response = await fetch(BASE_URL + "tasks.json", {
-//         method: 'POST',
-//         headers: {
-//             'Content-Type': 'application/json'
-//         },
-//         body: JSON.stringify(task)
-//     });
-// }
+function updateSubtaskStatus(indexSubTask, taskId) {
+    let task = tasks.find(t => t.id === taskId);
+    let subtasksArray = task.subtasks;
+    subtasksArray[indexSubTask].completed = !subtasksArray[indexSubTask].completed;
+    updateOnDatabase(`tasks/${taskId}`, task);
+    renderTasksBoard();
+}
