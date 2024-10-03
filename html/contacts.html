@@ -11,10 +11,12 @@
     <link rel="stylesheet" href="../css/fonts.css">
     <link rel="stylesheet" href="../css/contact.css">
     <script src="../script/include.js"></script>
+    <script defer src="../script/contacts.js"></script>
+    <script defer src="../script.js"></script>
     <title>Join</title>
 </head>
 
-<body onload="includeHTML()">
+<body onload="includeHTML(); loadContacts()">
     <header>
         <div w3-include-html="header.html"></div>
     </header>
@@ -27,80 +29,92 @@
         <div class="contact-container">
             <div class="contact-list">
                 <div class="d-flex add-contact-container">
-                    <button class="add-contact-btn d-flex">Add new contact
+                    <button class="add-contact-btn d-flex" onclick="showAddContactOverlay()">Add new contact
                         <img src="../assets/img/person_add.png" alt="">
                     </button>
+                    
+                    
                 </div>
-                <div class="contacts">
-                    <div class="contact-group">
-                        <h2>A</h2>
-                        <hr>
-                        <div class="contact">
-                            <span class="avatar" style="background-color: #FF5722;">AM</span>
-                            <div class="contact-info">
-                                <span class="name">Anton Mayer</span>
-                                <span class="email">antom@gmail.com</span>
-                            </div>
-                        </div>
-                        <div class="contact">
-                            <span class="avatar" style="background-color: #9C27B0;">AS</span>
-                            <div class="contact-info">
-                                <span class="name">Anja Schulz</span>
-                                <span class="email">schulz@hotmail.com</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="contact-group">
-                        <h2>B</h2>
-                        <hr>
-                        <div class="contact">
-                            <span class="avatar" style="background-color: #03A9F4;">BZ</span>
-                            <div class="contact-info">
-                                <span class="name">Benedikt Ziegler</span>
-                                <span class="email">benedikt@gmail.com</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="contact-group">
-                        <h2>D</h2>
-                        <hr>
-                        <div class="contact">
-                            <span class="avatar" style="background-color: #E91E63;">DE</span>
-                            <div class="contact-info">
-                                <span class="name">David Eisenberg</span>
-                                <span class="email">davidberg@gmail.com</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="contact-group">
-                        <h2>E</h2>
-                        <hr>
-                        <div class="contact">
-                            <span class="avatar" style="background-color: #FFC107;">EF</span>
-                            <div class="contact-info">
-                                <span class="name">Eva Fischer</span>
-                                <span class="email">eva@gmail.com</span>
-                            </div>
-                        </div>
-                        <div class="contact">
-                            <span class="avatar" style="background-color: #00BCD4;">EM</span>
-                            <div class="contact-info">
-                                <span class="name">Emmanuel Mauer</span>
-                                <span class="email">emmanuelma@gmail.com</span>
-                            </div>
-                        </div>
-                    </div>
+                <div class="contacts"></div>
+            </div>
+            <div class="contact-detail-container">
+                <div class="contact-rightheadline">
+                    <div class="d-flex-y"></div>
+                    <h1 class="headline padding-right20">Contacts</h1>
+                    <div class="vertical-line-blue"></div>
+                    <span class="headline-right padding-left20">Better with a team</span>
+                    <div class="horizontal-line-blue d-none"></div>
                 </div>
-            </div>
-            <div class="d-flex-y"></div>
-                <h1 class="headline">Contacts</h1>
-                <div class="vertical-line-blue"></div>
-                <span class="headline-right">Better with a team</span>
-                <div class="horizontal-line-blue d-none"></div>
-            </div>
+                
+                <div class="contact-view">
+                    <div class="contact-details" id="contact-details">
+                        <div style="display: flex; flex-direction: row;">
+                            <div class="contact-avatar"></div>
+                            <div style="display: flex; flex-direction: column; padding-left: 20px;">
+                                <h2 class="margin0 padding-left20"><span class="contact-name"></span></h2>
+                                <div class="contact-actions">
+                                    <button class="edit-btn border-unset d-flex" onclick="showEditContact(document.getElementById('edit-contact-id').value, document.querySelector('.contact-name').textContent, document.getElementById('contact-email').textContent, document.getElementById('contact-phone').textContent)"><img src="../assets/img/edit.png" alt="">Edit</button>
+                                    <button class="delete-btn border-unset d-flex" onclick="deleteContact()"><img src="../assets/img/delete.png" alt="">Delete</button>
+                                </div>
+                            </div>    
+                        </div>
+                        <span>Contact Information</span>
+                        <p>Email:<br><span id="contact-email"></span></p>
+                        <p>Phone:<br><span id="contact-phone"></span></p>
+                    </div>
+                   
+                </div>
+            </div>            
+               
         </div>
+
+       <!-- Add Contact Overlay -->
+       <div id="add-contact-overlay" class="overlay">
+        <div class="overlay-content">
+            <div class="overlay-left">
+                <img src="../assets/img/logo_white.png" alt="">
+                <h1>Add Contact</h1>
+                <p>Tasks are better with a team!</p>
+                <div class="horizontal-line-blue"></div>
+            </div>
+            <div class="d-flex overlay-contact-middle">
+                <img src="../assets/img/addcontact.png" alt="">
+            </div>
+            <form class="d-flex" style="flex-direction: column;" onsubmit="addNewContact(); return false;">
+                <input type="text" placeholder="Name" id="add-name" required>
+                <input type="email" placeholder="Email" id="add-email" required>
+                <input type="tel" placeholder="Phone" id="add-phone" required>
+                <div style="display: flex; gap: 5px;">
+                    <button type="button" class="cancel" onclick="hideOverlay()">Cancel</button>
+                    <button type="submit" class="create-contact">Create contact</button>
+                </div>
+            </form>
+        </div>
+    </div>
+      <!-- Edit Contact Overlay -->
+<div id="edit-contact-overlay" class="overlay">
+    <div class="overlay-content">
+        <div class="overlay-left">
+            <h1>Edit Contact</h1> 
+            <div class="horizontal-line-blue"></div>
+        </div>
+        <div class="d-flex overlay-contact-middle padding20">
+            <span id="edit-avatar" class="avatar-details d-flex"></span>
+        </div>
+        <form class="d-flex" style="flex-direction: column;">
+            <input type="text" placeholder="Name" id="edit-name">
+            <input type="email" placeholder="Email" id="edit-email">
+            <input type="tel" placeholder="Phone" id="edit-phone">
+            <input type="hidden" id="edit-contact-id"> 
+            <div style="display: flex; gap: 5px;">
+                <button type="button" class="cancel" onclick="hideOverlay()">Cancel</button>
+                <button type="button" class="save-changes" onclick="editContact()">Save changes</button>
+            </div>
+        </form>
+    </div>
+</div>
+
     </main>
-    
 </body>
 
 </html>
