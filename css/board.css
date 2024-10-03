@@ -193,19 +193,40 @@ progress {
     right: 0;
     left: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5)
+    background-color: rgba(0, 0, 0, 0.5);
 }
+
+/* @keyframes slide-in {
+    from {
+        transform: translate(250%, -50%);
+    }
+
+    to {
+        transform: translate(-50%, -50%);
+    }
+}
+
+@keyframes slide-out {
+    from {
+        transform: translate(-50%, -50%);
+    }
+
+    to {
+        transform: translate(250%, -50%);
+    }
+} */
 
 .overlay-detail-task-board {
     position: fixed;
     left: 50%;
     top: 50%;
-    transform: translate(-50%, -50%);
     padding: 24px;
     gap: 16px;
+    transform: translate(-50%, -50%);
     max-width: 400px;
     font-size: 14px;
     max-height: 70vh;
+    animation: slide-in 1s ease-in-out;
 }
 
 .no-hover {
