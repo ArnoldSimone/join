@@ -11,7 +11,7 @@ function getNumberOfTasks(tasks) {
     let awaitFeedbackTasks = tasks.filter(task => task.progress === "await feedback");
     let doneTasks = tasks.filter(task => task.progress === "done");
     let totalTasks = tasks.length;
-    let urgentTasks = tasks.filter(task => task.priority === "urgent");
+    let urgentTasks = tasks.filter(task => task.priority === "Urgent");
     renderNumberOfTasks(toDoTasks, inProgressTasks, awaitFeedbackTasks, doneTasks, totalTasks, urgentTasks);
 }
 
@@ -30,15 +30,17 @@ function greetingUser() {
     if (currentHour >= 5 && currentHour < 12) {
         greeting = "Good morning,";
     } else if (currentHour < 18) {
-        greeting = "Guten afternoon,";
+        greeting = "Good afternoon,";
     } else {
-        greeting = "Guten evening,";
+        greeting = "Good evening,";
     }
     document.getElementById('daytime-greeting').innerHTML = greeting;
 }
 
 function getUpcomingDeadline() {
-    let urgentTasks = tasks.filter(task => task.priority === "urgent");
+    let urgentTasks = tasks.filter(task => task.priority === "Urgent");
+    console.log(urgentTasks);
+
     if (urgentTasks == "") {
         document.getElementById('main-summary-middle-right').innerHTML = `<div>No upcoming Deadline</div>`;
     } else {
