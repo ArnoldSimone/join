@@ -1,3 +1,20 @@
+#registrationBody {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.header {
+  max-width: 1920px !important;
+}
+
+#registrationMain {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+}
+
 .sign-up-header {
   display: flex;
   justify-content: space-between;
@@ -19,7 +36,7 @@
   left: 34px;
 }
 
-.content {
+.register-headline {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -73,23 +90,6 @@ form {
   outline: none;
 }
 
-input[type=text] {
-  background-image: url(../assets/icon/person.svg);
-  background-repeat: no-repeat;
-  background-position: right 12px center;
-}
-
-input[type=email] {
-  background-image: url(../assets/icon/mail.svg);
-  background-repeat: no-repeat;
-  background-position: right 12px center;
-}
-
-input[type=password] {
-  background-repeat: no-repeat;
-  background-position: right 12px center;
-}
-
 .msg-box {
   margin: 0px;
   border-color: var(--red) !important;
@@ -127,6 +127,17 @@ input[type=password] {
   text-underline-offset: 4px;
 }
 
+.disable-btn {
+  background-color: var(--grey);
+  height: 40px;
+  width: 94px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--textwhite);
+  border: none;
+}
+
 .sign-up-btn {
   background-color: var(--darkblue);
   height: 40px;
@@ -158,4 +169,32 @@ input[type=password] {
 .info-notice a:hover {
   color: var(--lightblue);
   transform: scale(1.06);
+}
+
+.registration-popup {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  animation: registration-successfull 0.4s ease-in-out 0s 1 normal forwards;
+}
+
+@keyframes registration-successfull {
+	0% {
+		opacity: 0;
+		transform: translateY(250px);
+	}
+
+	100% {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+.popup-content {
+  background-color: var(--darkblue);
+  color: var(--textwhite);
+  width: 240px;
+  height: 40px;
+  padding: 10px;
+  border-radius: 20px;
 }

@@ -103,12 +103,9 @@ a {
     font-weight: 700;
 }
 
-main {
-    margin-left: 232px;
-    padding: 32px 64px;
+content {
     max-width: 1440px;
 }
-
 
 body {
     --sb-track-color: #fafafa;
