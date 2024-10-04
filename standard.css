@@ -103,13 +103,10 @@ a {
   font-weight: 700;
 }
 
-<<<<<<< Updated upstream
 content {
-    max-width: 1440px;
+  max-width: 1440px;
 }
 
-=======
->>>>>>> Stashed changes
 body {
   --sb-track-color: #fafafa;
   --sb-thumb-color: var(--middlegrey);
