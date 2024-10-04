@@ -7,6 +7,12 @@
     flex-direction: column;
 }
 
+main {
+    margin-left: 232px;
+    padding: 32px 64px;
+    max-width: 1440px;
+}
+
 form {
     display: flex;
     justify-content: space-between;
