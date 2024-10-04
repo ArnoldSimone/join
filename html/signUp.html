@@ -13,56 +13,73 @@
   <title>Join</title>
 </head>
 
-<body>
-  <section>
-    <div class="sign-up-header">
-      <img src="../assets/img/logo_blue.png" alt="Logo">
-    </div>
-  </section>
-  <section class="d-flex width100">
-    <div class="sign-up-container d-flex-x">
-      <div>
-        <div class="arrow">
-          <a href="../index.html"><img id="stop" src="../assets/icon/arrow-left-line.svg" alt="Back"></a>
-        </div>
-        <div class="content width100">
-          <h1>Sign up</h1>
-          <div class="underline"></div>
-        </div>
+<body id="registrationBody">
+  <header class="d-flex-x">
+    <section class="header width100">
+      <div class="sign-up-header">
+        <img src="../assets/img/logo_blue.png" alt="Logo">
       </div>
-      <div>
-        <form onsubmit="registrationUser(); return false;">
-          <input onkeyup="validateForm()" class="input" placeholder="Name" type="text" id="name" required>
-          <input onkeyup="validateForm()" class="input" placeholder="Email" type="email" id="email" required>
-          <div id="inputPassword" class="input-content">
-            <input onkeyup="validateForm(); changePasswortImage()" class="input" minlength="5" placeholder="Password" type="password" id="password" required>
-            <img id="passwordImage" onclick="togglePasswordVisibility('password')" src="../assets/icon/lock.svg" alt="Lock">
+    </section> 
+  </header>
+  <main id="registrationMain">
+    <section class="d-flex width100 content">
+      <div class="sign-up-container d-flex-x">
+        <div>
+          <div class="arrow">
+            <a href="../index.html"><img id="stop" src="../assets/icon/arrow-left-line.svg" alt="Back"></a>
           </div>
-          <div>
-            <div id="inputPasswordConfirm" class="input-content">
-              <input onkeyup="validateForm(); changePasswortConfirmImage()" class="input" minlength="5" placeholder="Confirm Password" type="password" id="passwordConfirm" required>
-              <img id="passwordConfirmImage" onclick="togglePasswordVisibility('passwordConfirm')" src="../assets/icon/lock.svg" alt="Lock">
+          <div class="register-headline width100">
+            <h1>Sign up</h1>
+            <div class="underline"></div>
+          </div>
+        </div>
+        <div>
+          <form onsubmit="registrationUser(); return false;">
+            <div class="input-content">
+              <input onkeyup="validateForm()" class="input" placeholder="Name" type="text" id="name" required>
+              <img src="../assets/icon/person.svg" alt="Text">
+            </div>
+            <div class="input-content">
+              <input onkeyup="validateForm()" class="input" placeholder="Email" type="email" id="email" required>
+              <img src="../assets/icon/mail.svg" alt="Email">
+            </div>
+            <div id="inputPassword" class="input-content">
+              <input onkeyup="validateForm(); changePasswortImage()" class="input" minlength="5" placeholder="Password" type="password" id="password" required>
+              <img id="passwordImage" onclick="togglePasswordVisibility('password')" src="../assets/icon/lock.svg" alt="Lock">
+            </div>
+            <div>
+              <div id="inputConfirmPassword" class="input-content">
+                <input onkeyup="validateForm(); changePasswortConfirmImage()" class="input" minlength="5" placeholder="Confirm Password" type="password" id="confirmPassword" required>
+                <img id="confirmPasswordImage" onclick="togglePasswordVisibility('confirmPassword')" src="../assets/icon/lock.svg" alt="Lock">
               </div>
               <div id="error" class="msg-box d-none ">
-              <span>Your password don`t match. Please try again</span>
+                <span>Your password don`t match. Please try again</span>
+              </div>
             </div>
-          </div>
-          <div class="checkbox d-flex-y">
-            <input onchange="validateForm()" id="checkbox" type="checkbox" required><span class="grey">I accept the</span>
-            <span><a class="blue" href="../html/privacy.html">Privacy policy</a></span>
-          </div>
-          <div class="d-flex-x">
-            <button id="registrationButton" class="sign-up-btn" disabled>Sign up</button>
-          </div>
-        </form>
+            <div class="checkbox d-flex-y">
+              <input onchange="validateForm()" id="checkbox" type="checkbox" required><span class="grey">I accept the</span>
+              <span><a class="blue" href="../html/privacy.html">Privacy policy</a></span>
+            </div>
+            <div class="d-flex-x">
+              <button id="registrationButton" class="disable-btn" disabled>Sign up</button>
+            </div>
+          </form>
+        </div>
       </div>
-    </div>
-  </section>
-  <section>
-    <div class="info-notice d-flex">
-      <a href="./html/privacy.html">Privacy Policy</a>
-      <a href="./html/legalnotice.html">Legal notice</a>
-    </div>
-  </section>
+      <div id="popUp" class="registration-popup d-flex d-none">
+        <div class="popup-content d-flex">
+          <span>You Signed Up successfully</span>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="d-flex-x">
+    <section class="content">
+      <div class="info-notice d-flex">
+        <a href="./html/privacy.html">Privacy Policy</a>
+        <a href="./html/legalnotice.html">Legal notice</a>
+      </div>
+    </section>
+  </footer>
 </body>
 </html>
