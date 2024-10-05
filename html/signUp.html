@@ -7,8 +7,9 @@
   <link rel="icon" type="image/png" href="../assets/img/logo_white.png" />
   <link rel="stylesheet" href="../standard.css">
   <link rel="stylesheet" href="../css/signUp.css">
+  <link rel="stylesheet" href="../css/animation.css">
   <script defer src="../script/animation.js"></script>
-  <script defer src="../script.js"></script>
+  <script defer src="../script/signUp.js"></script>
   <script src="../script/database.js"></script>
   <title>Join</title>
 </head>
@@ -44,12 +45,12 @@
               <img src="../assets/icon/mail.svg" alt="Email">
             </div>
             <div id="inputPassword" class="input-content">
-              <input onkeyup="validateForm(); changePasswortImage()" class="input" minlength="5" placeholder="Password" type="password" id="password" required>
+              <input onkeyup="validateForm(); validateInputValue(); passwortInput()" class="input" minlength="5" placeholder="Password" type="password" id="password" required>
               <img id="passwordImage" onclick="togglePasswordVisibility('password')" src="../assets/icon/lock.svg" alt="Lock">
             </div>
             <div>
               <div id="inputConfirmPassword" class="input-content">
-                <input onkeyup="validateForm(); changePasswortConfirmImage()" class="input" minlength="5" placeholder="Confirm Password" type="password" id="confirmPassword" required>
+                <input onkeyup="validateForm(); validateInputValue(); confirmInput()" class="input" minlength="5" placeholder="Confirm Password" type="password" id="confirmPassword" required>
                 <img id="confirmPasswordImage" onclick="togglePasswordVisibility('confirmPassword')" src="../assets/icon/lock.svg" alt="Lock">
               </div>
               <div id="error" class="msg-box d-none ">

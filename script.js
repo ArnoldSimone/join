@@ -1,129 +1,92 @@
-function validateForm() {
-  let name = document.getElementById('name').value;
-  let email = document.getElementById('email').value;
+let users = [];
+
+
+function validateLogin() {
+  let inputColor = document.getElementById('password-content');
   let password = document.getElementById('password').value;
-  let confirmPassword = document.getElementById('confirmPassword').value;
-  let checkbox = document.getElementById('checkbox').checked;
-  if (name && email && password && confirmPassword && checkbox) {
-    buttonAktiv();
+  if (password > 0) {
+    inputColor.style.borderColor = 'var(--bluehover)';
   } else {
-    buttonNotAktiv();
-  }
+    inputColor.style.borderColor = 'lightgrey';
+  };
 }
 
 
-function buttonAktiv() {
-  document.getElementById("registrationButton").classList.remove('disable-btn');
-  document.getElementById("registrationButton").classList.add('sign-up-btn');
-  document.getElementById("registrationButton").disabled = false;
+function login() {
+  loadData();
 }
 
 
-function buttonNotAktiv() {
-  document.getElementById("registrationButton").classList.add('disable-btn');
-  document.getElementById("registrationButton").classList.remove('sign-up-btn');
-  document.getElementById("registrationButton").disabled = true;
-}
-
-
-async function registrationUser() {
-  checkPasswort();
-}
-
-
-function checkPasswort() {  
-  let password = document.getElementById('password').value;
-  let confirmPassword = document.getElementById('confirmPassword').value;
-  if (password === confirmPassword) {    
-      postRegistrationUser();
-    } else {
-      passwordDontMatch();
-    };
-}
-
-
-function passwordDontMatch() {
-  document.getElementById('error').classList.add('msg-span');
-  document.getElementById('inputPassword').classList.add('msg-box');
-  document.getElementById('inputConfirmPassword').classList.add('msg-box');
-  document.getElementById('error').classList.remove('d-none');
-  buttonNotAktiv();
-}
-
-
-function resetInput() {
-  document.getElementById('error').classList.remove('msg-box');
-  document.getElementById('inputPassword').classList.remove('msg-box');
-  document.getElementById('inputConfirmPassword').classList.remove('msg-box');
-  document.getElementById('error').classList.add('d-none');
-}
-
-
-async function postRegistrationUser() {
-  let name = document.getElementById('name').value;
-  let email = document.getElementById('email').value;
-  let password = document.getElementById('password').value;
+async function loadData() {
   try {
-    await postToDatabase("users", {user: {name: name, email: email, password: password}});
+    let allUsers = await loadFromDatabase("/users");
+    allUsersFilter(allUsers);
   } catch (error) {
-    console.error('Registration failed', error);    
+    console.error(error);      
   };
-  await registrationSuccesful();
 }
 
 
-function registrationSuccesful() {
-  document.getElementById('popUp').classList.remove('d-none');
-  setTimeout(() => {
-    loginInForwarding();
-  }, 1000);
+function allUsersFilter(allUsers) {
+  let userKeysArray = Object.entries(allUsers);
+  for (let index = 0; index < userKeysArray.length; index++) {
+    users.push(
+      {
+        email : userKeysArray[index][1].email,
+        password : userKeysArray[index][1].password,
+      }
+    );
+  };
+  checkLoginData();
 }
 
 
-function loginInForwarding() {
-  window.location.href = '../index.html';
-}
-
-
-function changePasswortImage() {
-  let container = document.getElementById('inputPassword');
-  let input = document.getElementById('password').value;
-  let image = document.getElementById('passwordImage');
-  if (input.length > 0) {
-    container.style.borderColor = 'var(--bluehover)';
-    image.src="../assets/icon/visibility_off.png";
+function checkLoginData() {
+  let email = document.getElementById('email').value;
+  let password = document.getElementById('password').value;
+  let user = users.find(users => users.email == email && users.password == password);  
+  if (user) {
+    window.location.href = '/html/summary.html';
   } else {
-    container.style.borderColor = 'lightgrey';
-    image.src="../assets/icon/lock.svg";
+    loginDataDontMatch();
   };
 }
 
 
-function changePasswortConfirmImage() {
-  let container = document.getElementById('inputConfirmPassword');
-  let input = document.getElementById('confirmPassword').value;  
-  let image = document.getElementById('confirmPasswordImage');
-  if (input.length > 0) {
-    container.style.borderColor = 'var(--bluehover)';
-    image.src="../assets/icon/visibility_off.png";
+function loginDataDontMatch() {
+  document.getElementById('error').classList.add('msg-span');
+  document.getElementById('email-content').classList.add('msg-box');
+  document.getElementById('password-content').classList.add('msg-box');
+  document.getElementById('error').classList.remove('d-none');
+}
+
+
+function changeImage() {
+  let input = document.getElementById('password');
+  let image = document.getElementById('image');
+  if (input.value == 0) {
+    input.type = "password";
+    image.src = "../assets/icon/lock.svg";
   } else {
-    container.style.borderColor = 'lightgrey';
-    image.src="../assets/icon/lock.svg";
-  };
-}
-
-
-function togglePasswordVisibility(id) {
-  let input = document.getElementById(id);
-  let passwordImage = document.getElementById('passwordImage');
-  let confirmImage = document.getElementById('confirmPasswordImage');
-  if (input.id === "password" && input.type == 'password' && passwordImage.src.includes('visibility_off.png')) {
-    changeTypeAndImage(input, passwordImage);
-  } else { 
-    if (input.id === "confirmPassword" && input.type == 'password' && confirmImage.src.includes('visibility_off.png')) {
-    changeTypeAndImage(input, confirmImage);
+    if (input.type == "password" && input.value > 0) {
+      image.src = "../assets/icon/visibility_off.png";
     } else {
-      resetInputPasswort(input);
+      image.src = "../assets/icon/visibility.png";
+    };
+  };
+}
+
+
+function passwordVisibility() {
+  let input = document.getElementById('password');
+  let image = document.getElementById('image');
+  if (input.value == 0) {
+    return;
+  } else {
+    if (image.src.includes('visibility_off.png')) {
+      changeTypeAndImage(input, image);    
+    } else {
+      resetPasswort(input, image);
     };
   };
 }
@@ -131,18 +94,23 @@ function togglePasswordVisibility(id) {
 
 function changeTypeAndImage(input, image) {
   input.type = "text";
-  input.src ="none";
-  image.src="../assets/icon/visibility.png";
+  image.src = "../assets/icon/visibility.png";
 }
 
 
-function resetInputPasswort(input) {
-  let passwordImage = document.getElementById('passwordImage');
-  let confirmImage = document.getElementById('confirmPasswordImage');
+function resetPasswort(input, image) {
   input.type = "password";
-  if (input.id == 'password') {
-    passwordImage.src="../assets/icon/visibility_off.png";
-  } if (input.id == 'confirmPassword') {
-    confirmImage.src="../assets/icon/visibility_off.png";
-  };
+  image.src = "../assets/icon/visibility_off.png";
+}
+
+
+function saveRemember() {
+  let email = document.getElementById('email').value;
+  localStorage.setItem("userEmail", email);
+}
+
+
+function getRemember() {
+  let email = localStorage.getItem("userEmail");
+  document.getElementById('email').value = email;
 }

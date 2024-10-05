@@ -1,3 +1,9 @@
+#loginBody {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
 .login-header {
   display: flex;
   justify-content: end;
@@ -25,6 +31,10 @@
   transform: scale(1.01);
   background-color: var(--bluehover);
   filter: drop-shadow(0px 4px 2px rgba(0, 0, 0, 0.3));
+}
+
+.login-section {
+  flex: 1;
 }
 
 .login {
@@ -65,31 +75,6 @@ form {
   padding: 0 68px 28px;
 }
 
-.input {
-  border-radius: 10px;
-  padding: 10px 16px;
-  border: 1px solid lightgrey;
-  cursor: pointer;
-  outline: none;
-}
-
-input[type=email] {
-  background-image: url(../assets/icon/mail.svg);
-  background-repeat: no-repeat;
-  background-position: right 12px center;
-}
-
-input[type=password] {
-  background-image: url(../assets/icon/lock.svg);
-  background-repeat: no-repeat;
-  background-position: right 12px center;
-}
-
-input[type=password]:focus {
-  border: 1px solid var(--bluehover);
-  background-image: url(../assets/icon/visibility_off.svg);
-}
-
 .checkbox {
   padding-left: 24px;
   gap: 8px;
@@ -114,6 +99,7 @@ input[type=password]:focus {
   font-size: 14px;
   font-weight: 700;
   color: var(--textwhite);
+  cursor: pointer;
 }
 
 .login-in:hover {

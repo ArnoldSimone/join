@@ -8,11 +8,14 @@
   <link rel="stylesheet" href="./css/animation.css">
   <link rel="stylesheet" href="../standard.css">
   <link rel="stylesheet" href="../css/login.css">
+  <link rel="stylesheet" href="./css/signUp.css">
   <script defer src="./script/animation.js"></script>
+  <script defer src="script.js"></script>
+  <script src="./script/database.js"></script>
   <title>Join</title>
 </head>
 
-<body>
+<body id="loginBody" onload="getRemember()">
   <section id="animation" class="animation">
     <div class="animation-content">
       <img src="./assets/img/logo_white.png" alt="Logo">
@@ -26,22 +29,33 @@
       </div>
     </div>
   </section>
-  <section id="login" class="d-flex width100 d-none">
+  <section id="login" class="login-section d-flex width100 d-none">
     <div class="login d-flex-x">
       <div class="login-content width100">
         <h1>Log in</h1>
         <div class="underline"></div>
       </div>
       <div>
-        <form>
-          <input class="input" placeholder="Email" type="email" required>
-          <input class="input" placeholder="Password" type="password" required>
+        <form onsubmit="login(); return false;">
+          <div id="email-content" class="input-content">
+            <input id="email" class="input" placeholder="Email" type="email" required>
+            <img src="./assets/icon/mail.svg" alt="Email">
+          </div>
+          <div>
+            <div id="password-content" class="input-content">
+              <input onkeyup="changeImage(); validateLogin()" id="password" class="input" placeholder="Password" type="password" required>
+              <img id="image" onclick="passwordVisibility()" src="./assets/icon/lock.svg" alt="lock">
+            </div>
+            <div id="error" class="msg-box d-none ">
+              <span>Check your email and password. Please try again</span>
+            </div>
+          </div>
           <div class="checkbox d-flex-y">
-            <input type="checkbox"><span>Remember me</span>
+            <input onclick="saveRemember()" type="checkbox"><span>Remember me</span>
           </div>
           <div class="login-buttons d-flex-x">
             <button class="login-in">Log in</button>
-            <button class="guest-log">Guest Log in</button>
+            <a href="./html/summary.html" class="guest-log d-flex">Guest Log in</a>
           </div>
         </form>
       </div>
