@@ -106,3 +106,10 @@ window.onload = function() {
     fetchContacts(); 
     includeHTML(); 
 };
+
+function setPriority(button, color) {
+    const buttons = document.querySelectorAll('.prio');
+    buttons.forEach(btn => btn.style.backgroundColor = 'transparent');
+    
+    button.style.backgroundColor = color;
+}

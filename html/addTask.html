@@ -56,13 +56,19 @@
         
                         <div class="form-group">
                             <label>Prio</label>
-                            <div class="prio-group" onchange="updatePriority();">
-                                <input type="radio" id="urgent" name="priority" value="Urgent"> Urgent<img src="../assets/img/urgentsym.png" alt="">
-                                <input type="radio" id="medium" name="priority" value="Medium"> Medium<img src="../assets/img/mediumsym.png" alt="">
-                                <input type="radio" id="low" name="priority" value="Low"> Low<img src="../assets/img/lowsym.png" alt="">
+                            <div class="prio-group">
+                                <button type="button" class="prio d-flex" style="background-color: transparent;" onclick="setPriority(this, 'red')">Urgent
+                                    <img src="../assets/img/urgentsym.png" alt="">
+                                </button>
+                                <button type="button" class="prio d-flex" style="background-color: transparent;" onclick="setPriority(this, 'yellow')">Medium
+                                    <img src="../assets/img/mediumsym.png" alt="">
+                                </button>
+                                <button type="button" class="prio d-flex" style="background-color: transparent;" onclick="setPriority(this, 'green')">Low
+                                    <img src="../assets/img/lowsym.png" alt="">
+                                </button>
                             </div>
                         </div>
-        
+                        
                         <div class="form-group">
                             <label for="category">Category<span class="required">*</span></label>
                             <select id="category" name="category">
