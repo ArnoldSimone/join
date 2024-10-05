@@ -28,7 +28,6 @@
         <div w3-include-html="sidebar.html"></div>
     </aside>
 
-
     <main>
         <section class="board-container">
 
@@ -105,38 +104,40 @@
             <div onclick="closeDetailTaskOverlay()" id="overlay-board-detail" class="overlay-board d-none d-flex">
             </div>
 
-            <div onclick="closeDetailTaskOverlay()" id="overlay-board-edit"
-                class="overlay-board d-flex ctn-task no-hover d-none d-flex-x">
+            <div onclick="closeDetailTaskOverlay()" id="overlay-board-edit" class="overlay-board d-none d-flex">
 
-                <div onclick="bubblingProtection(event)" id="overlay-edit-task-board" class="overlay-edit-task-board">
-                    <div class="ctn-category-close d-flex-y">
+                <div onclick="bubblingProtection(event)" id="overlay-edit-task-board"
+                    class="overlay-edit-task-board ctn-task no-hover d-flex-x">
+
+                    <div class="ctn-close d-flex-y">
                         <img onclick="closeDetailTaskOverlay()" class="btn-close-detail-task"
                             src="../assets/img/close.svg" alt="Image Close">
                     </div>
-                    <div class="ctn-main-Edit-Task d-flex-x">
-                        <form>
-                            <div class="form-group">
-                                <label for="title-white">Title<span class="required">*</span></label>
-                                <input type="text" id="title-white" name="title" placeholder="Enter a title">
+
+                    <div class="ctn-main-edit-task d-flex-y">
+                        <form class="d-flex-x">
+                            <div class="d-flex-x column gap-8">
+                                <label for="title-edit">Title<span class="required">*</span></label>
+                                <input type="text" id="title-edit" name="title" placeholder="Enter a title">
                             </div>
-                            <div class="form-group">
-                                <label for="description-white">Description</label>
-                                <textarea id="description-white" name="description"
+                            <div class="d-flex-x column gap-8">
+                                <label for="description-edit">Description</label>
+                                <textarea id="description-edit" name="description"
                                     placeholder="Enter a Description"></textarea>
                             </div>
-                            <div class="form-group">
-                                <label for="assigned-white">Assigned to</label>
-                                <select id="assigned-white" name="assigned">
+                            <div class="d-flex-x column gap-8">
+                                <label for="assigned-edit">Assigned to</label>
+                                <select id="assigned-edit" name="assigned">
                                     <option>Select contacts to assign</option>
                                 </select>
                             </div>
-                            <div class="form-group">
-                                <label for="due-date-white">Due date<span class="required">*</span></label>
-                                <input type="date" id="due-date-white" name="due-date">
+                            <div class="d-flex-x column gap-8">
+                                <label for="due-date-edit">Due date<span class="required">*</span></label>
+                                <input type="date" id="due-date-edit" name="due-date">
                             </div>
-                            <div class="form-group">
-                                <label>Prio</label>
-                                <div class="prio-group">
+                            <div class="d-flex-x column gap-8">
+                                <label class="label-prio">Prio</label>
+                                <div class="d-flex-y prio-group">
                                     <button type="button" class="prio d-flex">Urgent<img
                                             src="../assets/img/urgentsym.png" alt=""></button>
                                     <button type="button" class="prio d-flex">Medium<img
@@ -144,39 +145,34 @@
                                     <button type="button" class="prio d-flex">Low<img src="../assets/img/lowsym.png"
                                             alt=""></button>
                                 </div>
-                                <div class="form-group">
-                                    <label for="category-white">Category<span class="required">*</span></label>
-                                    <select id="category-white" name="category">
-                                        <option>Select task category</option>
-                                    </select>
-                                </div>
-                                <div class="form-group-subtask">
-                                    <label for="subtasks-white">Subtasks</label>
-                                    <div class="subtask-connect">
-                                        <input type="text" id="subtasks-white" name="subtasks"
-                                            placeholder="Add new subtask">
-                                        <div class="subtask-img">
-                                            <img src="../assets/img/plusicon.png" alt="">
-                                        </div>
+                            </div>
+                            <div class="d-flex-x column gap-8">
+                                <label for="category-edit">Category<span class="required">*</span></label>
+                                <select id="category-edit" name="category">
+                                    <option>Select task category</option>
+                                </select>
+                            </div>
+                            <div class="d-flex-x column gap-8">
+                                <label for="subtasks-edit">Subtasks</label>
+                                <div class="subtask-connect">
+                                    <input type="text" id="subtasks-edit" name="subtasks" placeholder="Add new subtask">
+                                    <div class="subtask-img">
+                                        <img src="../assets/img/plusicon.png" alt="">
                                     </div>
                                 </div>
                             </div>
                         </form>
                     </div>
 
-                    <div class="addtask-footer">
-                        <div><span class="required">*</span><span>This field is required</span></div>
-                        <div class="form-actions">
-                            <button type="button" class="clear">Clear</button>
-                            <button type="submit" class="create-task">Create Task</button>
+                    <div class="edit-task-footer d-flex-y">
+                        <div class="form-actions d-flex">
+                            <button type="submit" class="btn-ok d-flex-y">Ok <img class="img-check"
+                                    src="../assets/img/check-white.png" alt=""></button>
                         </div>
                     </div>
 
                 </div>
-
             </div>
-
-
 
         </section>
     </main>

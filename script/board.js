@@ -85,11 +85,16 @@ function renderTaskProgressBar(subtasks) {
 }
 
 function closeDetailTaskOverlay() {
-    let overlayBoardRef = document.getElementById('overlay-board-detail');
-    overlayBoardRef.classList.add('slide-out')
+    document.body.style.overflow = '';
+    let overlayBoardDetailRef = document.getElementById('overlay-board-detail');
+    let overlayBoardEditRef = document.getElementById('overlay-board-edit');
+    overlayBoardDetailRef.classList.add('slide-out')
+    overlayBoardEditRef.classList.add('slide-out')
     setTimeout(() => {
-        overlayBoardRef.classList.add('d-none');
-        overlayBoardRef.classList.remove('slide-out');
+        overlayBoardDetailRef.classList.add('d-none');
+        overlayBoardDetailRef.classList.remove('slide-out');
+        overlayBoardEditRef.classList.add('d-none');
+        overlayBoardEditRef.classList.remove('slide-out');
     }, 200);
 }
 
@@ -98,9 +103,10 @@ function bubblingProtection(event) {
 }
 
 function showDetailTaskOverlay(taskId) {
+    document.body.style.overflow = 'hidden';
     let overlayBoardRef = document.getElementById('overlay-board-detail');
     overlayBoardRef.classList.remove('d-none');
-    overlayBoardRef.classList.add('slide-in')
+    overlayBoardRef.classList.add('slide-in');
 
     setTimeout(() => {
         overlayBoardRef.classList.remove('slide-in');
@@ -153,6 +159,7 @@ function updateSubtaskStatus(indexSubTask, taskId) {
 
 function showEditTaskOverlay(taskId) {
     document.getElementById('overlay-board-detail').classList.add('d-none');
+    document.getElementById('overlay-board-edit').classList.remove('d-none');
 
 
 }
