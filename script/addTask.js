@@ -92,7 +92,7 @@ function populateContactsDropdown(contacts) {
 
 window.onload = function () {
     fetchContacts();
-    includeHTML(); // Falls du diese Funktion benötigst.
+    includeHTML(); 
 };
 
 function setPriority(button, color) {
