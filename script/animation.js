@@ -1,13 +1,32 @@
-let animation = document.getElementById('animation');
-
-
-animation.addEventListener("animationend", (event) => {
-  if (event.elapsedTime > 0.2) {
-    console.log(event.elapsedTime);
-    document.getElementById('login-header').classList.remove('d-none');
-    document.getElementById('login').classList.remove('d-none'); 
-    document.getElementById('info-notice').classList.remove('d-none');
+function animationStartCheck() {
+  if (!sessionStorage.getItem("animation")) {
+    animationStart();
+  } else {
+    stoppAnimation();
   };
-  animation.style.zIndex = '-1';
-  animation.style.animationPlayState = 'paused';
-})
+}
+
+
+function animationStart() {
+  document.getElementById('animation').classList.add('animation');
+  document.getElementById('content').classList.add('animation-content');
+  setTimeout(() => {
+    sessionStorage.setItem("animation", "true");
+    loginShow();
+  }, 2000);
+}
+
+
+function loginShow() {
+  document.getElementById('login-header').classList.remove('d-none');
+  document.getElementById('login').classList.remove('d-none'); 
+  document.getElementById('info-notice').classList.remove('d-none');
+}
+
+
+function stoppAnimation() {
+  document.getElementById('logo').src = '../assets/img/logo_blue.png';
+  document.getElementById('animation').classList.add('animation-stopped');
+  document.getElementById('content').classList.add('animation-content');
+  loginShow();
+}

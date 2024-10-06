@@ -22,8 +22,17 @@ async function loadData() {
     let allUsers = await loadFromDatabase("/users");
     allUsersFilter(allUsers);
   } catch (error) {
-    console.error(error);      
+    notRegistered();  
   };
+}
+
+
+
+function notRegistered() {
+  document.getElementById('notRegistered').classList.add('msg-span');
+  document.getElementById('email-content').classList.add('msg-box');
+  document.getElementById('password-content').classList.add('msg-box');
+  document.getElementById('notRegistered').classList.remove('d-none');
 }
 
 
