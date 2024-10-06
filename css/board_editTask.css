@@ -161,9 +161,16 @@ textarea {
 }
 
 .subtask-img:hover {
-    background-color: var(--lightgrey);
+    background-color: var(--middlegrey);
     border-radius: 50%;
 }
+
+.all-contacts:hover {
+    background-color: var(--middlegrey);
+    border-radius: 8px;
+}
+
+
 
 .edit-task-footer {
     justify-content: flex-end;
@@ -184,6 +191,7 @@ button.btn-ok {
     font-size: 16px;
     font-weight: 600;
     gap: 6px;
+    margin-right: 24px;
 }
 
 button.btn-ok:hover {
@@ -214,21 +222,9 @@ button.btn-ok:hover {
 }
 
 
-
-
-/* .custom-dropdown {
-    position: relative;
-    width: 100%;
-} */
-
-/* .dropdown-btn {
-    padding: 10px;
-    border: 1px solid #ccc;
-    background-color: #fff;
-    cursor: pointer;
-    width: 100%;
-    text-align: left;
-} */
+.assigned-content {
+    flex-wrap: wrap;
+}
 
 .dropdown-contacts {
     display: none;
@@ -243,26 +239,12 @@ button.btn-ok:hover {
 
 .all-contacts {
     justify-content: space-between;
-    padding: 6px 12px;
+    padding: 4px 12px;
 }
 
-.contact-left p {
+.contact-left label {
     padding-left: 12px;
 }
-
-/* .dropdown-content .person-detail {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    width: 100%;
-} */
-
-/* .dropdown-content .person-detail:hover {
-    background-color: #f1f1f1;
-} */
-
-
 
 .show {
     display: block;

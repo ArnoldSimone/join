@@ -128,7 +128,7 @@ function renderSubtasksOverlay(task) {
     }
 }
 
-function renderAssignedToOverlay(task, isEdit = false) {
+function renderAssignedToOverlay(task) {
     let assignedToArray = Array.isArray(task.assignedTo) ? task.assignedTo : [task.assignedTo];
     let assignedToContent = "";
     for (let i = 0; i < assignedToArray.length; i++) {
@@ -136,8 +136,6 @@ function renderAssignedToOverlay(task, isEdit = false) {
         let initial = contact.avatar.initials;
         let color = contact.avatar.color;
         let name = assignedToArray[i];
-
-
         assignedToContent += getAssignedToTemplateOverlay(initial, color, name);
     }
     return assignedToContent;
@@ -170,6 +168,7 @@ function showEditTaskOverlay(taskId) {
     let task = tasks.find(t => t.id === taskId);
     console.log(task);
     overlayBoardEditRef.innerHTML = getEditOverlayTemplate(task);
+    updateAssignedContacts();
 }
 
 function getEditOverlayTemplate(task) {
@@ -220,11 +219,7 @@ function getEditOverlayTemplate(task) {
                         <div class="dropdown-contacts" id="dropdown-contacts">
                             ${renderAllContactsInAssignedTo(task)}
                         </div>
-                        <div class="assigned-content d-flex-y gap-8">
-                            <div class="assigned-to d-flex" style="background-color:red;">AM</div>
-                            <div class="assigned-to d-flex" style="background-color:red;">AM</div>
-                            <div class="assigned-to d-flex" style="background-color:red;">AM</div>
-                        </div>
+                        <div id="assigned-content" class="assigned-content d-flex-y gap-8"></div>
                     </div>
 
 
@@ -237,24 +232,19 @@ function getEditOverlayTemplate(task) {
                             </div>
                         </div>
                     </div>
-
-
-                    <div class="edit-task-footer d-flex-y">
-                        <div class="form-actions d-flex">
-                            <button type="submit" class="btn-ok d-flex-y">
-                                <span>Ok</span>
-                                <img class="img-check" src="../assets/img/check-white.svg" alt="">
-                            </button>
-                        </div>
-                    </div>
-
                 </form>
-
+            </div>
+            <div class="edit-task-footer d-flex-y">
+                <div class="form-actions d-flex">
+                    <button type="submit" class="btn-ok d-flex-y">
+                        <span>Ok</span>
+                        <img class="img-check" src="../assets/img/check-white.svg" alt="">
+                    </button>
+                </div>
             </div>
         </div>
        `
 }
-
 
 function renderAllContactsInAssignedTo(task) {
     let allContacts = "";
@@ -274,12 +264,29 @@ function checkContactIsAssignedTo(name, task) {
             return 'checked';
         }
     }
+    return '';
 }
 
 function toggleCheckboxContact(iContact) {
-    const checkbox = document.getElementById(`checkbox${iContact}`);
+    const checkbox = document.getElementById(`checkboxContact${iContact}`);
     checkbox.checked = !checkbox.checked;
+    updateAssignedContacts();
 }
+
+function updateAssignedContacts() {
+    let assignedContentRef = document.getElementById('assigned-content');
+    assignedContentRef.innerHTML = '';
+    let checkboxes = document.querySelectorAll('.checkbox-contact');
+    checkboxes.forEach((checkbox, index) => {
+        if (checkbox.checked) {
+            const initial = contacts[index].avatar.initials;
+            const color = contacts[index].avatar.color;
+            assignedContentRef.innerHTML += `<div class="assigned-to d-flex" style="background-color:${color};">${initial}</div>`;
+        }
+    });
+}
+
+
 
 function toggleDropdown() {
     const dropdown = document.getElementById("dropdown-contacts");
