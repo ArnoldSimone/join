@@ -174,7 +174,7 @@ function showEditTaskOverlay(taskId) {
 
 function getEditOverlayTemplate(task) {
     return `
-        <div onclick="bubblingProtection(event)" id="overlay-edit-task-board" class="overlay-edit-task-board ctn-task no-hover d-flex-x">
+        <div onclick="bubblingProtection(event); closeDropdown();" id="overlay-edit-task-board" class="overlay-edit-task-board ctn-task no-hover d-flex-x">
             <div class="ctn-close d-flex-y">
                 <img onclick="closeDetailTaskOverlay()" class="btn-close-detail-task"
                     src="../assets/img/close.svg" alt="Image Close">
@@ -209,8 +209,8 @@ function getEditOverlayTemplate(task) {
                     </div>
                     <div class="d-flex-x column gap-8">
                         <label for="assigned-edit">Assigned to</label>
-                        <input type="text" id="input-assigned-edit" class="input-assigned-edit" autocomplete="off" onkeyup="searchContact('${task.id}')" onclick="toggleDropdown()" name="assigned" placeholder="Select contacts to assign"></input>
-                        <div class="dropdown-contacts" id="dropdown-contacts">
+                        <input type="text" id="input-assigned-edit" class="input-assigned-edit" autocomplete="off" onkeyup="searchContact('${task.id}')" onclick="toggleDropdown(); event.stopPropagation();" name="assigned" placeholder="Select contacts to assign"></input>
+                        <div class="dropdown-contacts" id="dropdown-contacts" onclick="event.stopPropagation();">
                             ${renderAllContactsInAssignedTo(task.id)}
                         </div>
                         <div id="assigned-content" class="assigned-content d-flex-y gap-8"></div>
@@ -238,7 +238,7 @@ function getEditOverlayTemplate(task) {
                 </div>
             </div>
         </div>
-       `
+       `;
 }
 
 function renderAllContactsInAssignedTo(taskId) {
@@ -301,14 +301,18 @@ function updateAssignedContacts() {
 }
 
 function toggleDropdown() {
-    const dropdown = document.getElementById("dropdown-contacts");
+    let dropdown = document.getElementById("dropdown-contacts");
     dropdown.classList.toggle("show");
 }
 
-
+function closeDropdown() {
+    let dropdown = document.getElementById("dropdown-contacts");
+    dropdown.classList.remove("show");
+}
 
 
 function changePrio(selectedPrio) {
+    toggleDropdown
     let btnUrgentRef = document.getElementById('btn-urgent');
     let btnMediumRef = document.getElementById('btn-medium');
     let btnLowRef = document.getElementById('btn-low');
