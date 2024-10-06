@@ -1,6 +1,7 @@
 let currentDraggedElement;
 let tasks;
 let contacts;
+let foundContacts = [];
 
 async function onloadFuncBoard() {
     let tasksData = await loadFromDatabase(`/tasks`);
@@ -174,29 +175,24 @@ function showEditTaskOverlay(taskId) {
 function getEditOverlayTemplate(task) {
     return `
         <div onclick="bubblingProtection(event)" id="overlay-edit-task-board" class="overlay-edit-task-board ctn-task no-hover d-flex-x">
-
             <div class="ctn-close d-flex-y">
                 <img onclick="closeDetailTaskOverlay()" class="btn-close-detail-task"
                     src="../assets/img/close.svg" alt="Image Close">
             </div>
-
             <div class="ctn-main-edit-task d-flex-y">
                 <form class="d-flex-x">
                     <div class="d-flex-x column gap-8">
                         <label for="title-edit">Title<span class="required">*</span></label>
                         <input type="text" id="title-edit" name="title" value="${task.title}">
                     </div>
-
                     <div class="d-flex-x column gap-8">
                         <label for="description-edit">Description</label>
                         <textarea id="description-edit" name="description">${task.description}</textarea>
                     </div>
-
                     <div class="d-flex-x column gap-8">
                         <label for="due-date-edit">Due date</label>
                         <input type="date" id="due-date-edit" placeholder="dd/mm/yyy" value="${task.dueDate}" name="due-date">
                     </div>
-
                     <div class="d-flex-x column gap-8">
                         <label class="label-prio">Prio</label>
                         <div class="d-flex-y prio-group">
@@ -211,17 +207,14 @@ function getEditOverlayTemplate(task) {
                             </button>
                         </div>
                     </div>
-
-
                     <div class="d-flex-x column gap-8">
                         <label for="assigned-edit">Assigned to</label>
-                        <input type="text" id="input-assigned-edit" class="" onclick="toggleDropdown()" name="assigned" placeholder="Select contacts to assign"></input>
+                        <input type="text" id="input-assigned-edit" class="input-assigned-edit" autocomplete="off" onkeyup="searchContact('${task.id}')" onclick="toggleDropdown()" name="assigned" placeholder="Select contacts to assign"></input>
                         <div class="dropdown-contacts" id="dropdown-contacts">
-                            ${renderAllContactsInAssignedTo(task)}
+                            ${renderAllContactsInAssignedTo(task.id)}
                         </div>
                         <div id="assigned-content" class="assigned-content d-flex-y gap-8"></div>
                     </div>
-
 
                     <div class="d-flex-x column gap-8">
                         <label for="subtasks-edit">Subtasks</label>
@@ -232,8 +225,10 @@ function getEditOverlayTemplate(task) {
                             </div>
                         </div>
                     </div>
+
                 </form>
             </div>
+
             <div class="edit-task-footer d-flex-y">
                 <div class="form-actions d-flex">
                     <button type="submit" class="btn-ok d-flex-y">
@@ -246,16 +241,35 @@ function getEditOverlayTemplate(task) {
        `
 }
 
-function renderAllContactsInAssignedTo(task) {
+function renderAllContactsInAssignedTo(taskId) {
+    let task = tasks.find(t => t.id === taskId);
     let allContacts = "";
-    for (let iContact = 0; iContact < contacts.length; iContact++) {
-        let name = contacts[iContact].name;
-        let initial = contacts[iContact].avatar.initials;
-        let color = contacts[iContact].avatar.color;
+    let contactsArray = foundContacts.length > 0 ? foundContacts : contacts;
+    for (let iContact = 0; iContact < contactsArray.length; iContact++) {
+        let name = contactsArray[iContact].name;
+        let initial = contactsArray[iContact].avatar.initials;
+        let color = contactsArray[iContact].avatar.color;
         allContacts += getAssignedToEditTemplateOverlay(initial, color, name, task, iContact);
     }
     return allContacts;
 }
+
+function searchContact(taskId) {
+    let searchValue = document.getElementById('input-assigned-edit').value.toLowerCase();
+    if (searchValue != "") {
+        foundContacts = contacts.filter(contact => contact.name.toLowerCase().includes(searchValue));
+    } else {
+        foundContacts = [];
+    }
+    let dropdownContactsRef = document.getElementById('dropdown-contacts');
+    dropdownContactsRef.innerHTML = renderAllContactsInAssignedTo(taskId);
+    if (foundContacts.length > 0) {
+        dropdownContactsRef.classList.add("show");
+    } else {
+        dropdownContactsRef.classList.remove("show");
+    }
+}
+
 
 function checkContactIsAssignedTo(name, task) {
     let assignedToArray = Array.isArray(task.assignedTo) ? task.assignedTo : [task.assignedTo];
@@ -286,12 +300,13 @@ function updateAssignedContacts() {
     });
 }
 
-
-
 function toggleDropdown() {
     const dropdown = document.getElementById("dropdown-contacts");
     dropdown.classList.toggle("show");
 }
+
+
+
 
 function changePrio(selectedPrio) {
     let btnUrgentRef = document.getElementById('btn-urgent');

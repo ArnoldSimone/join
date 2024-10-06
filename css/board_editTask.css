@@ -147,7 +147,7 @@ textarea {
     padding-right: 40px;
 }
 
-.subtask-img {
+.ctn-add-subtask {
     position: absolute;
     right: 10px;
     top: 50%;
@@ -155,13 +155,21 @@ textarea {
     cursor: pointer;
 }
 
-.subtask-img img {
+.ctn-clear-add-subtask {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+.add-subtask {
     width: 20px;
     height: 20px;
 }
 
-.subtask-img:hover {
-    background-color: var(--middlegrey);
+.add-subtask:hover {
+    background-color: var(--lightgrey);
     border-radius: 50%;
 }
 

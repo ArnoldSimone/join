@@ -278,7 +278,9 @@ progress {
     flex-direction: column;
     gap: 4px;
     padding-left: 16px;
+    padding-top: 8px;
     font-size: 14px;
+
 }
 
 .person-detail p {
@@ -288,6 +290,9 @@ progress {
 .ctn-subtasks {
     flex-direction: column;
     gap: 4px;
+    padding-top: 8px;
+    font-size: 14px;
+    padding-left: 16px;
 }
 
 .subtask-item {
@@ -332,7 +337,7 @@ input[type="checkbox"]:checked+.custom-checkbox {
 }
 
 .ctn-delete-edit img {
-    height: 18px;
+    height: 20px;
 }
 
 .vertikalLine {

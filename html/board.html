@@ -115,71 +115,24 @@
 
                     <div class="ctn-main-edit-task d-flex-y">
                         <form class="d-flex-x">
-                            <div class="d-flex-x column gap-8">
-                                <label for="title-edit">Title<span class="required">*</span></label>
-                                <input type="text" id="title-edit" name="title" placeholder="Enter a title">
-                            </div>
-                            <div class="d-flex-x column gap-8">
-                                <label for="description-edit">Description</label>
-                                <textarea id="description-edit" name="description"
-                                    placeholder="Enter a Description"></textarea>
-                            </div>
-
-                            <div class="d-flex-x column gap-8">
-                                <label for="due-date-edit">Due date<span class="required">*</span></label>
-                                <input type="date" id="due-date-edit" name="due-date">
-                            </div>
-                            <div class="d-flex-x column gap-8">
-                                <label class="label-prio">Prio</label>
-                                <div class="d-flex-y prio-group">
-                                    <button type="button" class="prio d-flex">Urgent<img
-                                            src="../assets/img/urgentsym.png" alt=""></button>
-                                    <button type="button" class="prio d-flex">Medium<img
-                                            src="../assets/img/mediumsym.png" alt=""></button>
-                                    <button type="button" class="prio d-flex">Low<img src="../assets/img/lowsym.png"
-                                            alt=""></button>
-                                </div>
-                            </div>
-
-
-
-                            <div class="d-flex-x column gap-8">
-                                <label for="assigned-edit">Assigned to</label>
-                                <input type="text" id="input-assigned-edit" class="" onclick="toggleDropdown()"
-                                    name="assigned" placeholder="Select contacts to assign"></input>
-                                <div class="dropdown-content" id="dropdown-content">
-                                    <div class="all-contacts d-flex-y">
-                                        <div class="contact-left d-flex-y">
-                                            <div class="assigned-to d-flex" style="background-color:red;">AM</div>
-                                            <p>Anton Mayer</p>
-                                        </div>
-                                        <div class="contact-right">
-                                            <input type="checkbox" id="checkbox${indexSubTask}" class="subtask">
-                                            <span class="custom-checkbox"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="assigned-content d-flex-y gap-8">
-                                    <div class="assigned-to d-flex" style="background-color:red;">AM</div>
-                                    <div class="assigned-to d-flex" style="background-color:red;">AM</div>
-                                    <div class="assigned-to d-flex" style="background-color:red;">AM</div>
-                                </div>
-                            </div>
-
-
-
-
 
 
                             <div class="d-flex-x column gap-8">
                                 <label for="subtasks-edit">Subtasks</label>
                                 <div class="subtask-connect">
-                                    <input type="text" id="subtasks-edit" name="subtasks" placeholder="Add new subtask">
-                                    <div class="subtask-img">
-                                        <img src="../assets/img/plusicon.png" alt="">
+                                    <input type="text" id="subtasks-edit" autocomplete="off" name="subtasks"
+                                        placeholder="Add new subtask">
+                                    <div class="ctn-add-subtask">
+                                        <img class="add-subtask" src="../assets/img/plusicon.png" alt="">
+                                    </div>
+                                    <div class="ctn-clear-add-subtask">
+                                        <img class="add-subtask" src="../assets/img/close.svg" alt="">
+                                        <img class="add-subtask" src="../assets/img/pencilLight.svg" alt="">
                                     </div>
                                 </div>
                             </div>
+
+
                         </form>
                     </div>
 

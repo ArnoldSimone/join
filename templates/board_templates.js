@@ -65,13 +65,17 @@ function getTaskOverlayTemplate(task) {
                 <p class="prio-detail">${task.priority}</p>
                 ${getImagePrioTemplate(task.priority)}
             </div>
-            <p class="label">Assigned To:</p>
-            <div class="ctn-assigned-to-detail d-flex-x">
-                ${renderAssignedToOverlay(task)}
+            <div>
+                <p class="label">Assigned To:</p>
+                <div class="ctn-assigned-to-detail d-flex-x">
+                    ${renderAssignedToOverlay(task)}
+                </div>
             </div>
-            <p class="label">Subtasks:</p>
-            <div class="ctn-subtasks d-flex-x">
-                ${renderSubtasksOverlay(task)}
+            <div>
+                <p class="label">Subtasks:</p>
+                <div class="ctn-subtasks d-flex-x">
+                    ${renderSubtasksOverlay(task)}
+                </div>
             </div>
         </div>
         <div class="ctn-delete-edit d-flex-y">
