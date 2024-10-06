@@ -46,7 +46,7 @@ form {
 .prio {
     padding: 12px;
     border: 1px solid #ccc;
-    border-radius: 10px;
+    border-radius: 6px;
     cursor: pointer;
     text-align: center;
     background-color: white;
@@ -55,7 +55,7 @@ form {
 }
 
 .prio img {
-    margin-left: 6px;
+    margin-left: 8px;
     width: 15px;
 }
 
@@ -93,17 +93,34 @@ select,
 textarea {
     padding: 10px;
     border: 1px solid #ccc;
-    border-radius: 10px;
-    font-size: 16px;
+    border-radius: 6px;
+    font-size: 14px;
     font-family: 'Inter', sans-serif;
-    font-weight: 200;
+    font-weight: 400;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
 }
+
 
 input:hover,
 select:hover,
 textarea:hover {
     border: 1px solid var(--darkblue);
     cursor: pointer;
+}
+
+input::placeholder,
+textarea::placeholder,
+select::placeholder {
+    font-weight: 200;
+    color: var(middlegrey);
+}
+
+#input-assigned-edit {
+    background: url('../assets/img/drop-down-arrow.png') no-repeat right 12px center;
+    background-size: 12px;
+    font-weight: 200;
 }
 
 textarea {
@@ -177,6 +194,76 @@ button.btn-ok:hover {
 }
 
 .img-check {
-    width: 18px;
-    height: 18px;
+    width: 16px;
+    height: 16px;
+}
+
+.urgent-active {
+    background-color: var(--red);
+    color: white;
+}
+
+.medium-active {
+    background-color: var(--orange);
+    color: white;
+}
+
+.low-active {
+    background-color: var(--green);
+    color: white;
+}
+
+
+
+
+/* .custom-dropdown {
+    position: relative;
+    width: 100%;
+} */
+
+/* .dropdown-btn {
+    padding: 10px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+} */
+
+.dropdown-contacts {
+    display: none;
+    width: 100%;
+    border: 1px solid #ccc;
+    z-index: 1;
+    max-height: 200px;
+    overflow-y: auto;
+    margin-top: -8px;
+    border-radius: 6px;
+}
+
+.all-contacts {
+    justify-content: space-between;
+    padding: 6px 12px;
+}
+
+.contact-left p {
+    padding-left: 12px;
+}
+
+/* .dropdown-content .person-detail {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    width: 100%;
+} */
+
+/* .dropdown-content .person-detail:hover {
+    background-color: #f1f1f1;
+} */
+
+
+
+.show {
+    display: block;
 }

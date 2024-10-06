@@ -85,7 +85,7 @@ function getTaskOverlayTemplate(task) {
 function getAssignedToTemplateOverlay(initial, color, name) {
     return `     
         <div class="person-detail d-flex-y">
-            <div class="assigned-to d-flex bg-1" style="background-color:${color};">${initial}</div>
+            <div class="assigned-to d-flex" style="background-color:${color};">${initial}</div>
             <p>${name}</p>
         </div>`
 }
@@ -95,6 +95,22 @@ function getSubtasksOverlayTemplate(indexSubTask, task) {
     return `
         <div class="subtask-item d-flex-y">
             <input onchange="updateSubtaskStatus(${indexSubTask}, '${task.id}')" type="checkbox" id="checkbox${indexSubTask}" class="subtask" ${(subtasksArray[indexSubTask].completed == true) ? "checked" : ""}>
+            <span class="custom-checkbox" onclick="toggleCheckbox(${indexSubTask}, '${task.id}')"></span>
             <label for="checkbox${indexSubTask}">${subtasksArray[indexSubTask].title}</label>
         </div>`
+}
+
+
+function getAssignedToEditTemplateOverlay(initial, color, name, task, iContact) {
+    return `
+        <div class="all-contacts d-flex-y">
+            <div class="contact-left d-flex-y">
+                <div class="assigned-to d-flex" style="background-color:${color};">${initial}</div>
+                <p>${name}</p>
+            </div >
+            <div class="contact-right">
+                <input type="checkbox" id="checkbox${iContact}" ${checkContactIsAssignedTo(name, task)}>
+                <span class="custom-checkbox" onclick="toggleCheckboxContact(${iContact})"></span>
+            </div>
+        </div> `;
 }

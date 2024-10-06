@@ -107,13 +107,11 @@ function showDetailTaskOverlay(taskId) {
     let overlayBoardRef = document.getElementById('overlay-board-detail');
     overlayBoardRef.classList.remove('d-none');
     overlayBoardRef.classList.add('slide-in');
-
     setTimeout(() => {
         overlayBoardRef.classList.remove('slide-in');
     }, 200);
-
     overlayBoardRef.innerHTML = "";
-    let task = tasks.find(t => t.id === taskId)
+    let task = tasks.find(t => t.id === taskId);
     overlayBoardRef.innerHTML = getTaskOverlayTemplate(task);
 }
 
@@ -130,7 +128,7 @@ function renderSubtasksOverlay(task) {
     }
 }
 
-function renderAssignedToOverlay(task) {
+function renderAssignedToOverlay(task, isEdit = false) {
     let assignedToArray = Array.isArray(task.assignedTo) ? task.assignedTo : [task.assignedTo];
     let assignedToContent = "";
     for (let i = 0; i < assignedToArray.length; i++) {
@@ -138,6 +136,8 @@ function renderAssignedToOverlay(task) {
         let initial = contact.avatar.initials;
         let color = contact.avatar.color;
         let name = assignedToArray[i];
+
+
         assignedToContent += getAssignedToTemplateOverlay(initial, color, name);
     }
     return assignedToContent;
@@ -156,10 +156,174 @@ function updateSubtaskStatus(indexSubTask, taskId) {
     renderTasksBoard();
 }
 
+function toggleCheckbox(indexSubTask, taskId) {
+    const checkbox = document.getElementById(`checkbox${indexSubTask}`);
+    checkbox.checked = !checkbox.checked;
+    updateSubtaskStatus(indexSubTask, taskId);
+}
 
 function showEditTaskOverlay(taskId) {
     document.getElementById('overlay-board-detail').classList.add('d-none');
-    document.getElementById('overlay-board-edit').classList.remove('d-none');
-
-
+    let overlayBoardEditRef = document.getElementById('overlay-board-edit');
+    overlayBoardEditRef.classList.remove('d-none');
+    overlayBoardEditRef.innerHTML = "";
+    let task = tasks.find(t => t.id === taskId);
+    console.log(task);
+    overlayBoardEditRef.innerHTML = getEditOverlayTemplate(task);
 }
+
+function getEditOverlayTemplate(task) {
+    return `
+        <div onclick="bubblingProtection(event)" id="overlay-edit-task-board" class="overlay-edit-task-board ctn-task no-hover d-flex-x">
+
+            <div class="ctn-close d-flex-y">
+                <img onclick="closeDetailTaskOverlay()" class="btn-close-detail-task"
+                    src="../assets/img/close.svg" alt="Image Close">
+            </div>
+
+            <div class="ctn-main-edit-task d-flex-y">
+                <form class="d-flex-x">
+                    <div class="d-flex-x column gap-8">
+                        <label for="title-edit">Title<span class="required">*</span></label>
+                        <input type="text" id="title-edit" name="title" value="${task.title}">
+                    </div>
+
+                    <div class="d-flex-x column gap-8">
+                        <label for="description-edit">Description</label>
+                        <textarea id="description-edit" name="description">${task.description}</textarea>
+                    </div>
+
+                    <div class="d-flex-x column gap-8">
+                        <label for="due-date-edit">Due date</label>
+                        <input type="date" id="due-date-edit" placeholder="dd/mm/yyy" value="${task.dueDate}" name="due-date">
+                    </div>
+
+                    <div class="d-flex-x column gap-8">
+                        <label class="label-prio">Prio</label>
+                        <div class="d-flex-y prio-group">
+                            <button onclick="changePrio('Urgent')" id="btn-urgent" type="button" class="prio d-flex ${task.priority === 'Urgent' ? 'urgent-active' : ''}">Urgent
+                                <img src="${task.priority === 'Urgent' ? '../assets/img/urgentwhitesym.png' : '../assets/img/urgentsym.png'}"  alt="">
+                            </button>
+                            <button onclick="changePrio('Medium')" id="btn-medium" type="button" class="prio d-flex ${task.priority === 'Medium' ? 'medium-active' : ''}">Medium
+                                <img src="${task.priority === 'Medium' ? '../assets/img/mediumwhitesym.png' : '../assets/img/mediumsym.png'}" alt="">
+                            </button>
+                            <button onclick="changePrio('Low')" id="btn-low" type="button" class="prio d-flex ${task.priority === 'Low' ? 'low-active' : ''}">Low
+                                <img src="${task.priority === 'Low' ? '../assets/img/lowwhitesym.png' : '../assets/img/lowsym.png'}" alt="">
+                            </button>
+                        </div>
+                    </div>
+
+
+                    <div class="d-flex-x column gap-8">
+                        <label for="assigned-edit">Assigned to</label>
+                        <input type="text" id="input-assigned-edit" class="" onclick="toggleDropdown()" name="assigned" placeholder="Select contacts to assign"></input>
+                        <div class="dropdown-contacts" id="dropdown-contacts">
+                            ${renderAllContactsInAssignedTo(task)}
+                        </div>
+                        <div class="assigned-content d-flex-y gap-8">
+                            <div class="assigned-to d-flex" style="background-color:red;">AM</div>
+                            <div class="assigned-to d-flex" style="background-color:red;">AM</div>
+                            <div class="assigned-to d-flex" style="background-color:red;">AM</div>
+                        </div>
+                    </div>
+
+
+                    <div class="d-flex-x column gap-8">
+                        <label for="subtasks-edit">Subtasks</label>
+                        <div class="subtask-connect">
+                            <input type="text" id="subtasks-edit" name="subtasks" placeholder="Add new subtask">
+                            <div class="subtask-img">
+                                <img src="../assets/img/plusicon.png" alt="">
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="edit-task-footer d-flex-y">
+                        <div class="form-actions d-flex">
+                            <button type="submit" class="btn-ok d-flex-y">
+                                <span>Ok</span>
+                                <img class="img-check" src="../assets/img/check-white.svg" alt="">
+                            </button>
+                        </div>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+       `
+}
+
+
+function renderAllContactsInAssignedTo(task) {
+    let allContacts = "";
+    for (let iContact = 0; iContact < contacts.length; iContact++) {
+        let name = contacts[iContact].name;
+        let initial = contacts[iContact].avatar.initials;
+        let color = contacts[iContact].avatar.color;
+        allContacts += getAssignedToEditTemplateOverlay(initial, color, name, task, iContact);
+    }
+    return allContacts;
+}
+
+function checkContactIsAssignedTo(name, task) {
+    let assignedToArray = Array.isArray(task.assignedTo) ? task.assignedTo : [task.assignedTo];
+    for (let iName = 0; iName < assignedToArray.length; iName++) {
+        if (assignedToArray[iName] == name) {
+            return 'checked';
+        }
+    }
+}
+
+function toggleCheckboxContact(iContact) {
+    const checkbox = document.getElementById(`checkbox${iContact}`);
+    checkbox.checked = !checkbox.checked;
+}
+
+function toggleDropdown() {
+    const dropdown = document.getElementById("dropdown-contacts");
+    dropdown.classList.toggle("show");
+}
+
+function changePrio(selectedPrio) {
+    let btnUrgentRef = document.getElementById('btn-urgent');
+    let btnMediumRef = document.getElementById('btn-medium');
+    let btnLowRef = document.getElementById('btn-low');
+    removeAllActivButtons(btnUrgentRef, btnMediumRef, btnLowRef);
+    if (selectedPrio === 'Urgent') {
+        changePrioUrgent(btnUrgentRef, btnMediumRef, btnLowRef);
+    } else if (selectedPrio === 'Medium') {
+        changePrioMedium(btnUrgentRef, btnMediumRef, btnLowRef)
+    } else if (selectedPrio === 'Low') {
+        changePrioLow(btnUrgentRef, btnMediumRef, btnLowRef);
+    }
+}
+
+function changePrioUrgent(btnUrgentRef, btnMediumRef, btnLowRef) {
+    btnUrgentRef.classList.add('urgent-active');
+    btnUrgentRef.querySelector('img').src = '../assets/img/urgentwhitesym.png';
+    btnMediumRef.querySelector('img').src = '../assets/img/mediumsym.png';
+    btnLowRef.querySelector('img').src = '../assets/img/lowsym.png';
+}
+
+function changePrioMedium(btnUrgentRef, btnMediumRef, btnLowRef) {
+    btnMediumRef.classList.add('medium-active');
+    btnMediumRef.querySelector('img').src = '../assets/img/mediumwhitesym.png';
+    btnUrgentRef.querySelector('img').src = '../assets/img/urgentsym.png';
+    btnLowRef.querySelector('img').src = '../assets/img/lowsym.png';
+}
+
+function changePrioLow(btnUrgentRef, btnMediumRef, btnLowRef) {
+    btnLowRef.classList.add('low-active');
+    btnLowRef.querySelector('img').src = '../assets/img/lowwhitesym.png';
+    btnUrgentRef.querySelector('img').src = '../assets/img/urgentsym.png';
+    btnMediumRef.querySelector('img').src = '../assets/img/mediumsym.png';
+}
+
+function removeAllActivButtons(btnUrgentRef, btnMediumRef, btnLowRef) {
+    btnUrgentRef.classList.remove('urgent-active');
+    btnMediumRef.classList.remove('medium-active');
+    btnLowRef.classList.remove('low-active');
+}
+

@@ -12,15 +12,15 @@ function addTaskToFirebase(taskData) {
             description: taskData.description,
             dueDate: taskData.dueDate,
             priority: taskData.priority,
-            progress: 'todo', 
+            progress: 'todo',
             subtasks: taskData.subtasks,
-            title: taskData.title 
+            title: taskData.title
         })
     })
-    .then(response => response.json())
-    .then(data => {
-        clearForm();
-    })
+        .then(response => response.json())
+        .then(data => {
+            clearForm();
+        })
 }
 
 function gatherFormData() {
@@ -49,7 +49,7 @@ function gatherFormData() {
     });
 
     return {
-        title, 
+        title,
         description,
         assignedTo,
         dueDate,
@@ -78,38 +78,38 @@ function submitForm() {
 
 function fetchContacts() {
     fetch(`${BASE_URL}/contacts.json`)
-    .then(response => response.json())
-    .then(data => {
-        populateContactsDropdown(data);
-    })
-    .catch((error) => {
-        console.error('Error fetching contacts:', error);
-    });
+        .then(response => response.json())
+        .then(data => {
+            populateContactsDropdown(data);
+        })
+        .catch((error) => {
+            console.error('Error fetching contacts:', error);
+        });
 }
 
 function populateContactsDropdown(contacts) {
     const assignedSelect = document.getElementById('assigned');
-    assignedSelect.innerHTML = '<option>Select contacts to assign</option>'; 
+    assignedSelect.innerHTML = '<option>Select contacts to assign</option>';
 
     for (let key in contacts) {
         if (contacts.hasOwnProperty(key)) {
             const contact = contacts[key];
             const option = document.createElement('option');
-            option.value = contact.name; 
+            option.value = contact.name;
             option.textContent = contact.name;
             assignedSelect.appendChild(option);
         }
     }
 }
 
-window.onload = function() {
-    fetchContacts(); 
-    includeHTML(); 
+window.onload = function () {
+    fetchContacts();
+    includeHTML();
 };
 
 function setPriority(button, color) {
     const buttons = document.querySelectorAll('.prio');
     buttons.forEach(btn => btn.style.backgroundColor = 'white');
-    
+
     button.style.backgroundColor = color;
 }
