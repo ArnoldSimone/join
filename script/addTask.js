@@ -109,7 +109,7 @@ window.onload = function() {
 
 function setPriority(button, color) {
     const buttons = document.querySelectorAll('.prio');
-    buttons.forEach(btn => btn.style.backgroundColor = 'transparent');
+    buttons.forEach(btn => btn.style.backgroundColor = 'white');
     
     button.style.backgroundColor = color;
 }
