@@ -1,115 +1,110 @@
 const BASE_URL = "https://join-5800e-default-rtdb.europe-west1.firebasedatabase.app/";
 
-function addTaskToFirebase(taskData) {
-    fetch(`${BASE_URL}/tasks.json`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            assignedTo: taskData.assignedTo,
-            category: taskData.category,
-            description: taskData.description,
-            dueDate: taskData.dueDate,
-            priority: taskData.priority,
-            progress: 'todo',
-            subtasks: taskData.subtasks,
-            title: taskData.title
-        })
-    })
-        .then(response => response.json())
-        .then(data => {
-            clearForm();
-        })
+async function addTaskToFirebase(taskData) {
+    const request = createRequest(`${BASE_URL}/tasks.json`, 'POST', taskData);
+    const response = await fetch(request);
+
+    if (response.ok) handleSuccessfulTaskCreation();
+    else console.error("Error pushing task to Firebase");
 }
 
-function gatherFormData() {
-    const title = document.getElementById('title').value;
-    const description = document.getElementById('description').value;
-    const assignedTo = document.getElementById('assigned').value;
-    const dueDate = document.getElementById('due-date').value;
-    const priorityButtons = document.querySelectorAll('.prio');
-    let selectedPriority = '';
-
-    priorityButtons.forEach(button => {
-        if (button.classList.contains('selected')) {
-            selectedPriority = button.textContent.trim();
-        }
+function createRequest(url, method, data) {
+    return new Request(url, {
+        method: method,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
     });
-
-    const category = document.getElementById('category').value;
-
-    const subtaskElements = document.querySelectorAll('.subtask-connect input');
-    const subtasks = [];
-    subtaskElements.forEach((element, index) => {
-        subtasks.push({
-            completed: false,
-            title: element.value
-        });
-    });
-
-    return {
-        title,
-        description,
-        assignedTo,
-        dueDate,
-        priority: selectedPriority,
-        category,
-        subtasks
-    };
 }
 
-
-function clearForm() {
-    document.getElementById('title').value = '';
-    document.getElementById('description').value = '';
-    document.getElementById('assigned').value = 'Select contacts to assign';
-    document.getElementById('due-date').value = '';
-    document.getElementById('category').value = 'Select task category';
-    document.getElementById('subtasks').value = '';
-    document.querySelectorAll('input[name="priority"]').forEach(input => input.checked = false);
+function handleSuccessfulTaskCreation() {
+    clearForm();
+    window.location.href = 'board.html';
 }
-
 
 function submitForm() {
     const taskData = gatherFormData();
     addTaskToFirebase(taskData);
 }
 
-function fetchContacts() {
-    fetch(`${BASE_URL}/contacts.json`)
-        .then(response => response.json())
-        .then(data => {
-            populateContactsDropdown(data);
-        })
-        .catch((error) => {
-            console.error('Error fetching contacts:', error);
-        });
+function gatherFormData() {
+    return {
+        title: getFormValue("title"),
+        description: getFormValue("description"),
+        assignedTo: getFormValue("assigned"),
+        dueDate: getFormValue("due-date"),
+        priority: getSelectedPriority(),
+        category: getFormValue("category"),
+        subtasks: gatherSubtasks()
+    };
+}
+
+function getFormValue(name) {
+    return document.forms["taskForm"][name].value;
+}
+
+function getSelectedPriority() {
+    const priorityButtons = document.querySelectorAll('.prio');
+    for (let button of priorityButtons) {
+        if (button.classList.contains('selected')) return button.textContent.trim();
+    }
+    return '';
+}
+
+function gatherSubtasks() {
+    const subtaskElements = document.querySelectorAll('.subtask-connect input');
+    return Array.from(subtaskElements).map(el => ({ completed: false, title: el.value }));
+}
+
+function clearForm() {
+    setFormValue("title", '');
+    setFormValue("description", '');
+    setFormValue("assigned", 'Select contacts to assign');
+    setFormValue("due-date", '');
+    setFormValue("category", 'Select task category');
+    clearSubtasks();
+}
+
+function setFormValue(name, value) {
+    document.forms["taskForm"][name].value = value;
+}
+
+function clearSubtasks() {
+    const subtaskInputs = document.querySelectorAll('.subtask-connect input');
+    subtaskInputs.forEach(input => input.value = '');
+}
+
+async function fetchContacts() {
+    const request = createRequest(`${BASE_URL}/contacts.json`, 'GET');
+    const response = await fetch(request);
+
+    if (response.ok) populateContactsDropdown(await response.json());
+    else console.error("Error fetching contacts");
 }
 
 function populateContactsDropdown(contacts) {
-    const assignedSelect = document.getElementById('assigned');
+    const assignedSelect = document.forms["taskForm"]["assigned"];
     assignedSelect.innerHTML = '<option>Select contacts to assign</option>';
 
-    for (let key in contacts) {
-        if (contacts.hasOwnProperty(key)) {
-            const contact = contacts[key];
-            const option = document.createElement('option');
-            option.value = contact.name;
-            option.textContent = contact.name;
-            assignedSelect.appendChild(option);
-        }
-    }
+    Object.values(contacts).forEach(contact => {
+        assignedSelect.innerHTML += `<option value="${contact.name}">${contact.name}</option>`;
+    });
 }
 
 window.onload = function () {
     fetchContacts();
-    includeHTML();
+    includeHTML(); // Falls du diese Funktion benötigst.
 };
 
 function setPriority(button, color) {
-    const buttons = document.querySelectorAll('.prio');
-    buttons.forEach(btn => btn.style.backgroundColor = 'white');
-
+    resetPriorities();
     button.style.backgroundColor = color;
+    button.classList.add('selected');
+}
+
+function resetPriorities() {
+    const buttons = document.querySelectorAll('.prio');
+    buttons.forEach(button => {
+        button.style.backgroundColor = 'white';
+        button.classList.remove('selected');
+    });
 }
