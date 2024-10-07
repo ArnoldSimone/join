@@ -33,7 +33,7 @@ function gatherFormData() {
         description: getFormValue("description"),
         assignedTo: getFormValue("assigned"),
         dueDate: getFormValue("due-date"),
-        priority: getSelectedPriority(),
+        priority: selectedPriority,
         category: getFormValue("category"),
         progress: "todo", 
         subtasks: gatherSubtasks()
@@ -44,13 +44,6 @@ function getFormValue(name) {
     return document.forms["taskForm"][name].value;
 }
 
-function getSelectedPriority() {
-    const priorityButtons = document.querySelectorAll('.prio');
-    for (let button of priorityButtons) {
-        if (button.classList.contains('selected')) return button.textContent.trim();
-    }
-    return '';
-}
 
 function gatherSubtasks() {
     const subtaskElements = document.querySelectorAll('.subtask-connect input');
@@ -100,16 +93,57 @@ window.onload = function () {
     includeHTML(); 
 };
 
-function setPriority(button, color) {
-    resetPriorities();
-    button.style.backgroundColor = color;
-    button.classList.add('selected');
+let selectedPriority = ''; 
+
+function changePrio(priority) {
+    const priorityConfig = getPriorityConfig();
+    const buttons = document.querySelectorAll('.prio');
+    
+    selectedPriority = priority; 
+    
+    buttons.forEach(button => updateButtonStyle(button, priority, priorityConfig));
 }
 
-function resetPriorities() {
-    const buttons = document.querySelectorAll('.prio');
-    buttons.forEach(button => {
-        button.style.backgroundColor = 'white';
-        button.classList.remove('selected');
-    });
+
+function getPriorityConfig() {
+    return {
+        'Urgent': {
+            color: '#ff3e06',
+            activeImg: '../assets/img/urgentwhitesym.png',
+            defaultImg: '../assets/img/urgentsym.png'
+        },
+        'Medium': {
+            color: '#ffaa18',
+            activeImg: '../assets/img/mediumwhitesym.png',
+            defaultImg: '../assets/img/mediumsym.png'
+        },
+        'Low': {
+            color: '#7ee432',
+            activeImg: '../assets/img/lowwhitesym.png',
+            defaultImg: '../assets/img/lowsym.png'
+        }
+    };
+}
+
+function updateButtonStyle(button, selectedPriority, config) {
+    const buttonPriority = button.textContent.trim();
+    const img = button.querySelector('img');
+    
+    if (buttonPriority === selectedPriority) {
+        applyActiveStyle(button, config[selectedPriority], img);
+    } else {
+        resetButtonStyle(button, config[buttonPriority], img);
+    }
+}
+
+function applyActiveStyle(button, config, img) {
+    button.style.backgroundColor = config.color;
+    img.src = config.activeImg;
+    button.classList.add(`${button.textContent.trim().toLowerCase()}-active`);
+}
+
+function resetButtonStyle(button, config, img) {
+    button.style.backgroundColor = 'white';
+    img.src = config.defaultImg;
+    button.classList.remove(`${button.textContent.trim().toLowerCase()}-active`);
 }
