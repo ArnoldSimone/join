@@ -1,19 +1,20 @@
 const BASE_URL = "https://join-5800e-default-rtdb.europe-west1.firebasedatabase.app/";
 
-async function addTaskToFirebase(taskData) {
-    const request = createRequest(`${BASE_URL}/tasks.json`, 'POST', taskData);
-    const response = await fetch(request);
-
-    if (response.ok) handleSuccessfulTaskCreation();
-    else console.error("Error pushing task to Firebase");
+async function postToDatabase(path = "", data = {}) {
+    let response = await fetch(BASE_URL + path + ".json", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+    });
+    return await response.json();
 }
 
-function createRequest(url, method, data) {
-    return new Request(url, {
-        method: method,
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
-    });
+async function addTaskToFirebase(taskData) {
+    const result = await postToDatabase("tasks", taskData);
+    
+    if (result) handleSuccessfulTaskCreation();
 }
 
 function handleSuccessfulTaskCreation() {
@@ -34,6 +35,7 @@ function gatherFormData() {
         dueDate: getFormValue("due-date"),
         priority: getSelectedPriority(),
         category: getFormValue("category"),
+        progress: "todo", 
         subtasks: gatherSubtasks()
     };
 }
@@ -74,11 +76,14 @@ function clearSubtasks() {
 }
 
 async function fetchContacts() {
-    const request = createRequest(`${BASE_URL}/contacts.json`, 'GET');
-    const response = await fetch(request);
-
-    if (response.ok) populateContactsDropdown(await response.json());
-    else console.error("Error fetching contacts");
+    const response = await fetch(BASE_URL + "/contacts.json");
+    
+    if (response.ok) {
+        const contacts = await response.json();
+        populateContactsDropdown(contacts);
+    } else {
+        console.error("Error fetching contacts");
+    }
 }
 
 function populateContactsDropdown(contacts) {
