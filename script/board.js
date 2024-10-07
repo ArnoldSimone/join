@@ -62,16 +62,20 @@ function removeHighlight(containerId) {
     document.getElementById(containerId).classList.remove('drag-area-highlight');
 }
 
-function renderAssignedTo(task) {
-    let assignedToArray = Array.isArray(task.assignedTo) ? task.assignedTo : [task.assignedTo];
-    let assignedToContent = "";
-    for (let i = 0; i < assignedToArray.length; i++) {
-        let contact = contacts.find(c => c.name === assignedToArray[i]);
-        let initial = contact.avatar.initials;
-        let color = contact.avatar.color;
-        assignedToContent += getAssignedToTemplate(initial, color);
+function renderAssignedTo(assignedTo) {
+    let assignedToArray = Array.isArray(assignedTo) ? assignedTo : [assignedTo];
+    if (!assignedToArray || assignedToArray.length === 0 || assignedToArray == '') {
+        return '';
+    } else {
+        let assignedToContent = "";
+        for (let i = 0; i < assignedToArray.length; i++) {
+            let contact = contacts.find(c => c.name === assignedToArray[i]);
+            let initial = contact.avatar.initials;
+            let color = contact.avatar.color;
+            assignedToContent += getAssignedToTemplate(initial, color);
+        }
+        return assignedToContent;
     }
-    return assignedToContent;
 }
 
 function renderTaskProgressBar(subtasks) {
@@ -118,7 +122,7 @@ function showDetailTaskOverlay(taskId) {
 
 function renderSubtasksOverlay(task) {
     let subtasksArray = task.subtasks;
-    if (!subtasksArray || subtasksArray.length === 0) {
+    if (!subtasksArray || subtasksArray.length === 0 || subtasksArray === "") {
         return 'No subtasks in this task!';
     } else {
         let ctnSubtasks = "";
@@ -129,17 +133,21 @@ function renderSubtasksOverlay(task) {
     }
 }
 
-function renderAssignedToOverlay(task) {
-    let assignedToArray = Array.isArray(task.assignedTo) ? task.assignedTo : [task.assignedTo];
-    let assignedToContent = "";
-    for (let i = 0; i < assignedToArray.length; i++) {
-        let contact = contacts.find(c => c.name === assignedToArray[i]);
-        let initial = contact.avatar.initials;
-        let color = contact.avatar.color;
-        let name = assignedToArray[i];
-        assignedToContent += getAssignedToTemplateOverlay(initial, color, name);
+function renderAssignedToOverlay(assignedTo) {
+    let assignedToArray = Array.isArray(assignedTo) ? assignedTo : [assignedTo];
+    if (!assignedToArray || assignedToArray.length === 0 || assignedToArray == '') {
+        return '';
+    } else {
+        let assignedToContent = "";
+        for (let i = 0; i < assignedToArray.length; i++) {
+            let contact = contacts.find(c => c.name === assignedToArray[i]);
+            let initial = contact.avatar.initials;
+            let color = contact.avatar.color;
+            let name = assignedToArray[i];
+            assignedToContent += getAssignedToTemplateOverlay(initial, color, name);
+        }
+        return assignedToContent;
     }
-    return assignedToContent;
 }
 
 function formatDate(dateString) {
@@ -180,7 +188,7 @@ function getEditOverlayTemplate(task) {
                     src="../assets/img/close.svg" alt="Image Close">
             </div>
             <div class="ctn-main-edit-task d-flex-y">
-                <form class="d-flex-x">
+                <form class="d-flex-x" autocomplete="off">
                     <div class="d-flex-x column gap-8">
                         <label for="title-edit">Title<span class="required">*</span></label>
                         <input type="text" id="title-edit" name="title" value="${task.title}">
@@ -209,11 +217,12 @@ function getEditOverlayTemplate(task) {
                     </div>
                     <div class="d-flex-x column gap-8">
                         <label for="assigned-edit">Assigned to</label>
-                        <input type="text" id="input-assigned-edit" class="input-assigned-edit" autocomplete="off" onkeyup="searchContact('${task.id}')" onclick="toggleDropdown(); event.stopPropagation();" name="assigned" placeholder="Select contacts to assign"></input>
+                        <input type="text" id="input-assigned-edit" class="input-assigned-edit" onkeyup="searchContact('${task.id}')" onclick="toggleDropdown(); event.stopPropagation();" name="assigned" placeholder="Select contacts to assign"></input>
                         <div class="dropdown-contacts" id="dropdown-contacts" onclick="event.stopPropagation();">
                             ${renderAllContactsInAssignedTo(task.id)}
                         </div>
-                        <div id="assigned-content" class="assigned-content d-flex-y gap-8"></div>
+                        <div id="assigned-content" class="assigned-content d-flex-y gap-8">
+                        </div>
                     </div>
 
                     <div class="d-flex-x column gap-8">
@@ -241,14 +250,14 @@ function getEditOverlayTemplate(task) {
        `;
 }
 
+//rendert alle existierenden Kontakte in das Dropdown
 function renderAllContactsInAssignedTo(taskId) {
     let task = tasks.find(t => t.id === taskId);
     let allContacts = "";
-    let contactsArray = foundContacts.length > 0 ? foundContacts : contacts;
-    for (let iContact = 0; iContact < contactsArray.length; iContact++) {
-        let name = contactsArray[iContact].name;
-        let initial = contactsArray[iContact].avatar.initials;
-        let color = contactsArray[iContact].avatar.color;
+    for (let iContact = 0; iContact < contacts.length; iContact++) {
+        let name = contacts[iContact].name;
+        let initial = contacts[iContact].avatar.initials;
+        let color = contacts[iContact].avatar.color;
         allContacts += getAssignedToEditTemplateOverlay(initial, color, name, task, iContact);
     }
     return allContacts;
@@ -258,17 +267,34 @@ function searchContact(taskId) {
     let searchValue = document.getElementById('input-assigned-edit').value.toLowerCase();
     if (searchValue != "") {
         foundContacts = contacts.filter(contact => contact.name.toLowerCase().includes(searchValue));
+        console.log(foundContacts);
+
     } else {
         foundContacts = [];
     }
     let dropdownContactsRef = document.getElementById('dropdown-contacts');
-    dropdownContactsRef.innerHTML = renderAllContactsInAssignedTo(taskId);
+    dropdownContactsRef.innerHTML = renderFilteredContactsInAssignedTo(taskId);
     if (foundContacts.length > 0) {
         dropdownContactsRef.classList.add("show");
     } else {
         dropdownContactsRef.classList.remove("show");
     }
 }
+
+function renderFilteredContactsInAssignedTo(taskId) {
+    let task = tasks.find(t => t.id === taskId);
+    let allContactsFiltered = "";
+    let contactsArray = foundContacts.length > 0 ? foundContacts : contacts;
+    for (let iContact = 0; iContact < contactsArray.length; iContact++) {
+        let name = contactsArray[iContact].name;
+        let initial = contactsArray[iContact].avatar.initials;
+        let color = contactsArray[iContact].avatar.color;
+        allContactsFiltered += getAssignedToEditTemplateOverlay(initial, color, name, task, iContact);
+    }
+    return allContactsFiltered;
+}
+
+
 
 
 function checkContactIsAssignedTo(name, task) {
@@ -282,10 +308,19 @@ function checkContactIsAssignedTo(name, task) {
 }
 
 function toggleCheckboxContact(iContact) {
-    const checkbox = document.getElementById(`checkboxContact${iContact}`);
+    let checkbox = document.getElementById(`checkboxContact${iContact}`);
     checkbox.checked = !checkbox.checked;
+
+    let contactRef = document.getElementById(`contact${iContact}`);
+    if (checkbox.checked) {
+        contactRef.classList.add('checked');
+    } else {
+        contactRef.classList.remove('checked');
+    }
     updateAssignedContacts();
 }
+
+
 
 function updateAssignedContacts() {
     let assignedContentRef = document.getElementById('assigned-content');
@@ -293,8 +328,8 @@ function updateAssignedContacts() {
     let checkboxes = document.querySelectorAll('.checkbox-contact');
     checkboxes.forEach((checkbox, index) => {
         if (checkbox.checked) {
-            const initial = contacts[index].avatar.initials;
-            const color = contacts[index].avatar.color;
+            let initial = contacts[index].avatar.initials;
+            let color = contacts[index].avatar.color;
             assignedContentRef.innerHTML += `<div class="assigned-to d-flex" style="background-color:${color};">${initial}</div>`;
         }
     });

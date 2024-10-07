@@ -89,7 +89,6 @@ label {
 }
 
 input,
-select,
 textarea {
     padding: 10px;
     border: 1px solid #ccc;
@@ -104,15 +103,13 @@ textarea {
 
 
 input:hover,
-select:hover,
 textarea:hover {
     border: 1px solid var(--darkblue);
     cursor: pointer;
 }
 
 input::placeholder,
-textarea::placeholder,
-select::placeholder {
+textarea::placeholder {
     font-weight: 200;
     color: var(middlegrey);
 }
@@ -173,12 +170,10 @@ textarea {
     border-radius: 50%;
 }
 
-.all-contacts:hover {
+.contact:hover {
     background-color: var(--middlegrey);
     border-radius: 8px;
 }
-
-
 
 .edit-task-footer {
     justify-content: flex-end;
@@ -229,13 +224,13 @@ button.btn-ok:hover {
     color: white;
 }
 
-
 .assigned-content {
     flex-wrap: wrap;
 }
 
 .dropdown-contacts {
     display: none;
+    flex-direction: column;
     width: 100%;
     border: 1px solid #ccc;
     z-index: 1;
@@ -243,11 +238,15 @@ button.btn-ok:hover {
     overflow-y: auto;
     margin-top: -8px;
     border-radius: 6px;
+
 }
 
-.all-contacts {
+.contact {
     justify-content: space-between;
     padding: 4px 12px;
+    gap: 2px;
+    margin-bottom: 2px;
+
 }
 
 .contact-left label {
@@ -256,4 +255,30 @@ button.btn-ok:hover {
 
 .show {
     display: block;
+}
+
+.checked {
+    background-color: var(--darkblue);
+    border-radius: 8px;
+    color: white;
+
+}
+
+.checked:hover {
+    background-color: rgba(42, 54, 71, 0.95);
+    border-radius: 8px;
+    color: white;
+}
+
+.custom-checkbox-edit {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    background-image: url('../assets/img/checkbox.png');
+    background-size: cover;
+    cursor: pointer;
+}
+
+input[type="checkbox"]:checked+.custom-checkbox-edit {
+    background-image: url('../assets/img/checkbox-checked-white.png');
 }

@@ -14,7 +14,7 @@ function getBoardTaskTemplate(task) {
         ${renderTaskProgressBar(task.subtasks)}
         <div class="ctn-task-bottom d-flex-y">
             <div class="ctn-assigned-to mesh d-flex-y">
-                ${renderAssignedTo(task)}
+                ${renderAssignedTo(task.assignedTo)}
             </div>
             ${getImagePrioTemplate(task.priority)}
         </div>
@@ -68,7 +68,7 @@ function getTaskOverlayTemplate(task) {
             <div>
                 <p class="label">Assigned To:</p>
                 <div class="ctn-assigned-to-detail d-flex-x">
-                    ${renderAssignedToOverlay(task)}
+                    ${renderAssignedToOverlay(task.assignedTo)}
                 </div>
             </div>
             <div>
@@ -107,15 +107,15 @@ function getSubtasksOverlayTemplate(indexSubTask, task) {
 
 function getAssignedToEditTemplateOverlay(initial, color, name, task, iContact) {
     return `
-        <div class="all-contacts d-flex-y" onclick="toggleCheckboxContact(${iContact})">
+        <div class="contact d-flex-y ${checkContactIsAssignedTo(name, task)}" id="contact${iContact}" onclick="toggleCheckboxContact(${iContact})">
             <div class="contact-left d-flex-y">
                 <div class="assigned-to d-flex" style="background-color:${color};">${initial}</div>
                 <label for=""checkboxContact${iContact}">${name}</label>
             </div >
             <div class="contact-right">
-                <input type="checkbox" autocomplete="off" id="checkboxContact${iContact}" class="checkbox-contact" 
+                <input type="checkbox" id="checkboxContact${iContact}" class="checkbox-contact" 
                     ${checkContactIsAssignedTo(name, task)} onchange="updateAssignedContacts()">
-                <span class="custom-checkbox"></span>
+                <span class="custom-checkbox-edit"></span>
             </div>
         </div> `;
 }
