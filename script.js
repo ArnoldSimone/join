@@ -55,7 +55,7 @@ function checkLoginData() {
   let password = document.getElementById('password').value;
   let user = users.find(users => users.email == email && users.password == password);  
   if (user) {
-    window.location.href = '/html/summary.html';
+    window.location.replace('/html/summary.html');
   } else {
     loginDataDontMatch();
   };
@@ -122,4 +122,15 @@ function saveRemember() {
 function getRemember() {
   let email = localStorage.getItem("userEmail");
   document.getElementById('email').value = email;
+}
+
+
+function toggleUserMenu() {
+  let userMenu = document.getElementById('userMenu');
+  userMenu.classList.toggle('d-none');
+}
+
+
+function logOut() {
+  window.location.replace('../index.html');
 }

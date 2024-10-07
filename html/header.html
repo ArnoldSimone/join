@@ -5,8 +5,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="icon" type="image/png" href="../assets/img/logo_white.png" />
+  <link rel="stylesheet" href="../standard.css">
   <link rel="stylesheet" href="../css/header.css" />
   <link rel="stylesheet" href="../css/fonts.css">
+  <script src="../script.js"></script>
   <title>Join</title>
 </head>
 
@@ -18,10 +20,15 @@
       </div>
       <div class="header-right">
         <a href="/html/help.html"><img src="/assets/img/help.png" alt="Help" /></a>
-        <div class="user-letter">
+        <div onclick="toggleUserMenu()" class="user-letter">
           <h2>G</h2>
         </div>
       </div>
+    </div>
+    <div id="userMenu" class="logout-menu d-none">
+      <div class="logout"><a href="../html/legalnotice.html">Legal Notice</a></div>
+      <div class="logout"><a href="../html/privacy.html">Privacy Police</a></div>
+      <div onclick="logOut()" class="logout"><a href="#">Log Out</a></div>
     </div>
   </header>
 </body>

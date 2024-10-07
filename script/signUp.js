@@ -186,5 +186,5 @@ function registrationSuccesful() {
 
 
 function loginInForwarding() {
-  window.location.href = '../index.html';
+  window.location.replace('../index.html');
 }
