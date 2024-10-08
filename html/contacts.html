@@ -46,11 +46,11 @@
                     <div class="horizontal-line-blue d-none"></div>
                 </div>
                 
-                <div class="contact-view">
+                <div class="contact-view contact-info">
                     <div class="contact-details" id="contact-details">
-                        <div style="display: flex; flex-direction: row;">
+                        <div class="direction-row">
                             <div class="contact-avatar"></div>
-                            <div style="display: flex; flex-direction: column; padding-left: 20px;">
+                            <div class="padding-left20 direction-column">
                                 <h2 class="margin0 padding-left20"><span class="contact-name"></span></h2>
                                 <div class="contact-actions">
                                     <button class="edit-btn border-unset d-flex" onclick="showEditContact(document.getElementById('edit-contact-id').value, document.querySelector('.contact-name').textContent, document.getElementById('contact-email').textContent, document.getElementById('contact-phone').textContent)"><img src="../assets/img/edit.png" alt="">Edit</button>
@@ -59,8 +59,8 @@
                             </div>    
                         </div>
                         <span>Contact Information</span>
-                        <p>Email:<br><span id="contact-email"></span></p>
-                        <p>Phone:<br><span id="contact-phone"></span></p>
+                        <p><span class="contact-data">Email:</span><br><span class="contact-email" id="contact-email"></span></p>
+                        <p><span class="contact-data">Phone:</span><br><span class="contact-phone" id="contact-phone"></span></p>
                     </div>
                    
                 </div>
@@ -80,11 +80,11 @@
             <div class="d-flex overlay-contact-middle">
                 <img src="../assets/img/addcontact.png" alt="">
             </div>
-            <form class="d-flex" style="flex-direction: column;" onsubmit="addNewContact(); return false;">
+            <form class="d-flex direction-column" onsubmit="addNewContact(); return false;">
                 <input type="text" placeholder="Name" id="add-name" required>
                 <input type="email" placeholder="Email" id="add-email" required>
                 <input type="tel" placeholder="Phone" id="add-phone" required>
-                <div style="display: flex; gap: 5px;">
+                <div class="contacts-button">
                     <button type="button" class="cancel" onclick="hideOverlay()">Cancel</button>
                     <button type="submit" class="create-contact">Create contact</button>
                 </div>
@@ -106,7 +106,7 @@
             <input type="email" placeholder="Email" id="edit-email">
             <input type="tel" placeholder="Phone" id="edit-phone">
             <input type="hidden" id="edit-contact-id"> 
-            <div style="display: flex; gap: 5px;">
+            <div class="contacts-button">
                 <button type="button" class="cancel" onclick="hideOverlay()">Cancel</button>
                 <button type="button" class="save-changes" onclick="editContact()">Save changes</button>
             </div>

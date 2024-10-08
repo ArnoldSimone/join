@@ -293,3 +293,30 @@ button.save-changes {
     display: flex; 
     align-items: center;
 }
+
+.direction-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.direction-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.contacts-button {
+    display: flex; 
+    gap: 5px;
+}
+
+.contact-email {
+    color: var(--lightblue);
+}
+
+.contact-phone {
+    color: black;
+}
+
+.contact-data {
+    color: black;
+}
