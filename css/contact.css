@@ -174,7 +174,7 @@
 
 .overlay-content {
     background-color: white;
-    border-radius: 10px;
+    border-radius: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
     text-align: center; 
     display: flex;
@@ -189,7 +189,7 @@
     justify-content: center;
     align-items: flex-start;
     flex-direction: column;
-    border-radius: 10px 0 0 10px;
+    border-radius: 20px 0 0 20px;
     width: 250px;
     padding-left: 30px;
 }
@@ -331,6 +331,7 @@ button.save-changes:hover {
 .contacts-button {
     display: flex; 
     gap: 5px;
+    margin-top: 30px;
 }
 
 .contact-email {
