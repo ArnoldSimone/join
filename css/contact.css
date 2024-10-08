@@ -9,6 +9,7 @@
 .contact-detail-container {
     display: flex;
     flex-direction: column;
+    padding-left: 70px;
 }
 
 .contact-list {
@@ -112,7 +113,7 @@
 .contact-info {
     display: flex;
     flex-direction: column;
-    margin-left: 32px;
+    margin-left: 20px;
 }
 
 .name {
@@ -274,7 +275,7 @@ button.save-changes {
 }
 
 .contact-actions {
-    margin-top: 20px;
+    margin-top: 10px;
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
@@ -319,4 +320,39 @@ button.save-changes {
 
 .contact-data {
     color: black;
+}
+
+.delete-btn:hover {
+    color: var(--lightblue);
+}
+
+.delete-btn:hover img {
+    content: url('../assets/img/delete_blue.png');
+}
+
+.edit-btn:hover {
+    color: var(--lightblue);
+}
+
+.edit-btn:hover img {
+    content: url('../assets/img/edit_blue.png')
+}
+
+.contact-name {
+    font-size: 36px;
+}
+
+.selected-contact {
+    background-color: var(--darkblue);
+    color: white;
+    border-radius: 10px;
+}
+
+.selected-contact .name {
+    color: white;
+}
+
+.contact.selected-contact:hover {
+    background-color: var(--darkblue); 
+    cursor: default; 
 }

@@ -183,11 +183,20 @@ function showEditContact(id, name, email, phone, initials, color) {
 
 
 function showContactDetails(id, name, email, phone, initials, color) {
-    document.querySelector('.contact-details').style.display = 'block';
+    // Entferne die selected-contact Klasse von allen Kontakten
+    const contacts = document.querySelectorAll('.contact');
+    contacts.forEach(contact => contact.classList.remove('selected-contact'));
 
+    // Finde den angeklickten Kontakt und füge die Klasse hinzu
+    const selectedContact = document.querySelector(`.contact[onclick*="'${id}'"]`);
+    if (selectedContact) {
+        selectedContact.classList.add('selected-contact');
+    }
+
+    // Zeige die Kontaktdetails an
+    document.querySelector('.contact-details').style.display = 'block';
     document.querySelector('.contact-name').textContent = name;
     document.querySelector('.contact-avatar').innerHTML = `<span class="avatar-details d-flex" style="background-color:${color};">${initials}</span>`;
-
     document.getElementById('contact-email').textContent = email;
     document.getElementById('contact-phone').textContent = phone;
     document.getElementById('edit-contact-id').value = id;
@@ -196,6 +205,7 @@ function showContactDetails(id, name, email, phone, initials, color) {
         showEditContact(id, name, email, phone, initials, color);
     };
 }
+
 
 
 function hideOverlay() {
