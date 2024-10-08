@@ -13,7 +13,7 @@ async function postToDatabase(path = "", data = {}) {
 
 async function addTaskToFirebase(taskData) {
     const result = await postToDatabase("tasks", taskData);
-    
+
     if (result) handleSuccessfulTaskCreation();
 }
 
@@ -35,7 +35,7 @@ function gatherFormData() {
         dueDate: getFormValue("due-date"),
         priority: selectedPriority,
         category: getFormValue("category"),
-        progress: "todo", 
+        progress: "todo",
         subtasks: gatherSubtasks()
     };
 }
@@ -70,7 +70,7 @@ function clearSubtasks() {
 
 async function fetchContacts() {
     const response = await fetch(BASE_URL + "/contacts.json");
-    
+
     if (response.ok) {
         const contacts = await response.json();
         populateContactsDropdown(contacts);
@@ -90,17 +90,17 @@ function populateContactsDropdown(contacts) {
 
 window.onload = function () {
     fetchContacts();
-    includeHTML(); 
+    includeHTML();
 };
 
-let selectedPriority = ''; 
+let selectedPriority = '';
 
 function changePrio(priority) {
     const priorityConfig = getPriorityConfig();
     const buttons = document.querySelectorAll('.prio');
-    
-    selectedPriority = priority; 
-    
+
+    selectedPriority = priority;
+
     buttons.forEach(button => updateButtonStyle(button, priority, priorityConfig));
 }
 
@@ -128,7 +128,7 @@ function getPriorityConfig() {
 function updateButtonStyle(button, selectedPriority, config) {
     const buttonPriority = button.textContent.trim();
     const img = button.querySelector('img');
-    
+
     if (buttonPriority === selectedPriority) {
         applyActiveStyle(button, config[selectedPriority], img);
     } else {

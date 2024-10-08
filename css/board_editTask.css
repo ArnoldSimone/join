@@ -261,7 +261,6 @@ button.btn-ok:hover {
     background-color: var(--darkblue);
     border-radius: 8px;
     color: white;
-
 }
 
 .checked:hover {
