@@ -1,0 +1,20 @@
+main {
+    margin-left: 232px;
+    padding: 32px 64px;
+    max-width: 1440px;
+}
+
+.headline-legal {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.vector-legal {
+    padding: 10px;
+}
+
+.vector-legal:hover {
+    border: 1px solid var(--lightblue);
+}
