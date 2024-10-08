@@ -178,8 +178,8 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
     text-align: center; 
     display: flex;
-    width: 800px;
-    height: 350px;
+    width: 900px;
+    height: 450px;
 }
 
 .overlay-left {
@@ -187,10 +187,11 @@
     color: white;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     flex-direction: column;
     border-radius: 10px 0 0 10px;
     width: 250px;
+    padding-left: 30px;
 }
 
 .overlay-left img {
@@ -199,8 +200,8 @@
 }
 
 .overlay-contact-middle img{
-    height: 100px;
-    padding: 40px;
+    height: 150px;
+    padding: 50px;
 }
 
 input {
@@ -223,6 +224,14 @@ button.cancel {
     font-weight: 600;
 }
 
+button.cancel:hover {
+    color: var(--lightblue);
+    border: 2px solid var(--lightblue);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.19);
+    transform: translateY(-1px); 
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
 button.create-contact {
     background-color: var(--darkblue);
     color: white;
@@ -234,6 +243,13 @@ button.create-contact {
     font-weight: 600;
 }
 
+button.create-contact:hover {
+    background-color: var(--lightblue);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.19);
+    transform: translateY(-1px); 
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
 button.save-changes {
     background-color: var(--darkblue);
     color: white;
@@ -243,6 +259,13 @@ button.save-changes {
     cursor: pointer;
     font-size: 16px;
     font-weight: 600;
+}
+
+button.save-changes:hover {
+    background-color: var(--lightblue);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.19);
+    transform: translateY(-1px); 
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
 
 .contact-info-container {
@@ -355,4 +378,8 @@ button.save-changes {
 .contact.selected-contact:hover {
     background-color: var(--darkblue); 
     cursor: default; 
+}
+
+.edit-overlay-middle {
+    padding: 70px;
 }
