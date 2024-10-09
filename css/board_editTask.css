@@ -70,10 +70,6 @@ form {
     position: relative;
 }
 
-.subtask-connect input {
-    width: 100%;
-    padding-right: 40px;
-}
 
 label {
     font-weight: 400;
@@ -100,7 +96,6 @@ textarea {
     -moz-appearance: none;
     appearance: none;
 }
-
 
 input:hover,
 textarea:hover {
@@ -144,12 +139,15 @@ textarea {
     padding-right: 40px;
 }
 
+.ctn-edit-all-subtask {
+    width: 100%;
+}
+
 .ctn-add-subtask {
     position: absolute;
     right: 10px;
     top: 50%;
     transform: translateY(-50%);
-    cursor: pointer;
 }
 
 .ctn-clear-add-subtask {
@@ -157,12 +155,46 @@ textarea {
     right: 10px;
     top: 50%;
     transform: translateY(-50%);
-    cursor: pointer;
+    gap: 4px;
 }
 
 .add-subtask {
     width: 20px;
-    height: 20px;
+    cursor: pointer;
+}
+
+.clear-input-subtask {
+    height: 10px;
+    width: 10px;
+    cursor: pointer;
+}
+
+.ctn-clear-input-subtask {
+    padding: 4px;
+}
+
+.ctn-add-input-subtask {
+    padding: 4px;
+}
+
+.ctn-clear-input-subtask:hover,
+.ctn-add-input-subtask:hover {
+    background-color: var(--lightgrey);
+    border-radius: 50%;
+}
+
+.add-input-subtask {
+    height: 10px;
+    width: 10px;
+    scale: 1.1;
+    object-fit: contain;
+
+
+    cursor: pointer;
+}
+
+.horizonal-line-subtask {
+    border: 0.5px solid var(--middlegrey);
 }
 
 .add-subtask:hover {
@@ -280,4 +312,50 @@ button.btn-ok:hover {
 
 input[type="checkbox"]:checked+.custom-checkbox-edit {
     background-image: url('../assets/img/checkbox-checked-white.png');
+}
+
+
+ul {
+    padding: 0;
+    margin: 0;
+}
+
+.subtask-item-edit {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4px 16px;
+    gap: 2px;
+    width: 100%;
+    font-size: 14px;
+}
+
+.subtask-icons {
+    gap: 10px;
+}
+
+.subtask-icons img {
+    height: 12px;
+    transition: opacity 0.3s;
+    opacity: 0;
+}
+
+.subtask-item-edit:hover .subtask-icons img {
+    opacity: 1;
+}
+
+.img-edit-subtask,
+.img-delete-subtask {
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.img-edit-subtask:hover,
+.img-delete-subtask:hover {
+    transform: scale(1.1);
+}
+
+.subtask-item-edit:hover {
+    background-color: var(--lightgrey);
+    border-radius: 6px;
 }

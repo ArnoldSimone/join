@@ -115,7 +115,7 @@ function getEditOverlayTemplate(task) {
                 <form class="d-flex-x" autocomplete="off">
                     <div class="d-flex-x column gap-8">
                         <label for="title-edit">Title<span class="required">*</span></label>
-                        <input type="text" id="title-edit" name="title" value="${task.title}">
+                        <input type="text" id="title-edit" name="title-edit" value="${task.title}">
                     </div>
                     <div class="d-flex-x column gap-8">
                         <label for="description-edit">Description</label>
@@ -123,10 +123,10 @@ function getEditOverlayTemplate(task) {
                     </div>
                     <div class="d-flex-x column gap-8">
                         <label for="due-date-edit">Due date</label>
-                        <input type="date" id="due-date-edit" placeholder="dd/mm/yyy" value="${task.dueDate}" name="due-date">
+                        <input type="date" id="due-date-edit" placeholder="dd/mm/yyy" value="${task.dueDate}" name="due-date-edit">
                     </div>
                     <div class="d-flex-x column gap-8">
-                        <label class="label-prio">Prio</label>
+                        <span class="label-prio">Prio</span>
                         <div class="d-flex-y prio-group">
                             <button onclick="changePrio('Urgent')" id="btn-urgent" type="button" class="prio d-flex ${task.priority === 'Urgent' ? 'urgent-active' : ''}">Urgent
                                 <img src="${task.priority === 'Urgent' ? '../assets/img/urgentwhitesym.png' : '../assets/img/urgentsym.png'}"  alt="">
@@ -140,8 +140,8 @@ function getEditOverlayTemplate(task) {
                         </div>
                     </div>
                     <div class="d-flex-x column gap-8">
-                        <label for="assigned-edit">Assigned to</label>
-                        <input type="text" id="input-assigned-edit" class="input-assigned-edit" onkeyup="searchContact()" onclick="toggleDropdown(); event.stopPropagation();" name="assigned" placeholder="Select contacts to assign"></input>
+                        <label for="input-assigned-edit">Assigned to</label>
+                        <input type="text" id="input-assigned-edit" class="input-assigned-edit" onkeyup="searchContact()" onclick="toggleDropdown(); event.stopPropagation();" name="assigned-edit" placeholder="Select contacts to assign"></input>
                         <div class="dropdown-contacts" id="dropdown-contacts" onclick="event.stopPropagation();">
                             ${renderAllContactsInAssignedTo(task.id)}
                         </div>
@@ -149,15 +149,41 @@ function getEditOverlayTemplate(task) {
                         </div>
                     </div>
 
+
+
                     <div class="d-flex-x column gap-8">
                         <label for="subtasks-edit">Subtasks</label>
                         <div class="subtask-connect">
-                            <input type="text" id="subtasks-edit" name="subtasks" placeholder="Add new subtask">
-                            <div class="subtask-img">
-                                <img src="../assets/img/plusicon.png" alt="">
+                            <input type="text" id="subtasks-edit" name="subtasks-edit" placeholder="Add new subtask">
+                            <div id="ctn-add-subtask" class="ctn-add-subtask d-flex">
+                                <img class="add-subtask d-flex" src="../assets/img/plusicon.png" alt="Input Subtask">
+                            </div>
+                            <div id="ctn-clear-add-subtask" class="ctn-clear-add-subtask d-flex-x d-none">
+                                <div class="ctn-clear-input-subtask d-flex">
+                                    <img class="clear-input-subtask d-flex" src="../assets/img/close.svg" alt="Clear Input">
+                                </div>
+                                <span class="horizonal-line-subtask"></span>
+                                <div class="ctn-add-input-subtask d-flex">
+                                    <img class="add-input-subtask d-flex" src="../assets/img/check.png" alt="Add Subtask">
+                                </div>
                             </div>
                         </div>
+                        <div class="ctn-edit-all-subtask">
+                            ${renderSubtasks(task.id)}
+
+                            <ul>
+                                <li class="subtask-item-edit d-flex-y">
+                                    <span class="subtask-text">&bull; Firebase-Projekt erstellen</span>
+                                    <div class="subtask-icons d-flex-x">
+                                        <img id="img-edit-subtask" class="img-edit-subtask"  src="../assets/img/pencilBlue.png" alt="Edit Subtask">
+                                        <img id="img-delete-subtask" class="img-delete-subtask" src="../assets/img/dustbinDark.svg" alt="Delete Subtask">
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
+
+
 
                 </form>
             </div>
@@ -179,10 +205,10 @@ function getAssignedToEditTemplateOverlay(initial, color, name, iContact, isChec
         <div class="contact d-flex-y ${isChecked}" id="contact${iContact}" onclick="toggleCheckboxContact(${iContact})">
             <div class="contact-left d-flex-y">
                 <div class="assigned-to d-flex" style="background-color:${color};">${initial}</div>
-                <label for=""checkboxContact${iContact}">${name}</label>
+                <label for="checkboxContact${iContact}">${name}</label>
             </div >
             <div class="contact-right">
-                <input type="checkbox" id="checkboxContact${iContact}" class="checkbox-contact"
+                <input type="checkbox" id="checkboxContact${iContact}" name="checkboxContact${iContact}" class="checkbox-contact"
                  ${isChecked} onchange="updateAssignedContacts()">
                 <span class="custom-checkbox-edit"></span>
             </div>

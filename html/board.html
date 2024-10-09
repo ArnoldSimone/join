@@ -105,7 +105,7 @@
             <div onclick="closeDetailTaskOverlay()" id="overlay-board-detail" class="overlay-board d-none d-flex">
             </div>
 
-            <div onclick="closeDetailTaskOverlay()" id="overlay-board-edit" class="overlay-board d-none d-flex">
+            <div onclick="closeDetailTaskOverlay()" id="overlay-board-edit" class="overlay-board d-flex d-none">
                 <div onclick="bubblingProtection(event)" id="overlay-edit-task-board"
                     class="overlay-edit-task-board ctn-task no-hover d-flex-x">
 
@@ -118,20 +118,43 @@
                         <form class="d-flex-x">
 
 
-                            <div class="d-flex-x column gap-8">
+                            <!-- <div class="d-flex-x column gap-8">
                                 <label for="subtasks-edit">Subtasks</label>
                                 <div class="subtask-connect">
                                     <input type="text" id="subtasks-edit" autocomplete="off" name="subtasks"
                                         placeholder="Add new subtask">
-                                    <div class="ctn-add-subtask">
-                                        <img class="add-subtask" src="../assets/img/plusicon.png" alt="">
+                                    <div id="ctn-add-subtask" class="ctn-add-subtask d-flex d-none">
+                                        <img class="add-subtask d-flex" src="../assets/img/plusicon.png"
+                                            alt="Input Subtask">
                                     </div>
-                                    <div class="ctn-clear-add-subtask">
-                                        <img class="add-subtask" src="../assets/img/close.svg" alt="">
-                                        <img class="add-subtask" src="../assets/img/pencilLight.svg" alt="">
+                                    <div id="ctn-clear-add-subtask" class="ctn-clear-add-subtask d-flex-x">
+                                        <div class="ctn-clear-input-subtask d-flex">
+                                            <img class="clear-input-subtask d-flex" src="../assets/img/close.svg"
+                                                alt="Clear Input">
+                                        </div>
+                                        <span class="horizonal-line-subtask"></span>
+                                        <div class="ctn-add-input-subtask d-flex">
+                                            <img class="add-input-subtask d-flex" src="../assets/img/check.png"
+                                                alt="Add Subtask">
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+
+                                <div class="ctn-edit-all-subtask">
+                                    <ul>
+                                        <li class="subtask-item-edit d-flex-y">
+                                            <span class="subtask-text">&bull; Firebase-Projekt erstellen</span>
+                                            <div class="subtask-icons d-flex-x">
+                                                <img id="img-edit-subtask" class="img-edit-subtask"
+                                                    src="../assets/img/pencilBlue.png" alt="Edit Subtask">
+                                                <img id="img-delete-subtask" class="img-delete-subtask"
+                                                    src="../assets/img/dustbinDark.svg" alt="Delete Subtask">
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div> -->
+
 
 
                         </form>

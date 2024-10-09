@@ -14,6 +14,48 @@ function showEditTaskOverlay(taskId) {
     updateAssignedContacts();
 }
 
+function changePrio(selectedPrio) {
+    toggleDropdown
+    let btnUrgentRef = document.getElementById('btn-urgent');
+    let btnMediumRef = document.getElementById('btn-medium');
+    let btnLowRef = document.getElementById('btn-low');
+    removeAllActivButtons(btnUrgentRef, btnMediumRef, btnLowRef);
+    if (selectedPrio === 'Urgent') {
+        changePrioUrgent(btnUrgentRef, btnMediumRef, btnLowRef);
+    } else if (selectedPrio === 'Medium') {
+        changePrioMedium(btnUrgentRef, btnMediumRef, btnLowRef)
+    } else if (selectedPrio === 'Low') {
+        changePrioLow(btnUrgentRef, btnMediumRef, btnLowRef);
+    }
+}
+
+function changePrioUrgent(btnUrgentRef, btnMediumRef, btnLowRef) {
+    btnUrgentRef.classList.add('urgent-active');
+    btnUrgentRef.querySelector('img').src = '../assets/img/urgentwhitesym.png';
+    btnMediumRef.querySelector('img').src = '../assets/img/mediumsym.png';
+    btnLowRef.querySelector('img').src = '../assets/img/lowsym.png';
+}
+
+function changePrioMedium(btnUrgentRef, btnMediumRef, btnLowRef) {
+    btnMediumRef.classList.add('medium-active');
+    btnMediumRef.querySelector('img').src = '../assets/img/mediumwhitesym.png';
+    btnUrgentRef.querySelector('img').src = '../assets/img/urgentsym.png';
+    btnLowRef.querySelector('img').src = '../assets/img/lowsym.png';
+}
+
+function changePrioLow(btnUrgentRef, btnMediumRef, btnLowRef) {
+    btnLowRef.classList.add('low-active');
+    btnLowRef.querySelector('img').src = '../assets/img/lowwhitesym.png';
+    btnUrgentRef.querySelector('img').src = '../assets/img/urgentsym.png';
+    btnMediumRef.querySelector('img').src = '../assets/img/mediumsym.png';
+}
+
+function removeAllActivButtons(btnUrgentRef, btnMediumRef, btnLowRef) {
+    btnUrgentRef.classList.remove('urgent-active');
+    btnMediumRef.classList.remove('medium-active');
+    btnLowRef.classList.remove('low-active');
+}
+
 function renderAllContactsInAssignedTo(taskId) {
     let task = tasks.find(t => t.id === taskId);
     let allContactsContent = "";
@@ -104,46 +146,10 @@ function showDropdown() {
     dropdown.classList.add("show");
 }
 
-function changePrio(selectedPrio) {
-    toggleDropdown
-    let btnUrgentRef = document.getElementById('btn-urgent');
-    let btnMediumRef = document.getElementById('btn-medium');
-    let btnLowRef = document.getElementById('btn-low');
-    removeAllActivButtons(btnUrgentRef, btnMediumRef, btnLowRef);
-    if (selectedPrio === 'Urgent') {
-        changePrioUrgent(btnUrgentRef, btnMediumRef, btnLowRef);
-    } else if (selectedPrio === 'Medium') {
-        changePrioMedium(btnUrgentRef, btnMediumRef, btnLowRef)
-    } else if (selectedPrio === 'Low') {
-        changePrioLow(btnUrgentRef, btnMediumRef, btnLowRef);
-    }
-}
+function renderSubtasks(taskId) {
+    let task = tasks.find(t => t.id === taskId);
+    console.log(task);
 
-function changePrioUrgent(btnUrgentRef, btnMediumRef, btnLowRef) {
-    btnUrgentRef.classList.add('urgent-active');
-    btnUrgentRef.querySelector('img').src = '../assets/img/urgentwhitesym.png';
-    btnMediumRef.querySelector('img').src = '../assets/img/mediumsym.png';
-    btnLowRef.querySelector('img').src = '../assets/img/lowsym.png';
-}
-
-function changePrioMedium(btnUrgentRef, btnMediumRef, btnLowRef) {
-    btnMediumRef.classList.add('medium-active');
-    btnMediumRef.querySelector('img').src = '../assets/img/mediumwhitesym.png';
-    btnUrgentRef.querySelector('img').src = '../assets/img/urgentsym.png';
-    btnLowRef.querySelector('img').src = '../assets/img/lowsym.png';
-}
-
-function changePrioLow(btnUrgentRef, btnMediumRef, btnLowRef) {
-    btnLowRef.classList.add('low-active');
-    btnLowRef.querySelector('img').src = '../assets/img/lowwhitesym.png';
-    btnUrgentRef.querySelector('img').src = '../assets/img/urgentsym.png';
-    btnMediumRef.querySelector('img').src = '../assets/img/mediumsym.png';
-}
-
-function removeAllActivButtons(btnUrgentRef, btnMediumRef, btnLowRef) {
-    btnUrgentRef.classList.remove('urgent-active');
-    btnMediumRef.classList.remove('medium-active');
-    btnLowRef.classList.remove('low-active');
 }
 
 
