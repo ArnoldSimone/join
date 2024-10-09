@@ -1,8 +1,6 @@
 let currentDraggedElement;
 let tasks;
 let contacts;
-let foundContacts = [];
-let selectedContacts = [];
 
 async function onloadFuncBoard() {
     let tasksData = await loadFromDatabase(`/tasks`);
@@ -63,6 +61,10 @@ function removeHighlight(containerId) {
     document.getElementById(containerId).classList.remove('drag-area-highlight');
 }
 
+function bubblingProtection(event) {
+    event.stopPropagation();
+}
+
 function renderAssignedTo(assignedTo) {
     let assignedToArray = Array.isArray(assignedTo) ? assignedTo : [assignedTo];
     if (!assignedToArray || assignedToArray.length === 0 || assignedToArray == '') {
@@ -102,10 +104,6 @@ function closeDetailTaskOverlay() {
         overlayBoardEditRef.classList.add('d-none');
         overlayBoardEditRef.classList.remove('slide-out');
     }, 200);
-}
-
-function bubblingProtection(event) {
-    event.stopPropagation();
 }
 
 function showDetailTaskOverlay(taskId) {
@@ -168,121 +166,6 @@ function toggleCheckbox(indexSubTask, taskId) {
     const checkbox = document.getElementById(`checkbox${indexSubTask}`);
     checkbox.checked = !checkbox.checked;
     updateSubtaskStatus(indexSubTask, taskId);
-}
-
-
-let currentlyAssignedContacts = [];
-
-
-
-function showEditTaskOverlay(taskId) {
-    document.getElementById('overlay-board-detail').classList.add('d-none');
-    let overlayBoardEditRef = document.getElementById('overlay-board-edit');
-    overlayBoardEditRef.classList.remove('d-none');
-    overlayBoardEditRef.innerHTML = "";
-    let task = tasks.find(t => t.id === taskId);
-    console.log(task);
-    //rendert Overlay
-    overlayBoardEditRef.innerHTML = getEditOverlayTemplate(task);
-    updateAssignedContacts();
-}
-
-//rendert alle existierenden Kontakte in das Dropdown
-function renderAllContactsInAssignedTo(taskId) {
-    let task = tasks.find(t => t.id === taskId);
-    let allContacts = "";
-    let assignedContacts = task.assignedTo;
-    for (let iContact = 0; iContact < contacts.length; iContact++) {
-        let name = contacts[iContact].name;
-        let initial = contacts[iContact].avatar.initials;
-        let color = contacts[iContact].avatar.color;
-
-        let isChecked = assignedContacts.includes(contacts[iContact].name) ? 'checked' : '';
-        allContacts += getAssignedToEditTemplateOverlay(initial, color, name, task, iContact, isChecked);
-    }
-    return allContacts;
-}
-
-function toggleCheckboxContact(iContact) {
-    let checkbox = document.getElementById(`checkboxContact${iContact}`);
-    checkbox.checked = !checkbox.checked;
-
-    let contactRef = document.getElementById(`contact${iContact}`);
-    if (checkbox.checked) {
-        contactRef.classList.add('checked');
-    } else {
-        contactRef.classList.remove('checked');
-    }
-    updateAssignedContacts();
-}
-
-
-function updateAssignedContacts() {
-    let assignedContentRef = document.getElementById('assigned-content');
-    assignedContentRef.innerHTML = '';
-    let checkboxes = document.querySelectorAll('.checkbox-contact');
-    checkboxes.forEach((checkbox, index) => {
-        if (checkbox.checked) {
-            let initial = contacts[index].avatar.initials;
-            let color = contacts[index].avatar.color;
-            assignedContentRef.innerHTML += `<div class="assigned-to d-flex" style="background-color:${color};">${initial}</div>`;
-        }
-    });
-}
-
-function toggleDropdown() {
-    let dropdown = document.getElementById("dropdown-contacts");
-    dropdown.classList.toggle("show");
-}
-
-function closeDropdown() {
-    let dropdown = document.getElementById("dropdown-contacts");
-    dropdown.classList.remove("show");
-}
-
-
-
-
-function changePrio(selectedPrio) {
-    toggleDropdown
-    let btnUrgentRef = document.getElementById('btn-urgent');
-    let btnMediumRef = document.getElementById('btn-medium');
-    let btnLowRef = document.getElementById('btn-low');
-    removeAllActivButtons(btnUrgentRef, btnMediumRef, btnLowRef);
-    if (selectedPrio === 'Urgent') {
-        changePrioUrgent(btnUrgentRef, btnMediumRef, btnLowRef);
-    } else if (selectedPrio === 'Medium') {
-        changePrioMedium(btnUrgentRef, btnMediumRef, btnLowRef)
-    } else if (selectedPrio === 'Low') {
-        changePrioLow(btnUrgentRef, btnMediumRef, btnLowRef);
-    }
-}
-
-function changePrioUrgent(btnUrgentRef, btnMediumRef, btnLowRef) {
-    btnUrgentRef.classList.add('urgent-active');
-    btnUrgentRef.querySelector('img').src = '../assets/img/urgentwhitesym.png';
-    btnMediumRef.querySelector('img').src = '../assets/img/mediumsym.png';
-    btnLowRef.querySelector('img').src = '../assets/img/lowsym.png';
-}
-
-function changePrioMedium(btnUrgentRef, btnMediumRef, btnLowRef) {
-    btnMediumRef.classList.add('medium-active');
-    btnMediumRef.querySelector('img').src = '../assets/img/mediumwhitesym.png';
-    btnUrgentRef.querySelector('img').src = '../assets/img/urgentsym.png';
-    btnLowRef.querySelector('img').src = '../assets/img/lowsym.png';
-}
-
-function changePrioLow(btnUrgentRef, btnMediumRef, btnLowRef) {
-    btnLowRef.classList.add('low-active');
-    btnLowRef.querySelector('img').src = '../assets/img/lowwhitesym.png';
-    btnUrgentRef.querySelector('img').src = '../assets/img/urgentsym.png';
-    btnMediumRef.querySelector('img').src = '../assets/img/mediumsym.png';
-}
-
-function removeAllActivButtons(btnUrgentRef, btnMediumRef, btnLowRef) {
-    btnUrgentRef.classList.remove('urgent-active');
-    btnMediumRef.classList.remove('medium-active');
-    btnLowRef.classList.remove('low-active');
 }
 
 

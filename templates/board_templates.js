@@ -104,7 +104,6 @@ function getSubtasksOverlayTemplate(indexSubTask, task) {
         </div>`
 }
 
-
 function getEditOverlayTemplate(task) {
     return `
         <div onclick="bubblingProtection(event); closeDropdown();" id="overlay-edit-task-board" class="overlay-edit-task-board ctn-task no-hover d-flex-x">
@@ -142,7 +141,7 @@ function getEditOverlayTemplate(task) {
                     </div>
                     <div class="d-flex-x column gap-8">
                         <label for="assigned-edit">Assigned to</label>
-                        <input type="text" id="input-assigned-edit" class="input-assigned-edit" onkeyup="searchContact('${task.id}')" onclick="toggleDropdown(); event.stopPropagation();" name="assigned" placeholder="Select contacts to assign"></input>
+                        <input type="text" id="input-assigned-edit" class="input-assigned-edit" onkeyup="searchContact()" onclick="toggleDropdown(); event.stopPropagation();" name="assigned" placeholder="Select contacts to assign"></input>
                         <div class="dropdown-contacts" id="dropdown-contacts" onclick="event.stopPropagation();">
                             ${renderAllContactsInAssignedTo(task.id)}
                         </div>
@@ -175,8 +174,7 @@ function getEditOverlayTemplate(task) {
        `;
 }
 
-
-function getAssignedToEditTemplateOverlay(initial, color, name, task, iContact, isChecked) {
+function getAssignedToEditTemplateOverlay(initial, color, name, iContact, isChecked) {
     return `
         <div class="contact d-flex-y ${isChecked}" id="contact${iContact}" onclick="toggleCheckboxContact(${iContact})">
             <div class="contact-left d-flex-y">
