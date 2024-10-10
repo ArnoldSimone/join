@@ -12,10 +12,11 @@
     <link rel="stylesheet" href="../css/addTask.css">
     <script src="../script/include.js"></script>
     <script defer src="../script/addTask.js"></script>
+    <script src="../script/database.js"></script>
     <title>Join</title>
 </head>
 
-<body onload="includeHTML()">
+<body onload="includeHTML(); init()">
     <header>
         <div w3-include-html="header.html"></div>
     </header>
@@ -28,83 +29,84 @@
         <section class="task-form-section">
             <div class="task-container">
                 <h1 class="headline">Add Task</h2>
-                    <form name="taskForm">
-                        <div class="form-left">
-                            <div class="form-group">
-                                <label for="title">Title<span class="required">*</span></label>
-                                <input type="text" id="title" name="title" placeholder="Enter a title">
-                            </div>
-
-                            <div class="form-group">
-                                <label for="description">Description</label>
-                                <textarea id="description" name="description"
-                                    placeholder="Enter a Description"></textarea>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="assigned">Assigned to</label>
-                                <select id="assigned" name="assigned">
-                                    <option>Select task category</option>
-                                </select>
-                            </div>
+                <form name="taskForm">
+                    <div class="form-left">
+                        <div class="form-group">
+                            <label for="title">Title<span class="required">*</span></label>
+                            <input type="text" id="title" name="title" placeholder="Enter a title">
                         </div>
-                        <div class="break-between"></div>
-                        <div class="form-right">
-                            <div class="form-group">
-                                <label for="due-date">Due date<span class="required">*</span></label>
-                                <input type="date" id="due-date" name="due-date">
-                            </div>
-
-                            <div class="form-group">
-                                <label>Prio</label>
-                                <div class="prio-group">
-                                    <button onclick="changePrio('Urgent')" id="btn-urgent" type="button"
-                                        class="prio d-flex">Urgent
-                                        <img src="../assets/img/urgentsym.png" alt="">
-                                    </button>
-                                    <button onclick="changePrio('Medium')" id="btn-medium" type="button"
-                                        class="prio d-flex">Medium
-                                        <img src="../assets/img/mediumsym.png" alt="">
-                                    </button>
-                                    <button onclick="changePrio('Low')" id="btn-low" type="button"
-                                        class="prio d-flex">Low
-                                        <img src="../assets/img/lowsym.png" alt="">
-                                    </button>
-
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="category">Category<span class="required">*</span></label>
-                                <select id="category" name="category">
-                                    <option>User Story</option>
-                                    <option>Technical Task</option>
-                                </select>
-                            </div>
-
-                            <div class="form-group-subtask">
-                                <label for="subtasks">Subtasks</label>
-                                <div class="subtask-connect">
-                                    <input type="text" id="subtasks" name="subtasks" placeholder="Add new subtask">
-                                    <div class="subtask-img">
-                                        <img src="../assets/img/plusicon.png" alt="">
-                                    </div>
-                                </div>
-                            </div>
+        
+                        <div class="form-group">
+                            <label for="description">Description</label>
+                            <textarea id="description" name="description" placeholder="Enter a Description"></textarea>
                         </div>
-                    </form>
-                    <div class="addtask-footer">
-                        <div><span class="required">*</span><span>This field is required</span></div>
-                        <div class="form-actions">
-                            <button type="button" class="clear" onclick="clearForm()">Clear</button>
-                            <button type="submit" class="create-task" onclick="submitForm()">Create Task</button>
+        
+                        <div class="form-group">
+                            <label for="assigned">Assigned to</label>
+
+                            <input onclick="assignedListToogle()" placeholder="Select task category" type="text">
+                            <div id="assignedList" class="d-none">
+
+                            </div>
+                            <div id="selectedUser" class="d-none">
+
+                            </div>
                         </div>
                     </div>
+                    <div class="break-between"></div>
+                    <div class="form-right">
+                        <div class="form-group">
+                            <label for="due-date">Due date<span class="required">*</span></label>
+                            <input type="date" id="due-date" name="due-date">
+                        </div>
+        
+                        <div class="form-group">
+                            <label>Prio</label>
+                            <div class="prio-group">
+                                <button onclick="changePrio('Urgent')" id="btn-urgent" type="button" class="prio d-flex">Urgent
+                                    <img src="../assets/img/urgentsym.png" alt="">
+                                </button>
+                                <button onclick="changePrio('Medium')" id="btn-medium" type="button" class="prio d-flex">Medium
+                                    <img src="../assets/img/mediumsym.png" alt="">
+                                </button>
+                                <button onclick="changePrio('Low')" id="btn-low" type="button" class="prio d-flex">Low
+                                    <img src="../assets/img/lowsym.png" alt="">
+                                </button>
+                                
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="category">Category<span class="required">*</span></label>
+                            <select id="category" name="category">
+                                <option>User Story</option>
+                                <option>Technical Task</option>
+                            </select>
+                        </div>
+        
+                        <div class="form-group-subtask">
+                            <label for="subtasks">Subtasks</label>
+                            <div class="subtask-connect">
+                                <input type="text" id="subtasks" name="subtasks" placeholder="Add new subtask">
+                                <div class="subtask-img">
+                                    <img src="../assets/img/plusicon.png" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div class="addtask-footer">
+                    <div><span class="required">*</span><span>This field is required</span></div>
+                    <div class="form-actions">
+                        <button type="button" class="clear" onclick="clearForm()">Clear</button>
+                        <button type="submit" class="create-task" onclick="submitForm()">Create Task</button>
+                    </div>
+                </div>
             </div>
         </section>        
         
 
-        <section class="task-form-section white-background">
+        <!-- <section class="task-form-section white-background">
             <div class="task-container white-background-container">
                 <h1 class="headline">Add Task</h1>
                 <form>
@@ -168,7 +170,7 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </section> -->
     </main>
 </body>
 

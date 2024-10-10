@@ -1,31 +1,75 @@
-const BASE_URL = "https://join-5800e-default-rtdb.europe-west1.firebasedatabase.app/";
+let selectedPriority = ''; 
+let allContacts;
 
-async function postToDatabase(path = "", data = {}) {
-    let response = await fetch(BASE_URL + path + ".json", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-    });
-    return await response.json();
+
+
+function init() {
+    fetchContacts();
 }
+
+
+async function fetchContacts() {
+    try {
+        let contactsData = await loadFromDatabase("/contacts");
+        allContacts = Object.entries(contactsData).map(([id, contact]) => ({ id, ...contact }));
+    } catch (error) {
+        console.log(error);        
+    }
+    renderAllContactsInAssignedTo();
+}
+
+
+function renderAllContactsInAssignedTo() {
+    let list = document.getElementById('assignedList');
+    for (let index = 0; index < allContacts.length; index++) {
+        let name = allContacts[index].name
+        let initial = allContacts[index].avatar.initials;
+        let color = allContacts[index].avatar.color;
+        list.innerHTML += generateCreateOption(name, initial, color, index);
+    }
+}
+
+
+function assignedListToogle() {
+    let list = document.getElementById('assignedList');
+    list.classList.toggle('d-none');
+}
+
+
+function generateCreateOption(name, initial, color, index) {
+    return `
+        <div>
+            <div class="initial" style="background-color: ${color};">
+                <p>${initial}</p>
+            </div>
+            <div>
+                <p>${name}</p>
+            </div>
+            <input type="checkbox">
+        </div>
+    `;
+}
+
 
 async function addTaskToFirebase(taskData) {
-    const result = await postToDatabase("tasks", taskData);
-
-    if (result) handleSuccessfulTaskCreation();
+    const result = await postToDatabase("tasks", taskData);    
+    if (result) {
+        handleSuccessfulTaskCreation();
+    }
 }
+
 
 function handleSuccessfulTaskCreation() {
     clearForm();
     window.location.href = 'board.html';
 }
 
+
 function submitForm() {
     const taskData = gatherFormData();
     addTaskToFirebase(taskData);
 }
+
 
 function gatherFormData() {
     return {
@@ -35,10 +79,11 @@ function gatherFormData() {
         dueDate: getFormValue("due-date"),
         priority: selectedPriority,
         category: getFormValue("category"),
-        progress: "todo",
+        progress: "todo", 
         subtasks: gatherSubtasks()
     };
 }
+
 
 function getFormValue(name) {
     return document.forms["taskForm"][name].value;
@@ -50,6 +95,7 @@ function gatherSubtasks() {
     return Array.from(subtaskElements).map(el => ({ completed: false, title: el.value }));
 }
 
+
 function clearForm() {
     setFormValue("title", '');
     setFormValue("description", '');
@@ -59,48 +105,32 @@ function clearForm() {
     clearSubtasks();
 }
 
+
 function setFormValue(name, value) {
     document.forms["taskForm"][name].value = value;
 }
+
 
 function clearSubtasks() {
     const subtaskInputs = document.querySelectorAll('.subtask-connect input');
     subtaskInputs.forEach(input => input.value = '');
 }
 
-async function fetchContacts() {
-    const response = await fetch(BASE_URL + "/contacts.json");
 
-    if (response.ok) {
-        const contacts = await response.json();
-        populateContactsDropdown(contacts);
-    } else {
-        console.error("Error fetching contacts");
-    }
-}
+// function populateContactsDropdown(contacts) {
+//     const assignedSelect = document.forms["taskForm"]["assigned"];
+//     assignedSelect.innerHTML = '<option>Select contacts to assign</option>';
 
-function populateContactsDropdown(contacts) {
-    const assignedSelect = document.forms["taskForm"]["assigned"];
-    assignedSelect.innerHTML = '<option>Select contacts to assign</option>';
+//     Object.values(contacts).forEach(contact => {
+//         assignedSelect.innerHTML += `<option value="${contact.name}">${contact.name}</option>`;
+//     });
+// }
 
-    Object.values(contacts).forEach(contact => {
-        assignedSelect.innerHTML += `<option value="${contact.name}">${contact.name}</option>`;
-    });
-}
-
-window.onload = function () {
-    fetchContacts();
-    includeHTML();
-};
-
-let selectedPriority = '';
 
 function changePrio(priority) {
     const priorityConfig = getPriorityConfig();
-    const buttons = document.querySelectorAll('.prio');
-
-    selectedPriority = priority;
-
+    const buttons = document.querySelectorAll('.prio');    
+    selectedPriority = priority;     
     buttons.forEach(button => updateButtonStyle(button, priority, priorityConfig));
 }
 
@@ -125,10 +155,10 @@ function getPriorityConfig() {
     };
 }
 
+
 function updateButtonStyle(button, selectedPriority, config) {
     const buttonPriority = button.textContent.trim();
-    const img = button.querySelector('img');
-
+    const img = button.querySelector('img');    
     if (buttonPriority === selectedPriority) {
         applyActiveStyle(button, config[selectedPriority], img);
     } else {
@@ -136,11 +166,13 @@ function updateButtonStyle(button, selectedPriority, config) {
     }
 }
 
+
 function applyActiveStyle(button, config, img) {
     button.style.backgroundColor = config.color;
     img.src = config.activeImg;
     button.classList.add(`${button.textContent.trim().toLowerCase()}-active`);
 }
+
 
 function resetButtonStyle(button, config, img) {
     button.style.backgroundColor = 'white';
