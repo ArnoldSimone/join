@@ -43,8 +43,10 @@
         
                         <div class="form-group">
                             <label for="assigned">Assigned to</label>
-
-                            <input onclick="assignedListToogle()" placeholder="Select task category" type="text">
+                            <div class="assigned-input d-flex-y">
+                                <input placeholder="Select task category" type="search" >
+                                <img id="assignedImage" onclick="assignedListToogle()" src="../assets/icon/arrow_drop_downaa.svg" alt="Down">
+                            </div>
                             <div id="assignedList" class="assigned-list d-none">
 
                             </div>

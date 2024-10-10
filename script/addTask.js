@@ -33,6 +33,17 @@ function renderAllContactsInAssignedTo() {
 function assignedListToogle() {
     let list = document.getElementById('assignedList');
     list.classList.toggle('d-none');
+    toogleInputImage();
+}
+
+
+function toogleInputImage() {
+    let image = document.getElementById('assignedImage');
+    if (image.src.includes('assets/icon/arrow_drop_downaa.svg')) {
+        image.src = '../assets/icon/arrow_drop_up.svg'
+    } else {
+        image.src = '../assets/icon/arrow_drop_downaa.svg'
+    };
 }
 
 
