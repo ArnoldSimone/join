@@ -38,11 +38,11 @@ function assignedListToogle() {
 
 function generateCreateOption(name, initial, color, index) {
     return `
-        <div>
-            <div class="initial" style="background-color: ${color};">
-                <p>${initial}</p>
-            </div>
-            <div>
+        <div class="assigned-content">
+            <div class="assigned-user">
+                <div class="assigned-initital d-flex" style="background-color: ${color};">
+                    <p>${initial}</p>
+                </div>
                 <p>${name}</p>
             </div>
             <input type="checkbox">

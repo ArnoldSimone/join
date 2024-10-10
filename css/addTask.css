@@ -44,6 +44,36 @@ form {
     margin-top: 30px;
 }
 
+.assigned-list {
+    height: 200px;
+    overflow: scroll;
+    background-color: var(--textwhite);
+    border-radius: 0px 0px 8px 8px;
+}
+
+.assigned-content {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px;
+}
+
+.assigned-content:hover {
+    background-color: var(--lightgrey);
+}
+
+.assigned-user {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.assigned-initital {
+    width: 36px;
+    height: 36px;
+    border-radius: 100%;
+    color: var(--textwhite);
+}
+
 label {
     font-weight: 400;
     margin-bottom: 8px;
