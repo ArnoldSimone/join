@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="../css/addTask.css">
     <script src="../script/include.js"></script>
     <script defer src="../script/addTask.js"></script>
+    <script src="../templates/addTask_templates.js"></script>
     <script src="../script/database.js"></script>
     <title>Join</title>
 </head>
@@ -44,14 +45,14 @@
                         <div class="form-group">
                             <label for="assigned">Assigned to</label>
                             <div class="assigned-input d-flex-y">
-                                <input placeholder="Select task category" type="search" >
+                                <input id="assignedInput" onkeyup="assignedSearch()" placeholder="Select task category" type="search" >
                                 <img id="assignedImage" onclick="assignedListToogle()" src="../assets/icon/arrow_drop_downaa.svg" alt="Down">
                             </div>
                             <div id="assignedList" class="assigned-list d-none">
 
                             </div>
-                            <div id="selectedUser" class="d-none">
-
+                            <div id="selectedUser" class="selectedUser">
+                                   
                             </div>
                         </div>
                     </div>

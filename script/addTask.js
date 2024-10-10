@@ -1,6 +1,6 @@
 let selectedPriority = ''; 
 let allContacts;
-
+let users = [];
 
 
 function init() {
@@ -30,13 +30,6 @@ function renderAllContactsInAssignedTo() {
 }
 
 
-function assignedListToogle() {
-    let list = document.getElementById('assignedList');
-    list.classList.toggle('d-none');
-    toogleInputImage();
-}
-
-
 function toogleInputImage() {
     let image = document.getElementById('assignedImage');
     if (image.src.includes('assets/icon/arrow_drop_downaa.svg')) {
@@ -47,18 +40,86 @@ function toogleInputImage() {
 }
 
 
-function generateCreateOption(name, initial, color, index) {
-    return `
-        <div class="assigned-content">
-            <div class="assigned-user">
-                <div class="assigned-initital d-flex" style="background-color: ${color};">
-                    <p>${initial}</p>
-                </div>
-                <p>${name}</p>
-            </div>
-            <input type="checkbox">
-        </div>
-    `;
+function assignedSearch() {
+    let searchText = document.getElementById('assignedInput').value;
+    if (searchText.length > 0) {
+        searchIndexOfArray(searchText);
+    } else {
+        searchTextReset();   
+    }
+}
+
+
+function searchIndexOfArray(searchText) {
+    result = allContacts.filter(element => element.name.toLowerCase().includes(searchText.toLowerCase()));
+    renderSearchResult(result);
+}
+
+
+function renderSearchResult(result) {
+    let searchList = document.getElementById('assignedList');
+    searchList.innerHTML = '';
+    for (let index = 0; index < result.length; index++) {
+        let name = result[index].name
+        let initial = result[index].avatar.initials;
+        let color = result[index].avatar.color;
+        searchList.innerHTML += generateSearchHTML(name, initial, color, id);        
+    };
+    openAssignedList();
+}
+
+
+function openAssignedList() {
+    document.getElementById('assignedList').classList.remove('d-none')
+}
+
+
+function searchTextReset() {
+    let list = document.getElementById('assignedList');
+    list.innerHTML = '';
+    document.getElementById('assignedList').classList.add('d-none')
+}
+
+
+function assignedListToogle() {
+    let list = document.getElementById('assignedList');
+    list.classList.toggle('d-none');
+    let users = document.getElementById('selectedUser');
+    users.classList.toggle('d-none');
+    toogleInputImage();
+}
+
+
+function selectionUser(index) {
+    let user = allContacts[index];
+    let result = users.find((element) => element == user)
+    if (!result) {
+        users.push(user);
+    } else {
+        deleteUser(user);
+    };
+    renderSelectArray();
+}
+
+
+function renderSelectArray() {
+    let listContent = document.getElementById('selectedUser');
+    listContent.innerHTML = '';
+    for (let index = 0; index < users.length; index++) {
+        let initial = users[index].avatar.initials;
+        let color = users[index].avatar.color;
+        listContent.innerHTML += generateSelectedUsersHTML(initial, color);        
+    };
+}
+
+
+function deleteUser(user) {
+    if (users.length > 0) {
+        users.splice(user, 1);
+    } else {
+        let listContent = document.getElementById('selectedUser');
+        listContent.innerHTML = ''; 
+    }
 }
 
 
