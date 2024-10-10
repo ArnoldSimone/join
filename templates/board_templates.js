@@ -152,37 +152,27 @@ function getEditOverlayTemplate(task) {
 
 
                     <div class="d-flex-x column gap-8">
-                        <label for="subtasks-edit">Subtasks</label>
+                         <label for="subtasks-edit">Subtasks</label>
                         <div class="subtask-connect">
-                            <input type="text" id="subtasks-edit" name="subtasks-edit" placeholder="Add new subtask">
-                            <div id="ctn-add-subtask" class="ctn-add-subtask d-flex">
+                            <input type="text" id="subtasks-edit" onclick="inputStart()" autocomplete="off" name="subtasks" onkeydown="handleKeyDown(event)" placeholder="Add new subtask">
+                            <div id="ctn-add-subtask" class="ctn-add-subtask d-flex" onclick="inputStart()">
                                 <img class="add-subtask d-flex" src="../assets/img/plusicon.png" alt="Input Subtask">
                             </div>
                             <div id="ctn-clear-add-subtask" class="ctn-clear-add-subtask d-flex-x d-none">
-                                <div class="ctn-clear-input-subtask d-flex">
+                                <div class="ctn-clear-input-subtask d-flex" onclick="clearInputSubtask()">
                                     <img class="clear-input-subtask d-flex" src="../assets/img/close.svg" alt="Clear Input">
                                 </div>
                                 <span class="horizonal-line-subtask"></span>
                                 <div class="ctn-add-input-subtask d-flex">
-                                    <img class="add-input-subtask d-flex" src="../assets/img/check.png" alt="Add Subtask">
+                                    <img class="add-input-subtask d-flex" onclick="addSubtask()" src="../assets/img/check.png" alt="Add Subtask">
                                 </div>
                             </div>
                         </div>
-                        <div class="ctn-edit-all-subtask">
-                            ${renderSubtasks(task.id)}
 
-                            <ul>
-                                <li class="subtask-item-edit d-flex-y">
-                                    <span class="subtask-text">&bull; Firebase-Projekt erstellen</span>
-                                    <div class="subtask-icons d-flex-x">
-                                        <img id="img-edit-subtask" class="img-edit-subtask"  src="../assets/img/pencilBlue.png" alt="Edit Subtask">
-                                        <img id="img-delete-subtask" class="img-delete-subtask" src="../assets/img/dustbinDark.svg" alt="Delete Subtask">
-                                    </div>
-                                </li>
-                            </ul>
+                        <div id="ctn-edit-all-subtasks" class="ctn-edit-all-subtasks">
+                            ${renderAllSubtasks(task.id)}
                         </div>
                     </div>
-
 
 
                 </form>
@@ -200,6 +190,34 @@ function getEditOverlayTemplate(task) {
        `;
 }
 
+function getAllSubtasksTemplate(title) {
+    return `                     
+        <ul>
+            <li class="subtask-item-edit d-flex-y">
+                <input id="input-subtask-edit" class="input-subtask-edit" type="text" value="&bull; ${title}" disabled>
+                <div id="subtask-icons-display-mode" class="subtask-icons d-flex-x d-none">
+                    <img id="edit-subtask" class="img-edit-subtask" src="../assets/img/pencilBlue.png" alt="Edit Subtask">
+                    <span class="horizonal-line-subtask horizontal-line-hover"></span>
+                    <img id="delete-subtask" class="img-delete-subtask" src="../assets/img/dustbinDark.svg" alt="Delete Subtask">
+                </div>
+                <div id="subtask-icons-editing-mode" class="subtask-icons d-flex-x">
+                    <img id="delete-edit-subtask" class="img-edit-subtask" src="../assets/img/dustbinDark.svg" alt="Edit Subtask">
+                    <span class="horizonal-line-subtask horizontal-line-hover"></span>
+                    <img id="save-subtask" class="img-save-edit-subtask" src="../assets/img/check.png" alt="Delete Subtask">
+                </div>
+            </li>
+        </ul>`
+}
+
+function getNoSubtaskInTaskTemplate() {
+    return `
+            <ul>
+                <li class="subtask-item-edit d-flex-y">
+                    <input id="input-subtask-edit" class="input-subtask-edit" type="text" value="No subtasks in this task!" disabled>
+                </li>
+            </ul>`
+}
+
 function getAssignedToEditTemplateOverlay(initial, color, name, iContact, isChecked) {
     return `
         <div class="contact d-flex-y ${isChecked}" id="contact${iContact}" onclick="toggleCheckboxContact(${iContact})">
@@ -209,8 +227,10 @@ function getAssignedToEditTemplateOverlay(initial, color, name, iContact, isChec
             </div >
             <div class="contact-right">
                 <input type="checkbox" id="checkboxContact${iContact}" name="checkboxContact${iContact}" class="checkbox-contact"
-                 ${isChecked} onchange="updateAssignedContacts()">
+                 ${isChecked ? 'checked' : ''} >
                 <span class="custom-checkbox-edit"></span>
             </div>
         </div> `;
 }
+
+

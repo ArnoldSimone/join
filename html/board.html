@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="../css/board.css">
     <link rel="stylesheet" href="../css/board_editTask.css">
     <script src="../script/include.js"></script>
+    <script src="../script.js"></script>
     <script src="../script/board.js"></script>
     <script src="../script/boardEdit.js"></script>
     <script src="../script/database.js"></script>
@@ -106,7 +107,7 @@
             </div>
 
             <div onclick="closeDetailTaskOverlay()" id="overlay-board-edit" class="overlay-board d-flex d-none">
-                <div onclick="bubblingProtection(event)" id="overlay-edit-task-board"
+                <!-- <div onclick="bubblingProtection(event)" id="overlay-edit-task-board"
                     class="overlay-edit-task-board ctn-task no-hover d-flex-x">
 
                     <div class="ctn-close d-flex-y">
@@ -118,16 +119,16 @@
                         <form class="d-flex-x">
 
 
-                            <!-- <div class="d-flex-x column gap-8">
+                            <div class="d-flex-x column gap-8">
                                 <label for="subtasks-edit">Subtasks</label>
                                 <div class="subtask-connect">
                                     <input type="text" id="subtasks-edit" autocomplete="off" name="subtasks"
                                         placeholder="Add new subtask">
-                                    <div id="ctn-add-subtask" class="ctn-add-subtask d-flex d-none">
+                                    <div id="ctn-add-subtask" class="ctn-add-subtask d-flex">
                                         <img class="add-subtask d-flex" src="../assets/img/plusicon.png"
                                             alt="Input Subtask">
                                     </div>
-                                    <div id="ctn-clear-add-subtask" class="ctn-clear-add-subtask d-flex-x">
+                                    <div id="ctn-clear-add-subtask" class="ctn-clear-add-subtask d-flex-x d-none">
                                         <div class="ctn-clear-input-subtask d-flex">
                                             <img class="clear-input-subtask d-flex" src="../assets/img/close.svg"
                                                 alt="Clear Input">
@@ -143,17 +144,30 @@
                                 <div class="ctn-edit-all-subtask">
                                     <ul>
                                         <li class="subtask-item-edit d-flex-y">
-                                            <span class="subtask-text">&bull; Firebase-Projekt erstellen</span>
+                                            <input id="input-subtask-edit" class="input-subtask-edit" type="text"
+                                                value="&bull; Firebase-Projekt erstellen" disabled>
                                             <div class="subtask-icons d-flex-x">
                                                 <img id="img-edit-subtask" class="img-edit-subtask"
                                                     src="../assets/img/pencilBlue.png" alt="Edit Subtask">
+                                                <span class="horizonal-line-subtask horizontal-line-hover"></span>
+                                                <img id="img-delete-subtask" class="img-delete-subtask"
+                                                    src="../assets/img/dustbinDark.svg" alt="Delete Subtask">
+                                            </div>
+                                        </li>
+                                        <li class="subtask-item-edit d-flex-y">
+                                            <input id="input-subtask-edit" class="input-subtask-edit" type="text"
+                                                value="&bull; Firebase-Projekt erstellen" disabled>
+                                            <div class="subtask-icons d-flex-x">
+                                                <img id="img-edit-subtask" class="img-edit-subtask"
+                                                    src="../assets/img/pencilBlue.png" alt="Edit Subtask">
+                                                <span class="horizonal-line-subtask horizontal-line-hover"></span>
                                                 <img id="img-delete-subtask" class="img-delete-subtask"
                                                     src="../assets/img/dustbinDark.svg" alt="Delete Subtask">
                                             </div>
                                         </li>
                                     </ul>
                                 </div>
-                            </div> -->
+                            </div>
 
 
 
@@ -167,7 +181,7 @@
                         </div>
                     </div>
 
-                </div>
+                </div> -->
             </div>
 
         </section>

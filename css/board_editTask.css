@@ -188,13 +188,19 @@ textarea {
     width: 10px;
     scale: 1.1;
     object-fit: contain;
+    cursor: pointer;
+}
 
-
+.img-save-edit-subtask {
+    height: 10px;
+    width: 10px;
+    scale: 1.1;
+    object-fit: contain;
     cursor: pointer;
 }
 
 .horizonal-line-subtask {
-    border: 0.5px solid var(--middlegrey);
+    border: 1px solid var(--middlegrey);
 }
 
 .add-subtask:hover {
@@ -324,25 +330,29 @@ ul {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 4px 16px;
+    padding: 4px 12px;
     gap: 2px;
     width: 100%;
     font-size: 14px;
 }
 
 .subtask-icons {
-    gap: 10px;
+    gap: 6px;
 }
 
-.subtask-icons img {
-    height: 12px;
+.subtask-icons img,
+.horizontal-line-hover {
+    height: 11px;
     transition: opacity 0.3s;
     opacity: 0;
 }
 
+.subtask-item-edit:hover .horizontal-line-hover,
 .subtask-item-edit:hover .subtask-icons img {
     opacity: 1;
 }
+
+.horizontal-line-hover {}
 
 .img-edit-subtask,
 .img-delete-subtask {
@@ -351,11 +361,32 @@ ul {
 }
 
 .img-edit-subtask:hover,
-.img-delete-subtask:hover {
+.img-delete-subtask:hover,
+.img-save-edit-subtask:hover {
     transform: scale(1.1);
 }
 
 .subtask-item-edit:hover {
     background-color: var(--lightgrey);
     border-radius: 6px;
+}
+
+.input-subtask-edit {
+    padding: 0;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    width: 100%;
+    font-size: 12px;
+}
+
+.input-subtask-edit:hover {
+    border: none;
+    cursor: default;
+}
+
+.ctn-edit-all-subtasks {
+    max-height: 130px;
+    margin-bottom: 20px;
+    overflow-y: scroll;
 }
