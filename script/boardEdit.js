@@ -3,9 +3,6 @@ let assignedContacts = [];
 let selectedContacts = [];
 let filteredContacts = [];
 
-
-
-
 function changePrio(selectedPrio) {
     toggleDropdown
     let btnUrgentRef = document.getElementById('btn-urgent');
@@ -168,22 +165,23 @@ function showDropdown() {
     dropdown.classList.add("show");
 }
 
-function renderSubtasks(taskId) {
-    let task = tasks.find(t => t.id === taskId);
-    console.log(task);
+// function renderSubtasks(taskId) {
+//     let task = tasks.find(t => t.id === taskId);
+//     console.log(task);
+// }
 
-}
-
-
-
+let allSubtasks = [];
 
 function renderAllSubtasks(taskId) {
     let task = tasks.find(t => t.id === taskId);
+    console.log(task);
     let allSubtasks = '';
-    let subtasks = task.subtasks;
+
     if (!subtasks || subtasks.length === 0) {
         return getNoSubtaskInTaskTemplate();
     } else {
+        let subtasks = task.subtasks;
+        allSubtasks = [...task.subtasks];
         for (let iSubtasks = 0; iSubtasks < subtasks.length; iSubtasks++) {
             let title = subtasks[iSubtasks].title;
             allSubtasks += getAllSubtasksTemplate(title);
@@ -200,6 +198,7 @@ function inputStart() {
 
 function clearInputSubtask() {
     document.getElementById('subtasks-edit').value = "";
+    document.getElementById('subtasks-edit').focus();
     document.getElementById('ctn-add-subtask').classList.remove('d-none');
     document.getElementById('ctn-clear-add-subtask').classList.add('d-none');
 }
@@ -208,9 +207,16 @@ function addSubtask() {
     let ctnEditAllSubtasksRef = document.getElementById('ctn-edit-all-subtasks');
     let inputValueSubtaskRef = document.getElementById('subtasks-edit');
     let inputValueSubtask = inputValueSubtaskRef.value;
+    let noSubtaskEditRef = document.getElementById('no-subtask-edit');
+    if (noSubtaskEditRef) {
+        noSubtaskEditRef.remove();
+    }
     if (inputValueSubtaskRef.value !== "") {
+        allSubtasks.push({ title: inputValueSubtask });
         ctnEditAllSubtasksRef.innerHTML += getAllSubtasksTemplate(inputValueSubtask);
         inputValueSubtaskRef.value = '';
+        inputValueSubtaskRef.focus();
+    } else {
         inputValueSubtaskRef.focus();
     }
 }
@@ -220,4 +226,5 @@ function handleKeyDown(event) {
         addSubtask();
     }
 }
+
 

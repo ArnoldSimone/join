@@ -195,12 +195,12 @@ function getAllSubtasksTemplate(title) {
         <ul>
             <li class="subtask-item-edit d-flex-y">
                 <input id="input-subtask-edit" class="input-subtask-edit" type="text" value="&bull; ${title}" disabled>
-                <div id="subtask-icons-display-mode" class="subtask-icons d-flex-x d-none">
+                <div id="subtask-icons-display-mode" class="subtask-icons d-flex-x">
                     <img id="edit-subtask" class="img-edit-subtask" src="../assets/img/pencilBlue.png" alt="Edit Subtask">
                     <span class="horizonal-line-subtask horizontal-line-hover"></span>
-                    <img id="delete-subtask" class="img-delete-subtask" src="../assets/img/dustbinDark.svg" alt="Delete Subtask">
+                    <img id="delete-subtask" class="img-delete-subtask" onclick="deleteSubtask()" src="../assets/img/dustbinDark.svg" alt="Delete Subtask">
                 </div>
-                <div id="subtask-icons-editing-mode" class="subtask-icons d-flex-x">
+                <div id="subtask-icons-editing-mode" class="subtask-icons d-flex-x d-none">
                     <img id="delete-edit-subtask" class="img-edit-subtask" src="../assets/img/dustbinDark.svg" alt="Edit Subtask">
                     <span class="horizonal-line-subtask horizontal-line-hover"></span>
                     <img id="save-subtask" class="img-save-edit-subtask" src="../assets/img/check.png" alt="Delete Subtask">
@@ -211,7 +211,7 @@ function getAllSubtasksTemplate(title) {
 
 function getNoSubtaskInTaskTemplate() {
     return `
-            <ul>
+            <ul id="no-subtask-edit">
                 <li class="subtask-item-edit d-flex-y">
                     <input id="input-subtask-edit" class="input-subtask-edit" type="text" value="No subtasks in this task!" disabled>
                 </li>
