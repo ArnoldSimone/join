@@ -114,13 +114,14 @@ function renderSelectArray() {
 }
 
 
-function deleteUser(user) {
-    if (users.length > 0) {
-        users.splice(user, 1);
-    } else {
-        let listContent = document.getElementById('selectedUser');
-        listContent.innerHTML = ''; 
-    }
+function deleteUser(id) {
+    let index = users.findIndex((user) => user == id)
+    if (users.length > 1 ) {
+        users.splice(index, 1);
+    }else {
+        users.splice(index, 1);
+        assignedListToogle();
+    };
 }
 
 
