@@ -25,7 +25,8 @@ function renderAllContactsInAssignedTo() {
         let name = allContacts[index].name
         let initial = allContacts[index].avatar.initials;
         let color = allContacts[index].avatar.color;
-        list.innerHTML += generateCreateOption(name, initial, color, index);
+        let id = allContacts[index].id;
+        list.innerHTML += generateCreateOption(name, initial, color, id);
     }
 }
 
@@ -63,7 +64,7 @@ function renderSearchResult(result) {
         let name = result[index].name
         let initial = result[index].avatar.initials;
         let color = result[index].avatar.color;
-        searchList.innerHTML += generateSearchHTML(name, initial, color, id);        
+        searchList.innerHTML += generateSearchHTML(name, initial, color, index);        
     };
     openAssignedList();
 }
@@ -90,8 +91,8 @@ function assignedListToogle() {
 }
 
 
-function selectionUser(index) {
-    let user = allContacts[index];
+function selectionUser(id) {    
+    let user = allContacts.find(user => user.id == id);    
     let result = users.find((element) => element == user)
     if (!result) {
         users.push(user);

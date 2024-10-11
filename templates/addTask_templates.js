@@ -1,4 +1,4 @@
-function generateCreateOption(name, initial, color, index) {
+function generateCreateOption(name, initial, color, id) {
   return `
       <div class="assigned-content">
           <div class="assigned-user">
@@ -7,13 +7,13 @@ function generateCreateOption(name, initial, color, index) {
               </div>
               <p>${name}</p>
           </div>
-          <input onclick="selectionUser(${index})"  type="checkbox">
+          <input onclick="selectionUser('${id}')"  type="checkbox">
       </div>
   `;
 }
 
 
-function generateSearchHTML(name, initial, color, index) {
+function generateSearchHTML(name, initial, color, id) {
     return `
         <div class="assigned-content">
             <div class="assigned-user">
@@ -22,7 +22,7 @@ function generateSearchHTML(name, initial, color, index) {
                 </div>
                 <p>${name}</p>
             </div>
-            <input onclick="selectionUser(${index})" type="checkbox">
+            <input onclick="selectionUser('${id}')" type="checkbox">
         </div>
     `;
 }
