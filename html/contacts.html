@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="../css/fonts.css">
     <link rel="stylesheet" href="../css/contact.css">
     <script src="../script/include.js"></script>
+    <script src="../script/database.js"></script>
     <script defer src="../script/contacts.js"></script>
     <script defer src="../script.js"></script>
     <title>Join</title>
@@ -67,8 +68,8 @@
         </div>
 
        <!-- Add Contact Overlay -->
-       <div id="add-contact-overlay" class="overlay">
-        <div class="overlay-content">
+       <div id="add-contact-overlay" class="overlay" onclick="hideOverlay(event)">
+        <div class="overlay-content" onclick="event.stopPropagation()">
             <div class="overlay-left">
                 <img src="../assets/img/logo_white.png" alt="">
                 <h1>Add Contact</h1>
@@ -90,8 +91,8 @@
         </div>
     </div>
       <!-- Edit Contact Overlay -->
-<div id="edit-contact-overlay" class="overlay">
-    <div class="overlay-content">
+<div id="edit-contact-overlay" class="overlay slide-out" onclick="hideOverlay(event)">
+    <div class="overlay-content" onclick="event.stopPropagation()">
         <div class="overlay-left">
             <img src="../assets/img/logo_white.png" alt="">
             <h1>Edit Contact</h1> 
