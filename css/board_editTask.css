@@ -276,7 +276,6 @@ button.btn-ok:hover {
     overflow-y: auto;
     margin-top: -8px;
     border-radius: 6px;
-
 }
 
 .contact {
@@ -284,7 +283,6 @@ button.btn-ok:hover {
     padding: 4px 12px;
     gap: 2px;
     margin-bottom: 2px;
-
 }
 
 .contact-left label {
@@ -389,4 +387,9 @@ ul {
     max-height: 130px;
     margin-bottom: 20px;
     overflow-y: scroll;
+}
+
+ul {
+    list-style-type: disc;
+    /* oder 'circle', 'square', je nach gewünschtem Stil */
 }

@@ -149,12 +149,10 @@ function getEditOverlayTemplate(task) {
                         </div>
                     </div>
 
-
-
                     <div class="d-flex-x column gap-8">
                          <label for="subtasks-edit">Subtasks</label>
                         <div class="subtask-connect">
-                            <input type="text" id="subtasks-edit" onclick="inputStart()" autocomplete="off" name="subtasks" onkeydown="handleKeyDown(event)" placeholder="Add new subtask">
+                            <input type="text" id="subtasks-edit" onclick="inputStart()" onblur="onInputBlur()" autocomplete="off" name="subtasks" onkeydown="handleKeyDown(event); inputStart()" placeholder="Add new subtask">
                             <div id="ctn-add-subtask" class="ctn-add-subtask d-flex" onclick="inputStart()">
                                 <img class="add-subtask d-flex" src="../assets/img/plusicon.png" alt="Input Subtask">
                             </div>
@@ -190,20 +188,20 @@ function getEditOverlayTemplate(task) {
        `;
 }
 
-function getAllSubtasksTemplate(title) {
+function getAllSubtasksTemplate(iSubtasks, title) {
     return `                     
         <ul>
-            <li class="subtask-item-edit d-flex-y">
-                <input id="input-subtask-edit" class="input-subtask-edit" type="text" value="&bull; ${title}" disabled>
-                <div id="subtask-icons-display-mode" class="subtask-icons d-flex-x">
-                    <img id="edit-subtask" class="img-edit-subtask" src="../assets/img/pencilBlue.png" alt="Edit Subtask">
+            <li ondblclick="editSubtask(${iSubtasks})" class="subtask-item-edit d-flex-y">
+                <input id="input-subtask-edit${iSubtasks}" class="input-subtask-edit" type="text" value="&bull; ${title}" disabled>
+                <div id="subtask-icons-display-mode${iSubtasks}" class="subtask-icons d-flex-x">
+                    <img id="edit-subtask${iSubtasks}" class="img-edit-subtask" onclick="editSubtask(${iSubtasks})" src="../assets/img/pencilBlue.png" alt="Edit Subtask">
                     <span class="horizonal-line-subtask horizontal-line-hover"></span>
-                    <img id="delete-subtask" class="img-delete-subtask" onclick="deleteSubtask()" src="../assets/img/dustbinDark.svg" alt="Delete Subtask">
+                    <img id="delete-subtask${iSubtasks}" class="img-delete-subtask" onclick="deleteSubtask(${iSubtasks})" src="../assets/img/dustbinDark.svg" alt="Delete Subtask">
                 </div>
-                <div id="subtask-icons-editing-mode" class="subtask-icons d-flex-x d-none">
-                    <img id="delete-edit-subtask" class="img-edit-subtask" src="../assets/img/dustbinDark.svg" alt="Edit Subtask">
+                <div id="subtask-icons-editing-mode${iSubtasks}" class="subtask-icons d-flex-x d-none">
+                    <img id="delete-edit-subtask${iSubtasks}" onclick="deleteSubtask(${iSubtasks})" class="img-edit-subtask" src="../assets/img/dustbinDark.svg" alt="Edit Subtask">
                     <span class="horizonal-line-subtask horizontal-line-hover"></span>
-                    <img id="save-subtask" class="img-save-edit-subtask" src="../assets/img/check.png" alt="Delete Subtask">
+                    <img id="save-subtask${iSubtasks}" onclick="saveSubtask(${iSubtasks})" class="img-save-edit-subtask" src="../assets/img/check.png" alt="Delete Subtask">
                 </div>
             </li>
         </ul>`

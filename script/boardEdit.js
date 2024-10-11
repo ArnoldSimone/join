@@ -2,6 +2,7 @@ let allContacts = [];
 let assignedContacts = [];
 let selectedContacts = [];
 let filteredContacts = [];
+let allSubtasksArray = [];
 
 function changePrio(selectedPrio) {
     toggleDropdown
@@ -94,7 +95,6 @@ function searchContact() {
 function renderAllContacts() {
     let dropdownContactsRef = document.getElementById("dropdown-contacts");
     dropdownContactsRef.innerHTML = "";
-
     allContacts.forEach(contact => {
         let name = contact.name;
         let initial = contact.initial;
@@ -104,7 +104,6 @@ function renderAllContacts() {
         dropdownContactsRef.innerHTML += getAssignedToEditTemplateOverlay(initial, color, name, iContact, isChecked);
     });
 }
-
 
 function renderFilteredContactsinAssignedTo() {
     let dropdownContactsRef = document.getElementById("dropdown-contacts");
@@ -131,7 +130,6 @@ function toggleCheckboxContact(iContact) {
     } else {
         contactRef.classList.remove('checked');
         selectedContacts = selectedContacts.filter(c => c.contactId !== iContact);
-
     }
     updateAssignedContacts();
 }
@@ -153,38 +151,43 @@ function updateAssignedContacts() {
 function toggleDropdown() {
     let dropdown = document.getElementById("dropdown-contacts");
     dropdown.classList.toggle("show");
+    changeDropdownImage()
 }
 
 function closeDropdown() {
     let dropdown = document.getElementById("dropdown-contacts");
     dropdown.classList.remove("show");
+    changeDropdownImage()
 }
 
 function showDropdown() {
     let dropdown = document.getElementById("dropdown-contacts");
     dropdown.classList.add("show");
+    changeDropdownImage()
 }
 
-// function renderSubtasks(taskId) {
-//     let task = tasks.find(t => t.id === taskId);
-//     console.log(task);
-// }
-
-let allSubtasks = [];
+function changeDropdownImage() {
+    let dropdownImage = document.getElementById("input-assigned-edit");
+    let imageSrc = dropdownImage.style.backgroundImage;
+    if (imageSrc.includes('../assets/img/drop-up-arrow.png')) {
+        dropdownImage.style.backgroundImage = "url('../assets/img/drop-down-arrow.png')";
+    } else {
+        dropdownImage.style.backgroundImage = "url('../assets/img/drop-up-arrow.png')";
+    }
+}
 
 function renderAllSubtasks(taskId) {
+    allSubtasksArray = [];
     let task = tasks.find(t => t.id === taskId);
-    console.log(task);
     let allSubtasks = '';
-
+    let subtasks = task.subtasks;
     if (!subtasks || subtasks.length === 0) {
         return getNoSubtaskInTaskTemplate();
     } else {
-        let subtasks = task.subtasks;
-        allSubtasks = [...task.subtasks];
         for (let iSubtasks = 0; iSubtasks < subtasks.length; iSubtasks++) {
             let title = subtasks[iSubtasks].title;
-            allSubtasks += getAllSubtasksTemplate(title);
+            allSubtasksArray.push({ 'title': subtasks[iSubtasks].title })
+            allSubtasks += getAllSubtasksTemplate(iSubtasks, title);
         }
     }
     return allSubtasks;
@@ -212,19 +215,64 @@ function addSubtask() {
         noSubtaskEditRef.remove();
     }
     if (inputValueSubtaskRef.value !== "") {
-        allSubtasks.push({ title: inputValueSubtask });
-        ctnEditAllSubtasksRef.innerHTML += getAllSubtasksTemplate(inputValueSubtask);
-        inputValueSubtaskRef.value = '';
-        inputValueSubtaskRef.focus();
+        ctnEditAllSubtasksRef.innerHTML = '';
+        allSubtasksArray.push({ 'title': inputValueSubtask });
+        for (let iSubtasks = 0; iSubtasks < allSubtasksArray.length; iSubtasks++) {
+            let title = allSubtasksArray[iSubtasks].title;
+            ctnEditAllSubtasksRef.innerHTML += getAllSubtasksTemplate(iSubtasks, title);
+            inputValueSubtaskRef.value = '';
+            inputValueSubtaskRef.focus();
+        }
     } else {
         inputValueSubtaskRef.focus();
     }
+}
+
+function deleteSubtask(iSubtasks) {
+    allSubtasksArray.splice(iSubtasks, 1);
+    renderCurrentSubtasks(iSubtasks);
+}
+
+function renderCurrentSubtasks(iSubtasks) {
+    let ctnEditAllSubtasksRef = document.getElementById('ctn-edit-all-subtasks');
+    ctnEditAllSubtasksRef.innerHTML = "";
+    if (allSubtasksArray.length > 0) {
+        for (let iSubtasks = 0; iSubtasks < allSubtasksArray.length; iSubtasks++) {
+            let title = allSubtasksArray[iSubtasks].title;
+            ctnEditAllSubtasksRef.innerHTML += getAllSubtasksTemplate(iSubtasks, title)
+        }
+    } else {
+        ctnEditAllSubtasksRef.innerHTML = getNoSubtaskInTaskTemplate();
+    }
+}
+
+function editSubtask(iSubtasks) {
+    document.getElementById(`subtask-icons-display-mode${iSubtasks}`).classList.add('d-none');
+    document.getElementById(`subtask-icons-editing-mode${iSubtasks}`).classList.remove('d-none');
+    let inputField = document.getElementById(`input-subtask-edit${iSubtasks}`);
+    inputField.removeAttribute('disabled');
+    inputField.focus();
+    inputField.setSelectionRange(inputField.value.length, inputField.value.length);
+}
+
+function saveSubtask(iSubtasks) {
+    let inputField = document.getElementById(`input-subtask-edit${iSubtasks}`);
+    inputField.setAttribute('disabled', 'true');
+    document.getElementById(`subtask-icons-display-mode${iSubtasks}`).classList.remove('d-none');
+    document.getElementById(`subtask-icons-editing-mode${iSubtasks}`).classList.add('d-none');
+    allSubtasksArray[iSubtasks].title = inputField.value.substring(2);
+    renderCurrentSubtasks(iSubtasks);
 }
 
 function handleKeyDown(event) {
     if (event.key === "Enter") {
         addSubtask();
     }
+}
+
+function onInputBlur() {
+    document.getElementById('ctn-add-subtask').classList.remove('d-none');
+    document.getElementById('ctn-clear-add-subtask').classList.add('d-none');
 }
 
 
