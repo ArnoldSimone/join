@@ -67,6 +67,7 @@ form {
 .assigned-content {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding: 2px 12px;
 }
 
@@ -92,6 +93,23 @@ form {
     padding-top: 8px;
     gap: 4px;
 }
+
+input[type="checkbox"] {
+    display: none;
+}
+
+.user-checkbox {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    background-image: url('../assets/img/check-white.svg');
+    background-size: cover;
+    cursor: pointer;
+}
+
+/* input[type="checkbox"]:checked+.custom-checkbox {
+    background-image: url('../assets/img/checkbox-checked.png');
+} */
 
 label {
     font-weight: 400;

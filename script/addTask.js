@@ -31,16 +31,6 @@ function renderAllContactsInAssignedTo() {
 }
 
 
-function toogleInputImage() {
-    let image = document.getElementById('assignedImage');
-    if (image.src.includes('assets/icon/arrow_drop_downaa.svg')) {
-        image.src = '../assets/icon/arrow_drop_up.svg'
-    } else {
-        image.src = '../assets/icon/arrow_drop_downaa.svg'
-    };
-}
-
-
 function assignedSearch() {
     let searchText = document.getElementById('assignedInput').value;
     if (searchText.length > 0) {
@@ -88,6 +78,28 @@ function assignedListToogle() {
     let users = document.getElementById('selectedUser');
     users.classList.toggle('d-none');
     toogleInputImage();
+    toogleInputBorderColor();
+}
+
+
+function toogleInputImage() {
+    let image = document.getElementById('assignedImage');
+    if (image.src.includes('assets/icon/arrow_drop_downaa.svg')) {
+        image.src = '../assets/icon/arrow_drop_up.svg'
+    } else {
+        image.src = '../assets/icon/arrow_drop_downaa.svg'
+    };
+}
+
+
+function toogleInputBorderColor() {
+    let inputElement  = document.getElementById('inputAssigned');
+    let color = window.getComputedStyle(inputElement).borderColor;
+    if (color == 'rgb(209, 209, 209)') {
+        inputElement.style.borderColor = 'var(--lightblue)';
+    } else {
+        inputElement.style.borderColor = 'var(--middlegrey)';
+    }
 }
 
 
@@ -99,7 +111,18 @@ function selectionUser(id) {
     } else {
         deleteUser(user);
     };
+    toogleUserCheckbox();
     renderSelectArray();
+}
+
+
+function toogleUserCheckbox() {
+    let checkboxImage = document.getElementById('userCheckbox').src;
+    if (checkboxImage.src == '../assets/img/checkbox-checked.png') {
+        image.src = '../assets/img/checkbox-checked.png';
+    } else {
+        image.src = '../assets/img/checkbox.png';
+    };
 }
 
 
