@@ -8,6 +8,10 @@ main {
     max-width: 1440px;
 }
 
+a {
+    color: inherit;
+}
+
 .header-summary {
     gap: 24px;
 }
