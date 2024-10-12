@@ -22,12 +22,13 @@ async function fetchContacts() {
 function renderAllContactsInAssignedTo() {
     let list = document.getElementById('assignedList');
     for (let index = 0; index < allContacts.length; index++) {
-        let name = allContacts[index].name
+        let name = allContacts[index].name;
         let initial = allContacts[index].avatar.initials;
         let color = allContacts[index].avatar.color;
         let id = allContacts[index].id;
-        list.innerHTML += generateCreateOption(name, initial, color, id);
-    }
+        let checked = users.find(user => user.id === id) ? 'checked' : ''; 
+        list.innerHTML += generateCreateOption(name, initial, color, id, checked);
+    };
 }
 
 
@@ -35,9 +36,12 @@ function assignedSearch() {
     let searchText = document.getElementById('assignedInput').value;
     if (searchText.length > 0) {
         searchIndexOfArray(searchText);
-    } else {
-        searchTextReset();   
-    }
+    } else { 
+        if (searchText.length == 0) {
+            resetSearch();
+            renderAllContactsInAssignedTo();
+        };
+    };
 }
 
 
@@ -51,34 +55,58 @@ function renderSearchResult(result) {
     let searchList = document.getElementById('assignedList');
     searchList.innerHTML = '';
     for (let index = 0; index < result.length; index++) {
-        let name = result[index].name
+        let name = result[index].name;
         let initial = result[index].avatar.initials;
         let color = result[index].avatar.color;
-        searchList.innerHTML += generateSearchHTML(name, initial, color, index);        
+        let id = result[index].id;
+        let checked = users.find(user => user.id === id) ? 'checked' : '';
+        searchList.innerHTML += generateCreateOption(name, initial, color, id, checked);        
     };
-    openAssignedList();
+    openUserList();
 }
 
 
-function openAssignedList() {
-    document.getElementById('assignedList').classList.remove('d-none')
+function openUserList() {
+    document.getElementById('assignedList').classList.remove('d-none');
+    document.getElementById('selectedUser').classList.add('d-none');
 }
 
 
-function searchTextReset() {
+function resetSearch() {
     let list = document.getElementById('assignedList');
     list.innerHTML = '';
-    document.getElementById('assignedList').classList.add('d-none')
+    result = '';
 }
 
 
 function assignedListToogle() {
     let list = document.getElementById('assignedList');
-    list.classList.toggle('d-none');
     let users = document.getElementById('selectedUser');
-    users.classList.toggle('d-none');
+    if (list.classList.contains('d-none')) {
+        list.classList.remove('d-none');
+        users.classList.add('d-none');
+    } else { 
+        list.classList.add('d-none');
+        users.classList.remove('d-none');
+    };
+    resetSearchValue();
     toogleInputImage();
     toogleInputBorderColor();
+}
+
+
+function resetSearchValue() {
+    document.getElementById('assignedInput').value = '';
+}
+
+
+function inputValueCheck() {
+    let value = document.getElementById('assignedInput').value;
+    if (value == 0) {
+        document.getElementById('assignedInput').value = "";
+    } else {
+        return
+    };
 }
 
 
@@ -99,29 +127,29 @@ function toogleInputBorderColor() {
         inputElement.style.borderColor = 'var(--lightblue)';
     } else {
         inputElement.style.borderColor = 'var(--middlegrey)';
-    }
+    };
 }
 
 
 function selectionUser(id) {    
     let user = allContacts.find(user => user.id == id);    
-    let result = users.find((element) => element == user)
+    let result = users.find((element) => element == user);
     if (!result) {
         users.push(user);
     } else {
         deleteUser(user);
     };
-    toogleUserCheckbox();
+    toogleUserCheckbox(id);
     renderSelectArray();
 }
 
 
-function toogleUserCheckbox() {
-    let checkboxImage = document.getElementById('userCheckbox').src;
-    if (checkboxImage.src == '../assets/img/checkbox-checked.png') {
-        image.src = '../assets/img/checkbox-checked.png';
+function toogleUserCheckbox(id) {
+    let checkbox = document.querySelector(`input[data-user-id="${id}"]`);
+    if (checkbox) {
+        checkbox.checked = !checkbox.checked;
     } else {
-        image.src = '../assets/img/checkbox.png';
+        console.error(`Checkbox not found for user with ID ${id}`);
     };
 }
 
@@ -138,7 +166,7 @@ function renderSelectArray() {
 
 
 function deleteUser(id) {
-    let index = users.findIndex((user) => user == id)
+    let index = users.findIndex((user) => user == id);
     if (users.length > 1 ) {
         users.splice(index, 1);
     }else {

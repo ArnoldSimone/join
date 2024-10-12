@@ -45,13 +45,13 @@
                         <div class="form-group">
                             <label for="assigned">Assigned to</label>
                             <div id="inputAssigned" class="assigned-input d-flex-y">
-                                <input id="assignedInput" onkeyup="assignedSearch()" placeholder="Select task category" type="search" >
+                                <input id="assignedInput" onkeyup="assignedSearch(); inputValueCheck()" placeholder="Select task category" type="text">
                                 <img id="assignedImage" onclick="assignedListToogle()" src="../assets/icon/arrow_drop_downaa.svg" alt="Down">
                             </div>
                             <div id="assignedList" class="assigned-list d-none">
 
                             </div>
-                            <div id="selectedUser" class="selectedUser">
+                            <div id="selectedUser" class="selectedUser d-none">
                                    
                             </div>
                         </div>
