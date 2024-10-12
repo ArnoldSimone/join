@@ -112,10 +112,10 @@ function getEditOverlayTemplate(task) {
                     src="../assets/img/close.svg" alt="Image Close">
             </div>
             <div class="ctn-main-edit-task d-flex-y">
-                <form class="d-flex-x" autocomplete="off">
+                <form class="d-flex-x" autocomplete="off" return false;">
                     <div class="d-flex-x column gap-8">
-                        <label for="title-edit">Title<span class="required">*</span></label>
-                        <input type="text" id="title-edit" name="title-edit" value="${task.title}">
+                        <label for="title-edit">Title</label>
+                        <input type="text" id="title-edit" name="title-edit" value="${task.title}" oninput="checkInputs()">
                     </div>
                     <div class="d-flex-x column gap-8">
                         <label for="description-edit">Description</label>
@@ -123,7 +123,7 @@ function getEditOverlayTemplate(task) {
                     </div>
                     <div class="d-flex-x column gap-8">
                         <label for="due-date-edit">Due date</label>
-                        <input type="date" id="due-date-edit" placeholder="dd/mm/yyy" value="${task.dueDate}" name="due-date-edit">
+                        <input type="date" id="due-date-edit" placeholder="dd/mm/yyy" value="${task.dueDate}" name="due-date-edit" oninput="checkInputs()">
                     </div>
                     <div class="d-flex-x column gap-8">
                         <span class="label-prio">Prio</span>
@@ -152,7 +152,7 @@ function getEditOverlayTemplate(task) {
                     <div class="d-flex-x column gap-8">
                          <label for="subtasks-edit">Subtasks</label>
                         <div class="subtask-connect">
-                            <input type="text" id="subtasks-edit" onclick="inputStart()" onblur="onInputBlur()" autocomplete="off" name="subtasks" onkeydown="handleKeyDown(event); inputStart()" placeholder="Add new subtask">
+                            <input type="text" id="subtasks-edit" onclick="inputStart()" autocomplete="off" name="subtasks" onkeydown="handleKeyDown(event); inputStart()" placeholder="Add new subtask">
                             <div id="ctn-add-subtask" class="ctn-add-subtask d-flex" onclick="inputStart()">
                                 <img class="add-subtask d-flex" src="../assets/img/plusicon.png" alt="Input Subtask">
                             </div>
@@ -161,8 +161,8 @@ function getEditOverlayTemplate(task) {
                                     <img class="clear-input-subtask d-flex" src="../assets/img/close.svg" alt="Clear Input">
                                 </div>
                                 <span class="horizonal-line-subtask"></span>
-                                <div class="ctn-add-input-subtask d-flex">
-                                    <img class="add-input-subtask d-flex" onclick="addSubtask()" src="../assets/img/check.png" alt="Add Subtask">
+                                <div onclick="addSubtask()" class="ctn-add-input-subtask d-flex">
+                                    <img class="add-input-subtask d-flex" src="../assets/img/check.png" alt="Add Subtask">
                                 </div>
                             </div>
                         </div>
@@ -171,27 +171,24 @@ function getEditOverlayTemplate(task) {
                             ${renderAllSubtasks(task.id)}
                         </div>
                     </div>
-
-
                 </form>
             </div>
-
             <div class="edit-task-footer d-flex-y">
-                <div class="form-actions d-flex">
-                    <button type="submit" class="btn-ok d-flex-y">
+                <div class="d-flex">
+                    <button id="btn-update-task" type="submit" class="d-flex-y" onclick="updateTask('${task.id}')">
                         <span>Ok</span>
                         <img class="img-check" src="../assets/img/check-white.svg" alt="">
                     </button>
                 </div>
             </div>
-        </div>
+        </div>      
        `;
 }
 
 function getAllSubtasksTemplate(iSubtasks, title) {
     return `                     
-        <ul>
-            <li ondblclick="editSubtask(${iSubtasks})" class="subtask-item-edit d-flex-y">
+        <ul id="edit-mode-subtask${iSubtasks}" class="">
+            <li id="subtask-item-edit${iSubtasks}" ondblclick="editSubtask(${iSubtasks})" class="subtask-item-edit d-flex-y">
                 <input id="input-subtask-edit${iSubtasks}" class="input-subtask-edit" type="text" value="&bull; ${title}" disabled>
                 <div id="subtask-icons-display-mode${iSubtasks}" class="subtask-icons d-flex-x">
                     <img id="edit-subtask${iSubtasks}" class="img-edit-subtask" onclick="editSubtask(${iSubtasks})" src="../assets/img/pencilBlue.png" alt="Edit Subtask">
@@ -199,7 +196,7 @@ function getAllSubtasksTemplate(iSubtasks, title) {
                     <img id="delete-subtask${iSubtasks}" class="img-delete-subtask" onclick="deleteSubtask(${iSubtasks})" src="../assets/img/dustbinDark.svg" alt="Delete Subtask">
                 </div>
                 <div id="subtask-icons-editing-mode${iSubtasks}" class="subtask-icons d-flex-x d-none">
-                    <img id="delete-edit-subtask${iSubtasks}" onclick="deleteSubtask(${iSubtasks})" class="img-edit-subtask" src="../assets/img/dustbinDark.svg" alt="Edit Subtask">
+                    <img id="delete-edit-subtask${iSubtasks}" onclick="deleteSubtask(${iSubtasks})" class="img-delete-subtask" src="../assets/img/dustbinDark.svg" alt="Edit Subtask">
                     <span class="horizonal-line-subtask horizontal-line-hover"></span>
                     <img id="save-subtask${iSubtasks}" onclick="saveSubtask(${iSubtasks})" class="img-save-edit-subtask" src="../assets/img/check.png" alt="Delete Subtask">
                 </div>

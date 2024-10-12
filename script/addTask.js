@@ -1,4 +1,4 @@
-let selectedPriority = ''; 
+let selectedPriority = '';
 let allContacts;
 let users = [];
 
@@ -13,7 +13,7 @@ async function fetchContacts() {
         let contactsData = await loadFromDatabase("/contacts");
         allContacts = Object.entries(contactsData).map(([id, contact]) => ({ id, ...contact }));
     } catch (error) {
-        console.log(error);        
+        console.log(error);
     }
     renderAllContactsInAssignedTo();
 }
@@ -36,12 +36,18 @@ function assignedSearch() {
     let searchText = document.getElementById('assignedInput').value;
     if (searchText.length > 0) {
         searchIndexOfArray(searchText);
+<<<<<<< Updated upstream
     } else { 
         if (searchText.length == 0) {
             resetSearch();
             renderAllContactsInAssignedTo();
         };
     };
+=======
+    } else {
+        searchTextReset();
+    }
+>>>>>>> Stashed changes
 }
 
 
@@ -58,9 +64,13 @@ function renderSearchResult(result) {
         let name = result[index].name;
         let initial = result[index].avatar.initials;
         let color = result[index].avatar.color;
+<<<<<<< Updated upstream
         let id = result[index].id;
         let checked = users.find(user => user.id === id) ? 'checked' : '';
         searchList.innerHTML += generateCreateOption(name, initial, color, id, checked);        
+=======
+        searchList.innerHTML += generateSearchHTML(name, initial, color, id);
+>>>>>>> Stashed changes
     };
     openUserList();
 }
@@ -131,9 +141,15 @@ function toogleInputBorderColor() {
 }
 
 
+<<<<<<< Updated upstream
 function selectionUser(id) {    
     let user = allContacts.find(user => user.id == id);    
     let result = users.find((element) => element == user);
+=======
+function selectionUser(id) {
+    let user = allContacts.find(user => user.id == id);
+    let result = users.find((element) => element == user)
+>>>>>>> Stashed changes
     if (!result) {
         users.push(user);
     } else {
@@ -160,11 +176,12 @@ function renderSelectArray() {
     for (let index = 0; index < users.length; index++) {
         let initial = users[index].avatar.initials;
         let color = users[index].avatar.color;
-        listContent.innerHTML += generateSelectedUsersHTML(initial, color);        
+        listContent.innerHTML += generateSelectedUsersHTML(initial, color);
     };
 }
 
 
+<<<<<<< Updated upstream
 function deleteUser(id) {
     let index = users.findIndex((user) => user == id);
     if (users.length > 1 ) {
@@ -173,11 +190,20 @@ function deleteUser(id) {
         users.splice(index, 1);
         assignedListToogle();
     };
+=======
+function deleteUser(user) {
+    if (users.length > 0) {
+        users.splice(user, 1);
+    } else {
+        let listContent = document.getElementById('selectedUser');
+        listContent.innerHTML = '';
+    }
+>>>>>>> Stashed changes
 }
 
 
 async function addTaskToFirebase(taskData) {
-    const result = await postToDatabase("tasks", taskData);    
+    const result = await postToDatabase("tasks", taskData);
     if (result) {
         handleSuccessfulTaskCreation();
     }
@@ -204,7 +230,7 @@ function gatherFormData() {
         dueDate: getFormValue("due-date"),
         priority: selectedPriority,
         category: getFormValue("category"),
-        progress: "todo", 
+        progress: "todo",
         subtasks: gatherSubtasks()
     };
 }
@@ -254,8 +280,8 @@ function clearSubtasks() {
 
 function changePrio(priority) {
     const priorityConfig = getPriorityConfig();
-    const buttons = document.querySelectorAll('.prio');    
-    selectedPriority = priority;     
+    const buttons = document.querySelectorAll('.prio');
+    selectedPriority = priority;
     buttons.forEach(button => updateButtonStyle(button, priority, priorityConfig));
 }
 
@@ -283,7 +309,7 @@ function getPriorityConfig() {
 
 function updateButtonStyle(button, selectedPriority, config) {
     const buttonPriority = button.textContent.trim();
-    const img = button.querySelector('img');    
+    const img = button.querySelector('img');
     if (buttonPriority === selectedPriority) {
         applyActiveStyle(button, config[selectedPriority], img);
     } else {

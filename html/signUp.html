@@ -20,7 +20,7 @@
       <div class="sign-up-header">
         <img src="../assets/img/logo_blue.png" alt="Logo">
       </div>
-    </section> 
+    </section>
   </header>
   <main id="registrationMain">
     <section class="d-flex width100 content">
@@ -45,20 +45,25 @@
               <img src="../assets/icon/mail.svg" alt="Email">
             </div>
             <div id="inputPassword" class="input-content">
-              <input onkeyup="validateForm(); validateInputValue(); passwortInput()" class="input" minlength="5" placeholder="Password" type="password" id="password" required>
-              <img id="passwordImage" onclick="togglePasswordVisibility('password')" src="../assets/icon/lock.svg" alt="Lock">
+              <input onkeyup="validateForm(); validateInputValue(); passwortInput()" class="input" minlength="5"
+                placeholder="Password" type="password" id="password" required>
+              <img id="passwordImage" onclick="togglePasswordVisibility('password')" src="../assets/icon/lock.svg"
+                alt="Lock">
             </div>
             <div>
               <div id="inputConfirmPassword" class="input-content">
-                <input onkeyup="validateForm(); validateInputValue(); confirmInput()" class="input" minlength="5" placeholder="Confirm Password" type="password" id="confirmPassword" required>
-                <img id="confirmPasswordImage" onclick="togglePasswordVisibility('confirmPassword')" src="../assets/icon/lock.svg" alt="Lock">
+                <input onkeyup="validateForm(); validateInputValue(); confirmInput()" class="input" minlength="5"
+                  placeholder="Confirm Password" type="password" id="confirmPassword" required>
+                <img id="confirmPasswordImage" onclick="togglePasswordVisibility('confirmPassword')"
+                  src="../assets/icon/lock.svg" alt="Lock">
               </div>
               <div id="error" class="msg-box d-none ">
                 <span>Your password don`t match. Please try again</span>
               </div>
             </div>
             <div class="checkbox d-flex-y">
-              <input onchange="validateForm()" id="checkbox" type="checkbox" required><span class="grey">I accept the</span>
+              <input onchange="validateForm()" id="checkbox" type="checkbox" required><span class="grey">I accept
+                the</span>
               <span><a class="blue" href="../html/privacy.html">Privacy policy</a></span>
             </div>
             <div class="d-flex-x">
@@ -83,4 +88,5 @@
     </section>
   </footer>
 </body>
+
 </html>

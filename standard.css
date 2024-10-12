@@ -108,9 +108,9 @@ content {
 }
 
 body {
-  --sb-track-color: #fafafa;
+  --sb-track-color: transparent;
   --sb-thumb-color: var(--middlegrey);
-  --sb-size: 10px;
+  --sb-size: 8px;
 }
 
 body::-webkit-scrollbar {
@@ -124,11 +124,11 @@ body::-webkit-scrollbar-track {
 
 body::-webkit-scrollbar-thumb {
   background: var(--sb-thumb-color);
-  border-radius: 18px;
+  border-radius: 16px;
 }
 
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 5px;
 }
 
 ::-webkit-scrollbar-track {
@@ -138,7 +138,7 @@ body::-webkit-scrollbar-thumb {
 
 ::-webkit-scrollbar-thumb {
   background: var(--middlegrey);
-  border-radius: 18px;
+  border-radius: 16px;
 }
 
 @supports not selector(::-webkit-scrollbar) {

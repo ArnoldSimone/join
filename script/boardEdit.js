@@ -3,9 +3,10 @@ let assignedContacts = [];
 let selectedContacts = [];
 let filteredContacts = [];
 let allSubtasksArray = [];
+let editAssignedContacts = [];
+let editAllSubtasksArray = [];
 
 function changePrio(selectedPrio) {
-    toggleDropdown
     let btnUrgentRef = document.getElementById('btn-urgent');
     let btnMediumRef = document.getElementById('btn-medium');
     let btnLowRef = document.getElementById('btn-low');
@@ -54,6 +55,7 @@ function showEditTaskOverlay(taskId) {
     let task = tasks.find(t => t.id === taskId);
     overlayBoardEditRef.innerHTML = getEditOverlayTemplate(task);
     updateAssignedContacts();
+    checkInputs();
 }
 
 function renderAllContactsInAssignedTo(taskId) {
@@ -150,29 +152,33 @@ function updateAssignedContacts() {
 
 function toggleDropdown() {
     let dropdown = document.getElementById("dropdown-contacts");
-    dropdown.classList.toggle("show");
-    changeDropdownImage()
+    let isDropdownVisible = dropdown.classList.toggle("show");
+    if (isDropdownVisible) {
+        changeDropdownImage(true);  // Dropdown wird geöffnet
+    } else {
+        changeDropdownImage(false); // Dropdown wird geschlossen
+    }
 }
 
 function closeDropdown() {
     let dropdown = document.getElementById("dropdown-contacts");
     dropdown.classList.remove("show");
-    changeDropdownImage()
+    changeDropdownImage(false);
+
 }
 
 function showDropdown() {
     let dropdown = document.getElementById("dropdown-contacts");
     dropdown.classList.add("show");
-    changeDropdownImage()
+    changeDropdownImage(true);
 }
 
-function changeDropdownImage() {
+function changeDropdownImage(isOpened) {
     let dropdownImage = document.getElementById("input-assigned-edit");
-    let imageSrc = dropdownImage.style.backgroundImage;
-    if (imageSrc.includes('../assets/img/drop-up-arrow.png')) {
-        dropdownImage.style.backgroundImage = "url('../assets/img/drop-down-arrow.png')";
-    } else {
+    if (isOpened) {
         dropdownImage.style.backgroundImage = "url('../assets/img/drop-up-arrow.png')";
+    } else {
+        dropdownImage.style.backgroundImage = "url('../assets/img/drop-down-arrow.png')";
     }
 }
 
@@ -221,11 +227,10 @@ function addSubtask() {
             let title = allSubtasksArray[iSubtasks].title;
             ctnEditAllSubtasksRef.innerHTML += getAllSubtasksTemplate(iSubtasks, title);
             inputValueSubtaskRef.value = '';
-            inputValueSubtaskRef.focus();
         }
-    } else {
-        inputValueSubtaskRef.focus();
     }
+    document.getElementById('ctn-add-subtask').classList.remove('d-none');
+    document.getElementById('ctn-clear-add-subtask').classList.add('d-none');
 }
 
 function deleteSubtask(iSubtasks) {
@@ -249,6 +254,8 @@ function renderCurrentSubtasks(iSubtasks) {
 function editSubtask(iSubtasks) {
     document.getElementById(`subtask-icons-display-mode${iSubtasks}`).classList.add('d-none');
     document.getElementById(`subtask-icons-editing-mode${iSubtasks}`).classList.remove('d-none');
+    document.getElementById(`edit-mode-subtask${iSubtasks}`).classList.add('underlined');
+    document.getElementById(`subtask-item-edit${iSubtasks}`).classList.add('no-hover-edit');
     let inputField = document.getElementById(`input-subtask-edit${iSubtasks}`);
     inputField.removeAttribute('disabled');
     inputField.focus();
@@ -256,6 +263,8 @@ function editSubtask(iSubtasks) {
 }
 
 function saveSubtask(iSubtasks) {
+    document.getElementById(`edit-mode-subtask${iSubtasks}`).classList.remove('underlined');
+    document.getElementById(`subtask-item-edit${iSubtasks}`).classList.remove('no-hover-edit');
     let inputField = document.getElementById(`input-subtask-edit${iSubtasks}`);
     inputField.setAttribute('disabled', 'true');
     document.getElementById(`subtask-icons-display-mode${iSubtasks}`).classList.remove('d-none');
@@ -275,4 +284,101 @@ function onInputBlur() {
     document.getElementById('ctn-clear-add-subtask').classList.add('d-none');
 }
 
+function updateTask(taskId) {
+    let task = tasks.find(t => t.id === taskId);
+
+    let title = document.getElementById('title-edit').value;
+    let description = document.getElementById('description-edit').value;
+    let dueDate = document.getElementById('due-date-edit').value;
+    let priority = getActivePriority();
+    let assignedTo = getAssignedTo();
+    let subtasks = getSubtasks();
+
+    task.title = title;
+    task.description = description;
+    task.dueDate = dueDate;
+    task.priority = priority;
+    task.assignedTo = assignedTo;
+    task.subtasks = subtasks;
+
+    console.log(task);
+    console.log(title);
+    console.log(description);
+    console.log(dueDate);
+    console.log(priority);
+    console.log(assignedTo);
+    console.log(subtasks);
+
+    updateOnDatabase(`tasks/${taskId}`, task);
+}
+
+function buttonAktiv() {
+    document.getElementById("btn-update-task").classList.remove('btn-disabled');
+    document.getElementById("btn-update-task").classList.add('btn-active');
+    document.getElementById("btn-update-task").disabled = false;
+}
+
+function buttonNotAktiv() {
+    document.getElementById("btn-update-task").classList.add('btn-disabled');
+    document.getElementById("btn-update-task").classList.remove('btn-active');
+    document.getElementById("btn-update-task").disabled = true;
+}
+
+function checkInputs() {
+    let title = document.getElementById('title-edit').value.trim();
+    let dueDate = document.getElementById('due-date-edit').value;
+    let updateButton = document.getElementById('btn-update-task');
+    if (title && dueDate) {
+        updateButton.disabled = false;
+        updateButton.classList.add('btn-active');
+        updateButton.classList.remove('btn-disabled');
+    } else {
+        updateButton.disabled = true;
+        updateButton.classList.remove('btn-active');
+        updateButton.classList.add('btn-disabled');
+    }
+}
+
+function getActivePriority() {
+    let btnUrgentRef = document.getElementById('btn-urgent');
+    let btnMediumRef = document.getElementById('btn-medium');
+    let btnLowRef = document.getElementById('btn-low');
+
+    if (btnUrgentRef.classList.contains('urgent-active')) {
+        return 'Urgent';
+    } else if (btnMediumRef.classList.contains('medium-active')) {
+        return 'Medium';
+    } else if (btnLowRef.classList.contains('low-active')) {
+        return 'Low';
+    }
+    return null;
+}
+
+function getAssignedTo() {
+    editAssignedContacts = [];
+    let contacts = Array.from(document.querySelectorAll('.contact'));
+    let checkedContactsArray = Array.from(contacts.filter(c => c.classList.contains('checked')));
+    for (let iCheckedContact = 0; iCheckedContact < checkedContactsArray.length; iCheckedContact++) {
+        let id = +checkedContactsArray[iCheckedContact].id.replace('contact', '');
+        for (let iAllContact = 0; iAllContact < allContacts.length; iAllContact++) {
+            let idAllContact = allContacts[iAllContact].contactId;
+            if (id === idAllContact) {
+                let name = allContacts[iAllContact].name;
+                editAssignedContacts.push(name);
+            }
+        }
+    }
+    return editAssignedContacts;
+}
+
+function getSubtasks() {
+    editAssignedContacts = [];
+    let subtasksArray = Array.from(document.querySelectorAll('.input-subtask-edit'));
+    for (let iSubtask = 0; iSubtask < subtasksArray.length; iSubtask++) {
+        let subtask = subtasksArray[iSubtask].value.replace('• ', '');
+        editAllSubtasksArray.push({ 'title': subtask });
+        // editAllSubtasksArray.push({ 'completed': false, 'title': subtask });
+    }
+    return editAllSubtasksArray;
+}
 

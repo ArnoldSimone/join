@@ -22,7 +22,7 @@ async function loadData() {
     let allUsers = await loadFromDatabase("/users");
     allUsersFilter(allUsers);
   } catch (error) {
-    notRegistered();  
+    notRegistered();
   };
 }
 
@@ -41,8 +41,8 @@ function allUsersFilter(allUsers) {
   for (let index = 0; index < userKeysArray.length; index++) {
     users.push(
       {
-        email : userKeysArray[index][1].email,
-        password : userKeysArray[index][1].password,
+        email: userKeysArray[index][1].email,
+        password: userKeysArray[index][1].password,
       }
     );
   };
@@ -53,7 +53,7 @@ function allUsersFilter(allUsers) {
 function checkLoginData() {
   let email = document.getElementById('email').value;
   let password = document.getElementById('password').value;
-  let user = users.find(users => users.email == email && users.password == password);  
+  let user = users.find(users => users.email == email && users.password == password);
   if (user) {
     window.location.replace('/html/summary.html');
   } else {
@@ -93,7 +93,7 @@ function passwordVisibility() {
     return;
   } else {
     if (image.src.includes('visibility_off.png')) {
-      changeTypeAndImage(input, image);    
+      changeTypeAndImage(input, image);
     } else {
       resetPasswort(input, image);
     };
