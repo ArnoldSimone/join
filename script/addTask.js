@@ -1,6 +1,7 @@
 let selectedPriority = '';
 let allContacts;
 let users = [];
+let subtasks = [];
 
 
 function init() {
@@ -36,18 +37,12 @@ function assignedSearch() {
     let searchText = document.getElementById('assignedInput').value;
     if (searchText.length > 0) {
         searchIndexOfArray(searchText);
-<<<<<<< Updated upstream
     } else { 
         if (searchText.length == 0) {
             resetSearch();
             renderAllContactsInAssignedTo();
         };
     };
-=======
-    } else {
-        searchTextReset();
-    }
->>>>>>> Stashed changes
 }
 
 
@@ -64,13 +59,9 @@ function renderSearchResult(result) {
         let name = result[index].name;
         let initial = result[index].avatar.initials;
         let color = result[index].avatar.color;
-<<<<<<< Updated upstream
         let id = result[index].id;
         let checked = users.find(user => user.id === id) ? 'checked' : '';
         searchList.innerHTML += generateCreateOption(name, initial, color, id, checked);        
-=======
-        searchList.innerHTML += generateSearchHTML(name, initial, color, id);
->>>>>>> Stashed changes
     };
     openUserList();
 }
@@ -141,15 +132,9 @@ function toogleInputBorderColor() {
 }
 
 
-<<<<<<< Updated upstream
 function selectionUser(id) {    
     let user = allContacts.find(user => user.id == id);    
     let result = users.find((element) => element == user);
-=======
-function selectionUser(id) {
-    let user = allContacts.find(user => user.id == id);
-    let result = users.find((element) => element == user)
->>>>>>> Stashed changes
     if (!result) {
         users.push(user);
     } else {
@@ -181,7 +166,6 @@ function renderSelectArray() {
 }
 
 
-<<<<<<< Updated upstream
 function deleteUser(id) {
     let index = users.findIndex((user) => user == id);
     if (users.length > 1 ) {
@@ -190,29 +174,34 @@ function deleteUser(id) {
         users.splice(index, 1);
         assignedListToogle();
     };
-=======
-function deleteUser(user) {
-    if (users.length > 0) {
-        users.splice(user, 1);
-    } else {
-        let listContent = document.getElementById('selectedUser');
-        listContent.innerHTML = '';
-    }
->>>>>>> Stashed changes
 }
 
 
 async function addTaskToFirebase(taskData) {
-    const result = await postToDatabase("tasks", taskData);
-    if (result) {
-        handleSuccessfulTaskCreation();
+    try {
+        const result = await postToDatabase("tasks", taskData);
+        if (result) {
+            handleSuccessfulTaskCreation();
+        }
+    } catch (error) {
+        console.error("Error adding task to Firebase:", error);
     }
 }
 
 
 function handleSuccessfulTaskCreation() {
-    clearForm();
-    window.location.href = 'board.html';
+    showPopup();
+}
+
+
+function showPopup() {
+    const popup = document.getElementById('success-popup');
+    popup.classList.remove('d-none');
+
+    setTimeout(() => {
+        popup.classList.add('d-none'); 
+        window.location.href = 'board.html';
+    }, 2000);
 }
 
 
@@ -226,7 +215,7 @@ function gatherFormData() {
     return {
         title: getFormValue("title"),
         description: getFormValue("description"),
-        assignedTo: getFormValue("assigned"),
+        assignedTo: document.getElementById('assignedInput').value, 
         dueDate: getFormValue("due-date"),
         priority: selectedPriority,
         category: getFormValue("category"),
@@ -242,8 +231,95 @@ function getFormValue(name) {
 
 
 function gatherSubtasks() {
-    const subtaskElements = document.querySelectorAll('.subtask-connect input');
-    return Array.from(subtaskElements).map(el => ({ completed: false, title: el.value }));
+    const subtaskElements = document.querySelectorAll('#subtask-list li');
+    return Array.from(subtaskElements).map(el => ({ completed: false, title: el.textContent.slice(2) }));
+}
+
+
+function addSubtask() {
+    let subtaskInput = document.getElementById('subtasks');
+    
+    if (subtaskInput && subtaskInput.value.trim() !== '') {
+        let subtaskText = subtaskInput.value.trim();
+
+        let subtaskList = document.getElementById('subtask-list');
+        let subtaskId = subtasks.length; 
+
+        subtaskList.innerHTML += `
+            <li id="subtask-${subtaskId}">
+                <span id="subtask-text-${subtaskId}">${subtaskText}</span>
+                <input type="text" id="edit-subtask-${subtaskId}" class="edit-subtask-input" value="${subtaskText}" style="display: none;">
+                <button type="button" onclick="editSubtask(${subtaskId})"><img src="../assets/img/edit.png" alt=""></button>
+                <button type="button" onclick="deleteSubtask(${subtaskId})"><img src="../assets/img/dustbinDark.svg" alt=""></button>
+                <button type="button" id="save-${subtaskId}" style="display: none;" onclick="saveSubtask(${subtaskId})">Save</button>
+            </li>
+        `;
+
+        subtasks.push({
+            id: subtaskId, 
+            title: subtaskText,
+            completed: false
+        });
+
+        subtaskInput.value = '';
+    } else {
+        console.error('Das Eingabefeld ist leer oder nicht vorhanden.');
+    }
+}
+
+
+function editSubtask(index) {
+    const subtask = subtasks[index];
+    let subtaskElement = document.querySelectorAll('#subtask-list li')[index];
+
+    subtaskElement.innerHTML = `
+        <input type="text" id="edit-subtask-input" value="${subtask.title}" class="edit-subtask-input">
+        <button onclick="saveSubtask(${index})"><img src="../assets/img/check.png" alt=""></button>
+        <button onclick="cancelEdit(${index})"><img src="../assets/img/dustbinDark.svg" alt=""></button>
+    `;
+}
+
+function saveSubtask(index) {
+    let newTitle = document.getElementById('edit-subtask-input').value.trim();
+
+    if (newTitle !== '') {
+        subtasks[index].title = newTitle;
+
+        renderSubtasks();
+    }
+}
+
+function cancelEdit(index) {
+    renderSubtasks();
+}
+
+function renderSubtasks() {
+    let subtaskList = document.getElementById('subtask-list');
+    subtaskList.innerHTML = '';
+
+    subtasks.forEach((subtask, index) => {
+        subtaskList.innerHTML += `
+            <li class="subtask-item" onmouseover="showButtons(${index})" onmouseout="hideButtons(${index})">
+                ${subtask.title}
+                <span id="subtask-buttons-${index}" class="subtask-buttons" style="display:none;">
+                    <button onclick="editSubtask(${index})"><img src="../assets/img/edit.png" alt=""></button>
+                    <button onclick="deleteSubtask(${index})"><img src="../assets/img/dustbinDark.svg" alt=""></button>
+                </span>
+            </li>`;
+    });
+}
+
+function showButtons(index) {
+    document.getElementById(`subtask-buttons-${index}`).style.display = 'inline';
+}
+
+function hideButtons(index) {
+    document.getElementById(`subtask-buttons-${index}`).style.display = 'none';
+}
+
+function deleteSubtask(index) {
+    subtasks.splice(index, 1);
+    renderSubtasks();
 }
 
 
@@ -266,16 +342,6 @@ function clearSubtasks() {
     const subtaskInputs = document.querySelectorAll('.subtask-connect input');
     subtaskInputs.forEach(input => input.value = '');
 }
-
-
-// function populateContactsDropdown(contacts) {
-//     const assignedSelect = document.forms["taskForm"]["assigned"];
-//     assignedSelect.innerHTML = '<option>Select contacts to assign</option>';
-
-//     Object.values(contacts).forEach(contact => {
-//         assignedSelect.innerHTML += `<option value="${contact.name}">${contact.name}</option>`;
-//     });
-// }
 
 
 function changePrio(priority) {

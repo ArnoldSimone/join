@@ -284,3 +284,53 @@ button.create-task:hover {
 .white-background-container textarea:hover {
     border: 1px solid #aaa;
 }
+
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.popup-content {
+    background: var(--darkblue);
+    color: white;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+}
+
+.popup-content img {
+   height: 24px;
+   width: auto;
+   display: flex;
+   padding-left: 10px;
+}
+
+.d-none {
+    display: none;
+}
+
+#subtask-list li {
+    position: relative;
+}
+
+#subtask-list li button {
+    display: none;
+    margin-left: 10px;
+}
+
+#subtask-list li:hover button {
+    display: inline-block;
+}
+

@@ -92,9 +92,10 @@
                             <div class="subtask-connect">
                                 <input type="text" id="subtasks" name="subtasks" placeholder="Add new subtask">
                                 <div class="subtask-img">
-                                    <img src="../assets/img/plusicon.png" alt="">
+                                    <img src="../assets/img/plusicon.png" alt="Add subtask" onclick="addSubtask()">
                                 </div>
                             </div>
+                            <ul id="subtask-list"></ul>
                         </div>
                     </div>
                 </form>
@@ -175,6 +176,10 @@
             </div>
         </section> -->
     </main>
+    <div id="success-popup" class="popup d-none">
+        <div class="popup-content">
+            <p>Task added to board</p><img src="../assets/icon/board.png" alt="">
+        </div>
+    </div>    
 </body>
-
 </html>
