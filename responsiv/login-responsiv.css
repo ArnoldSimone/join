@@ -1,0 +1,14 @@
+@media (max-width: 1000px) {
+  .login-header {
+
+  }
+  
+  .login-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .login-in {
+    width: 140px;
+  }
+}
