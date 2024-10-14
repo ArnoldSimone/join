@@ -20,7 +20,8 @@ function renderTasksBoard() {
 function renderTasksByProgress(progressStatus, containerId, noTaskMessage) {
     let containerRef = document.getElementById(containerId);
     containerRef.innerHTML = "";
-    let filteredTasks = tasks.filter(task => task.progress === progressStatus);
+    let tasksToRender = filteredSearchTasks.length > 0 ? filteredSearchTasks : tasks;
+    let filteredTasks = tasksToRender.filter(task => task.progress === progressStatus);
     if (filteredTasks.length === 0) {
         containerRef.innerHTML = getBoardNoTaskTemplate(noTaskMessage);
     } else {
@@ -67,15 +68,20 @@ function bubblingProtection(event) {
 
 function renderAssignedTo(assignedTo) {
     let assignedToArray = Array.isArray(assignedTo) ? assignedTo : [assignedTo];
+    let assignedToContent = "";
     if (!assignedToArray || assignedToArray.length === 0 || assignedToArray == '') {
         return '';
     } else {
-        let assignedToContent = "";
         for (let i = 0; i < assignedToArray.length; i++) {
-            let contact = contacts.find(c => c.name === assignedToArray[i]);
-            let initial = contact.avatar.initials;
-            let color = contact.avatar.color;
-            assignedToContent += getAssignedToTemplate(initial, color);
+            if (i > 4) {
+                assignedToContent += getAssignedToTemplateAdditional(assignedTo.length);
+                return assignedToContent;
+            } else {
+                let contact = contacts.find(c => c.name === assignedToArray[i]);
+                let initial = contact.avatar.initials;
+                let color = contact.avatar.color;
+                assignedToContent += getAssignedToTemplate(initial, color);
+            }
         }
         return assignedToContent;
     }
@@ -169,4 +175,21 @@ async function deleteTask(taskId) {
     await deleteFromDatabase(`tasks/${taskId}`);
     closeDetailTaskOverlay()
     onloadFuncBoard();
+}
+
+let filteredSearchTasks = [];
+
+function filterTasksBoard() {
+    filteredSearchTasks = [];
+    let inputRef = document.getElementById('input-search-task');
+    let input = inputRef.value.toLowerCase();
+    for (let i = 0; i < tasks.length; i++) {
+        let taskTitle = tasks[i].title.toLowerCase();
+        let taskDescription = tasks[i].description.toLowerCase();
+
+        if (taskTitle.includes(input) || taskDescription.includes(input)) {
+            filteredSearchTasks.push(tasks[i]);
+        }
+    }
+    renderTasksBoard();
 }

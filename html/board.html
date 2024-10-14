@@ -39,7 +39,8 @@
                 </div>
                 <div class="header-board-right d-flex">
                     <div class="ctn-input-search">
-                        <input id="input-search-task" class="input-field" type="text" placeholder="Find Task">
+                        <input id="input-search-task" class="input-field" type="text" oninput="filterTasksBoard()"
+                            autocomplete="off" spellcheck="false" placeholder="Find Task">
                         <img class="search-image" src="../assets/img/search.svg" alt="imageSearch">
                     </div>
                     <button class="btn-dark d-flex-y">Add Task
@@ -57,10 +58,10 @@
                         ondragleave="removeHighlight('highlight-todo')">
                         <div id="ctn-tasks-todo" class="ctn-tasks-todo tasks-box d-flex-y height drag-area">
                         </div>
-                        <div id="highlight-todo"></div>
+                        <div id="highlight-todo" ondrop="moveTo('todo')" ondragover="allowDrop(event)"></div>
                     </div>
                 </div>
-                <div class="ctn-cards-in-progress ctn-cards">
+                <div class=" ctn-cards-in-progress ctn-cards">
                     <div class="header-container d-flex-y">
                         <span>In progress</span>
                         <img class="btn-add-task-smal" src="../assets/img/plusButtonDarkBlue.svg" alt="Image Plus">
@@ -71,7 +72,8 @@
                         <div id="ctn-tasks-in-progress"
                             class="ctn-tasks-in-progress tasks-box d-flex-y height drag-area">
                         </div>
-                        <div id="highlight-in-progress"></div>
+                        <div id="highlight-in-progress" ondrop="moveTo('in progress')" ondragover="allowDrop(event)">
+                        </div>
                     </div>
                 </div>
                 <div class="ctn-cards-await-feedback ctn-cards">
@@ -86,7 +88,8 @@
                             class="ctn-tasks-await-feedback tasks-box d-flex-y height drag-area"
                             ondrop="moveTo('await feedback')">
                         </div>
-                        <div id="highlight-await-feedback"></div>
+                        <div id="highlight-await-feedback" ondrop="moveTo('await feedback')"
+                            ondragover="allowDrop(event)"></div>
                     </div>
                 </div>
                 <div class="ctn-cards-done ctn-cards">
@@ -98,7 +101,7 @@
                         ondragleave="removeHighlight('highlight-done')">
                         <div id="ctn-tasks-done" class="ctn-tasks-done tasks-box d-flex-y height drag-area">
                         </div>
-                        <div id="highlight-done"></div>
+                        <div id="highlight-done" ondrop="moveTo('done')" ondragover="allowDrop(event)"></div>
                     </div>
                 </div>
             </div>

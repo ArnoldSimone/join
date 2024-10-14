@@ -166,7 +166,6 @@ function closeDropdown() {
     let dropdown = document.getElementById("dropdown-contacts");
     dropdown.classList.remove("show");
     changeDropdownImage(false);
-
 }
 
 function showDropdown() {
@@ -291,11 +290,6 @@ function handleKeyDownEditSubtask(event, iSubtasks) {
         saveSubtask(iSubtasks);
     }
 }
-
-// function onInputBlur() {
-//     document.getElementById('ctn-add-subtask').classList.remove('d-none');
-//     document.getElementById('ctn-clear-add-subtask').classList.add('d-none');
-// }
 
 function updateTask(taskId) {
     let task = tasks.find(t => t.id === taskId);

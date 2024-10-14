@@ -25,6 +25,10 @@ function getAssignedToTemplate(initial, color) {
     return `<div class="assigned-to mesh d-flex" style="background-color:${color};">${initial}</div>`
 }
 
+function getAssignedToTemplateAdditional(numberOfAssignedTo) {
+    return `<div class="assigned-to mesh d-flex" style="background-color:grey;">+${numberOfAssignedTo - 5}</div>`
+}
+
 function getImagePrioTemplate(priority) {
     const priortyImages = {
         'Low': '../assets/img/lowsym.png',
@@ -105,6 +109,7 @@ function getSubtasksOverlayTemplate(indexSubTask, task) {
 }
 
 function getEditOverlayTemplate(task) {
+    let today = new Date().toISOString().split('T')[0];
     return `
         <div onclick="bubblingProtection(event); closeDropdown();" id="overlay-edit-task-board" class="overlay-edit-task-board ctn-task no-hover d-flex-x">
             <div class="ctn-close d-flex-y">
@@ -124,7 +129,7 @@ function getEditOverlayTemplate(task) {
                     </div>
                     <div class="d-flex-x column gap-8">
                         <label for="due-date-edit">Due date</label>
-                        <input type="date" id="due-date-edit" placeholder="dd/mm/yyy" value="${task.dueDate}" name="due-date-edit" oninput="checkInputs()">
+                        <input type="date" id="due-date-edit" placeholder="dd/mm/yyy" value="${task.dueDate}" min="${today}" name="due-date-edit" oninput="checkInputs()">
                         <div id="error-due-date" class="error error-title d-none">The due date cannot be in the past.</div>
                     </div>
                     <div class="d-flex-x column gap-8">

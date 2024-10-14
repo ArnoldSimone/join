@@ -377,3 +377,10 @@ input[type="checkbox"]:checked+.custom-checkbox {
     margin-top: -5px;
     padding-left: 8px;
 }
+
+#highlight-todo,
+#highlight-in-progress,
+#highlight-await-feedback,
+#highlight-done {
+    min-height: 100px;
+}

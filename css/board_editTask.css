@@ -281,6 +281,7 @@ button.btn-active:hover {
     color: white;
 }
 
+
 .checked:hover {
     background-color: rgba(42, 54, 71, 0.95);
     border-radius: 8px;
