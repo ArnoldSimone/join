@@ -124,14 +124,3 @@ function getRemember() {
   let email = localStorage.getItem("userEmail");
   document.getElementById('email').value = email;
 }
-
-
-function toggleUserMenu() {
-  let userMenu = document.getElementById('userMenu');
-  userMenu.classList.toggle('d-none');
-}
-
-
-function logOut() {
-  window.location.replace('../index.html');
-}

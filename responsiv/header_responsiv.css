@@ -1,0 +1,34 @@
+@media (max-width: 1000px) {
+  p {
+    display: none;
+  }
+
+  .header-content {
+    padding-left: 40px;
+  }
+
+  .mobile-logo {
+    display: block;
+  }
+
+  .mobile-logo img {
+    height: 50px;
+  }
+
+  .header-right {
+    justify-content: center;
+  }
+
+  .header-right a {
+    display: none;
+  }
+
+  .user-letter {
+    width: 50px;
+    height: 50px;
+  }
+
+  .show-logout-mobile {
+    top: 77px;
+  }
+}
