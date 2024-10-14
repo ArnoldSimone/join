@@ -178,14 +178,10 @@ function deleteUser(id) {
 
 
 async function addTaskToFirebase(taskData) {
-    try {
-        const result = await postToDatabase("tasks", taskData);
+    const result = await postToDatabase("tasks", taskData);
         if (result) {
             handleSuccessfulTaskCreation();
         }
-    } catch (error) {
-        console.error("Error adding task to Firebase:", error);
-    }
 }
 
 
@@ -215,13 +211,18 @@ function gatherFormData() {
     return {
         title: getFormValue("title"),
         description: getFormValue("description"),
-        assignedTo:  getFormValue("selectedUser"), 
+        assignedTo: gatherSelectedUsers(),
         dueDate: getFormValue("due-date"),
         priority: selectedPriority,
         category: getFormValue("category"),
         progress: "todo",
         subtasks: gatherSubtasks()
     };
+}
+
+
+function gatherSelectedUsers() {
+    return users.map(user => user.name);
 }
 
 
@@ -237,47 +238,44 @@ function gatherSubtasks() {
 
 
 function addSubtask() {
-    let subtaskInput = document.getElementById('subtasks');
-    
-    if (subtaskInput && subtaskInput.value.trim() !== '') {
+    let subtaskInput = getSubtaskInput();
+    if (isValidSubtask(subtaskInput)) {
         let subtaskText = subtaskInput.value.trim();
-
-        let subtaskList = document.getElementById('subtask-list');
-        let subtaskId = subtasks.length; 
-
-        subtaskList.innerHTML += `
-            <li id="subtask-${subtaskId}">
-                <span id="subtask-text-${subtaskId}">${subtaskText}</span>
-                <input type="text" id="edit-subtask-${subtaskId}" class="edit-subtask-input" value="${subtaskText}" style="display: none;">
-                <button type="button" onclick="editSubtask(${subtaskId})"><img src="../assets/img/edit.png" alt=""></button>
-                <button type="button" onclick="deleteSubtask(${subtaskId})"><img src="../assets/img/dustbinDark.svg" alt=""></button>
-                <button type="button" id="save-${subtaskId}" style="display: none;" onclick="saveSubtask(${subtaskId})">Save</button>
-            </li>
-        `;
-
-        subtasks.push({
-            id: subtaskId, 
-            title: subtaskText,
-            completed: false
-        });
-
+        let subtaskId = subtasks.length;
+        appendSubtaskToList(subtaskId, subtaskText);
+        subtasks.push(createSubtask(subtaskId, subtaskText));
         subtaskInput.value = '';
-    } else {
-        console.error('Das Eingabefeld ist leer oder nicht vorhanden.');
     }
+}
+
+
+function getSubtaskInput() {
+    return document.getElementById('subtasks');
+}
+
+
+function isValidSubtask(subtaskInput) {
+    return subtaskInput && subtaskInput.value.trim() !== '';
+}
+
+
+function appendSubtaskToList(subtaskId, subtaskText) {
+    let subtaskList = document.getElementById('subtask-list');
+    subtaskList.innerHTML += generateSubtaskHTML(subtaskId, subtaskText);
+}
+
+
+function createSubtask(subtaskId, subtaskText) {
+    return { id: subtaskId, title: subtaskText, completed: false };
 }
 
 
 function editSubtask(index) {
     const subtask = subtasks[index];
     let subtaskElement = document.querySelectorAll('#subtask-list li')[index];
-
-    subtaskElement.innerHTML = `
-        <input type="text" id="edit-subtask-input" value="${subtask.title}" class="edit-subtask-input">
-        <button onclick="saveSubtask(${index})"><img src="../assets/img/check.png" alt=""></button>
-        <button onclick="cancelEdit(${index})"><img src="../assets/img/dustbinDark.svg" alt=""></button>
-    `;
+    subtaskElement.innerHTML = generateEditSubtaskHTML(index, subtask.title);
 }
+
 
 function saveSubtask(index) {
     let newTitle = document.getElementById('edit-subtask-input').value.trim();
@@ -289,33 +287,30 @@ function saveSubtask(index) {
     }
 }
 
+
 function cancelEdit(index) {
     renderSubtasks();
 }
 
+
 function renderSubtasks() {
     let subtaskList = document.getElementById('subtask-list');
     subtaskList.innerHTML = '';
-
     subtasks.forEach((subtask, index) => {
-        subtaskList.innerHTML += `
-            <li class="subtask-item" onmouseover="showButtons(${index})" onmouseout="hideButtons(${index})">
-                ${subtask.title}
-                <span id="subtask-buttons-${index}" class="subtask-buttons" style="display:none;">
-                    <button onclick="editSubtask(${index})"><img src="../assets/img/edit.png" alt=""></button>
-                    <button onclick="deleteSubtask(${index})"><img src="../assets/img/dustbinDark.svg" alt=""></button>
-                </span>
-            </li>`;
+        subtaskList.innerHTML += generateSubtaskItemHTML(subtask.title, index);
     });
 }
+
 
 function showButtons(index) {
     document.getElementById(`subtask-buttons-${index}`).style.display = 'inline';
 }
 
+
 function hideButtons(index) {
     document.getElementById(`subtask-buttons-${index}`).style.display = 'none';
 }
+
 
 function deleteSubtask(index) {
     subtasks.splice(index, 1);
