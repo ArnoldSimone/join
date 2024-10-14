@@ -1,4 +1,5 @@
 let users = [];
+let activeLink = null;
 
 
 function validateLogin() {

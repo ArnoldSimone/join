@@ -4,38 +4,43 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="../assets/img/logo_white.png" />
   <link rel="stylesheet" href="../css/sidebar.css" />
   <link rel="stylesheet" href="../css/fonts.css">
   <link rel="stylesheet" href="../standard.css">
+  <link rel="stylesheet" href="../responsiv/sidebar_responsiv.css">
+  <script defer src="../script/sidebar.js"></script>
   <title>Join</title>
 </head>
 
 <body>
-  <section>
+  <section class="sidebar-section">
     <div class="sidebar-content">
       <div class="logo d-flex width100">
-        <img src="/assets/img/logo_white.png" alt="Logo" />
+        <div class="image-sidebar">
+          <img src="/assets/img/logo_white.png" alt="Logo"/>
+        </div>
         <div class="sidebar-menu width100">
           <div class="width100">
-            <a class="menu-content d-flex" href="/html/summary.html">
+            <a onclick="changeActive()" class="menu-content d-flex" href="/html/summary.html">
               <img src="/assets/icon/summary.png" alt="Summary">
               <p>Summary</p>
             </a>
           </div>
           <div class="width100">
-            <a class="menu-content d-flex" href="/html/addTask.html">
+            <a onclick="changeActive()" class="menu-content d-flex" href="/html/addTask.html">
               <img src="/assets/icon/add_task.png" alt="Add Task">
               <p>Add Task</p>
             </a>
           </div>
           <div class="width100">
-            <a class="menu-content d-flex" href="/html/board.html">
+            <a onclick="changeActive()" class="menu-content d-flex" href="/html/board.html">
               <img src="/assets/icon/board.png" alt="Board">
               <p>Board</p>
             </a>
           </div>
           <div class="width100">
-            <a class="menu-content d-flex" href="/html/contacts.html">
+            <a onclick="changeActive()" class="menu-content d-flex" href="/html/contacts.html">
               <img src="/assets/icon/contacts.png" alt="Contacts">
               <p>Contacts</p>
             </a>

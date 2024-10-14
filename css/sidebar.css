@@ -22,16 +22,20 @@
   padding: 0;
 }
 
-.menu-content:hover {
-  background-color: var(--bluegrey);
-}
-
 .menu-content {
   display: flex;
   align-items: center;
   color: var(--textwhite);
   gap: 8px;
   width: 100%;
+}
+
+.menu-content:hover {
+  background-color: var(--bluegrey);
+}
+
+.menu-content.active {
+  background-color: var(--darkblueMenu);
 }
 
 .menu-content img {

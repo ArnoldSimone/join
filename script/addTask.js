@@ -215,7 +215,7 @@ function gatherFormData() {
     return {
         title: getFormValue("title"),
         description: getFormValue("description"),
-        assignedTo: document.getElementById('assignedInput').value, 
+        assignedTo:  getFormValue("selectedUser"), 
         dueDate: getFormValue("due-date"),
         priority: selectedPriority,
         category: getFormValue("category"),
