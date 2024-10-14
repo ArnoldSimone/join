@@ -4,7 +4,6 @@ let selectedContacts = [];
 let filteredContacts = [];
 let allSubtasksArray = [];
 let editAssignedContacts = [];
-let editAllSubtasksArray = [];
 
 function changePrio(selectedPrio) {
     let btnUrgentRef = document.getElementById('btn-urgent');
@@ -64,19 +63,22 @@ function renderAllContactsInAssignedTo(taskId) {
     allContacts = [];
     selectedContacts = [];
     assignedContacts = [];
-    assignedContacts.push(task.assignedTo);
+    if (task.assignedTo && task.assignedTo !== "") {
+        assignedContacts.push(task.assignedTo);
+    }
     for (let iContact = 0; iContact < contacts.length; iContact++) {
         let name = contacts[iContact].name;
         let initial = contacts[iContact].avatar.initials;
         let color = contacts[iContact].avatar.color;
         allContacts.push({ 'contactId': iContact, 'name': (contacts[iContact].name), 'initial': (contacts[iContact].avatar.initials), 'color': (contacts[iContact].avatar.color) });
-        let isChecked = assignedContacts[0].includes(contacts[iContact].name) ? 'checked' : '';
+        let isChecked = (assignedContacts.length > 0 && assignedContacts[0].includes(name)) ? 'checked' : '';
         if (isChecked) {
             selectedContacts.push({ 'contactId': iContact, 'name': (contacts[iContact].name), 'initial': (contacts[iContact].avatar.initials), 'color': (contacts[iContact].avatar.color) });
         }
         allContactsContent += getAssignedToEditTemplateOverlay(initial, color, name, iContact, isChecked);
     }
     return allContactsContent;
+
 }
 
 function searchContact() {
@@ -154,9 +156,9 @@ function toggleDropdown() {
     let dropdown = document.getElementById("dropdown-contacts");
     let isDropdownVisible = dropdown.classList.toggle("show");
     if (isDropdownVisible) {
-        changeDropdownImage(true);  // Dropdown wird geöffnet
+        changeDropdownImage(true);
     } else {
-        changeDropdownImage(false); // Dropdown wird geschlossen
+        changeDropdownImage(false);
     }
 }
 
@@ -192,7 +194,11 @@ function renderAllSubtasks(taskId) {
     } else {
         for (let iSubtasks = 0; iSubtasks < subtasks.length; iSubtasks++) {
             let title = subtasks[iSubtasks].title;
-            allSubtasksArray.push({ 'title': subtasks[iSubtasks].title })
+            let checkCompleted = subtasks[iSubtasks].completed;
+            if (checkCompleted == "" || checkCompleted == null || !checkCompleted) {
+                checkCompleted = false;
+            }
+            allSubtasksArray.push({ 'completed': checkCompleted, 'title': title })
             allSubtasks += getAllSubtasksTemplate(iSubtasks, title);
         }
     }
@@ -222,7 +228,7 @@ function addSubtask() {
     }
     if (inputValueSubtaskRef.value !== "") {
         ctnEditAllSubtasksRef.innerHTML = '';
-        allSubtasksArray.push({ 'title': inputValueSubtask });
+        allSubtasksArray.push({ 'completed': false, 'title': inputValueSubtask });
         for (let iSubtasks = 0; iSubtasks < allSubtasksArray.length; iSubtasks++) {
             let title = allSubtasksArray[iSubtasks].title;
             ctnEditAllSubtasksRef.innerHTML += getAllSubtasksTemplate(iSubtasks, title);
@@ -252,11 +258,12 @@ function renderCurrentSubtasks(iSubtasks) {
 }
 
 function editSubtask(iSubtasks) {
+    let inputField = document.getElementById(`input-subtask-edit${iSubtasks}`);
     document.getElementById(`subtask-icons-display-mode${iSubtasks}`).classList.add('d-none');
     document.getElementById(`subtask-icons-editing-mode${iSubtasks}`).classList.remove('d-none');
     document.getElementById(`edit-mode-subtask${iSubtasks}`).classList.add('underlined');
     document.getElementById(`subtask-item-edit${iSubtasks}`).classList.add('no-hover-edit');
-    let inputField = document.getElementById(`input-subtask-edit${iSubtasks}`);
+
     inputField.removeAttribute('disabled');
     inputField.focus();
     inputField.setSelectionRange(inputField.value.length, inputField.value.length);
@@ -279,37 +286,40 @@ function handleKeyDown(event) {
     }
 }
 
-function onInputBlur() {
-    document.getElementById('ctn-add-subtask').classList.remove('d-none');
-    document.getElementById('ctn-clear-add-subtask').classList.add('d-none');
+function handleKeyDownEditSubtask(event, iSubtasks) {
+    if (event.key === "Enter") {
+        saveSubtask(iSubtasks);
+    }
 }
+
+// function onInputBlur() {
+//     document.getElementById('ctn-add-subtask').classList.remove('d-none');
+//     document.getElementById('ctn-clear-add-subtask').classList.add('d-none');
+// }
 
 function updateTask(taskId) {
     let task = tasks.find(t => t.id === taskId);
-
-    let title = document.getElementById('title-edit').value;
-    let description = document.getElementById('description-edit').value;
-    let dueDate = document.getElementById('due-date-edit').value;
-    let priority = getActivePriority();
-    let assignedTo = getAssignedTo();
-    let subtasks = getSubtasks();
-
-    task.title = title;
-    task.description = description;
-    task.dueDate = dueDate;
-    task.priority = priority;
-    task.assignedTo = assignedTo;
-    task.subtasks = subtasks;
-
-    console.log(task);
-    console.log(title);
-    console.log(description);
-    console.log(dueDate);
-    console.log(priority);
-    console.log(assignedTo);
-    console.log(subtasks);
-
+    task.title = document.getElementById('title-edit').value;
+    task.description = document.getElementById('description-edit').value;
+    task.dueDate = document.getElementById('due-date-edit').value;
+    task.priority = getActivePriority();
+    task.assignedTo = getAssignedTo();
+    task.subtasks = allSubtasksArray;
     updateOnDatabase(`tasks/${taskId}`, task);
+    closeEditTaskOverlay();
+    renderTasksBoard();
+    showDetailTaskOverlay(taskId);
+}
+
+
+function closeEditTaskOverlay() {
+    document.body.style.overflow = '';
+    let overlayBoardEditRef = document.getElementById('overlay-board-edit');
+    overlayBoardEditRef.classList.add('slide-out');
+    setTimeout(() => {
+        overlayBoardEditRef.classList.add('d-none');
+        overlayBoardEditRef.classList.remove('slide-out');
+    }, 200);
 }
 
 function buttonAktiv() {
@@ -325,8 +335,16 @@ function buttonNotAktiv() {
 }
 
 function checkInputs() {
-    let title = document.getElementById('title-edit').value.trim();
-    let dueDate = document.getElementById('due-date-edit').value;
+    let titleInput = document.getElementById('title-edit');
+    let dueDateInput = document.getElementById('due-date-edit');
+    let title = titleInput.value.trim();
+    let dueDate = dueDateInput.value;
+    updateButtonToggleActive(title, dueDate);
+    checkInputTitle(title, titleInput);
+    checkInputDueDate(dueDate, dueDateInput);
+}
+
+function updateButtonToggleActive(title, dueDate) {
     let updateButton = document.getElementById('btn-update-task');
     if (title && dueDate) {
         updateButton.disabled = false;
@@ -339,11 +357,35 @@ function checkInputs() {
     }
 }
 
+function checkInputTitle(title, titleInput) {
+    let errorTitle = document.getElementById('error-title');
+    if (!title) {
+        titleInput.style.border = '1px solid red';
+        errorTitle.classList.remove('d-none');
+    } else {
+        titleInput.style.border = '';
+        errorTitle.classList.add('d-none');
+    }
+}
+
+function checkInputDueDate(dueDate, dueDateInput) {
+    let errorDueDate = document.getElementById('error-due-date');
+    let today = new Date();
+    today.setHours(0, 0, 0, 0);
+    let dueDateObj = new Date(dueDate);
+    if (dueDateObj < today) {
+        dueDateInput.style.border = '1px solid red';
+        errorDueDate.classList.remove('d-none');
+    } else {
+        dueDateInput.style.border = '';
+        errorDueDate.classList.add('d-none');
+    }
+}
+
 function getActivePriority() {
     let btnUrgentRef = document.getElementById('btn-urgent');
     let btnMediumRef = document.getElementById('btn-medium');
     let btnLowRef = document.getElementById('btn-low');
-
     if (btnUrgentRef.classList.contains('urgent-active')) {
         return 'Urgent';
     } else if (btnMediumRef.classList.contains('medium-active')) {
@@ -371,14 +413,5 @@ function getAssignedTo() {
     return editAssignedContacts;
 }
 
-function getSubtasks() {
-    editAssignedContacts = [];
-    let subtasksArray = Array.from(document.querySelectorAll('.input-subtask-edit'));
-    for (let iSubtask = 0; iSubtask < subtasksArray.length; iSubtask++) {
-        let subtask = subtasksArray[iSubtask].value.replace('• ', '');
-        editAllSubtasksArray.push({ 'title': subtask });
-        // editAllSubtasksArray.push({ 'completed': false, 'title': subtask });
-    }
-    return editAllSubtasksArray;
-}
+
 

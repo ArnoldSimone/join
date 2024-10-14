@@ -95,14 +95,10 @@ function renderTaskProgressBar(subtasks) {
 function closeDetailTaskOverlay() {
     document.body.style.overflow = '';
     let overlayBoardDetailRef = document.getElementById('overlay-board-detail');
-    let overlayBoardEditRef = document.getElementById('overlay-board-edit');
-    overlayBoardDetailRef.classList.add('slide-out')
-    overlayBoardEditRef.classList.add('slide-out')
+    overlayBoardDetailRef.classList.add('slide-out');
     setTimeout(() => {
         overlayBoardDetailRef.classList.add('d-none');
         overlayBoardDetailRef.classList.remove('slide-out');
-        overlayBoardEditRef.classList.add('d-none');
-        overlayBoardEditRef.classList.remove('slide-out');
     }, 200);
 }
 
@@ -135,7 +131,7 @@ function renderSubtasksOverlay(task) {
 function renderAssignedToOverlay(assignedTo) {
     let assignedToArray = Array.isArray(assignedTo) ? assignedTo : [assignedTo];
     if (!assignedToArray || assignedToArray.length === 0 || assignedToArray == '') {
-        return '';
+        return 'No contact in Assign To';
     } else {
         let assignedToContent = "";
         for (let i = 0; i < assignedToArray.length; i++) {
@@ -169,3 +165,8 @@ function toggleCheckbox(indexSubTask, taskId) {
 }
 
 
+async function deleteTask(taskId) {
+    await deleteFromDatabase(`tasks/${taskId}`);
+    closeDetailTaskOverlay()
+    onloadFuncBoard();
+}
