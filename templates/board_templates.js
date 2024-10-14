@@ -79,7 +79,7 @@ function getTaskOverlayTemplate(task) {
             </div>
         </div>
         <div class="ctn-delete-edit d-flex-y">
-            <img class="btn-delete-task" src="../assets/img/dustbinDarkText.svg" alt="Image Delete">
+            <img id="btn-delete-task" class="btn-delete-task" onclick="deleteTask('${task.id}')" src="../assets/img/dustbinDarkText.svg" alt="Image Delete">
                 <span class="vertikalLine"></span>
                 <img onclick="showEditTaskOverlay('${task.id}')" class="btn-edit-task" src="../assets/img/editDarkText.svg" alt="Image Close">
                 </div>
@@ -108,7 +108,7 @@ function getEditOverlayTemplate(task) {
     return `
         <div onclick="bubblingProtection(event); closeDropdown();" id="overlay-edit-task-board" class="overlay-edit-task-board ctn-task no-hover d-flex-x">
             <div class="ctn-close d-flex-y">
-                <img onclick="closeDetailTaskOverlay()" class="btn-close-detail-task"
+                <img onclick="closeEditTaskOverlay()" class="btn-close-detail-task"
                     src="../assets/img/close.svg" alt="Image Close">
             </div>
             <div class="ctn-main-edit-task d-flex-y">
@@ -116,6 +116,7 @@ function getEditOverlayTemplate(task) {
                     <div class="d-flex-x column gap-8">
                         <label for="title-edit">Title</label>
                         <input type="text" id="title-edit" name="title-edit" value="${task.title}" oninput="checkInputs()">
+                        <div id="error-title" class="error error-title d-none">This field ist required</div>
                     </div>
                     <div class="d-flex-x column gap-8">
                         <label for="description-edit">Description</label>
@@ -124,6 +125,7 @@ function getEditOverlayTemplate(task) {
                     <div class="d-flex-x column gap-8">
                         <label for="due-date-edit">Due date</label>
                         <input type="date" id="due-date-edit" placeholder="dd/mm/yyy" value="${task.dueDate}" name="due-date-edit" oninput="checkInputs()">
+                        <div id="error-due-date" class="error error-title d-none">The due date cannot be in the past.</div>
                     </div>
                     <div class="d-flex-x column gap-8">
                         <span class="label-prio">Prio</span>
@@ -189,7 +191,7 @@ function getAllSubtasksTemplate(iSubtasks, title) {
     return `                     
         <ul id="edit-mode-subtask${iSubtasks}" class="">
             <li id="subtask-item-edit${iSubtasks}" ondblclick="editSubtask(${iSubtasks})" class="subtask-item-edit d-flex-y">
-                <input id="input-subtask-edit${iSubtasks}" class="input-subtask-edit" type="text" value="&bull; ${title}" disabled>
+                <input id="input-subtask-edit${iSubtasks}" class="input-subtask-edit" type="text" value="&bull; ${title}" disabled onkeydown="handleKeyDownEditSubtask(event, ${iSubtasks})">
                 <div id="subtask-icons-display-mode${iSubtasks}" class="subtask-icons d-flex-x">
                     <img id="edit-subtask${iSubtasks}" class="img-edit-subtask" onclick="editSubtask(${iSubtasks})" src="../assets/img/pencilBlue.png" alt="Edit Subtask">
                     <span class="horizonal-line-subtask horizontal-line-hover"></span>
@@ -227,5 +229,4 @@ function getAssignedToEditTemplateOverlay(initial, color, name, iContact, isChec
             </div>
         </div> `;
 }
-
 
