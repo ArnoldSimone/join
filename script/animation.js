@@ -1,19 +1,38 @@
 function animationStartCheck() {
   if (!sessionStorage.getItem("animation")) {
-    animationStart();
+    startAnimation();
   } else {
     stoppAnimation();
   };
 }
 
 
-function animationStart() {
+function startAnimation() {
+  if (window.innerWidth > 1000) {
+    desktopAnimation();
+  } else {
+    mobileAnimation();
+  }
+}
+
+
+function desktopAnimation() {
   document.getElementById('animation').classList.add('animation');
   document.getElementById('content').classList.add('animation-content');
   setTimeout(() => {
     sessionStorage.setItem("animation", "true");
     loginShow();
-  }, 2000);
+  }, 1500);
+}
+
+
+function mobileAnimation() {
+  document.getElementById('animation').classList.add('animation-mobil');
+  document.getElementById('content').classList.add('animation-content-mobil');
+  setTimeout(() => {
+    sessionStorage.setItem("animation", "true");
+    loginShow();
+  }, 1500);
 }
 
 
@@ -25,8 +44,24 @@ function loginShow() {
 
 
 function stoppAnimation() {
+  if (window.innerWidth > 1000) {
+    desktopVersion();
+  } else {
+    mobileVersion();
+  }
+  loginShow();
+}
+
+
+function desktopVersion() {
   document.getElementById('logo').src = '../assets/img/logo_blue.png';
   document.getElementById('animation').classList.add('animation-stopped');
   document.getElementById('content').classList.add('animation-content');
-  loginShow();
+}
+
+
+function mobileVersion() {
+  document.getElementById('logo').src = '../assets/img/logo_blue.png';
+  document.getElementById('animation').classList.add('animation-mobil-stopped');
+  document.getElementById('content').classList.add('animation-content-mobil');
 }

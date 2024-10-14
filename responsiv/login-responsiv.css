@@ -1,14 +1,95 @@
 @media (max-width: 1000px) {
-  .login-header {
-
+  .animation-stopped .animation-content {
+    transform: translate(-42vw, -43vh);
   }
-  
+
+  .animation-content {
+    padding: 20px 0 0 40px;
+  }
+
+  .animation-content img {
+    width: 40%;
+  }
+
+  .login-header {
+    display: none;
+  }
+
+  .login-mobil {
+    display: flex !important;
+    justify-content: center;
+    margin-top: 20px;
+  }
+
+  .login-section {
+    margin-top: 88px;
+  }
+
+  .login {
+    width: 390px;
+  }
+
+  form {
+    padding: 0 20px 7px;
+  }
+
   .login-buttons {
     flex-direction: column;
     align-items: center;
+    gap: 16px;
   }
 
   .login-in {
     width: 140px;
+  }
+
+  .login-in:hover { 
+    transform: none;
+    background-color: var(--darkblue);
+    filter: none;
+  }
+
+  .guest-log:hover {
+    transform: none;
+    color: var(--darkblue);
+    filter: none;
+    border-color: var(--darkblue);
+  }
+
+  .sign-up-content a:hover {
+    transform: none;
+    background-color: var(--darkblue);
+    filter: none;
+  }
+
+  .info-notice {
+    margin-top: 40px;
+  }
+
+  .info-notice a:hover {
+    color: var(--grey);
+    transform: none;
+  }
+}
+
+@media (max-width: 430px) {
+  .login {
+    width: 300px;
+  }
+
+  .login-content h1 {
+    font-size: 46px;
+  }
+
+  .login-in {
+    width: 120px;
+  }
+
+  .login-buttons a {
+    width: 120px;
+  }
+
+  .sign-up-content a {
+    height: 40px;
   }
 }

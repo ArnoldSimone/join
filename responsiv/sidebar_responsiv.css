@@ -29,6 +29,10 @@
     height: 100%;
   }
 
+  .menu-link p {
+    margin: 0;
+  }
+
   .info p {
     margin: 0;
   }
