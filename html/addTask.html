@@ -45,7 +45,7 @@
                         <div class="form-group">
                             <label for="assigned">Assigned to</label>
                             <div id="inputAssigned" class="assigned-input d-flex-y">
-                                <input id="assignedInput" onkeyup="assignedSearch(); inputValueCheck()" placeholder="Select task category" type="text">
+                                <input id="assignedInput" onkeyup="assignedSearch(); inputValueCheck()" placeholder="Select contacts to assign" type="text">
                                 <img id="assignedImage" onclick="assignedListToogle()" src="../assets/icon/arrow_drop_downaa.svg" alt="Down">
                             </div>
                             <div id="assignedList" class="assigned-list d-none">
@@ -82,6 +82,7 @@
                         <div class="form-group">
                             <label for="category">Category<span class="required">*</span></label>
                             <select id="category" name="category">
+                                <option value="" disabled selected>Select task category</option>
                                 <option>User Story</option>
                                 <option>Technical Task</option>
                             </select>
