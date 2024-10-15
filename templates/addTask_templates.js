@@ -27,12 +27,13 @@ function generateSelectedUsersHTML(initial, color) {
 
 function generateSubtaskHTML(subtaskId, subtaskText) {
     return `
-        <li id="subtask-${subtaskId}">
+        <li id="subtask-${subtaskId}" class="subtask-item" onmouseover="showButtons(${subtaskId})" onmouseout="hideButtons(${subtaskId})">
             <span id="subtask-text-${subtaskId}">${subtaskText}</span>
-            <input type="text" id="edit-subtask-${subtaskId}" class="edit-subtask-input" value="${subtaskText}" style="display: none;">
-            <button type="button" onclick="editSubtask(${subtaskId})"><img src="../assets/img/edit.png" alt=""></button>
-            <button type="button" onclick="deleteSubtask(${subtaskId})"><img src="../assets/img/dustbinDark.svg" alt=""></button>
-            <button type="button" id="save-${subtaskId}" style="display: none;" onclick="saveSubtask(${subtaskId})">Save</button>
+            <span class="subtask-buttons" id="subtask-buttons-${subtaskId}" style="display: none;">
+                <button class="subtask-button" type="button" onclick="editSubtask(${subtaskId})"><img src="../assets/img/edit.png" alt=""></button>
+                 <div class="small-break-between"></div>
+                <button class="subtask-button" type="button" onclick="deleteSubtask(${subtaskId})"><img src="../assets/img/dustbinDark.svg" alt=""></button>
+            </span>
         </li>
     `;
 }
@@ -40,19 +41,26 @@ function generateSubtaskHTML(subtaskId, subtaskText) {
 
 function generateEditSubtaskHTML(index, title) {
     return `
-        <input type="text" id="edit-subtask-input" value="${title}" class="edit-subtask-input">
-        <button onclick="saveSubtask(${index})"><img src="../assets/img/check.png" alt=""></button>
-        <button onclick="cancelEdit(${index})"><img src="../assets/img/dustbinDark.svg" alt=""></button>
+        <div class="subtask-edit-container">
+            <input type="text" id="edit-subtask-input" value="${title}" class="edit-subtask-input">
+            <div class="subtask-buttons">
+                <button class="subtask-button" onclick="saveSubtask(${index})"><img src="../assets/img/check.png" alt="Save"></button>
+                 <div class="small-break-between"></div>
+                <button class="subtask-button" onclick="cancelEdit(${index})"><img src="../assets/img/dustbinDark.svg" alt="Delete"></button>
+            </div>
+        </div>
     `;
 }
+
 
 function generateSubtaskItemHTML(title, index) {
     return `
         <li class="subtask-item" onmouseover="showButtons(${index})" onmouseout="hideButtons(${index})">
             ${title}
             <span id="subtask-buttons-${index}" class="subtask-buttons" style="display:none;">
-                <button onclick="editSubtask(${index})"><img src="../assets/img/edit.png" alt=""></button>
-                <button onclick="deleteSubtask(${index})"><img src="../assets/img/dustbinDark.svg" alt=""></button>
+                <button class="subtask-button" onclick="editSubtask(${index})"><img src="../assets/img/edit.png" alt=""></button>
+                 <div class="small-break-between"></div>
+                <button class="subtask-button" onclick="deleteSubtask(${index})"><img src="../assets/img/dustbinDark.svg" alt=""></button>
             </span>
         </li>
     `;

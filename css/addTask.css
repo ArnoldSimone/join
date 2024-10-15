@@ -125,9 +125,9 @@ input, select, textarea {
     font-weight: 200;
 }
 
-/* input:hover, select:hover, textarea:hover {
-    border: 1px solid var(--darkblue);
-} */
+input:hover, select:hover, textarea:hover {
+    border: 1px solid grey;
+}
 
 textarea {
     resize: vertical;
@@ -206,41 +206,18 @@ button.create-task:hover {
 .break-between {
     width: 1px;               
     background-color: var(--middlegrey);         
-    margin: 0 20px; 
+    margin: 0 0; 
+}
+
+.small-break-between {
+    height: 14px; 
+    border-left: 1px solid var(--middlegrey); 
+    margin: 0 10px;
+    display: inline-block; 
 }
 
 #description {
     height: 108px;
-}
-
-.subtask-connect {
-    position: relative;
-    display: flex;
-    align-items: center;
-}
-
-.subtask-connect input {
-    width: 100%;
-    padding-right: 40px;
-    box-sizing: border-box;
-}
-
-.subtask-img {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    cursor: pointer;
-}
-
-.subtask-img img {
-    width: 20px;
-    height: 20px;
-}
-
-.subtask-img:hover {
-    background-color: var(--middlegrey);
-    border-radius: 50%;
 }
 
 .required {
@@ -317,20 +294,100 @@ button.create-task:hover {
    padding-left: 10px;
 }
 
-.d-none {
-    display: none;
-}
-
 #subtask-list li {
     position: relative;
 }
 
 #subtask-list li button {
     display: none;
-    margin-left: 10px;
 }
 
 #subtask-list li:hover button {
     display: inline-block;
 }
 
+.subtask-edit-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid var(--lightblue); 
+}
+
+.edit-subtask-input {
+    width: 100%;
+    height: 16px;
+    border: none;
+    border-radius: 0% !important;
+    padding-right: 50px;
+    box-sizing: border-box;
+    outline: none;
+}
+
+.edit-subtask-input:hover {
+    border: none;
+}
+
+.subtask-buttons {
+    position: absolute;
+    right: 10px; 
+    display: flex;
+}
+
+.subtask-buttons img {
+    height: 14px;
+    cursor: pointer;
+}
+
+.subtask-button {
+    border: inherit;
+}
+
+.subtask-edit-container button {
+    background-color: white !important;
+}
+
+.subtask-edit-container button:hover {
+    background-color: var(--middlegrey) !important;
+    border-radius: 50%;
+}
+
+.subtask-item:hover .subtask-buttons {
+    display: flex; 
+}
+
+.subtask-item button {
+    background-color: rgb(228, 228, 228);
+}
+
+.subtask-connect {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.subtask-connect input {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.subtask-img {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+.subtask-img img {
+    width: 20px;
+    height: 20px;
+}
+
+.subtask-img:hover {
+    background-color: rgb(228, 228, 228);
+    border-radius: 50%;
+}
+
+li:hover {
+    background-color: rgb(228, 228, 228);
+}

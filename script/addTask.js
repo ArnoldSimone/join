@@ -288,6 +288,12 @@ function saveSubtask(index) {
 }
 
 
+function deleteSubtask(index) {
+    subtasks.splice(index, 1);
+    renderSubtasks();
+}
+
+
 function cancelEdit(index) {
     renderSubtasks();
 }
@@ -303,18 +309,18 @@ function renderSubtasks() {
 
 
 function showButtons(index) {
-    document.getElementById(`subtask-buttons-${index}`).style.display = 'inline';
+    const buttons = document.getElementById(`subtask-buttons-${index}`);
+    if (buttons) {
+        buttons.style.display = 'inline';
+    }
 }
 
 
 function hideButtons(index) {
-    document.getElementById(`subtask-buttons-${index}`).style.display = 'none';
-}
-
-
-function deleteSubtask(index) {
-    subtasks.splice(index, 1);
-    renderSubtasks();
+    const buttons = document.getElementById(`subtask-buttons-${index}`);
+    if (buttons) {
+        buttons.style.display = 'none';
+    }
 }
 
 
