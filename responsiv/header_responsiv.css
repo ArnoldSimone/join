@@ -4,7 +4,8 @@
   }
 
   .header-content {
-    padding-left: 40px;
+    padding-right: 0px;
+    padding-left: 20px;
   }
 
   .mobile-logo {
@@ -16,6 +17,7 @@
   }
 
   .header-right {
+    width: 80px;
     justify-content: center;
   }
 
