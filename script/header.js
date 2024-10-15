@@ -1,3 +1,7 @@
+/**
+ * Toggles the user menu. For window widths greater than 1000 pixels, the menu is shown or hidden. 
+ * For smaller screens, the mobile menu is opened.
+ */
 function toggleUserMenu() {
   let userMenu = document.getElementById('userMenu');
   if (window.innerWidth > 1000) {
@@ -8,6 +12,9 @@ function toggleUserMenu() {
 }
 
 
+/**
+ * Opens or closes the mobile user menu. If the menu is not visible, it opens; otherwise, it closes.
+ */
 function mobilMenu() {
   let userMobile = document.getElementById('userMobile');
   if (!userMobile.classList.contains('show-logout-mobile')) {
@@ -18,6 +25,9 @@ function mobilMenu() {
 }
 
 
+/**
+ * Opens the mobile user menu by removing and adding the appropriate classes.
+ */
 function openMobilMenu() {
   userMobile.classList.remove('exit-logout-mobile');
   userMobile.classList.add('show-logout-mobile');
@@ -25,6 +35,10 @@ function openMobilMenu() {
 }
 
 
+/**
+ * Closes the mobile user menu by adding the exit class. 
+ * After a delay of 700 milliseconds, the menu is hidden.
+ */
 function closeMobilMenu() {
   userMobile.classList.add('exit-logout-mobile');
   setTimeout(function() {
@@ -34,6 +48,9 @@ function closeMobilMenu() {
 }
 
 
+/**
+ * Logs out the user by redirecting to the login page.
+ */
 function logOut() {
   window.location.replace('../index.html');
 }

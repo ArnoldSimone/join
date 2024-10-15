@@ -2,6 +2,10 @@ let users = [];
 let activeLink = null;
 
 
+/**
+ * 
+ * 
+ */
 function validateLogin() {
   let inputColor = document.getElementById('password-content');
   let password = document.getElementById('password').value;

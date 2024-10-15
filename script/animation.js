@@ -1,3 +1,7 @@
+/**
+ * Checks whether the animation should start by verifying if it's already stored in the session.
+ * Starts or stops the animation based on the result.
+ */
 function animationStartCheck() {
   if (!sessionStorage.getItem("animation")) {
     startAnimation();
@@ -7,6 +11,10 @@ function animationStartCheck() {
 }
 
 
+/**
+ * Starts the animation based on the window width. For larger screens, the desktop animation
+ * is used, while for smaller screens, the mobile animation is started.
+ */
 function startAnimation() {
   if (window.innerWidth > 1000) {
     desktopAnimation();
@@ -16,6 +24,10 @@ function startAnimation() {
 }
 
 
+/**
+ * Runs the animation for desktop screens. After a delay of 1.5 seconds, the animation is 
+ * stored in sessionStorage, and the login section is displayed.
+ */
 function desktopAnimation() {
   document.getElementById('animation').classList.add('animation');
   document.getElementById('content').classList.remove('animation-content-mobil');
@@ -27,6 +39,10 @@ function desktopAnimation() {
 }
 
 
+/**
+ * Runs the animation for mobile devices. After a delay of 1.5 seconds, the animation is 
+ * stored in sessionStorage, and the login section is displayed.
+ */
 function mobileAnimation() {
   document.getElementById('animation').classList.add('animation-mobil');
   document.getElementById('content').classList.remove('animation-content');
@@ -38,6 +54,9 @@ function mobileAnimation() {
 }
 
 
+/**
+ * Displays the login section by making the relevant elements visible.
+ */
 function loginShow() {
   document.getElementById('login-header').classList.remove('d-none');
   document.getElementById('login').classList.remove('d-none'); 
@@ -45,6 +64,10 @@ function loginShow() {
 }
 
 
+/**
+ * Stops the animation and displays the corresponding version (desktop or mobile) based on 
+ * the window width. The login section is displayed after the stop.
+ */
 function stoppAnimation() {
   if (window.innerWidth > 1000) {
     desktopVersion();
@@ -55,6 +78,9 @@ function stoppAnimation() {
 }
 
 
+/**
+ * Checks the window width and displays either the desktop or mobile version.
+ */
 function checkWindowWitdh() {
   let width = window.innerWidth;
   if (width > 1000) {
@@ -62,10 +88,13 @@ function checkWindowWitdh() {
   } else {
     mobileVersion();
   };
-  loginShow();
 }
 
 
+/**
+ * Sets the view and layout for desktop screens by adding or removing the appropriate 
+ * classes and styles.
+ */
 function desktopVersion() {
   document.getElementById('logo').src = '../assets/img/logo_blue.png';
   document.getElementById('animation').classList.remove('animation-mobil');
@@ -79,6 +108,10 @@ function desktopVersion() {
 }
 
 
+/**
+ * Sets the view and layout for mobile devices by adding or removing the appropriate 
+ * classes and styles.
+ */
 function mobileVersion() {
   document.getElementById('logo').src = '../assets/img/logo_blue.png';
   document.getElementById('animation').classList.remove('animation-stopped');
