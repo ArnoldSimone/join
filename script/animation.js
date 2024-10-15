@@ -12,12 +12,13 @@ function startAnimation() {
     desktopAnimation();
   } else {
     mobileAnimation();
-  }
+  };
 }
 
 
 function desktopAnimation() {
   document.getElementById('animation').classList.add('animation');
+  document.getElementById('content').classList.remove('animation-content-mobil');
   document.getElementById('content').classList.add('animation-content');
   setTimeout(() => {
     sessionStorage.setItem("animation", "true");
@@ -28,7 +29,8 @@ function desktopAnimation() {
 
 function mobileAnimation() {
   document.getElementById('animation').classList.add('animation-mobil');
-  document.getElementById('content').classList.add('animation-content');
+  document.getElementById('content').classList.remove('animation-content');
+  document.getElementById('content').classList.add('animation-content-mobil');
   setTimeout(() => {
     sessionStorage.setItem("animation", "true");
     loginShow();
@@ -48,35 +50,40 @@ function stoppAnimation() {
     desktopVersion();
   } else {
     mobileVersion();
-  }
+  };
   loginShow();
 }
 
 
 function checkWindowWitdh() {
   let width = window.innerWidth;
-  console.log(width);
-  
   if (width > 1000) {
     desktopVersion();
   } else {
     mobileVersion();
-  }
+  };
   loginShow();
 }
 
 
 function desktopVersion() {
   document.getElementById('logo').src = '../assets/img/logo_blue.png';
+  document.getElementById('animation').classList.remove('animation-mobil');
+  document.getElementById('animation').classList.remove('animation-mobil-stopped');
+  document.getElementById('content').classList.remove('animation-content-mobil');
   document.getElementById('animation').classList.add('animation');
   document.getElementById('animation').classList.add('animation-stopped');
   document.getElementById('content').classList.add('animation-content');
+  document.getElementById('content').classList.add('animation-content-img');
+  loginShow();
 }
 
 
 function mobileVersion() {
   document.getElementById('logo').src = '../assets/img/logo_blue.png';
-  document.getElementById('animation').classList.add('animation-mobil-stopped');
+  document.getElementById('animation').classList.remove('animation-stopped');
   document.getElementById('content').classList.remove('animation-content');
+  document.getElementById('animation').classList.add('animation-mobil-stopped');
   document.getElementById('content').classList.add('animation-content-mobil');
+  loginShow();
 }

@@ -1,8 +1,4 @@
 @media (max-width: 1000px) {
-  .animation-content {
-    padding: 20px 0 0 40px;
-  }
-
   .animation-content img {
     width: 40%;
   }
