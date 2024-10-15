@@ -1,8 +1,4 @@
 @media (max-width: 1000px) {
-  .animation-stopped .animation-content {
-    transform: translate(-42vw, -43vh);
-  }
-
   .animation-content {
     padding: 20px 0 0 40px;
   }
