@@ -1,11 +1,20 @@
-.body {
+body,
+html {
+    height: 100%;
     width: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
 }
 
 main {
     margin-left: 232px;
     padding: 32px 64px;
     max-width: 1440px;
+    flex-grow: 1;
+    overflow-y: auto;
 }
 
 a {
@@ -16,7 +25,7 @@ a {
     gap: 24px;
 }
 
-.headline {
+.headline-summary {
     font-size: 60px;
     font-weight: 700;
 }
@@ -162,73 +171,4 @@ a {
     font-size: 48px;
     color: var(--lightblue);
     font-weight: 600;
-}
-
-
-
-@media (max-width: 1280px) {
-    .greeting-summary {
-        display: none;
-    }
-}
-
-@media (max-width: 1024px) {
-    .header-summary {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0;
-    }
-
-    .vertical-line-blue {
-        display: none;
-    }
-
-    .horizontal-line-blue {
-        display: block;
-        margin: 16px 0 40px 0;
-    }
-
-    .headline {
-        margin-bottom: 0;
-    }
-}
-
-
-@media (max-width: 920px) {
-    aside {
-        display: none;
-    }
-
-    main {
-        margin-left: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .headline {
-        margin-top: 0;
-    }
-}
-
-@media (max-width: 600px) {
-
-    .main {
-        width: 100%;
-    }
-
-    .summary-container {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-    }
-
-    .main-summary {
-        justify-content: center;
-    }
-
-
-
 }

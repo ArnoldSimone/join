@@ -10,6 +10,9 @@
     <link rel="stylesheet" href="../css/sidebar.css">
     <link rel="stylesheet" href="../css/fonts.css">
     <link rel="stylesheet" href="../css/summary.css">
+    <link rel="stylesheet" href="../responsiv/header_responsiv.css">
+    <link rel="stylesheet" href="../responsiv/sidebar_responsiv.css">
+    <link rel="stylesheet" href="../responsiv/summary_responsiv.css">
     <script src="../script/include.js"></script>
     <script src="../script/summary.js"></script>
     <script src="../script/database.js"></script>
@@ -28,7 +31,7 @@
     <main>
         <section class="summary-container">
             <div class="header-summary d-flex-y">
-                <h1 class="headline">Join 360</h1>
+                <h1 class="headline-summary">Join 360</h1>
                 <div class="vertical-line-blue"></div>
                 <span class="headline-right">Key Metrics at a Glance</span>
                 <div class="horizontal-line-blue d-none"></div>
@@ -36,7 +39,7 @@
             <div class="main-summary d-flex-y">
                 <div class="ctn-tasks-summary d-flex">
                     <div class="main-summary-top d-flex">
-                       <a href="../html/board.html" class="summary-done d-flex ctn-tasks gap-20 ctn-task-middle">
+                        <a href="../html/board.html" class="summary-done d-flex ctn-tasks gap-20 ctn-task-middle">
                             <img id="img-pencil" class="img img-pencil" src="../assets/img/pencilDark.svg"
                                 alt="Image Pencil">
                             <div class="summary-task d-flex">
@@ -61,21 +64,25 @@
                             </div>
                         </a>
                         <div class="vertical-line-grey"></div>
-                        <a href="../html/board.html" id="main-summary-middle-right" class="main-summary-middle-right d-flex">
+                        <a href="../html/board.html" id="main-summary-middle-right"
+                            class="main-summary-middle-right d-flex">
                             <span id="date-upcoming-deadline" class="date-upcoming-deadline"></span>
-                            <span>Upcoming Dealine</span>
+                            <span class="text-deadline">Upcoming Dealine</span>
                         </a>
                     </div>
                     <div class="main-summary-bottom d-flex">
-                        <a href="../html/board.html" class="summary-tasks-in-board d-flex ctn-tasks ctn-task-smal task-bottom-summary">
+                        <a href="../html/board.html"
+                            class="summary-tasks-in-board d-flex ctn-tasks ctn-task-smal task-bottom-summary">
                             <span id="tasks-in-board-counter" class="counter"></span>
                             <span class="text-counter">Tasks in <br>Board</span>
                         </a>
-                        <a href="../html/board.html" class="summary-tasks-in-progress d-flex ctn-tasks ctn-task-smal task-bottom-summary">
+                        <a href="../html/board.html"
+                            class="summary-tasks-in-progress d-flex ctn-tasks ctn-task-smal task-bottom-summary">
                             <span id="tasks-in-progress-counter" class="counter"></span>
                             <span class="text-counter">Tasks in<br>Progress</span>
                         </a>
-                        <a href="../html/board.html" class="summary-feedback d-flex ctn-tasks ctn-task-smal task-bottom-summary">
+                        <a href="../html/board.html"
+                            class="summary-feedback d-flex ctn-tasks ctn-task-smal task-bottom-summary">
                             <span id="feedback-counter" class="counter"></span>
                             <span class="text-counter">Awaiting<br>Feedback</span>
                         </a>
