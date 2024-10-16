@@ -238,8 +238,9 @@ function passwordDontMatch() {
 
 
 /**
- * Sends the user's registration data to the database.
- * @async
+ * Handles user registration by gathering user input and saving it to the database.
+ * It first registers the user in the "users" collection, then creates a contact
+ * entry in the "contacts" collection with an avatar generated from the user's name.
  */
 async function postRegistrationUser() {
   let name = document.getElementById('name').value;
@@ -247,10 +248,61 @@ async function postRegistrationUser() {
   let password = document.getElementById('password').value;
   try {
     await postToDatabase("users", user = { name: name, email: email, password: password });
+    let contact = createNewContact(name, email);
+    await postToDatabase("contacts", contact);
   } catch (error) {
     console.error('Registration failed', error);
   };
   await registrationSuccesful();
+}
+
+
+/**
+ * Creates a new contact object with a generated avatar from the user's name and email.
+ *
+ * @function createNewContact
+ * @param {string} name - The name of the contact.
+ * @param {string} email - The email address of the contact.
+ * @returns {Object} - The contact object containing name, email, and avatar.
+ */
+function createNewContact(name, email) {
+  let avatar = generateAvatar(name);
+  return createContact(name, email, avatar);
+}
+
+
+/**
+ * Generates an avatar for a user based on their name.
+ * The avatar contains the initials of the user's name and a random color.
+ *
+ * @function generateAvatar
+ * @param {string} name - The name of the user.
+ * @returns {Object} - An avatar object containing initials and color.
+ */
+function generateAvatar(name) {
+  return {
+      initials: name.split(' ').map(n => n[0]).join(''),
+      color: '#' + Math.floor(Math.random() * 16777215).toString(16)
+  };
+}
+
+
+/**
+ * Creates a contact object with the provided name, email, and avatar.
+ *
+ * @function createContact
+ * @param {string} name - The name of the contact.
+ * @param {string} email - The email address of the contact.
+ * @param {Object} avatar - The avatar object of the contact.
+ * @returns {Object} - The contact object containing name, email, and avatar.
+ */
+function createContact(name, email, avatar) {
+  return {
+      name: name,
+      email: email,
+      avatar: avatar,
+      phone: ''
+  };
 }
 
 
@@ -265,6 +317,10 @@ function registrationSuccesful() {
 }
 
 
+/**
+ * Redirects the user to the login page.
+ * This function changes the current window location to '../index.html'.
+ */
 function loginInForwarding() {
   window.location.replace('../index.html');
 }

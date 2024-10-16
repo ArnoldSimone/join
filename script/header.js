@@ -52,5 +52,6 @@ function closeMobilMenu() {
  * Logs out the user by redirecting to the login page.
  */
 function logOut() {
+  localStorage.clear();
   window.location.replace('../index.html');
 }
