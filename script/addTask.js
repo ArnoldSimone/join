@@ -3,7 +3,9 @@ let allContacts;
 let users = [];
 let subtasks = [];
 
-
+/**
+ * Initializes the application by fetching contacts, setting the minimum date for the due date input, and setting the medium priority.
+ */
 function init() {
     fetchContacts();
     setMinDate();
@@ -11,17 +13,21 @@ function init() {
 }
 
 
+/**
+ * Fetches the contacts from the database and renders them in the assigned list.
+ * @async
+ * @returns {Promise<void>}
+ */
 async function fetchContacts() {
-    try {
-        let contactsData = await loadFromDatabase("/contacts");
-        allContacts = Object.entries(contactsData).map(([id, contact]) => ({ id, ...contact }));
-    } catch (error) {
-        console.log(error);
-    }
+    let contactsData = await loadFromDatabase("/contacts");
+    allContacts = Object.entries(contactsData).map(([id, contact]) => ({ id, ...contact }));
     renderAllContactsInAssignedTo();
 }
 
 
+/**
+ * Renders all contacts in the assigned to list.
+ */
 function renderAllContactsInAssignedTo() {
     let list = document.getElementById('assignedList');
     for (let index = 0; index < allContacts.length; index++) {
@@ -35,6 +41,9 @@ function renderAllContactsInAssignedTo() {
 }
 
 
+/**
+ * Handles the assigned search input and filters the contacts based on the search text.
+ */
 function assignedSearch() {
     let searchText = document.getElementById('assignedInput').value;
     if (searchText.length > 0) {
@@ -48,12 +57,20 @@ function assignedSearch() {
 }
 
 
+/**
+ * Filters the contacts array based on the search text and renders the search results.
+ * @param {string} searchText - The text to search for in the contacts.
+ */
 function searchIndexOfArray(searchText) {
     result = allContacts.filter(element => element.name.toLowerCase().includes(searchText.toLowerCase()));
     renderSearchResult(result);
 }
 
 
+/**
+ * Renders the search results in the assigned list.
+ * @param {Array} result - The filtered list of contacts based on the search.
+ */
 function renderSearchResult(result) {
     let searchList = document.getElementById('assignedList');
     searchList.innerHTML = '';
@@ -69,12 +86,18 @@ function renderSearchResult(result) {
 }
 
 
+/**
+ * Opens the user list by displaying the assigned list and hiding the selected user list.
+ */
 function openUserList() {
     document.getElementById('assignedList').classList.remove('d-none');
     document.getElementById('selectedUser').classList.add('d-none');
 }
 
 
+/**
+ * Resets the search results and clears the current search.
+ */
 function resetSearch() {
     let list = document.getElementById('assignedList');
     list.innerHTML = '';
@@ -82,6 +105,9 @@ function resetSearch() {
 }
 
 
+/**
+ * Toggles the visibility of the assigned list and the selected user list.
+ */
 function assignedListToogle() {
     let list = document.getElementById('assignedList');
     let users = document.getElementById('selectedUser');
@@ -98,11 +124,17 @@ function assignedListToogle() {
 }
 
 
+/**
+ * Resets the value of the assigned input field.
+ */
 function resetSearchValue() {
     document.getElementById('assignedInput').value = '';
 }
 
 
+/**
+ * Checks the input value and resets it if it is empty.
+ */
 function inputValueCheck() {
     let value = document.getElementById('assignedInput').value;
     if (value == 0) {
@@ -113,6 +145,9 @@ function inputValueCheck() {
 }
 
 
+/**
+ * Toggles the image source for the assigned input dropdown.
+ */
 function toogleInputImage() {
     let image = document.getElementById('assignedImage');
     if (image.src.includes('assets/icon/arrow_drop_downaa.svg')) {
@@ -123,6 +158,9 @@ function toogleInputImage() {
 }
 
 
+/**
+ * Toggles the border color of the assigned input field based on its current state.
+ */
 function toogleInputBorderColor() {
     let inputElement  = document.getElementById('inputAssigned');
     let color = window.getComputedStyle(inputElement).borderColor;
@@ -134,6 +172,10 @@ function toogleInputBorderColor() {
 }
 
 
+/**
+ * Selects or deselects a user by their ID and updates the user selection.
+ * @param {string} id - The ID of the user to select or deselect.
+ */
 function selectionUser(id) {    
     let user = allContacts.find(user => user.id == id);    
     let result = users.find((element) => element == user);
@@ -142,12 +184,16 @@ function selectionUser(id) {
     } else {
         deleteUser(user);
     };
-    toogleUserCheckbox(id);
+    toggleUserCheckbox(id);
     renderSelectArray();
 }
 
 
-function toogleUserCheckbox(id) {
+/**
+ * Toggles the checkbox state for a user based on their ID.
+ * @param {string} id - The ID of the user whose checkbox state should be toggled.
+ */
+function toggleUserCheckbox(id) {
     let checkbox = document.querySelector(`input[data-user-id="${id}"]`);
     if (checkbox) {
         checkbox.checked = !checkbox.checked;
@@ -155,6 +201,9 @@ function toogleUserCheckbox(id) {
 }
 
 
+/**
+ * Renders the selected users in the selected user list.
+ */
 function renderSelectArray() {
     let listContent = document.getElementById('selectedUser');
     listContent.innerHTML = '';
@@ -166,6 +215,10 @@ function renderSelectArray() {
 }
 
 
+/**
+ * Deletes a user from the users array by their ID.
+ * @param {string} id - The ID of the user to delete.
+ */
 function deleteUser(id) {
     let index = users.findIndex((user) => user == id);
     if (users.length > 1 ) {
@@ -177,6 +230,11 @@ function deleteUser(id) {
 }
 
 
+/**
+ * Adds a task to Firebase with the provided task data.
+ * @param {Object} taskData - The task data to add to Firebase.
+ * @returns {Promise<void>}
+ */
 async function addTaskToFirebase(taskData) {
     const result = await postToDatabase("tasks", taskData);
         if (result) {
@@ -185,11 +243,17 @@ async function addTaskToFirebase(taskData) {
 }
 
 
+/**
+ * Handles successful task creation by showing a popup.
+ */
 function handleSuccessfulTaskCreation() {
     showPopup();
 }
 
 
+/**
+ * Displays a success popup and redirects to the board page after a timeout.
+ */
 function showPopup() {
     const popup = document.getElementById('success-popup');
     popup.classList.remove('d-none');
@@ -201,6 +265,9 @@ function showPopup() {
 }
 
 
+/**
+ * Submits the task form by validating the fields and adding the task to Firebase if valid.
+ */
 function submitForm() {
     const taskData = gatherFormData();
     let valid = validateField("title", taskData.title) &&
@@ -211,6 +278,13 @@ function submitForm() {
 }
 
 
+/**
+ * Validates a specific field based on its ID and value.
+ * @param {string} fieldId - The ID of the field to validate.
+ * @param {string} value - The value of the field to validate.
+ * @param {boolean} [isDate=false] - Indicates if the field is a date field.
+ * @returns {boolean} - Returns true if the field is valid; otherwise, false.
+ */
 function validateField(fieldId, value, isDate = false) {
     const input = document.getElementById(fieldId);
     const errorText = getErrorText(fieldId, input);
@@ -221,6 +295,12 @@ function validateField(fieldId, value, isDate = false) {
 }
 
 
+/**
+ * Gets or creates an error text element for a specific input field.
+ * @param {string} fieldId - The ID of the field to get the error text for.
+ * @param {HTMLInputElement} input - The input element associated with the field.
+ * @returns {HTMLElement} - The error text element.
+ */
 function getErrorText(fieldId, input) {
     let errorText = document.getElementById(`${fieldId}-error`);
     if (!errorText) {
@@ -235,18 +315,30 @@ function getErrorText(fieldId, input) {
 }
 
 
+/**
+ * Sets the state of the input field and its error text based on validity.
+ * @param {HTMLInputElement} input - The input element to set the state for.
+ * @param {HTMLElement} errorText - The error text element to update.
+ * @param {boolean} isValid - Indicates if the input is valid.
+ */
 function setFieldState(input, errorText, isValid) {
     input.style.border = isValid ? "" : "1px solid red";
     errorText.textContent = isValid ? "" : "This field is required";
 }
 
 
+/**
+ * Sets the minimum date for the due date input field to today’s date.
+ */
 function setMinDate() {
     let today = new Date().toISOString().split('T')[0]; 
     document.getElementById("due-date").setAttribute("min", today); 
 }
 
 
+/**
+ * Validates the selected due date and shows an error message if it is in the past.
+ */
 function validateDate() {
     const input = document.getElementById("due-date");
     const selectedDate = new Date(input.value);
@@ -261,6 +353,10 @@ function validateDate() {
 }
 
 
+/**
+ * Gathers all form data into an object for submission.
+ * @returns {Object} - The collected form data.
+ */
 function gatherFormData() {
     return {
         title: getFormValue("title"),
@@ -275,28 +371,47 @@ function gatherFormData() {
 }
 
 
+/**
+ * Gathers the names of the selected users.
+ * @returns {Array} - An array of selected user names.
+ */
 function gatherSelectedUsers() {
     return users.map(user => user.name);
 }
 
 
+/**
+ * Retrieves the value of a specific form field by name.
+ * @param {string} name - The name of the form field to get the value for.
+ * @returns {string} - The value of the specified form field.
+ */
 function getFormValue(name) {
     return document.forms["taskForm"][name].value;
 }
 
 
+/**
+ * Gathers the subtasks from the subtask list.
+ * @returns {Array} - An array of subtask objects.
+ */
 function gatherSubtasks() {
     const subtaskElements = document.querySelectorAll('#subtask-list li');
     return Array.from(subtaskElements).map(el => ({ completed: false, title: el.textContent.slice(2) }));
 }
 
 
+/**
+ * Shows the action buttons for subtasks.
+ */
 function showSubtaskActionButtons() {
     document.getElementById('plus-icon').style.display = 'none';
     document.getElementById('subtask-action-buttons').style.display = 'inline-block';
 }
 
 
+/**
+ * Clears the subtask input field.
+ */
 function clearSubtaskInput() {
     let subtaskInput = document.getElementById('subtasks');
     subtaskInput.value = '';
@@ -304,12 +419,18 @@ function clearSubtaskInput() {
 }
 
 
+/**
+ * Hides the action buttons for subtasks.
+ */
 function hideSubtaskActionButtons() {
     document.getElementById('plus-icon').style.display = 'inline-block';
     document.getElementById('subtask-action-buttons').style.display = 'none';
 }
 
 
+/**
+ * Adds a new subtask to the list if the input is valid.
+ */
 function addSubtask() {
     let subtaskInput = getSubtaskInput();
     if (isValidSubtask(subtaskInput)) {
@@ -323,27 +444,51 @@ function addSubtask() {
 }
 
 
+/**
+ * Retrieves the subtask input field element.
+ * @returns {HTMLInputElement} - The subtask input element.
+ */
 function getSubtaskInput() {
     return document.getElementById('subtasks');
 }
 
 
+/**
+ * Checks if the subtask input is valid.
+ * @param {HTMLInputElement} subtaskInput - The subtask input field to validate.
+ * @returns {boolean} - Returns true if valid; otherwise, false.
+ */
 function isValidSubtask(subtaskInput) {
     return subtaskInput && subtaskInput.value.trim() !== '';
 }
 
 
+/**
+ * Appends a new subtask to the subtask list.
+ * @param {number} subtaskId - The ID of the subtask to append.
+ * @param {string} subtaskText - The text of the subtask to append.
+ */
 function appendSubtaskToList(subtaskId, subtaskText) {
     let subtaskList = document.getElementById('subtask-list');
     subtaskList.innerHTML += generateSubtaskHTML(subtaskId, subtaskText);
 }
 
 
+/**
+ * Creates a subtask object.
+ * @param {number} subtaskId - The ID of the subtask.
+ * @param {string} subtaskText - The title of the subtask.
+ * @returns {Object} - The created subtask object.
+ */
 function createSubtask(subtaskId, subtaskText) {
     return { id: subtaskId, title: subtaskText, completed: false };
 }
 
 
+/**
+ * Edits a specific subtask by its index.
+ * @param {number} index - The index of the subtask to edit.
+ */
 function editSubtask(index) {
     const subtask = subtasks[index];
     let subtaskElement = document.querySelectorAll('#subtask-list li')[index];
@@ -352,6 +497,10 @@ function editSubtask(index) {
 }
 
 
+/**
+ * Saves changes made to a specific subtask.
+ * @param {number} index - The index of the subtask to save.
+ */
 function saveSubtask(index) {
     let newTitle = document.getElementById('edit-subtask-input').value.trim();
 
@@ -363,17 +512,28 @@ function saveSubtask(index) {
 }
 
 
+/**
+ * Deletes a specific subtask by its index.
+ * @param {number} index - The index of the subtask to delete.
+ */
 function deleteSubtask(index) {
     subtasks.splice(index, 1);
     renderSubtasks(); 
 }
 
 
+/**
+ * Cancels the editing of a subtask and re-renders the subtasks.
+ * @param {number} index - The index of the subtask to cancel editing for.
+ */
 function cancelEdit(index) {
     renderSubtasks();
 }
 
 
+/**
+ * Renders all subtasks in the subtask list.
+ */
 function renderSubtasks() {
     let subtaskList = document.getElementById('subtask-list');
     subtaskList.innerHTML = '';
@@ -383,6 +543,10 @@ function renderSubtasks() {
 }
 
 
+/**
+ * Shows action buttons for a specific subtask.
+ * @param {number} index - The index of the subtask to show buttons for.
+ */
 function showButtons(index) {
     const buttons = document.getElementById(`subtask-buttons-${index}`);
     if (buttons) {
@@ -391,6 +555,10 @@ function showButtons(index) {
 }
 
 
+/**
+ * Hides action buttons for a specific subtask.
+ * @param {number} index - The index of the subtask to hide buttons for.
+ */
 function hideButtons(index) {
     const buttons = document.getElementById(`subtask-buttons-${index}`);
     if (buttons) {
@@ -399,6 +567,11 @@ function hideButtons(index) {
 }
 
 
+/**
+ * Sets the value of a specific form field by name.
+ * @param {string} name - The name of the form field to set the value for.
+ * @param {string} value - The value to set for the specified form field.
+ */
 function setFormValue(name, value) {
     const formField = document.forms["taskForm"][name];
     if (formField) {
@@ -407,6 +580,9 @@ function setFormValue(name, value) {
 }
 
 
+/**
+ * Clears all fields in the task form.
+ */
 function clearForm() {
     setFormValue("title", '');
     setFormValue("description", '');
@@ -416,6 +592,9 @@ function clearForm() {
 }
 
 
+/**
+ * Clears the selected users from the user list.
+ */
 function clearAssignedUsers() {
     const selectedUser = document.getElementById('selectedUser');
     if (selectedUser) {
@@ -425,6 +604,9 @@ function clearAssignedUsers() {
 }
 
 
+/**
+ * Clears all subtasks from the subtask list.
+ */
 function clearSubtasks() {
     const subtaskList = document.getElementById('subtask-list');
     if (subtaskList) {
@@ -434,12 +616,19 @@ function clearSubtasks() {
 }
 
 
+/**
+ * Sets the default priority to medium and retrieves it from local storage if available.
+ */
 function mediumPriority() {
     const savedPriority = localStorage.getItem('selectedPriority') || 'Medium';
     changePrio(savedPriority);
 };
 
 
+/**
+ * Changes the task priority and updates the button styles accordingly.
+ * @param {string} priority - The new priority to set.
+ */
 function changePrio(priority) {
     const priorityConfig = getPriorityConfig();
     const buttons = document.querySelectorAll('.prio');
@@ -451,6 +640,10 @@ function changePrio(priority) {
 }
 
 
+/**
+ * Retrieves the configuration for task priorities.
+ * @returns {Object} - The configuration object for different priorities.
+ */
 function getPriorityConfig() {
     return {
         'Urgent': {
@@ -472,6 +665,12 @@ function getPriorityConfig() {
 }
 
 
+/**
+ * Updates the style of the priority buttons based on the selected priority.
+ * @param {HTMLElement} button - The button element to update.
+ * @param {string} selectedPriority - The currently selected priority.
+ * @param {Object} config - The configuration for button styles.
+ */
 function updateButtonStyle(button, selectedPriority, config) {
     const buttonPriority = button.textContent.trim();
     const img = button.querySelector('img');
@@ -483,6 +682,12 @@ function updateButtonStyle(button, selectedPriority, config) {
 }
 
 
+/**
+ * Applies the active style to a priority button.
+ * @param {HTMLElement} button - The button element to apply the style to.
+ * @param {Object} config - The configuration for the active style.
+ * @param {HTMLImageElement} img - The image element inside the button.
+ */
 function applyActiveStyle(button, config, img) {
     button.style.backgroundColor = config.color;
     img.src = config.activeImg;
@@ -492,6 +697,13 @@ function applyActiveStyle(button, config, img) {
 }
 
 
+/**
+ * Resets the style of a priority button to its default appearance.
+ * 
+ * @param {HTMLElement} button - The button element to reset.
+ * @param {Object} config - The configuration object containing default styles and image paths.
+ * @param {HTMLImageElement} img - The image element inside the button to update the source.
+ */
 function resetButtonStyle(button, config, img) {
     button.style.backgroundColor = 'white';
     img.src = config.defaultImg;
