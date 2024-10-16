@@ -77,7 +77,6 @@
                                 <button onclick="changePrio('Low')" id="btn-low" type="button" class="prio d-flex">Low
                                     <img src="../assets/img/lowsym.png" alt="">
                                 </button>
-                                
                             </div>
                         </div>
                         
@@ -93,7 +92,7 @@
                         <div class="form-group-subtask">
                             <label for="subtasks">Subtasks</label>
                             <div class="subtask-connect">
-                                <input type="text" id="subtasks" name="subtasks" placeholder="Add new subtask">
+                                <input type="text" id="subtasks" name="subtasks" placeholder="Add new subtask" onclick="showSubtaskActionButtons()">
                                 <div class="subtask-img">
                                     <img id="plus-icon" src="../assets/img/plusicon.png" alt="Add subtask" onclick="showSubtaskActionButtons()">
                                     <div id="subtask-action-buttons" style="display:none;">

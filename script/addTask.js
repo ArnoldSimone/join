@@ -7,6 +7,7 @@ let subtasks = [];
 function init() {
     fetchContacts();
     setMinDate();
+    mediumPriority();
 }
 
 
@@ -150,9 +151,7 @@ function toogleUserCheckbox(id) {
     let checkbox = document.querySelector(`input[data-user-id="${id}"]`);
     if (checkbox) {
         checkbox.checked = !checkbox.checked;
-    } else {
-        console.error(`Checkbox not found for user with ID ${id}`);
-    };
+    }
 }
 
 
@@ -391,6 +390,7 @@ function showButtons(index) {
     }
 }
 
+
 function hideButtons(index) {
     const buttons = document.getElementById(`subtask-buttons-${index}`);
     if (buttons) {
@@ -399,31 +399,54 @@ function hideButtons(index) {
 }
 
 
+function setFormValue(name, value) {
+    const formField = document.forms["taskForm"][name];
+    if (formField) {
+        formField.value = value;
+    }
+}
+
+
 function clearForm() {
     setFormValue("title", '');
     setFormValue("description", '');
-    setFormValue("assigned", 'Select contacts to assign');
+    clearAssignedUsers();
     setFormValue("due-date", '');
-    setFormValue("category", 'Select task category');
     clearSubtasks();
 }
 
 
-function setFormValue(name, value) {
-    document.forms["taskForm"][name].value = value;
+function clearAssignedUsers() {
+    const selectedUser = document.getElementById('selectedUser');
+    if (selectedUser) {
+        selectedUser.innerHTML = '';
+    }
+    document.getElementById('assignedInput').value = '';
 }
 
 
 function clearSubtasks() {
-    const subtaskInputs = document.querySelectorAll('.subtask-connect input');
-    subtaskInputs.forEach(input => input.value = '');
+    const subtaskList = document.getElementById('subtask-list');
+    if (subtaskList) {
+        subtaskList.innerHTML = '';
+    }
+    subtasks = []; 
 }
+
+
+function mediumPriority() {
+    const savedPriority = localStorage.getItem('selectedPriority') || 'Medium';
+    changePrio(savedPriority);
+};
 
 
 function changePrio(priority) {
     const priorityConfig = getPriorityConfig();
     const buttons = document.querySelectorAll('.prio');
     selectedPriority = priority;
+
+    localStorage.setItem('selectedPriority', priority);
+
     buttons.forEach(button => updateButtonStyle(button, priority, priorityConfig));
 }
 
