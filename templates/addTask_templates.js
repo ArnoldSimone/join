@@ -43,10 +43,10 @@ function generateEditSubtaskHTML(index, title) {
     return `
         <div class="subtask-edit-container">
             <input type="text" id="edit-subtask-input" value="${title}" class="edit-subtask-input">
-            <div class="subtask-buttons">
-                <button class="subtask-button" onclick="saveSubtask(${index})"><img src="../assets/img/check.png" alt="Save"></button>
-                 <div class="small-break-between"></div>
-                <button class="subtask-button" onclick="cancelEdit(${index})"><img src="../assets/img/dustbinDark.svg" alt="Delete"></button>
+            <div class="subtask-buttons" style="display: inline;">
+                <button class="subtask-button edit-check" onclick="saveSubtask(${index})"><img src="../assets/img/check.png" alt="Save"></button>
+                <div class="small-break-between"></div>
+                <button class="subtask-button" onclick="deleteSubtask(${index})"><img src="../assets/img/dustbinDark.svg" alt="Delete"></button>
             </div>
         </div>
     `;

@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="../css/sidebar.css">
     <link rel="stylesheet" href="../css/fonts.css">
     <link rel="stylesheet" href="../css/addTask.css">
+    <link rel="stylesheet" href="../responsiv/header_responsiv.css">
+    <link rel="stylesheet" href="../responsiv/sidebar_responsiv.css">
     <script src="../script/include.js"></script>
     <script defer src="../script/addTask.js"></script>
     <script src="../templates/addTask_templates.js"></script>
@@ -60,9 +62,9 @@
                     <div class="form-right">
                         <div class="form-group">
                             <label for="due-date">Due date<span class="required">*</span></label>
-                            <input type="date" id="due-date" name="due-date">
+                            <input type="date" id="due-date" name="due-date" placeholder="dd/mm/yyyy" oninput="validateDate()" required>
                         </div>
-        
+                   
                         <div class="form-group">
                             <label>Prio</label>
                             <div class="prio-group">
@@ -81,7 +83,7 @@
                         
                         <div class="form-group">
                             <label for="category">Category<span class="required">*</span></label>
-                            <select id="category" name="category">
+                            <select id="category" name="category" required>
                                 <option value="" disabled selected>Select task category</option>
                                 <option>User Story</option>
                                 <option>Technical Task</option>
@@ -93,7 +95,12 @@
                             <div class="subtask-connect">
                                 <input type="text" id="subtasks" name="subtasks" placeholder="Add new subtask">
                                 <div class="subtask-img">
-                                    <img src="../assets/img/plusicon.png" alt="Add subtask" onclick="addSubtask()">
+                                    <img id="plus-icon" src="../assets/img/plusicon.png" alt="Add subtask" onclick="showSubtaskActionButtons()">
+                                    <div id="subtask-action-buttons" style="display:none;">
+                                        <img src="../assets/img/check.png" alt="Save subtask" onclick="addSubtask()">
+                                        <div class="small-break-between"></div>
+                                        <img src="../assets/img/close.svg" alt="Clear input" onclick="clearSubtaskInput()">
+                                    </div>
                                 </div>
                             </div>
                             <ul id="subtask-list"></ul>

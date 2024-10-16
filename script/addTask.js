@@ -6,6 +6,7 @@ let subtasks = [];
 
 function init() {
     fetchContacts();
+    setMinDate();
 }
 
 
@@ -203,7 +204,61 @@ function showPopup() {
 
 function submitForm() {
     const taskData = gatherFormData();
-    addTaskToFirebase(taskData);
+    let valid = validateField("title", taskData.title) &&
+                validateField("due-date", taskData.dueDate, true) &&
+                validateField("category", taskData.category);
+
+    if (valid) addTaskToFirebase(taskData);
+}
+
+
+function validateField(fieldId, value, isDate = false) {
+    const input = document.getElementById(fieldId);
+    const errorText = getErrorText(fieldId, input);
+    const isValid = value && (!isDate || new Date(value) >= new Date());
+
+    setFieldState(input, errorText, isValid);
+    return isValid;
+}
+
+
+function getErrorText(fieldId, input) {
+    let errorText = document.getElementById(`${fieldId}-error`);
+    if (!errorText) {
+        errorText = document.createElement("small");
+        errorText.id = `${fieldId}-error`;
+        errorText.style.color = "red";
+        errorText.style.fontSize = "10px";
+        errorText.style.display = "block";
+        input.parentNode.appendChild(errorText);
+    }
+    return errorText;
+}
+
+
+function setFieldState(input, errorText, isValid) {
+    input.style.border = isValid ? "" : "1px solid red";
+    errorText.textContent = isValid ? "" : "This field is required";
+}
+
+
+function setMinDate() {
+    let today = new Date().toISOString().split('T')[0]; 
+    document.getElementById("due-date").setAttribute("min", today); 
+}
+
+
+function validateDate() {
+    const input = document.getElementById("due-date");
+    const selectedDate = new Date(input.value);
+    const today = new Date();
+
+    if (selectedDate < today) {
+        input.setCustomValidity("Bitte wählen Sie ein zukünftiges Datum.");
+        input.reportValidity();
+    } else {
+        input.setCustomValidity(""); 
+    }
 }
 
 
@@ -237,6 +292,25 @@ function gatherSubtasks() {
 }
 
 
+function showSubtaskActionButtons() {
+    document.getElementById('plus-icon').style.display = 'none';
+    document.getElementById('subtask-action-buttons').style.display = 'inline-block';
+}
+
+
+function clearSubtaskInput() {
+    let subtaskInput = document.getElementById('subtasks');
+    subtaskInput.value = '';
+    hideSubtaskActionButtons();
+}
+
+
+function hideSubtaskActionButtons() {
+    document.getElementById('plus-icon').style.display = 'inline-block';
+    document.getElementById('subtask-action-buttons').style.display = 'none';
+}
+
+
 function addSubtask() {
     let subtaskInput = getSubtaskInput();
     if (isValidSubtask(subtaskInput)) {
@@ -245,6 +319,7 @@ function addSubtask() {
         appendSubtaskToList(subtaskId, subtaskText);
         subtasks.push(createSubtask(subtaskId, subtaskText));
         subtaskInput.value = '';
+        hideSubtaskActionButtons();
     }
 }
 
@@ -273,6 +348,7 @@ function createSubtask(subtaskId, subtaskText) {
 function editSubtask(index) {
     const subtask = subtasks[index];
     let subtaskElement = document.querySelectorAll('#subtask-list li')[index];
+    subtaskElement.classList.add('edit-mode');
     subtaskElement.innerHTML = generateEditSubtaskHTML(index, subtask.title);
 }
 
@@ -290,7 +366,7 @@ function saveSubtask(index) {
 
 function deleteSubtask(index) {
     subtasks.splice(index, 1);
-    renderSubtasks();
+    renderSubtasks(); 
 }
 
 
@@ -314,7 +390,6 @@ function showButtons(index) {
         buttons.style.display = 'inline';
     }
 }
-
 
 function hideButtons(index) {
     const buttons = document.getElementById(`subtask-buttons-${index}`);
@@ -388,6 +463,8 @@ function updateButtonStyle(button, selectedPriority, config) {
 function applyActiveStyle(button, config, img) {
     button.style.backgroundColor = config.color;
     img.src = config.activeImg;
+    button.style.color = 'white';
+    button.style.fontWeight = 'bold';
     button.classList.add(`${button.textContent.trim().toLowerCase()}-active`);
 }
 
@@ -395,5 +472,7 @@ function applyActiveStyle(button, config, img) {
 function resetButtonStyle(button, config, img) {
     button.style.backgroundColor = 'white';
     img.src = config.defaultImg;
+    button.style.color = 'black';
+    button.style.fontWeight = 'normal';
     button.classList.remove(`${button.textContent.trim().toLowerCase()}-active`);
 }

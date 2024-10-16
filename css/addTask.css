@@ -29,6 +29,7 @@ form {
 .form-group {
     display: flex;
     flex-direction: column;
+    position: relative;
 }
 
 .form-group-subtask {
@@ -59,9 +60,15 @@ form {
 .assigned-list {
     max-height: 200px;
     height: auto;
-    overflow: scroll;
+    overflow-y: auto;
     background-color: var(--textwhite);
     border-radius: 0px 0px 8px 8px;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    z-index: 10;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .assigned-content {
@@ -228,7 +235,7 @@ button.create-task:hover {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
-    padding-top: 30px;
+    padding-top: 40px;
 }
 
 .white-background-container {
@@ -294,8 +301,23 @@ button.create-task:hover {
    padding-left: 10px;
 }
 
+#subtask-list {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 90%;
+    background-color: var(--lightgrey);
+    z-index: 10; 
+    max-height: 50px; 
+    overflow-y: auto; 
+}
+
 #subtask-list li {
     position: relative;
+}
+
+#subtask-list li.edit-mode button {
+    display: inline-block; 
 }
 
 #subtask-list li button {
@@ -318,7 +340,7 @@ button.create-task:hover {
     height: 16px;
     border: none;
     border-radius: 0% !important;
-    padding-right: 50px;
+    padding-right: 30px;
     box-sizing: border-box;
     outline: none;
 }
@@ -383,11 +405,26 @@ button.create-task:hover {
     height: 20px;
 }
 
-.subtask-img:hover {
+.subtask-img img:hover {
     background-color: rgb(228, 228, 228);
     border-radius: 50%;
 }
 
 li:hover {
     background-color: rgb(228, 228, 228);
+}
+
+#subtask-action-buttons img{
+    height: 10px;
+    width: auto;
+}
+
+#subtask-action-buttons img:hover{
+    background-color: var(--middlegrey);
+    border-radius: 30%
+}
+
+.edit-check img{
+    height: 10px;
+    width: auto;
 }
