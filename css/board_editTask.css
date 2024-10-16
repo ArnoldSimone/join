@@ -6,7 +6,7 @@ main {
 
 .overlay-edit-task-board {
     padding: 24px;
-    gap: 24px;
+    gap: 16px;
     max-width: 380px;
     font-size: 14px;
     max-height: 80vh;
@@ -363,8 +363,8 @@ ul {
 }
 
 .ctn-edit-all-subtasks {
-    max-height: 130px;
-    margin-bottom: 20px;
+    max-height: 100px;
+    margin-bottom: 8px;
     overflow-y: scroll;
 }
 

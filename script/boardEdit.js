@@ -214,9 +214,9 @@ function addSubtask() {
         ctnEditAllSubtasksRef.innerHTML = '';
         allSubtasksArray.push({ 'completed': false, 'title': inputValueSubtaskRef.value });
         updateSubtaskDisplay(ctnEditAllSubtasksRef);
+        inputValueSubtaskRef.value = '';
     }
-    document.getElementById('ctn-add-subtask').classList.remove('d-none');
-    document.getElementById('ctn-clear-add-subtask').classList.add('d-none');
+
 }
 
 /**
@@ -241,7 +241,6 @@ function updateSubtaskDisplay(container) {
         let title = allSubtasksArray[iSubtasks].title;
         container.innerHTML += getAllSubtasksTemplate(iSubtasks, title);
     }
-    container.innerHTML = subtasksHtml;
 }
 
 

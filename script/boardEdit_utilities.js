@@ -272,7 +272,6 @@ function inputStart() {
  */
 function clearInputSubtask() {
     document.getElementById('subtasks-edit').value = "";
-    document.getElementById('subtasks-edit').focus();
     document.getElementById('ctn-add-subtask').classList.remove('d-none');
     document.getElementById('ctn-clear-add-subtask').classList.add('d-none');
 }

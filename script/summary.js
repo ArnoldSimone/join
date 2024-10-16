@@ -1,8 +1,16 @@
+let loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
+
 async function onloadFuncSummary() {
     tasks = Object.values(await loadFromDatabase(`/tasks`));
+    let contactsData = await loadFromDatabase(`/contacts`);
+    contacts = Object.entries(contactsData).map(([id, contact]) => ({ id, ...contact }));
     getNumberOfTasks(tasks);
     greetingUser();
     getUpcomingDeadline();
+
+    console.log(loggedInUser);
+    console.log(contacts);
+
 }
 
 function getNumberOfTasks(tasks) {
@@ -39,8 +47,6 @@ function greetingUser() {
 
 function getUpcomingDeadline() {
     let urgentTasks = tasks.filter(task => task.priority === "Urgent");
-    console.log(urgentTasks);
-
     if (urgentTasks == "") {
         document.getElementById('main-summary-middle-right').innerHTML = `<div>No upcoming Deadline</div>`;
     } else {

@@ -32,10 +32,10 @@ function getBoardTaskTemplate(task) {
                 <a class="move-task d-flex" href="#" onclick="toggleMenuMoveTo('${task.id}'); handleClickMenu(event)"><img class="img-menu" src="../assets/icon/more.png" alt="More functions"></a>
                 <div id="menu-${task.id}" class="menu-move-to d-flex-x d-none" onclick="handleClickMenu(event)">
                     <ul class="ul-move-to d-flex-x">
-                        <li class="category-move-to" onclick="moveTask('todo', '${task.id}')">To do</li>
-                        <li class="category-move-to" onclick="moveTask('in progress', '${task.id}')">In Progress</li>
-                        <li class="category-move-to" onclick="moveTask('await feedback', '${task.id}')">Await Feedback</li>
-                        <li class="category-move-to" onclick="moveTask('done', '${task.id}')">Done</li>
+                        <li class="category-move-to" onclick="moveTaskResponsive('todo', '${task.id}')">To do</li>
+                        <li class="category-move-to" onclick="moveTaskResponsive('in progress', '${task.id}')">In Progress</li>
+                        <li class="category-move-to" onclick="moveTaskResponsive('await feedback', '${task.id}')">Await Feedback</li>
+                        <li class="category-move-to" onclick="moveTaskResponsive('done', '${task.id}')">Done</li>
                     </ul>
                 </div>
              </div>

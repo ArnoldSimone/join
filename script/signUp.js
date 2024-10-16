@@ -75,7 +75,7 @@ function passwortInput() {
  */
 function confirmInput() {
   let container = document.getElementById('inputConfirmPassword');
-  let input = document.getElementById('confirmPassword');  
+  let input = document.getElementById('confirmPassword');
   let image = document.getElementById('confirmPasswordImage');
   determineInputValue(container, input, image);
 }
@@ -90,10 +90,10 @@ function confirmInput() {
 function determineInputValue(container, input, image) {
   if (input.value == 0) {
     standardInput(container, input, image);
-  } else { 
+  } else {
     if (input.type == "password" && input.value > 0) {
       passwordInput(container, image);
-    } else{ 
+    } else {
       if (input.type == "text" && input.value > 0) {
         textInput(container, image);
       };
@@ -161,7 +161,7 @@ function currentStatus(input, passwordImage, confirmImage) {
   } else {
     if (input.id === "password" && input.type == 'password' && passwordImage.src.includes('visibility_off.png')) {
       changeTypeAndImage(input, passwordImage);
-    } else { 
+    } else {
       if (input.id === "confirmPassword" && input.type == 'password' && confirmImage.src.includes('visibility_off.png')) {
         changeTypeAndImage(input, confirmImage);
       } else {
@@ -179,7 +179,7 @@ function currentStatus(input, passwordImage, confirmImage) {
  */
 function changeTypeAndImage(input, image) {
   input.type = "text";
-  image.src="../assets/icon/visibility.png";
+  image.src = "../assets/icon/visibility.png";
 }
 
 
@@ -192,11 +192,11 @@ function resetTypeAndImage(input) {
   let confirmImage = document.getElementById('confirmPasswordImage');
   if (input.id == 'password') {
     input.type = "password";
-    passwordImage.src="../assets/icon/visibility_off.png";
+    passwordImage.src = "../assets/icon/visibility_off.png";
   } else {
     if (input.id == 'confirmPassword') {
       input.type = "password";
-      confirmImage.src="../assets/icon/visibility_off.png";
+      confirmImage.src = "../assets/icon/visibility_off.png";
     };
   };
 }
@@ -214,14 +214,14 @@ async function registrationUser() {
  * Checks if the entered password matches the confirm password.
  * If they match, the registration process continues, otherwise an error message is displayed.
  */
-function checkPasswort() {  
+function checkPasswort() {
   let password = document.getElementById('password').value;
   let confirmPassword = document.getElementById('confirmPassword').value;
-  if (password === confirmPassword) {    
-      postRegistrationUser();
-    } else {
-      passwordDontMatch();
-    };
+  if (password === confirmPassword) {
+    postRegistrationUser();
+  } else {
+    passwordDontMatch();
+  };
 }
 
 
@@ -246,9 +246,9 @@ async function postRegistrationUser() {
   let email = document.getElementById('email').value;
   let password = document.getElementById('password').value;
   try {
-    await postToDatabase("users",  user = {name: name, email: email, password: password});
+    await postToDatabase("users", user = { name: name, email: email, password: password });
   } catch (error) {
-    console.error('Registration failed', error);    
+    console.error('Registration failed', error);
   };
   await registrationSuccesful();
 }

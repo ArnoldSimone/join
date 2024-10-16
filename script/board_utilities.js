@@ -6,7 +6,7 @@
  * @param {string} taskId - The unique identifier of the task to be moved.
  * @returns {Promise<void>} - A promise that resolves when the task has been updated and the board is re-rendered.
  */
-async function moveTask(progressStatus, taskId) {
+async function moveTaskResponsive(progressStatus, taskId) {
     let task = tasks.find(t => t.id === taskId);
     task.progress = progressStatus;
     await updateOnDatabase(`tasks/${taskId}`, task);
@@ -68,6 +68,19 @@ async function moveTo(progress) {
     await updateOnDatabase(`tasks/${currentDraggedElement}`, task)
     renderTasksBoard();
     removeAllHighlight();
+    resetDraggingState();
+}
+
+
+/**
+ * Resets the transformation and clears the currently dragged element.
+ */
+function resetDraggingState() {
+    if (currentDraggedElement) {
+        const taskElement = document.getElementById(`task-${currentDraggedElement}`);
+        taskElement.style.transform = '';
+        currentDraggedElement = null;
+    }
 }
 
 

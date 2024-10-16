@@ -12,9 +12,9 @@ async function fetchContacts() {
 
 function renderContacts(contacts) {
     const contactContainer = document.querySelector('.contacts');
-    contactContainer.innerHTML = ''; 
+    contactContainer.innerHTML = '';
     const groupedContacts = groupContactsByFirstLetter(contacts);
-    
+
     Object.entries(groupedContacts).forEach(([letter, contactList]) => {
         contactContainer.innerHTML += renderContactGroup(letter, contactList);
     });
@@ -31,7 +31,7 @@ function groupContactsByFirstLetter(contacts) {
         return groups;
     }, {});
 
-    Object.keys(groupedContacts).forEach(letter => 
+    Object.keys(groupedContacts).forEach(letter =>
         groupedContacts[letter].sort((a, b) => a.name.localeCompare(b.name))
     );
     return groupedContacts;
@@ -66,8 +66,8 @@ function showContactDetails(id, name, email, phone, initials, color) {
     selectContact(id);
 
     const contactDetails = document.getElementById('contact-details');
-    contactDetails.style.display = 'block'; 
-    contactDetails.classList.remove('slide-out'); 
+    contactDetails.style.display = 'block';
+    contactDetails.classList.remove('slide-out');
     contactDetails.classList.add('slide-in');
     setTimeout(() => {
         contactDetails.classList.remove('slide-in');
@@ -79,7 +79,7 @@ function showContactDetails(id, name, email, phone, initials, color) {
     document.getElementById('contact-phone').textContent = phone;
     document.getElementById('edit-contact-id').value = id;
 
-    document.querySelector('.edit-btn').onclick = function() {
+    document.querySelector('.edit-btn').onclick = function () {
         showEditContact(id, name, email, phone, initials, color);
     };
 }
@@ -110,7 +110,7 @@ async function addNewContact() {
 
     const contact = { name, email, phone, avatar: generateAvatar(name) };
     const response = await saveContact(contact);
-    
+
     if (response) {
         hideOverlay();
         loadContacts();
@@ -133,16 +133,16 @@ async function saveContact(contact) {
 
 async function editContact() {
     const contactData = getContactData();
-    if (!contactData) return false; 
+    if (!contactData) return false;
 
     const response = await updateContact(contactData);
     if (response.ok) {
-        hideOverlay(); 
+        hideOverlay();
         loadContacts();
-        return true; 
+        return true;
     }
 
-    return false; 
+    return false;
 }
 
 
@@ -150,9 +150,9 @@ function getContactData() {
     const name = document.getElementById('edit-name').value.trim();
     const email = document.getElementById('edit-email').value.trim();
     const phone = document.getElementById('edit-phone').value.trim();
-    const id = document.getElementById('edit-contact-id').value; 
+    const id = document.getElementById('edit-contact-id').value;
 
-    if (!name || !email || !phone) return null; 
+    if (!name || !email || !phone) return null;
 
     return { name, email, phone, avatar: generateAvatar(name), id };
 }
@@ -174,17 +174,17 @@ function getEditContactId() {
 
 async function deleteContact() {
     const id = getEditContactId();
-    if (!id) return false; 
+    if (!id) return false;
 
     const response = await fetch(`${BASE_URL}/contacts/${id}.json`, { method: 'DELETE' });
     if (response.ok) {
         hideOverlay();
         loadContacts();
         document.getElementById('contact-details').style.display = 'none';
-        return true; 
+        return true;
     }
 
-    return false; 
+    return false;
 }
 
 
@@ -198,7 +198,7 @@ function generateAvatar(name) {
 
 function showAddContactOverlay() {
     const addContactOverlay = document.getElementById('add-contact-overlay');
-    addContactOverlay.style.display = 'flex'; 
+    addContactOverlay.style.display = 'flex';
     addContactOverlay.classList.remove('slide-out');
     addContactOverlay.classList.add('slide-in');
     setTimeout(() => {
@@ -209,7 +209,7 @@ function showAddContactOverlay() {
 
 function showEditContact(id, name, email, phone, initials, color) {
     const editContactOverlay = document.getElementById('edit-contact-overlay');
-    editContactOverlay.style.display = 'flex'; 
+    editContactOverlay.style.display = 'flex';
     editContactOverlay.classList.remove('slide-out');
     editContactOverlay.classList.add('slide-in');
     setTimeout(() => {
@@ -221,9 +221,9 @@ function showEditContact(id, name, email, phone, initials, color) {
 
 
 function updateEditContactFields(id, name, email, phone, initials, color) {
-    document.getElementById('edit-name').value = name || ''; 
-    document.getElementById('edit-email').value = email || ''; 
-    document.getElementById('edit-phone').value = phone || ''; 
+    document.getElementById('edit-name').value = name || '';
+    document.getElementById('edit-email').value = email || '';
+    document.getElementById('edit-phone').value = phone || '';
     document.getElementById('edit-contact-id').value = id;
 
     const avatarElement = document.getElementById('edit-avatar');
@@ -235,14 +235,14 @@ function updateEditContactFields(id, name, email, phone, initials, color) {
 function hideOverlay(event) {
     const addContactOverlay = document.getElementById('add-contact-overlay');
     const editContactOverlay = document.getElementById('edit-contact-overlay');
-    
+
     if (event) {
         event.stopPropagation();
     }
 
     addContactOverlay.classList.add('slide-out');
     editContactOverlay.classList.add('slide-out');
-    
+
     setTimeout(() => {
         addContactOverlay.style.display = 'none';
         editContactOverlay.style.display = 'none';
