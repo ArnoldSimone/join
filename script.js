@@ -25,6 +25,7 @@ function login() {
 async function loadData() {
   try {
     let allUsers = await loadFromDatabase("/users");
+    localStorage.setItem('users', JSON.stringify(allUsers));
     allUsersFilter(allUsers);
   } catch (error) {
     notRegistered();
