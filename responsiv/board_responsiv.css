@@ -1,0 +1,172 @@
+@media (max-width: 1200px) {
+
+    main {
+        padding: 0px 32px;
+    }
+
+    .main-board {
+        flex-direction: column;
+    }
+
+    .ctn-task {
+        width: 210px;
+        height: 100%;
+        justify-content: space-around !important;
+    }
+
+    .tasks-box {
+        flex-direction: row;
+        overflow-x: auto;
+        padding-bottom: 16px;
+        border-radius: 0;
+    }
+
+    .header-container {
+        max-width: 210px;
+    }
+
+    .highlight {
+        display: none;
+    }
+
+    .ctn-drag-area {
+        min-height: 0;
+    }
+
+    .ctn-no-tasks.d-flex {
+        width: 210px;
+    }
+
+    .ctn-drag-area {
+        display: flex;
+    }
+
+    .ctn-no-tasks {
+        padding: 0;
+    }
+
+    .overlay-detail-task-board {
+        height: 75vh;
+        width: 95%;
+        gap: 16px;
+    }
+
+    .overlay-edit-task-board {
+        height: 75vh;
+        width: 95%;
+    }
+
+    .move-to-responsive {
+        display: block !important;
+    }
+}
+
+
+
+@media (max-width: 1000px) {
+    main {
+        margin-left: 0;
+        margin-bottom: 80px;
+    }
+
+}
+
+@media (max-width: 760px) {
+    .btn-dark-responsive.d-none {
+        display: block !important;
+    }
+
+    button.btn-dark {
+        display: none;
+    }
+
+    .header-board {
+        flex-direction: column;
+    }
+
+    .header-board-left {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+    }
+
+    h1.headline {
+        margin: 18px 0;
+    }
+
+    .header-board-right.d-flex {
+        width: 100%;
+        margin-bottom: 24px;
+    }
+
+    .ctn-input-search {
+        width: 100%;
+    }
+
+    input#input-search-task {
+        width: 100%;
+    }
+
+    .sidebar-section {
+        position: fixed !important;
+    }
+}
+
+
+
+@media (max-width: 500px) {
+    main {
+        padding: 0 16px;
+    }
+
+    h1.headline {
+        font-size: 48px;
+    }
+
+    /* .ctn-cards {
+        width: 100%;
+    } */
+
+    .header-container {
+        min-width: 100% !important;
+    }
+
+    .tasks-box {
+        width: 100%;
+    }
+
+    .ctn-no-tasks {
+        width: 100% !important;
+    }
+
+    .overlay-board {
+        width: 100%;
+    }
+
+    .ctn-main-Detail-Task {
+        gap: 16px;
+    }
+
+    .overlay-detail-task-board {
+        height: 75vh;
+        width: 95%;
+        gap: 16px;
+    }
+
+    p#task-title-detail {
+        font-size: 32px;
+    }
+
+    .overlay-edit-task-board {
+        height: 75vh;
+        width: 95%;
+        gap: 16px;
+        padding: 16px;
+    }
+
+    .input-subtask-edit {
+        font-size: 13px;
+    }
+
+}

@@ -14,10 +14,12 @@ async function postToDatabase(path = "", data = {}) {
         },
         body: JSON.stringify(data),
     });
-    return responseToJson = await response.json();
+    let responseToJson = await response.json();
+    return responseToJson;
 }
 
 async function updateOnDatabase(path = "", data = {}) {
+
     let response = await fetch(BASE_URL + path + ".json", {
         method: "PUT",
         headers: {
@@ -25,12 +27,14 @@ async function updateOnDatabase(path = "", data = {}) {
         },
         body: JSON.stringify(data),
     });
-    return responseToJson = await response.json();
+    let responseToJson = await response.json();
+    return responseToJson;
 }
 
 async function deleteFromDatabase(path = "") {
     let response = await fetch(BASE_URL + path + ".json", {
         method: "DELETE",
     });
-    return responseToJson = await response.json();
+    let responseToJson = await response.json();
+    return responseToJson;
 }

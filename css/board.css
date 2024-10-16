@@ -2,10 +2,28 @@
     box-sizing: border-box;
 }
 
+body,
+html {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
 main {
     margin-left: 232px;
     padding: 32px 64px;
     max-width: 1440px;
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
+input:focus,
+textarea:focus {
+    border: 1px solid var(--lightblue);
+    outline: none;
 }
 
 .input-field {
@@ -36,6 +54,26 @@ main {
 }
 
 .btn-dark:hover {
+    cursor: pointer;
+    background-color: var(--lightblue);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.19);
+    transform: translateY(-1px);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.btn-dark-responsive {
+    background-color: var(--darkblue);
+    color: var(--textwhite);
+    border-radius: 10px;
+    border: none;
+    font-size: 20px;
+    height: 40px;
+    gap: 10px;
+    padding: 3px 12px 0 12px;
+    font-weight: 600;
+}
+
+.btn-dark-responsive:hover {
     cursor: pointer;
     background-color: var(--lightblue);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.19);
@@ -184,6 +222,7 @@ progress {
     margin-right: -12px;
 }
 
+
 .ctn-task-bottom {
     justify-content: space-between;
 }
@@ -248,15 +287,62 @@ progress {
     padding: 5px;
 }
 
+.move-to-responsive {
+    display: none;
+}
+
 .btn-close-detail-task:hover {
     background-color: var(--lightgrey);
     cursor: pointer;
+}
+
+.img-menu {
+    width: 22px;
+}
+
+.ctn-header-task {
+    position: relative;
+}
+
+.ctn-header-task {
+    justify-content: space-between !important;
+    align-items: center !important;
+}
+
+.menu-move-to {
+    position: absolute;
+    top: 100%;
+    right: 0px;
+    background-color: var(--darkblue);
+    color: var(--middlegrey);
+    font-size: 12px;
+    padding: 8px;
+    border-radius: 12px 0 12px 12px;
+}
+
+.ul-move-to {
+    list-style-type: none;
+    flex-direction: column;
+    gap: 6px;
+    text-align: right;
+}
+
+.ctn-header-task img:hover {
+    background-color: var(--lightgrey);
+    border-radius: 120px;
 }
 
 .task-title-detail {
     font-size: 40px;
     font-weight: 700;
 }
+
+.category-move-to:hover {
+    color: var(--textwhite);
+}
+
+
+
 
 .task-description-detail {
     font-size: 16px;
@@ -284,6 +370,7 @@ progress {
     max-height: 140px;
     overflow-y: scroll;
     margin-top: 8px;
+    width: 95%;
 }
 
 .person-detail p {
@@ -295,7 +382,8 @@ progress {
     gap: 4px;
     padding-top: 8px;
     font-size: 14px;
-    padding-left: 16px;
+    padding-left: 12px;
+    padding-right: 12px;
 }
 
 .subtask-item {

@@ -11,13 +11,19 @@
     <link rel="stylesheet" href="../css/fonts.css">
     <link rel="stylesheet" href="../css/board.css">
     <link rel="stylesheet" href="../css/board_editTask.css">
+    <link rel="stylesheet" href="../responsiv/board_responsiv.css">
+    <link rel="stylesheet" href="../responsiv/header_responsiv.css">
+    <link rel="stylesheet" href="../responsiv/sidebar_responsiv.css">
     <script src="../script/include.js"></script>
     <script src="../script.js"></script>
     <script src="../script/board.js"></script>
+    <script src="../script/board_utilities.js"></script>
     <script src="../script/boardEdit.js"></script>
+    <script src="../script/boardEdit_utilities.js"></script>
     <script src="../script/database.js"></script>
+    <script src="../script/header.js"></script>
     <script src="../templates/board_templates.js"></script>
-    <title>Join</title>
+    <title>Join - Board</title>
 
 </head>
 
@@ -32,10 +38,11 @@
 
     <main>
         <section class="board-container">
-
             <div class="header-board d-flex-y">
                 <div class="header-board-left">
                     <h1 class="headline">Board</h1>
+                    <button class="btn-dark-responsive d-flex d-none">
+                        <img class="image-plus-add-task" src="../assets/img/plus-white.svg" alt="Image Plus"></button>
                 </div>
                 <div class="header-board-right d-flex">
                     <div class="ctn-input-search">
@@ -45,6 +52,7 @@
                     </div>
                     <button class="btn-dark d-flex-y">Add Task
                         <img class="image-plus-add-task" src="../assets/img/plus-white.svg" alt="Image Plus"></button>
+
                 </div>
             </div>
             <div class="main-board d-flex-x">
@@ -58,7 +66,7 @@
                         ondragleave="removeHighlight('highlight-todo')">
                         <div id="ctn-tasks-todo" class="ctn-tasks-todo tasks-box d-flex-y height drag-area">
                         </div>
-                        <div id="highlight-todo" ondrop="moveTo('todo')" ondragover="allowDrop(event)"></div>
+                        <div id="highlight-todo" class="highlight"></div>
                     </div>
                 </div>
                 <div class=" ctn-cards-in-progress ctn-cards">
@@ -72,7 +80,7 @@
                         <div id="ctn-tasks-in-progress"
                             class="ctn-tasks-in-progress tasks-box d-flex-y height drag-area">
                         </div>
-                        <div id="highlight-in-progress" ondrop="moveTo('in progress')" ondragover="allowDrop(event)">
+                        <div id="highlight-in-progress" class="highlight">
                         </div>
                     </div>
                 </div>
@@ -88,8 +96,7 @@
                             class="ctn-tasks-await-feedback tasks-box d-flex-y height drag-area"
                             ondrop="moveTo('await feedback')">
                         </div>
-                        <div id="highlight-await-feedback" ondrop="moveTo('await feedback')"
-                            ondragover="allowDrop(event)"></div>
+                        <div id="highlight-await-feedback" class="highlight"></div>
                     </div>
                 </div>
                 <div class="ctn-cards-done ctn-cards">
@@ -101,7 +108,7 @@
                         ondragleave="removeHighlight('highlight-done')">
                         <div id="ctn-tasks-done" class="ctn-tasks-done tasks-box d-flex-y height drag-area">
                         </div>
-                        <div id="highlight-done" ondrop="moveTo('done')" ondragover="allowDrop(event)"></div>
+                        <div id="highlight-done" class="highlight"></div>
                     </div>
                 </div>
             </div>

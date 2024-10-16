@@ -9,31 +9,21 @@ body {
 :root {
   --darkblue: #2a3647;
   --darkblueMenu: #091931;
-  /*Active Menu*/
   --lightblue: #29abe2;
   --blue: #0038ff;
-  /* Button UserStory*/
   --bluelight: #1fd7c1;
-  /* Button Technical Task*/
   --textwhite: #ffffff;
   --textblack: #000000;
   --middlegrey: #d1d1d1;
   --lightgrey: #f6f7f8;
   --red: #ff3d00;
-  /* Button Login */
   --bluehover: #29ABE2;
-  /* Prio urgent*/
   --green: #7ae229;
-  /* Prio low*/
   --orange: #ffa800;
-  /* Prio medium*/
   --grey: #A8A8A8;
   --bluegrey: #2e3d51;
 }
 
-/* .example {
-    background-color: var(--blue);
-} */
 
 .headerline {
   font-size: 60px;
@@ -110,11 +100,13 @@ content {
 body {
   --sb-track-color: transparent;
   --sb-thumb-color: var(--middlegrey);
-  --sb-size: 8px;
+  --sb-size: 5px;
+  --sb-horizontal-size: 5px;
 }
 
 body::-webkit-scrollbar {
-  width: var(--sb-size)
+  width: var(--sb-size);
+  height: var(--sb-horizontal-size);
 }
 
 body::-webkit-scrollbar-track {
@@ -128,7 +120,8 @@ body::-webkit-scrollbar-thumb {
 }
 
 ::-webkit-scrollbar {
-  width: 5px;
+  width: var(--sb-size);
+  height: var(--sb-horizontal-size);
 }
 
 ::-webkit-scrollbar-track {

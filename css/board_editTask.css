@@ -97,7 +97,6 @@ textarea {
 
 input:hover,
 textarea:hover {
-    border: 1px solid var(--darkblue);
     cursor: pointer;
 }
 
@@ -355,7 +354,7 @@ ul {
     outline: none;
     background-color: transparent;
     width: 100%;
-    font-size: 12px;
+    font-size: 14px;
 }
 
 .input-subtask-edit:hover {
