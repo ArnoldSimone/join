@@ -301,6 +301,10 @@ button.create-task:hover {
    padding-left: 10px;
 }
 
+#assignedInput {
+    border: none;
+}
+
 #subtask-list {
     position: absolute;
     top: 100%;
