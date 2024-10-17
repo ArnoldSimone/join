@@ -6,11 +6,8 @@ async function onloadFuncSummary() {
     contacts = Object.entries(contactsData).map(([id, contact]) => ({ id, ...contact }));
     getNumberOfTasks(tasks);
     greetingUser();
+    greetingUserName();
     getUpcomingDeadline();
-
-    console.log(loggedInUser);
-    console.log(contacts);
-
 }
 
 function getNumberOfTasks(tasks) {
@@ -45,6 +42,21 @@ function greetingUser() {
     document.getElementById('daytime-greeting').innerHTML = greeting;
 }
 
+function greetingUserName() {
+    let loggedInUser;
+    let currentUser = localStorage.getItem('currentUser');
+    if (currentUser) {
+        loggedInUser = JSON.parse(currentUser);
+        let loggedInUserMail = loggedInUser.email;
+        let contactDetails = contacts.find(c => c.email === loggedInUserMail);
+        if (contactDetails) {
+            document.getElementById('user-greeting').innerHTML = contactDetails.name;
+        }
+    } else {
+        document.getElementById('user-greeting').innerHTML = "Guest";
+    }
+}
+
 function getUpcomingDeadline() {
     let urgentTasks = tasks.filter(task => task.priority === "Urgent");
     if (urgentTasks == "") {
@@ -60,6 +72,23 @@ function formattingDate(dateString) {
     const date = new Date(dateString);
     return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
 }
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    let greetingSummaryRef = document.querySelector('.greeting-summary');
+    let headerSummaryRef = document.querySelector('.header-summary');
+    let ctnTasksSummaryRef = document.querySelector('.ctn-tasks-summary');
+    if (window.innerWidth <= 1280) {
+        greetingSummaryRef.addEventListener('animationend', function () {
+            greetingSummaryRef.style.display = 'none';
+            headerSummaryRef.style.display = 'flex';
+            ctnTasksSummaryRef.style.display = 'flex';
+            headerSummaryRef.classList.add('fade-in');
+            ctnTasksSummaryRef.classList.add('fade-in');
+        });
+    }
+});
+
 
 
 

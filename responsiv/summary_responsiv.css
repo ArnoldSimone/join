@@ -1,7 +1,56 @@
 @media (max-width: 1280px) {
 
     .greeting-summary {
-        display: none !important;
+        opacity: 1;
+        animation: showAndHide 2s forwards;
+        height: calc(100vh - 300px);
+        width: 100%;
+    }
+
+    .ctn-greeting {
+        align-items: center;
+        padding: 0;
+    }
+
+    #header-summary,
+    #ctn-tasks-summary {
+        display: none;
+        opacity: 0;
+    }
+
+    .summary-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    @keyframes showAndHide {
+        0% {
+            opacity: 1;
+        }
+
+        70% {
+            opacity: 1;
+        }
+
+
+        100% {
+            opacity: 0;
+        }
+    }
+
+    @keyframes fadeIn {
+        0% {
+            opacity: 0;
+        }
+
+        100% {
+            opacity: 1;
+        }
+    }
+
+    .fade-in {
+        animation: fadeIn 0.3s ease-in-out forwards;
     }
 
 }
@@ -21,6 +70,11 @@
         justify-content: center;
     }
 
+    .summary-container {
+        display: block;
+
+    }
+
 }
 
 
@@ -28,6 +82,8 @@
 
     main {
         padding: 32px;
+        margin-bottom: 100px;
+        overflow-y: scroll;
     }
 
     .headline-summary {
@@ -46,6 +102,7 @@
 
 
 @media (max-width: 620px) {
+
 
     .ctn-tasks-summary {
         min-width: 100%;
@@ -68,10 +125,13 @@
     .horizontal-line-blue.d-none {
         display: block !important;
         margin-bottom: 24px;
+        height: 2px;
+        width: 80px;
     }
 
     .headline-right {
         margin-bottom: 8px;
+        font-size: 16px;
     }
 
     .main-summary-middle-left {
@@ -111,6 +171,8 @@
 
     main {
         padding: 24px 16px;
+        margin-bottom: 60px;
+        overflow-y: auto;
     }
 
     .ctn-tasks-summary {
@@ -139,6 +201,7 @@
 
     .headline-right {
         margin-bottom: 4px;
+        font-size: ;
     }
 
     .ctn-tasks-summary {
@@ -161,7 +224,6 @@
 
     .text-counter {
         font-size: 13px;
-
     }
 
     a.summary-done.d-flex.ctn-tasks.gap-20.ctn-task-middle {
@@ -205,4 +267,13 @@
     .main-summary-top {
         gap: 16px;
     }
+
+    .daytime-greeting {
+        font-size: 28px;
+    }
+
+    .user-greeting {
+        font-size: 32px;
+    }
+
 }
