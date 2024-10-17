@@ -9,11 +9,12 @@
   <link rel="stylesheet" href="../css/header.css" />
   <link rel="stylesheet" href="../css/fonts.css">
   <link rel="stylesheet" href="../responsiv/header_responsiv.css">
+  <script src="../script/database.js"></script>
   <script src="../script/header.js"></script>
   <title>Join</title>
 </head>
 
-<body>
+<body onload="onloadFuncHeader()">
   <header>
     <div class="header-content">
       <div class="mobile-logo">
@@ -24,8 +25,8 @@
       </div>
       <div class="header-right">
         <a href="/html/help.html"><img src="/assets/img/help.png" alt="Help" /></a>
-        <div onclick="toggleUserMenu()" class="user-letter">
-          <h2>G</h2>
+        <div id="user-letter" onclick="toggleUserMenu()" class="user-letter">
+          <h2 id="user-initial">G</h2>
         </div>
       </div>
     </div>

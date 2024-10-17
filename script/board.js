@@ -60,8 +60,9 @@ function renderTasksBoard() {
  */
 function renderTasksByProgress(progressStatus, containerId, noTaskMessage) {
     let containerRef = document.getElementById(containerId);
+    let inputRef = document.getElementById('input-search-task');
     containerRef.innerHTML = "";
-    let tasksToRender = filteredSearchTasks.length > 0 ? filteredSearchTasks : tasks;
+    let tasksToRender = (filteredSearchTasks.length > 0 || inputRef.value !== "") ? filteredSearchTasks : tasks;
     let filteredTasks = tasksToRender.filter(task => task.progress === progressStatus);
     if (filteredTasks.length === 0) {
         containerRef.innerHTML = getBoardNoTaskTemplate(noTaskMessage);
@@ -283,5 +284,6 @@ function filterTasksBoard() {
             filteredSearchTasks.push(tasks[i]);
         }
     }
+
     renderTasksBoard();
 }

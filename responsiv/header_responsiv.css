@@ -6,6 +6,7 @@
   .header-content {
     padding-right: 0px;
     padding-left: 20px;
+    height: 72px;
   }
 
   .mobile-logo {
@@ -13,7 +14,7 @@
   }
 
   .mobile-logo img {
-    height: 50px;
+    height: 40px;
   }
 
   .header-right {
@@ -26,11 +27,15 @@
   }
 
   .user-letter {
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
   }
 
   .show-logout-mobile {
     top: 77px;
+  }
+
+  h2#user-initial {
+    font-size: 20px;
   }
 }

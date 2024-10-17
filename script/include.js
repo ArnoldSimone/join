@@ -11,3 +11,8 @@ async function includeHTML() {
         }
     }
 }
+
+document.addEventListener("DOMContentLoaded", async function () {
+    await onloadFuncHeader();
+});
+

@@ -1,5 +1,11 @@
-let loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
 
+
+/**
+ * Loads task and contact data from the database and initializes the summary page.
+ * @async
+ * @function onloadFuncSummary
+ * @returns {Promise<void>}
+ */
 async function onloadFuncSummary() {
     tasks = Object.values(await loadFromDatabase(`/tasks`));
     let contactsData = await loadFromDatabase(`/contacts`);
@@ -10,6 +16,13 @@ async function onloadFuncSummary() {
     getUpcomingDeadline();
 }
 
+
+/**
+ * Calculates and renders the number of tasks based on their progress and priority.
+ * @function getNumberOfTasks
+ * @param {Array<Object>} tasks - The array of task objects.
+ * @returns {void}
+ */
 function getNumberOfTasks(tasks) {
     let toDoTasks = tasks.filter(task => task.progress === "todo");
     let inProgressTasks = tasks.filter(task => task.progress === "in progress");
@@ -20,6 +33,18 @@ function getNumberOfTasks(tasks) {
     renderNumberOfTasks(toDoTasks, inProgressTasks, awaitFeedbackTasks, doneTasks, totalTasks, urgentTasks);
 }
 
+
+/**
+ * Renders the number of tasks in various categories onto the page.
+ * @function renderNumberOfTasks
+ * @param {Array<Object>} toDoTasks - Array of tasks with "todo" status.
+ * @param {Array<Object>} inProgressTasks - Array of tasks with "in progress" status.
+ * @param {Array<Object>} awaitFeedbackTasks - Array of tasks awaiting feedback.
+ * @param {Array<Object>} doneTasks - Array of tasks marked as "done".
+ * @param {number} totalTasks - Total number of tasks.
+ * @param {Array<Object>} urgentTasks - Array of tasks marked as "Urgent".
+ * @returns {void}
+ */
 function renderNumberOfTasks(toDoTasks, inProgressTasks, awaitFeedbackTasks, doneTasks, totalTasks, urgentTasks) {
     document.getElementById('summary-todo-counter').innerHTML = toDoTasks.length;
     document.getElementById('tasks-in-progress-counter').innerHTML = inProgressTasks.length;
@@ -29,6 +54,12 @@ function renderNumberOfTasks(toDoTasks, inProgressTasks, awaitFeedbackTasks, don
     document.getElementById('summary-urgent-counter').innerHTML = urgentTasks.length;
 }
 
+
+/**
+ * Displays a greeting message based on the current time of day.
+ * @function greetingUser
+ * @returns {void}
+ */
 function greetingUser() {
     const currentHour = new Date().getHours();
     let greeting;
@@ -42,11 +73,14 @@ function greetingUser() {
     document.getElementById('daytime-greeting').innerHTML = greeting;
 }
 
+
+/**
+ * Displays the name of the logged-in user or a default message for guests.
+ * @function greetingUserName
+ * @returns {void}
+ */
 function greetingUserName() {
-    let loggedInUser;
-    let currentUser = localStorage.getItem('currentUser');
-    if (currentUser) {
-        loggedInUser = JSON.parse(currentUser);
+    if (loggedInUser) {
         let loggedInUserMail = loggedInUser.email;
         let contactDetails = contacts.find(c => c.email === loggedInUserMail);
         if (contactDetails) {
@@ -57,6 +91,12 @@ function greetingUserName() {
     }
 }
 
+
+/**
+ * Displays the upcoming deadline for urgent tasks or a message if there are none.
+ * @function getUpcomingDeadline
+ * @returns {void}
+ */
 function getUpcomingDeadline() {
     let urgentTasks = tasks.filter(task => task.priority === "Urgent");
     if (urgentTasks == "") {
@@ -68,13 +108,35 @@ function getUpcomingDeadline() {
     }
 }
 
+
+/**
+ * Formats a date string to a more readable format.
+ * @function formattingDate
+ * @param {string} dateString - The date string to format.
+ * @returns {string} - The formatted date string.
+ */
 function formattingDate(dateString) {
     const date = new Date(dateString);
     return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
 }
 
 
+/**
+ * Initializes animations when the DOM content is loaded.
+ * @function animationSummaryResponsive
+ * @returns {void}
+ */
 document.addEventListener('DOMContentLoaded', function () {
+    animationSummaryResponsive();
+});
+
+
+/**
+ * Adds animation effects for responsive design on the summary page.
+ * @function animationSummaryResponsive
+ * @returns {void}
+ */
+function animationSummaryResponsive() {
     let greetingSummaryRef = document.querySelector('.greeting-summary');
     let headerSummaryRef = document.querySelector('.header-summary');
     let ctnTasksSummaryRef = document.querySelector('.ctn-tasks-summary');
@@ -87,7 +149,8 @@ document.addEventListener('DOMContentLoaded', function () {
             ctnTasksSummaryRef.classList.add('fade-in');
         });
     }
-});
+}
+
 
 
 
