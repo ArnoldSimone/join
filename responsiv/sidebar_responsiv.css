@@ -1,4 +1,4 @@
-@media (max-width: 1000px){
+@media (max-width: 1000px) {
   .sidebar-section {
     position: fixed;
     bottom: 0;
@@ -7,6 +7,7 @@
     z-index: 1;
     background-color: var(--darkblue);
   }
+
   .sidebar-content {
     position: absolute;
     bottom: 0;
@@ -49,12 +50,13 @@
   }
 
   .menu-content:hover {
-   background-color: inherit;
+    background-color: inherit;
   }
 
   .info {
     display: none;
   }
+
 }
 
 @media (max-width: 400px) {
