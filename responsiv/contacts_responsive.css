@@ -48,8 +48,16 @@
         display: none;
     }
 
+    .details-contact-name{
+        display: flex;
+        justify-content: center;
+        padding-bottom: 15px;
+    }
+
     .contact-container {
         margin: 0;
+        display: flex;
+        justify-content: flex-start;
       
     }
 

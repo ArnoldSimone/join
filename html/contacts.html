@@ -15,6 +15,7 @@
     <script defer src="../script/sidebar.js"></script>
     <script src="../script/database.js"></script>
     <script defer src="../script/contacts.js"></script>
+    <script defer src="../templates/contacts_templates.js"></script>
     <script defer src="../script.js"></script>
     <script src="../script/header.js"></script>
     <title>Join</title>
@@ -40,7 +41,7 @@
                 <div class="contacts"></div>
             </div>
             <div class="contact-detail-container" id="contactDetail">
-                <button class="close-btn" onclick="hideContactDetails()">X</button>
+                <button class="close-btn" onclick="hideContactDetails()"><img src="../assets/img/vector.png" alt=""></button>
                 <div class="contact-rightheadline">
                     <div class="d-flex-y"></div>
                     <h1 class="headline padding-right20">Contacts</h1>
@@ -53,7 +54,7 @@
                     <div class="contact-details" id="contact-details">
                         <div class="direction-row">
                             <div class="contact-avatar"></div>
-                            <div class="padding-left20 direction-column">
+                            <div class="padding-left20 direction-column details-contact-name">
                                 <h2 class="margin0 padding-left20"><span class="contact-name"></span></h2>
                                 <div class="contact-actions">
                                     <button id="edit-points-btn" onclick="toggleEditDelete()">
