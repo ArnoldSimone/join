@@ -34,8 +34,9 @@
   background-color: var(--bluegrey);
 }
 
-.menu-content.active {
-  background-color: #091931;
+.active {
+  background-color: #091931 !important;
+  color: white;
 }
 
 .menu-content img {

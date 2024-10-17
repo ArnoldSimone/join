@@ -38,14 +38,23 @@
     margin: 0;
   }
 
+  .menu-link {
+    display: flex;
+    justify-content: center;
+    height: 100%;
+  }
+
   .menu-content {
     display: flex;
     flex-direction: column;
+    width: 50%;
     height: 100%;
     gap: 8px;
+    border-radius: 14px;
   }
 
   .menu-content p {
+    margin: 0;
     text-align: center;
   }
 
@@ -57,6 +66,18 @@
     display: none;
   }
 
+}
+
+@media (max-width: 780px) {
+  .menu-content {
+    width: 70%;
+  }
+}
+
+@media (max-width: 500px) {
+  .menu-content {
+    width: 100%;
+  }
 }
 
 @media (max-width: 400px) {
