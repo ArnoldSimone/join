@@ -125,6 +125,20 @@
         padding: 0;
     }
 
+    .edit-overlay-middle {
+        padding: 0;
+    }
+
+    .edit-overlay-middle span {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100px;
+        height: auto;
+        z-index: 2;
+        padding: 0;
+    }
+
     form {
         padding-top: 60px;
         display: flex;
