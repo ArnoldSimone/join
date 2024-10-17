@@ -433,3 +433,15 @@ button.save-changes:hover {
 .slide-in {
     animation: slide-in 0.2s ease-in-out 0s 1 normal forwards;
 }
+
+.close-btn {
+    background-color: transparent;
+    border: none;
+    font-size: 24px;
+    position: absolute; 
+    right: 40px;
+    top: 130px;
+    cursor: pointer;
+    color: #000;
+    display: none;
+}

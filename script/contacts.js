@@ -64,24 +64,59 @@ function renderContact(contact) {
 
 function showContactDetails(id, name, email, phone, initials, color) {
     selectContact(id);
+    toggleContactListVisibility();
+    updateContactDetails(id, name, email, phone, initials, color);
+}
 
+
+function toggleContactListVisibility() {
+    if (window.innerWidth <= 1000) {
+        document.querySelector('.contact-list').style.display = 'none';
+        document.querySelector('.close-btn').style.display = 'block';
+    }
+}
+
+
+function updateContactDetails(id, name, email, phone, initials, color) {
     const contactDetails = document.getElementById('contact-details');
-    contactDetails.style.display = 'block';
-    contactDetails.classList.remove('slide-out');
-    contactDetails.classList.add('slide-in');
-    setTimeout(() => {
-        contactDetails.classList.remove('slide-in');
-    }, 200);
-
     document.querySelector('.contact-name').textContent = name;
-    document.querySelector('.contact-avatar').innerHTML = `<span class="avatar-details d-flex" style="background-color:${color};">${initials}</span>`;
+    document.querySelector('.contact-avatar').innerHTML = createAvatar(initials, color);
     document.getElementById('contact-email').textContent = email;
     document.getElementById('contact-phone').textContent = phone;
     document.getElementById('edit-contact-id').value = id;
+    document.querySelector('.edit-btn').onclick = () => showEditContact(id, name, email, phone, initials, color);
+    displayContactDetailContainer(contactDetails);
+}
 
-    document.querySelector('.edit-btn').onclick = function () {
-        showEditContact(id, name, email, phone, initials, color);
-    };
+
+function createAvatar(initials, color) {
+    return `<span class="avatar-details d-flex" style="background-color:${color};">${initials}</span>`;
+}
+
+
+function displayContactDetailContainer(contactDetails) {
+    document.querySelector('#contactDetail').style.display = 'block';
+    contactDetails.style.display = 'block';
+    contactDetails.classList.remove('slide-out');
+    contactDetails.classList.add('slide-in');
+
+    setTimeout(() => {
+        contactDetails.classList.remove('slide-in');
+    }, 200);
+}
+
+
+function hideContactDetails() {
+    const contactDetails = document.getElementById('contact-details');
+
+    contactDetails.style.display = 'none';
+
+    if (window.innerWidth <= 1000) {
+        document.querySelector('.contact-list').style.display = 'block';
+    }
+
+    const closeButton = document.querySelector('.close-btn');
+    closeButton.style.display = 'none';
 }
 
 
