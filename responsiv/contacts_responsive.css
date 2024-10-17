@@ -64,27 +64,28 @@
     }
 }
 
-@media (max-width: 580px) {
-    .add-contact-container {
+@media (min-width: 1000px) {
+    #edit-btn, #delete-btn {
+        position: static; 
+        display: flex;
+        align-items: center; 
+        opacity: 1; 
+        transform: none; 
+      }
+    
+      #edit-points-btn {
         display: none; 
+      }
+  }
+  
+
+@media (max-width: 800px){
+    .edit-overlay-middle {
+        padding: 10px;
     }
 
-    .add-contact-btn {
-        position: fixed;
-        bottom: 80px;
-        right: 20px;
-        width: 60px;
-        height: 60px;
-        border-radius: 50%;
-        padding: 0;
-        font-size: 0;
-        background-color: var(--darkblue);
-    }
-
-    .add-contact-btn img {
-        margin: 0;
-        width: 30px;
-        height: 30px;
+    .overlay-contact-middle img {
+        padding: 10px;
     }
 }
 
@@ -98,6 +99,7 @@
     .overlay-left {
         border-radius: 20px 20px 0 0;
         padding-bottom: 60px;
+        padding-top: 30px;
         width: auto;
     }
 
@@ -151,6 +153,29 @@
     }
 }
 
+@media (max-width: 580px) {
+    .add-contact-container {
+        display: none; 
+    }
+
+    .add-contact-btn {
+        position: fixed;
+        bottom: 80px;
+        right: 20px;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        padding: 0;
+        font-size: 0;
+        background-color: var(--darkblue);
+    }
+
+    .add-contact-btn img {
+        margin: 0;
+        width: 30px;
+        height: 30px;
+    }
+}
 
 @media (max-width: 500px) {
     .contact-group {

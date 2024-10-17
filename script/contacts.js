@@ -130,6 +130,39 @@ function selectContact(id) {
     }
 }
 
+function checkButtonPositionAndSetColor() {
+    var editBtn = document.getElementById('edit-btn');
+    var deleteBtn = document.getElementById('delete-btn');
+  
+    function updateButtonBackgroundColor() {
+      if (getComputedStyle(editBtn).position === 'fixed') {
+        editBtn.style.backgroundColor = 'white';
+        deleteBtn.style.backgroundColor = 'white';
+      } else {
+        editBtn.style.backgroundColor = ''; 
+        deleteBtn.style.backgroundColor = ''; 
+      }
+    }
+  
+    updateButtonBackgroundColor();
+
+    window.addEventListener('resize', updateButtonBackgroundColor); 
+}
+  
+
+function toggleEditDelete() {
+    const editBtn = document.getElementById("edit-btn");
+    const deleteBtn = document.getElementById("delete-btn");
+  
+    if (editBtn.classList.contains("show")) {
+      editBtn.classList.remove("show");
+      deleteBtn.classList.remove("show");
+    } else {
+      editBtn.classList.add("show");
+      deleteBtn.classList.add("show");
+    }
+  }
+  
 
 function validateContactInput(name, email, phone) {
     return name && email && phone;

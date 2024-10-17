@@ -18,7 +18,7 @@
     <title>Join</title>
 </head>
 
-<body onload="includeHTML(); loadContacts()">
+<body onload="includeHTML(); loadContacts();  checkButtonPositionAndSetColor();">
     <header>
         <div w3-include-html="header.html"></div>
     </header>
@@ -54,10 +54,13 @@
                             <div class="padding-left20 direction-column">
                                 <h2 class="margin0 padding-left20"><span class="contact-name"></span></h2>
                                 <div class="contact-actions">
-                                    <button class="edit-btn border-unset d-flex"
+                                    <button id="edit-points-btn" onclick="toggleEditDelete()">
+                                        <img src="../assets/img/edit-points.png" alt="Edit Options">
+                                      </button>
+                                    <button id="edit-btn" class="edit-btn border-unset"
                                         onclick="showEditContact(document.getElementById('edit-contact-id').value, document.querySelector('.contact-name').textContent, document.getElementById('contact-email').textContent, document.getElementById('contact-phone').textContent)"><img
                                             src="../assets/img/edit.png" alt="">Edit</button>
-                                    <button class="delete-btn border-unset d-flex" onclick="deleteContact()"><img
+                                    <button id="delete-btn" class="delete-btn border-unset" onclick="deleteContact()"><img
                                             src="../assets/img/delete.png" alt="">Delete</button>
                                 </div>
                             </div>
