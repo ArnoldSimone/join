@@ -1,0 +1,156 @@
+@media (max-width: 1120px) { 
+    .headline {
+        font-size: 48px !important;
+        margin: 0;
+        padding-left: 20px;
+    }
+
+    .headline-right {
+        font-size: 16px;
+        padding-bottom: 10px;
+    }
+
+    .contact-name {
+        font-size: 24px;
+    }
+
+    .contact-rightheadline {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .vertical-line-blue {
+        display: none;
+    }
+
+    .horizontal-line-blue {
+        display: block;
+        margin-bottom: 20px;
+        margin-left: 20px;
+    }
+
+    .contact-actions button {
+        margin: 0;
+    }
+
+    .contact-list {
+        width: 430px;
+    }
+
+    .contact-container {
+        margin-left: 645px;
+    }
+   
+}
+
+@media (max-width: 1000px) {
+    .contact-detail-container {
+        display: none;
+    }
+
+    .contact-container {
+        margin: 0;
+      
+    }
+
+    .contact-list {
+        width: 100%;
+        left: 0;
+    }
+
+    .contact-group {
+        padding-left: 70px;
+        padding-right: 70px;
+    }
+}
+
+@media (max-width: 580px) {
+    .add-contact-container {
+        display: none; 
+    }
+
+    .add-contact-btn {
+        position: fixed;
+        bottom: 80px;
+        right: 20px;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        padding: 0;
+        font-size: 0;
+        background-color: var(--darkblue);
+    }
+
+    .add-contact-btn img {
+        margin: 0;
+        width: 30px;
+        height: 30px;
+    }
+}
+
+@media (max-width: 720px) {
+    .overlay-content {
+        flex-direction: column;
+        width: 350px;
+        height: calc(100vh - 200px);
+    }
+
+    .overlay-left {
+        border-radius: 20px 20px 0 0;
+        padding-bottom: 60px;
+        width: auto;
+    }
+
+    .overlay-left h1 {
+        margin: 0;
+        padding-top: 30px;
+    }
+
+    .overlay-left p {
+        margin: 0;
+        padding-bottom: 10px;
+    }
+
+    .overlay-left img {
+        display: none;
+    }
+
+    .overlay-contact-middle img {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100px;
+        height: auto;
+        z-index: 2;
+        padding: 0;
+    }
+
+    form {
+        padding-top: 60px;
+        display: flex;
+        align-items: flex-start;
+        padding-left: 55px;
+    }
+
+    .horizontal-line-blue {
+        margin-left: 0;
+    }
+}
+
+
+@media (max-width: 500px) {
+    .contact-group {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+}
+
+@media (max-width: 370px){
+    .name {
+        font-size: 16px;
+    }
+
+    .email {
+        font-size: 10px;
+    }
+}

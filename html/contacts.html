@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="../css/sidebar.css">
     <link rel="stylesheet" href="../css/fonts.css">
     <link rel="stylesheet" href="../css/contact.css">
+    <link rel="stylesheet" href="../responsiv/contacts_responsive.css">
     <script src="../script/include.js"></script>
     <script src="../script/database.js"></script>
     <script defer src="../script/contacts.js"></script>
@@ -36,13 +37,13 @@
                 </div>
                 <div class="contacts"></div>
             </div>
-            <div class="contact-detail-container">
+            <div class="contact-detail-container" id="contactDetail">
                 <div class="contact-rightheadline">
                     <div class="d-flex-y"></div>
                     <h1 class="headline padding-right20">Contacts</h1>
                     <div class="vertical-line-blue"></div>
                     <span class="headline-right padding-left20">Better with a team</span>
-                    <div class="horizontal-line-blue d-none"></div>
+                    <div class="horizontal-line-blue"></div>
                 </div>
 
                 <div class="contact-view contact-info">
@@ -84,7 +85,7 @@
                 <div class="d-flex overlay-contact-middle">
                     <img src="../assets/img/addcontact.png" alt="">
                 </div>
-                <form class="d-flex direction-column" onsubmit="addNewContact(); return false;">
+                <form class="direction-column" onsubmit="addNewContact(); return false;">
                     <div class="input-container">
                         <input type="text" placeholder="Name" id="add-name" required pattern="[A-Za-z\s]+" title="Only letters are allowed.">
                         <span class="icon"></span>

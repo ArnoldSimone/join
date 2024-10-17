@@ -1,15 +1,18 @@
 .contact-container {
     display: flex;
-    margin-left: 456px; 
+    margin-left: 688px; 
     padding: 20px;
     align-items: center;
     justify-content: space-evenly;
 }
 
+form {
+    justify-content: center;
+}
+
 .contact-detail-container {
     display: flex;
     flex-direction: column;
-    padding-left: 70px;
 }
 
 .contact-details p {
@@ -163,6 +166,7 @@
     height: 3px;
     background-color: var(--lightblue);
     border-radius: 2px;
+    display: none;
 }
 
 .overlay {
