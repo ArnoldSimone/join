@@ -30,7 +30,6 @@ function login() {
 
 /**
  * Asynchronously loads user data from a database, stores it in local storage, and filters the users.
- * @async
  */
 async function loadData() {
   try {
@@ -80,8 +79,6 @@ function checkLoginData() {
   let email = document.getElementById('email').value;
   let password = document.getElementById('password').value;
   let user = users.find(users => users.email == email && users.password == password);
-  console.log(user);
-
   if (user) {
     localStorage.setItem('currentUser', JSON.stringify(user));
     window.location.replace('/html/summary.html');
