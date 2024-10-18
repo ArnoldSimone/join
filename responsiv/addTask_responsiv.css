@@ -1,0 +1,61 @@
+@media (max-width: 1300px) {
+    .task-container {
+        width: 850px;
+    }
+
+}
+
+@media (max-width: 1150px) {
+    form {
+        flex-direction: column;
+    }
+
+    .task-container {
+        width: auto;
+    }
+
+    .form-left, .form-right, .addtask-footer {
+        width: 100%;
+    }
+
+}
+
+@media (max-width: 1000px) {
+    main {
+        margin-left: 0;
+    }
+
+    section {
+        height: calc(100vH - 240px);
+    }
+}
+
+@media (max-width: 580px) {
+    button.clear {
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .addtask-footer {
+        flex-direction: column;
+        align-items: flex-start;
+        padding-bottom: 80px;
+    }
+
+    section {
+        height: calc(100vH - 200px);
+    }
+}
+
+@media (max-width: 480px) {
+    main {
+        padding: 10px;
+    }
+}
+
+@media (max-width: 400px) {
+    .prio {
+        padding: 7px;
+    }
+}

@@ -2,8 +2,7 @@
     display: flex;
     justify-content: space-between;
     border-radius: 10px;
-    padding: 40px;
-    width: 900px;
+    width: 1000px;
     flex-direction: column;
 }
 
@@ -235,38 +234,7 @@ button.create-task:hover {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
-    padding-top: 40px;
-}
-
-.white-background-container {
-    background-color: white;
-    border-radius: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 40px;
-}
-
-.white-background {
-    margin-top: 40px;
-}
-
-.white-background-container form {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-}
-
-.white-background-container .form-left, 
-.white-background-container .form-right {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    width: 44%;
-}
-
-.white-background-container input:hover, 
-.white-background-container select:hover, 
-.white-background-container textarea:hover {
-    border: 1px solid #aaa;
+    padding-top: 90px;
 }
 
 .popup {
@@ -312,7 +280,7 @@ button.create-task:hover {
     width: 90%;
     background-color: var(--lightgrey);
     z-index: 10; 
-    max-height: 50px; 
+    max-height: 70px; 
     overflow-y: auto; 
 }
 
