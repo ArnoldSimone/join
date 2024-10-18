@@ -68,7 +68,8 @@ function toggleContactListVisibility() {
 function updateContactDetails(id, name, email, phone, initials, color) {
     const contactDetails = document.getElementById('contact-details');
     document.querySelector('.contact-name').textContent = name;
-    document.querySelector('.contact-avatar').innerHTML = createAvatar(initials, color);
+    document.querySelector('.contact-avatar').style.backgroundColor = color; 
+    document.querySelector('.contact-avatar').textContent = initials;
     document.getElementById('contact-email').textContent = email;
     document.getElementById('contact-phone').textContent = phone;
     document.getElementById('edit-contact-id').value = id;
@@ -228,22 +229,76 @@ async function saveContact(contact) {
 
 
 /**
- * Edit an existing contact and save changes to the server.
- * @returns {Promise<boolean>} Whether the contact was edited successfully.
+ * Edits a contact's details and updates the contact in the backend.
+ * @async
+ * @returns {Promise<boolean>} - Returns true if the contact is successfully updated, otherwise false.
  */
 async function editContact() {
     const contactData = getContactData();
     if (!contactData) return false;
 
+    setContactAvatar(contactData);
+    
     const response = await updateContact(contactData);
+    return handleContactUpdate(response, contactData);
+}
+
+
+/**
+ * Sets the contact's avatar based on whether the name has changed.
+ * @param {Object} contactData - The data of the contact being edited.
+ */
+function setContactAvatar(contactData) {
+    const currentName = document.getElementById('edit-name').getAttribute('data-original-name');
+
+    if (contactData.name !== currentName) {
+        contactData.avatar = generateAvatar(contactData.name);
+    } else {
+        contactData.avatar = { 
+            initials: document.getElementById('edit-avatar').textContent, 
+            color: document.getElementById('edit-avatar').style.backgroundColor 
+        };
+    }
+}
+
+/**
+ * Handles the contact update process after an update request.
+ * @param {Response} response - The response from the backend after attempting to update the contact.
+ * @param {Object} contactData - The data of the contact being edited.
+ * @returns {boolean} - Returns true if the update is successful, otherwise false.
+ */
+function handleContactUpdate(response, contactData) {
     if (response.ok) {
         hideOverlay();
         loadContacts();
         updateContactDetails(contactData.id, contactData.name, contactData.email, contactData.phone, contactData.avatar.initials, contactData.avatar.color);
         return true;
     }
-
     return false;
+}
+
+
+/**
+ * Update the input fields and avatar for editing a contact.
+ * @param {string} id - The contact ID.
+ * @param {string} name - The contact name.
+ * @param {string} email - The contact email.
+ * @param {string} phone - The contact phone.
+ * @param {string} initials - The contact initials.
+ * @param {string} color - The avatar background color.
+ */
+function updateEditContactFields(id, name, email, phone, initials, color) {
+    const nameField = document.getElementById('edit-name');
+    nameField.value = name || '';
+    nameField.setAttribute('data-original-name', name); // Store the original name for comparison
+
+    document.getElementById('edit-email').value = email || '';
+    document.getElementById('edit-phone').value = phone || '';
+    document.getElementById('edit-contact-id').value = id;
+
+    const avatarElement = document.getElementById('edit-avatar');
+    avatarElement.style.backgroundColor = color;
+    avatarElement.textContent = initials;
 }
 
 
@@ -259,9 +314,12 @@ function getContactData() {
 
     if (!name || !email || !phone) return null;
 
-    return { name, email, phone, avatar: generateAvatar(name), id };
-}
+    const avatarElement = document.getElementById('edit-avatar');
+    const initials = avatarElement.textContent;
+    const color = avatarElement.style.backgroundColor;
 
+    return { name, email, phone, avatar: { initials, color }, id };
+}
 
 /**
  * Update an existing contact on the server.
@@ -316,60 +374,6 @@ function generateAvatar(name) {
         initials: name.split(' ').map(n => n[0]).join(''),
         color: '#' + Math.floor(Math.random() * 16777215).toString(16)
     };
-}
-
-
-/**
- * Update the input fields and avatar for editing a contact.
- * @param {string} id - The contact ID.
- * @param {string} name - The contact name.
- * @param {string} email - The contact email.
- * @param {string} phone - The contact phone.
- * @param {string} initials - The contact initials.
- * @param {string} color - The avatar background color.
- */
-function updateEditContactFields(id, name, email, phone, initials, color) {
-    document.getElementById('edit-name').value = name || '';
-    document.getElementById('edit-email').value = email || '';
-    document.getElementById('edit-phone').value = phone || '';
-    document.getElementById('edit-contact-id').value = id;
-
-    const avatarElement = document.getElementById('edit-avatar');
-    avatarElement.style.backgroundColor = color;
-    avatarElement.textContent = initials;
-}
-
-
-/**
- * Hide the overlay for adding or editing a contact with a slide-out animation.
- * @param {Event} [event] - The event object if triggered by an event.
- */
-function hideOverlay(event) {
-    if (event) {
-        event.stopPropagation();
-    }
-    handleOverlayAnimation('add-contact-overlay', 'edit-contact-overlay');
-}
-
-
-/**
- * Handles the overlay animation by adding and removing CSS classes and updating the display property.
- * @param {string} addOverlayId - The ID of the add contact overlay element.
- * @param {string} editOverlayId - The ID of the edit contact overlay element.
- */
-function handleOverlayAnimation(addOverlayId, editOverlayId) {
-    const addContactOverlay = document.getElementById(addOverlayId);
-    const editContactOverlay = document.getElementById(editOverlayId);
-
-    addContactOverlay.classList.add('slide-out');
-    editContactOverlay.classList.add('slide-out');
-
-    setTimeout(() => {
-        addContactOverlay.style.display = 'none';
-        editContactOverlay.style.display = 'none';
-        addContactOverlay.classList.remove('slide-out');
-        editContactOverlay.classList.remove('slide-out');
-    }, 200);
 }
 
 

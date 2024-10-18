@@ -109,3 +109,36 @@ function showEditContact(id, name, email, phone, initials, color) {
 
     updateEditContactFields(id, name, email, phone, initials, color);
 }
+
+
+/**
+ * Hide the overlay for adding or editing a contact with a slide-out animation.
+ * @param {Event} [event] - The event object if triggered by an event.
+ */
+function hideOverlay(event) {
+    if (event) {
+        event.stopPropagation();
+    }
+    handleOverlayAnimation('add-contact-overlay', 'edit-contact-overlay');
+}
+
+
+/**
+ * Handles the overlay animation by adding and removing CSS classes and updating the display property.
+ * @param {string} addOverlayId - The ID of the add contact overlay element.
+ * @param {string} editOverlayId - The ID of the edit contact overlay element.
+ */
+function handleOverlayAnimation(addOverlayId, editOverlayId) {
+    const addContactOverlay = document.getElementById(addOverlayId);
+    const editContactOverlay = document.getElementById(editOverlayId);
+
+    addContactOverlay.classList.add('slide-out');
+    editContactOverlay.classList.add('slide-out');
+
+    setTimeout(() => {
+        addContactOverlay.style.display = 'none';
+        editContactOverlay.style.display = 'none';
+        addContactOverlay.classList.remove('slide-out');
+        editContactOverlay.classList.remove('slide-out');
+    }, 200);
+}
