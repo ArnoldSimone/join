@@ -96,22 +96,23 @@
                 </div>
                 <form class="direction-column" onsubmit="addNewContact(); return false;">
                     <div class="input-container">
-                        <input type="text" placeholder="Name" id="add-name" required pattern="[A-Za-z\s]+" title="Only letters are allowed.">
-                        <span class="icon"></span>
+                        <input type="text" placeholder="Name" id="add-name">
+                        <span id="name-error" class="error-message"></span>
                     </div>
                     <div class="input-container">
-                        <input type="email" placeholder="Email" id="add-email" required>
-                        <span class="icon"></span>
+                        <input type="email" placeholder="Email" id="add-email">
+                        <span id="email-error" class="error-message"></span>
                     </div>
                     <div class="input-container">
-                        <input type="tel" placeholder="Phone" id="add-phone" required pattern="[\d\s+]+" title="Only numbers are allowed.">
-                        <span class="icon"></span>
+                        <input type="tel" placeholder="Phone" id="add-phone">
+                        <span id="phone-error" class="error-message"></span>
                     </div>
                     <div class="contacts-button">
-                        <button type="button" class="cancel" onclick="hideOverlay()">Cancel</button>
+                        <button type="button" class="cancel" onclick="clearValidationErrors(); clearInputFields(); hideOverlay()">Cancel</button>
                         <button type="submit" class="create-contact">Create contact</button>
                     </div>
                 </form>
+                    
             </div>
         </div>
         <!-- Edit Contact Overlay -->

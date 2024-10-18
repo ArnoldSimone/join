@@ -167,18 +167,6 @@ function toggleEditDelete() {
       deleteBtn.classList.add("show");
     }
   }
-  
-
-/**
- * Validate the input fields for adding or editing a contact.
- * @param {string} name - The contact name.
- * @param {string} email - The contact email.
- * @param {string} phone - The contact phone.
- * @returns {boolean} Whether the input is valid.
- */
-function validateContactInput(name, email, phone) {
-    return name && email && phone;
-}
 
 
 /**
@@ -189,7 +177,9 @@ async function addNewContact() {
     const name = document.getElementById('add-name').value.trim();
     const email = document.getElementById('add-email').value.trim();
     const phone = document.getElementById('add-phone').value.trim();
+
     if (!validateContactInput(name, email, phone)) return false;
+
     const contact = { name, email, phone, avatar: generateAvatar(name) };
     const response = await saveContact(contact);
     if (response) {

@@ -29,6 +29,7 @@ form {
     overflow-y: auto; 
     padding-right: 10px;
     box-shadow: rgba(0, 0, 0, 0.08) 4px 0px 6px 0px;
+    cursor: pointer;
 }
 
 .add-contact-container {
@@ -328,6 +329,18 @@ input {
 .slide-in {
     animation: slide-in 0.2s ease-in-out 0s 1 normal forwards;
 }
+
+.error-message {
+    color: red;
+    font-size: 10px;
+    display: none;
+    text-align: left;
+}
+
+input.invalid {
+    border: 1px solid red;
+}
+
 
  
   

@@ -132,6 +132,7 @@ button.save-changes:hover {
     display: none; 
     padding: 10px;
     opacity: 0;
+    cursor: pointer;
   }
 
   #edit-btn {
