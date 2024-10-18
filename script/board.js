@@ -83,7 +83,6 @@ function renderTasksByProgress(progressStatus, containerId, noTaskMessage) {
 function renderAssignedTo(assignedTo) {
     let assignedToArray = Array.isArray(assignedTo) ? assignedTo : [assignedTo];
     if (!assignedToArray || assignedToArray.length === 0) return '';
-    let assignedToContent = '';
     if (!assignedToArray || assignedToArray.length === 0 || assignedToArray == '') {
         return '';
     } else {

@@ -2,6 +2,20 @@
 let loggedInUser = JSON.parse(localStorage.getItem('currentUser'));
 
 
+/**
+ * Executes `onloadFuncHeader` after the DOM has fully loaded.
+ */
+document.addEventListener("DOMContentLoaded", async function () {
+  await onloadFuncHeader();
+});
+
+
+/**
+ * Loads contacts from the database and initializes user initials.
+ * @async
+ * @function
+ * @returns {Promise<void>}
+ */
 async function onloadFuncHeader() {
   let contactsData = await loadFromDatabase(`/contacts`);
   contacts = Object.entries(contactsData).map(([id, contact]) => ({ id, ...contact }));
@@ -9,6 +23,10 @@ async function onloadFuncHeader() {
 }
 
 
+/**
+ * Displays the logged-in user's initials in the header.
+ * Defaults to "G" if no user is logged in.
+ */
 function generateUserLetter() {
   let userInitialRef = document.getElementById('user-initial');
   if (loggedInUser) {
@@ -20,8 +38,8 @@ function generateUserLetter() {
   } else {
     userInitialRef.innerHTML.innerHTML = "G";
   }
-
 }
+
 
 /**
  * Toggles the user menu. For window widths greater than 1000 pixels, the menu is shown or hidden. 

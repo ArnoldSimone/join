@@ -1,5 +1,3 @@
-
-
 /**
  * Loads task and contact data from the database and initializes the summary page.
  * @async
@@ -142,12 +140,16 @@ function animationSummaryResponsive() {
     let ctnTasksSummaryRef = document.querySelector('.ctn-tasks-summary');
     if (window.innerWidth <= 1280) {
         greetingSummaryRef.addEventListener('animationend', function () {
+
             greetingSummaryRef.style.display = 'none';
             headerSummaryRef.style.display = 'flex';
             ctnTasksSummaryRef.style.display = 'flex';
             headerSummaryRef.classList.add('fade-in');
             ctnTasksSummaryRef.classList.add('fade-in');
+            showAnimation = true;
         });
+    } else {
+        greetingSummaryRef.style.display = 'flex';
     }
 }
 
