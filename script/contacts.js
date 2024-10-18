@@ -186,16 +186,19 @@ function displayContactDetailContainer(contactDetails) {
  */
 function hideContactDetails() {
     const contactDetails = document.getElementById('contact-details');
-
     contactDetails.style.display = 'none';
-
     if (window.innerWidth <= 1000) {
         document.querySelector('.contact-list').style.display = 'block';
     }
-
     const closeButton = document.querySelector('.close-btn');
     closeButton.style.display = 'none';
+    const editBtn = document.getElementById("edit-btn");
+    const deleteBtn = document.getElementById("delete-btn");
+
+    editBtn.classList.remove("show");
+    deleteBtn.classList.remove("show");
 }
+
 
 
 /**
@@ -324,6 +327,7 @@ async function editContact() {
     if (response.ok) {
         hideOverlay();
         loadContacts();
+        updateContactDetails(contactData.id, contactData.name, contactData.email, contactData.phone, contactData.avatar.initials, contactData.avatar.color);
         return true;
     }
 

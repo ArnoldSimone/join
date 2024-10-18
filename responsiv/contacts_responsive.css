@@ -64,6 +64,8 @@
     .contact-list {
         width: 100%;
         left: 0;
+        top: 70px;
+        height: 648px;
     }
 
     .contact-group {
@@ -164,6 +166,7 @@
 @media (max-width: 580px) {
     .add-contact-container {
         display: none; 
+        padding: 0;
     }
 
     .add-contact-btn {
@@ -192,6 +195,12 @@
     }
 }
 
+@media (max-width: 375px){
+    .overlay-content{
+        height: calc(100vh - 150px);
+    }
+}
+
 @media (max-width: 370px){
     .name {
         font-size: 16px;
@@ -199,5 +208,5 @@
 
     .email {
         font-size: 10px;
-    }
+    } 
 }

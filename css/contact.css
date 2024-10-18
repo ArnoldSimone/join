@@ -359,7 +359,7 @@ button.save-changes:hover {
 .contacts-button {
     display: flex; 
     gap: 5px;
-    margin-top: 30px;
+    margin-top: 25px;
 }
 
 .contact-email {
@@ -466,9 +466,9 @@ button.save-changes:hover {
   }
 
   #edit-btn {
-    bottom: 180px !important;
+    bottom: 178px !important;
     border-radius: 10px 10px 0 0;
-    width: 95px;
+    width: 103px;
   }
 
   #delete-btn {
@@ -476,7 +476,7 @@ button.save-changes:hover {
   }
   
   #edit-btn.show, #delete-btn.show {
-    display: block;
+    display: flex;
     opacity: 1;
     transform: translateY(-10px); 
   }
