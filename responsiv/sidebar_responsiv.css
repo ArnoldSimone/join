@@ -7,6 +7,10 @@
     z-index: 1;
     background-color: var(--darkblue);
   }
+
+  .sidebar-guest {
+    display: none;
+  }
   
   .sidebar-content {
     position: absolute;
