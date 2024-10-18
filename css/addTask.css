@@ -31,6 +31,23 @@ form {
     position: relative;
 }
 
+.form-group select {
+    appearance: none;
+    -webkit-appearance: none; 
+    -moz-appearance: none; 
+    background: url('../assets/icon/arrow_drop_downaa.svg') no-repeat right 10px;
+    background-size: 25px; 
+    padding: 10px; 
+    border-radius: 10px; 
+    cursor: pointer; 
+    background-color: white;
+    color: grey;
+}
+
+.form-group select:focus {
+    outline: none;
+}
+
 .form-group-subtask {
     display: flex;
     flex-direction: column;
