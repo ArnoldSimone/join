@@ -39,27 +39,6 @@ form {
     z-index: 1000; 
 }
 
-.add-contact-btn {
-    background-color: var(--darkblue);
-    color: white;
-    padding: 10px 30px;
-    border-radius: 10px;
-    cursor: pointer;
-    margin-top: 20px;
-    width: 360px;
-    font-size: 20px;
-    font-weight: 600;
-}
-
-.add-contact-btn:hover {
-    background-color: var(--lightblue);
-    border: 2px solid var(--lightblue);
-}
-
-.add-contact-btn img {
-    margin-left: 7px;
-}
-
 .contact-information {
     font-size: 21px;
 }
@@ -241,61 +220,6 @@ input {
     background-image: url('../assets/icon/phone.svg');
 }
 
-button.cancel {
-    background-color: white;
-    border: 2px solid var(--darkblue);
-    color: var(--darkblue);
-    padding: 10px 20px;
-    border-radius: 10px;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: 600;
-}
-
-button.cancel:hover {
-    color: var(--lightblue);
-    border: 2px solid var(--lightblue);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.19);
-    transform: translateY(-1px); 
-    transition: box-shadow 0.3s ease, transform 0.3s ease;
-}
-
-button.create-contact {
-    background-color: var(--darkblue);
-    color: white;
-    padding: 10px 20px;
-    border-radius: 10px;
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: 600;
-}
-
-button.create-contact:hover {
-    background-color: var(--lightblue);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.19);
-    transform: translateY(-1px); 
-    transition: box-shadow 0.3s ease, transform 0.3s ease;
-}
-
-button.save-changes {
-    background-color: var(--darkblue);
-    color: white;
-    padding: 10px 20px;
-    border-radius: 10px;
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: 600;
-}
-
-button.save-changes:hover {
-    background-color: var(--lightblue);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.19);
-    transform: translateY(-1px); 
-    transition: box-shadow 0.3s ease, transform 0.3s ease;
-}
-
 .contact-info-container {
     display: flex;
     flex-direction: column;
@@ -332,13 +256,6 @@ button.save-changes:hover {
     align-items: flex-start;
 }
 
-.edit-btn, .delete-btn {
-    background-color: var(--lightgrey);
-    padding: 10px 20px !important;
-    margin-right: 10px !important;
-    gap: 8px !important;
-}
-
 .contact-rightheadline {
     flex-direction: row;
     justify-content: flex-start; 
@@ -356,12 +273,6 @@ button.save-changes:hover {
     flex-direction: row;
 }
 
-.contacts-button {
-    display: flex; 
-    gap: 5px;
-    margin-top: 25px;
-}
-
 .contact-email {
     color: var(--lightblue);
 }
@@ -373,22 +284,6 @@ button.save-changes:hover {
 .contact-data {
     color: black;
     padding-bottom: 10px;
-}
-
-.delete-btn:hover {
-    color: var(--lightblue);
-}
-
-.delete-btn:hover img {
-    content: url('../assets/img/delete_blue.png');
-}
-
-.edit-btn:hover {
-    color: var(--lightblue);
-}
-
-.edit-btn:hover img {
-    content: url('../assets/img/edit_blue.png')
 }
 
 .contact-name {
@@ -433,62 +328,6 @@ button.save-changes:hover {
 .slide-in {
     animation: slide-in 0.2s ease-in-out 0s 1 normal forwards;
 }
-
-.close-btn {
-    background-color: transparent;
-    border: none;
-    font-size: 24px;
-    position: absolute; 
-    right: 40px;
-    top: 130px;
-    cursor: pointer;
-    color: #000;
-    display: none;
-}
-
-#edit-points-btn {
-    position: fixed;
-    bottom: 100px;
-    right: 20px;
-    background-color: var(--darkblue);
-    border: none;
-    border-radius: 50%;
-    cursor: pointer;
-  }
-  
-  #edit-btn, #delete-btn {
-    position: fixed;
-    bottom: 170px; 
-    right: 20px;
-    display: none; 
-    padding: 10px;
-    opacity: 0;
-  }
-
-  #edit-btn {
-    bottom: 178px !important;
-    border-radius: 10px 10px 0 0;
-    width: 103px;
-  }
-
-  #delete-btn {
-    border-radius: 0 0 0 10px;
-  }
-  
-  #edit-btn.show, #delete-btn.show {
-    display: flex;
-    opacity: 1;
-    transform: translateY(-10px); 
-  }
-  
-  #delete-btn {
-    bottom: 140px; 
-  }
-
-  #edit-points-btn img {
-    height: 14px;
-    padding: 10px;
-  }
 
  
   
