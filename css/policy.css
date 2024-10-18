@@ -18,3 +18,7 @@ main {
 .vector-legal:hover {
     border: 1px solid var(--lightblue);
 }
+
+.legalnotice-infos p{
+    margin: 0;
+}
