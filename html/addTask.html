@@ -50,7 +50,7 @@
                         <div class="form-group">
                             <label for="assigned">Assigned to</label>
                             <div id="inputAssigned" class="assigned-input d-flex-y">
-                                <input id="assignedInput" onkeyup="assignedSearch(); inputValueCheck()" placeholder="Select contacts to assign" type="text">
+                                <input id="assignedInput" onclick="assignedListToogle()" onkeyup="assignedSearch(); inputValueCheck()" placeholder="Select contacts to assign" type="text">
                                 <img id="assignedImage" onclick="assignedListToogle()" src="../assets/icon/arrow_drop_downaa.svg" alt="Down">
                             </div>
                             <div id="assignedList" class="assigned-list d-none">
