@@ -86,6 +86,7 @@
         <div id="add-contact-overlay" class="overlay" onclick="hideOverlay(event)">
             <div class="overlay-content" onclick="event.stopPropagation()">
                 <div class="overlay-left">
+                    <img src="../assets/img/close-white.svg" alt="Close" class="close-icon" onclick="clearValidationErrors(); clearInputFields(); hideOverlay()">
                     <img src="../assets/img/logo_white.png" alt="">
                     <h1>Add Contact</h1>
                     <p>Tasks are better with a team!</p>
@@ -96,28 +97,30 @@
                 </div>
                 <form class="direction-column" onsubmit="addNewContact(); return false;">
                     <div class="input-container">
-                        <input type="text" placeholder="Name" id="add-name" required pattern="[A-Za-z\s]+" title="Only letters are allowed.">
-                        <span class="icon"></span>
+                        <input type="text" placeholder="Name" id="add-name">
+                        <span id="name-error" class="error-message"></span>
                     </div>
                     <div class="input-container">
-                        <input type="email" placeholder="Email" id="add-email" required>
-                        <span class="icon"></span>
+                        <input type="email" placeholder="Email" id="add-email">
+                        <span id="email-error" class="error-message"></span>
                     </div>
                     <div class="input-container">
-                        <input type="tel" placeholder="Phone" id="add-phone" required pattern="[\d\s+]+" title="Only numbers are allowed.">
-                        <span class="icon"></span>
+                        <input type="tel" placeholder="Phone" id="add-phone">
+                        <span id="phone-error" class="error-message"></span>
                     </div>
                     <div class="contacts-button">
-                        <button type="button" class="cancel" onclick="hideOverlay()">Cancel</button>
-                        <button type="submit" class="create-contact">Create contact</button>
+                        <button type="button" class="cancel" onclick="clearValidationErrors(); clearInputFields(); hideOverlay()">Cancel<img src="../assets/img/close.svg" alt=""></button>
+                        <button type="submit" class="create-contact">Create contact<img src="../assets/img/check-white.svg" alt=""></button>
                     </div>
                 </form>
+                    
             </div>
         </div>
         <!-- Edit Contact Overlay -->
         <div id="edit-contact-overlay" class="overlay slide-out" onclick="hideOverlay(event)">
             <div class="overlay-content" onclick="event.stopPropagation()">
                 <div class="overlay-left">
+                    <img src="../assets/img/close-white.svg" alt="Close" class="close-icon" onclick="clearValidationErrors(); clearInputFields(); hideOverlay()">
                     <img src="../assets/img/logo_white.png" alt="">
                     <h1>Edit Contact</h1>
                     <div class="horizontal-line-blue"></div>
@@ -128,22 +131,23 @@
                 <form class="direction-column">
                     <div class="input-container">
                         <input type="text" placeholder="Name" id="edit-name" required>
-                        <span class="icon"></span>
+                        <span id="edit-name-error" class="error-message"></span>
                     </div>
                     <div class="input-container">
                         <input type="email" placeholder="Email" id="edit-email" required>
-                        <span class="icon"></span>
+                        <span id="edit-email-error" class="error-message"></span>
                     </div>
                     <div class="input-container">
                         <input type="tel" placeholder="Phone" id="edit-phone" required>
-                        <span class="icon"></span>
+                        <span id="edit-phone-error" class="error-message"></span>
                     </div>
                     <input type="hidden" id="edit-contact-id">
                     <div class="contacts-button">
-                        <button type="button" class="cancel" onclick="hideOverlay()">Cancel</button>
-                        <button type="button" class="save-changes" onclick="editContact()">Save changes</button>
+                        <button type="button" class="cancel" onclick="hideOverlay()">Cancel<img src="../assets/img/close.svg" alt=""></button>
+                        <button type="button" class="save-changes" onclick="validateEditContact()">Save<img src="../assets/img/check-white.svg" alt=""></button>
                     </div>
                 </form>
+                
             </div>
         </div>
 

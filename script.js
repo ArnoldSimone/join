@@ -80,8 +80,8 @@ function checkLoginData() {
   let password = document.getElementById('password').value;
   let user = users.find(users => users.email == email && users.password == password);
   if (user) {
-    localStorage.setItem('currentUser', JSON.stringify(user));
     window.location.replace('/html/summary.html');
+    localStorage.setItem('currentUser', JSON.stringify(user));
   } else {
     loginDataDontMatch();
   };

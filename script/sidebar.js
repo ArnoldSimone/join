@@ -13,7 +13,11 @@ function menuColor() {
     boardBackgroundColor();
   } else if (currentURL === 'http://127.0.0.1:5502/html/contacts.html') {
     contactsBackgroundColor();
-  };
+  } else if (currentURL === 'http://127.0.0.1:5502/html/privacy.html') {
+    privacyBackgroundColor();
+  } else if (currentURL === 'http://127.0.0.1:5502/html/legalnotice.html') {
+    legalNoticeBackgroundColor();
+  }
 }
 
 
@@ -65,6 +69,34 @@ function boardBackgroundColor() {
  */
 function contactsBackgroundColor() {
   let menuColor = document.getElementById('menu-contacts');
+  if (menuColor.classList.contains('active')) {
+    menuColor.classList.remove('active');
+  } else {
+    menuColor.classList.add('active');
+  };
+}
+
+
+/**
+ * Toggles the 'active' class on the privacy menu item.
+ * If the class is present, it will be removed; otherwise, it will be added.
+ */
+function privacyBackgroundColor() {
+  let menuColor = document.getElementById('menu-privacy');
+  if (menuColor.classList.contains('active')) {
+    menuColor.classList.remove('active');
+  } else {
+    menuColor.classList.add('active');
+  };
+}
+
+
+/**
+ * Toggles the 'active' class on the legal notice menu item.
+ * If the class is present, it will be removed; otherwise, it will be added.
+ */
+function legalNoticeBackgroundColor() {
+  let menuColor = document.getElementById('menu-legal');
   if (menuColor.classList.contains('active')) {
     menuColor.classList.remove('active');
   } else {

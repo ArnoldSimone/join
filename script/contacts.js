@@ -68,7 +68,8 @@ function toggleContactListVisibility() {
 function updateContactDetails(id, name, email, phone, initials, color) {
     const contactDetails = document.getElementById('contact-details');
     document.querySelector('.contact-name').textContent = name;
-    document.querySelector('.contact-avatar').innerHTML = createAvatar(initials, color);
+    document.querySelector('.contact-avatar').style.backgroundColor = color; 
+    document.querySelector('.contact-avatar').textContent = initials;
     document.getElementById('contact-email').textContent = email;
     document.getElementById('contact-phone').textContent = phone;
     document.getElementById('edit-contact-id').value = id;
@@ -166,38 +167,50 @@ function toggleEditDelete() {
       deleteBtn.classList.add("show");
     }
   }
-  
 
-/**
- * Validate the input fields for adding or editing a contact.
- * @param {string} name - The contact name.
- * @param {string} email - The contact email.
- * @param {string} phone - The contact phone.
- * @returns {boolean} Whether the input is valid.
+
+  /**
+ * Adds a new contact by validating the input, saving the contact to Firebase,
+ * and displaying a success message upon completion.
+ * 
+ * @async
+ * @returns {Promise<boolean>} Returns true if the contact was added successfully, false otherwise.
  */
-function validateContactInput(name, email, phone) {
-    return name && email && phone;
-}
-
-
-/**
- * Add a new contact and save it to the server.
- * @returns {Promise<boolean>} Whether the contact was added successfully.
- */
-async function addNewContact() {
+  async function addNewContact() {
     const name = document.getElementById('add-name').value.trim();
     const email = document.getElementById('add-email').value.trim();
     const phone = document.getElementById('add-phone').value.trim();
+
     if (!validateContactInput(name, email, phone)) return false;
+
     const contact = { name, email, phone, avatar: generateAvatar(name) };
     const response = await saveContact(contact);
     if (response) {
         clearInputFields();
         hideOverlay();
         loadContacts();
+        showPopup('Contact added successfully');
         return true;
     }
     return false;
+}
+
+
+/**
+ * Saves a contact to Firebase by making a POST request to the Firebase contacts endpoint.
+ * 
+ * @async
+ * @param {Object} contact - The contact object to be saved.
+ * @returns {Promise<boolean>} Returns true if the contact was successfully saved, false otherwise.
+ */
+async function saveContact(contact) {
+    const response = await fetch(`${BASE_URL}/contacts.json`, {
+        method: 'POST',
+        body: JSON.stringify(contact),
+        headers: { 'Content-Type': 'application/json' }
+    });
+
+    return response.ok;
 }
 
 
@@ -212,38 +225,76 @@ function clearInputFields() {
 
 
 /**
- * Save a new contact to the server.
- * @param {Object} contact - The contact object.
- * @returns {Promise<boolean>} Whether the contact was saved successfully.
- */
-async function saveContact(contact) {
-    const response = await fetch(`${BASE_URL}/contacts.json`, {
-        method: 'POST',
-        body: JSON.stringify(contact),
-        headers: { 'Content-Type': 'application/json' }
-    });
-
-    return response.ok;
-}
-
-
-/**
- * Edit an existing contact and save changes to the server.
- * @returns {Promise<boolean>} Whether the contact was edited successfully.
+ * Edits a contact's details and updates the contact in the backend.
+ * @async
+ * @returns {Promise<boolean>} - Returns true if the contact is successfully updated, otherwise false.
  */
 async function editContact() {
     const contactData = getContactData();
     if (!contactData) return false;
 
+    setContactAvatar(contactData);
+    
     const response = await updateContact(contactData);
+    return handleContactUpdate(response, contactData);
+}
+
+
+/**
+ * Sets the contact's avatar based on whether the name has changed.
+ * @param {Object} contactData - The data of the contact being edited.
+ */
+function setContactAvatar(contactData) {
+    const currentName = document.getElementById('edit-name').getAttribute('data-original-name');
+
+    if (contactData.name !== currentName) {
+        contactData.avatar = generateAvatar(contactData.name);
+    } else {
+        contactData.avatar = { 
+            initials: document.getElementById('edit-avatar').textContent, 
+            color: document.getElementById('edit-avatar').style.backgroundColor 
+        };
+    }
+}
+
+/**
+ * Handles the contact update process after an update request.
+ * @param {Response} response - The response from the backend after attempting to update the contact.
+ * @param {Object} contactData - The data of the contact being edited.
+ * @returns {boolean} - Returns true if the update is successful, otherwise false.
+ */
+function handleContactUpdate(response, contactData) {
     if (response.ok) {
         hideOverlay();
         loadContacts();
         updateContactDetails(contactData.id, contactData.name, contactData.email, contactData.phone, contactData.avatar.initials, contactData.avatar.color);
         return true;
     }
-
     return false;
+}
+
+
+/**
+ * Update the input fields and avatar for editing a contact.
+ * @param {string} id - The contact ID.
+ * @param {string} name - The contact name.
+ * @param {string} email - The contact email.
+ * @param {string} phone - The contact phone.
+ * @param {string} initials - The contact initials.
+ * @param {string} color - The avatar background color.
+ */
+function updateEditContactFields(id, name, email, phone, initials, color) {
+    const nameField = document.getElementById('edit-name');
+    nameField.value = name || '';
+    nameField.setAttribute('data-original-name', name);
+
+    document.getElementById('edit-email').value = email || '';
+    document.getElementById('edit-phone').value = phone || '';
+    document.getElementById('edit-contact-id').value = id;
+
+    const avatarElement = document.getElementById('edit-avatar');
+    avatarElement.style.backgroundColor = color;
+    avatarElement.textContent = initials;
 }
 
 
@@ -259,9 +310,12 @@ function getContactData() {
 
     if (!name || !email || !phone) return null;
 
-    return { name, email, phone, avatar: generateAvatar(name), id };
-}
+    const avatarElement = document.getElementById('edit-avatar');
+    const initials = avatarElement.textContent;
+    const color = avatarElement.style.backgroundColor;
 
+    return { name, email, phone, avatar: { initials, color }, id };
+}
 
 /**
  * Update an existing contact on the server.
@@ -287,8 +341,11 @@ function getEditContactId() {
 
 
 /**
- * Delete a contact from the server.
- * @returns {Promise<boolean>} Whether the contact was deleted successfully.
+ * Deletes a contact from Firebase and updates the contact list.
+ * Displays a success popup upon deletion.
+ * 
+ * @async
+ * @returns {Promise<boolean>} Returns true if the contact was successfully deleted, false otherwise.
  */
 async function deleteContact() {
     const id = getEditContactId();
@@ -299,6 +356,7 @@ async function deleteContact() {
         hideOverlay();
         loadContacts();
         document.getElementById('contact-details').style.display = 'none';
+        showPopup('Contact successfully deleted'); // Pop-up beim Löschen
         return true;
     }
 
@@ -316,60 +374,6 @@ function generateAvatar(name) {
         initials: name.split(' ').map(n => n[0]).join(''),
         color: '#' + Math.floor(Math.random() * 16777215).toString(16)
     };
-}
-
-
-/**
- * Update the input fields and avatar for editing a contact.
- * @param {string} id - The contact ID.
- * @param {string} name - The contact name.
- * @param {string} email - The contact email.
- * @param {string} phone - The contact phone.
- * @param {string} initials - The contact initials.
- * @param {string} color - The avatar background color.
- */
-function updateEditContactFields(id, name, email, phone, initials, color) {
-    document.getElementById('edit-name').value = name || '';
-    document.getElementById('edit-email').value = email || '';
-    document.getElementById('edit-phone').value = phone || '';
-    document.getElementById('edit-contact-id').value = id;
-
-    const avatarElement = document.getElementById('edit-avatar');
-    avatarElement.style.backgroundColor = color;
-    avatarElement.textContent = initials;
-}
-
-
-/**
- * Hide the overlay for adding or editing a contact with a slide-out animation.
- * @param {Event} [event] - The event object if triggered by an event.
- */
-function hideOverlay(event) {
-    if (event) {
-        event.stopPropagation();
-    }
-    handleOverlayAnimation('add-contact-overlay', 'edit-contact-overlay');
-}
-
-
-/**
- * Handles the overlay animation by adding and removing CSS classes and updating the display property.
- * @param {string} addOverlayId - The ID of the add contact overlay element.
- * @param {string} editOverlayId - The ID of the edit contact overlay element.
- */
-function handleOverlayAnimation(addOverlayId, editOverlayId) {
-    const addContactOverlay = document.getElementById(addOverlayId);
-    const editContactOverlay = document.getElementById(editOverlayId);
-
-    addContactOverlay.classList.add('slide-out');
-    editContactOverlay.classList.add('slide-out');
-
-    setTimeout(() => {
-        addContactOverlay.style.display = 'none';
-        editContactOverlay.style.display = 'none';
-        addContactOverlay.classList.remove('slide-out');
-        editContactOverlay.classList.remove('slide-out');
-    }, 200);
 }
 
 

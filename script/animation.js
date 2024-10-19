@@ -82,7 +82,7 @@ function stoppAnimation() {
  * Checks the window width and displays either the desktop or mobile version.
  */
 function checkWindowWitdh() {
-  let width = window.innerWidth;
+  let width = window.innerWidth;  
   if (width > 1000) {
     desktopVersion();
   } else {

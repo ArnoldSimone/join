@@ -2,6 +2,7 @@ let selectedPriority = '';
 let allContacts;
 let users = [];
 let subtasks = [];
+let editingSubtaskIndex = null;
 
 /**
  * Initializes the application by fetching contacts, setting the minimum date for the due date input, and setting the medium priority.
@@ -445,6 +446,16 @@ function addSubtask() {
 
 
 /**
+ * Adds the ability to add a subtask by pressing the Enter key.
+ */
+document.getElementById('subtasks').addEventListener('keydown', function(event) {
+    if (event.key === 'Enter') {
+        addSubtask();
+    }
+});
+
+
+/**
  * Retrieves the subtask input field element.
  * @returns {HTMLInputElement} - The subtask input element.
  */
@@ -486,10 +497,15 @@ function createSubtask(subtaskId, subtaskText) {
 
 
 /**
- * Edits a specific subtask by its index.
+ * Edits a specific subtask by its index. Closes the currently edited subtask if another one is clicked.
  * @param {number} index - The index of the subtask to edit.
  */
 function editSubtask(index) {
+    if (editingSubtaskIndex !== null && editingSubtaskIndex !== index) {
+        renderSubtasks();
+    }
+    editingSubtaskIndex = index;
+
     const subtask = subtasks[index];
     let subtaskElement = document.querySelectorAll('#subtask-list li')[index];
     subtaskElement.classList.add('edit-mode');
@@ -506,19 +522,9 @@ function saveSubtask(index) {
 
     if (newTitle !== '') {
         subtasks[index].title = newTitle;
-
         renderSubtasks();
+        editingSubtaskIndex = null;
     }
-}
-
-
-/**
- * Deletes a specific subtask by its index.
- * @param {number} index - The index of the subtask to delete.
- */
-function deleteSubtask(index) {
-    subtasks.splice(index, 1);
-    renderSubtasks(); 
 }
 
 
@@ -528,6 +534,18 @@ function deleteSubtask(index) {
  */
 function cancelEdit(index) {
     renderSubtasks();
+    editingSubtaskIndex = null;
+}
+
+
+
+/**
+ * Deletes a specific subtask by its index.
+ * @param {number} index - The index of the subtask to delete.
+ */
+function deleteSubtask(index) {
+    subtasks.splice(index, 1);
+    renderSubtasks(); 
 }
 
 
@@ -710,4 +728,23 @@ function resetButtonStyle(button, config, img) {
     button.style.color = 'black';
     button.style.fontWeight = 'normal';
     button.classList.remove(`${button.textContent.trim().toLowerCase()}-active`);
+}
+
+
+/**
+ * Changes the source of an image inside a button depending on the hover state.
+ *
+ * @param {HTMLElement} button - The button element containing the image to be changed.
+ * @param {string} state - The state of the button, either 'hover' or 'default'.
+ *                         'hover' changes the image to the hover state.
+ *                         'default' resets the image to the original state.
+ */
+function changeImage(button, state) {
+    const img = button.querySelector('img');
+    
+    if (state === 'hover') {
+        img.src = '../assets/img/close-blue.svg'; 
+    } else {
+        img.src = '../assets/img/close.svg'; 
+    }
 }
