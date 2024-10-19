@@ -124,9 +124,9 @@ function formattingDate(dateString) {
  * @function animationSummaryResponsive
  * @returns {void}
  */
-document.addEventListener('DOMContentLoaded', function () {
-    animationSummaryResponsive();
-});
+// document.addEventListener('DOMContentLoaded', function () {
+//     animationSummaryResponsive();
+// });
 
 
 /**
@@ -138,9 +138,8 @@ function animationSummaryResponsive() {
     let greetingSummaryRef = document.querySelector('.greeting-summary');
     let headerSummaryRef = document.querySelector('.header-summary');
     let ctnTasksSummaryRef = document.querySelector('.ctn-tasks-summary');
-    if (window.innerWidth <= 1280) {
+    if (window.innerWidth < 1280) {
         greetingSummaryRef.addEventListener('animationend', function () {
-
             greetingSummaryRef.style.display = 'none';
             headerSummaryRef.style.display = 'flex';
             ctnTasksSummaryRef.style.display = 'flex';
@@ -148,8 +147,6 @@ function animationSummaryResponsive() {
             ctnTasksSummaryRef.classList.add('fade-in');
             showAnimation = true;
         });
-    } else {
-        greetingSummaryRef.style.display = 'flex';
     }
 }
 
