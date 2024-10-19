@@ -186,6 +186,17 @@ form {
     border-radius: 20px 0 0 20px;
     width: 250px;
     padding-left: 30px;
+    position: relative; 
+}
+
+.close-icon {
+    position: absolute; 
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+    display: none;
+    height: 20px !important;
+    width: 20px !important;
 }
 
 .overlay-left img {

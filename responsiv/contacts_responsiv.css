@@ -79,6 +79,11 @@
         padding-left: 70px;
         padding-right: 70px;
     }
+
+    .horizontal-line-blue {
+        margin-left: 0;
+    }
+
 }
 
 @media (min-width: 1000px) {
@@ -171,6 +176,14 @@
         display: flex;
         align-items: flex-start;
         padding-left: 55px;
+    }
+
+    .close-icon {
+        display: block !important; 
+    }
+
+    button.cancel {
+        display: none;
     }
 }
 

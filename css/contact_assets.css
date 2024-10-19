@@ -30,6 +30,10 @@ button.cancel {
     font-weight: 600;
 }
 
+button.cancel img {
+    padding-left: 8px;
+}
+
 button.cancel:hover {
     color: var(--lightblue);
     border: 2px solid var(--lightblue);
@@ -49,6 +53,10 @@ button.create-contact {
     font-weight: 600;
 }
 
+button.create-contact img {
+    padding-left: 8px;
+}
+
 button.create-contact:hover {
     background-color: var(--lightblue);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.19);
@@ -65,6 +73,10 @@ button.save-changes {
     cursor: pointer;
     font-size: 16px;
     font-weight: 600;
+}
+
+button.save-changes img {
+    padding-left: 8px;
 }
 
 button.save-changes:hover {

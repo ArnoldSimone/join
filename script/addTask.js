@@ -729,3 +729,22 @@ function resetButtonStyle(button, config, img) {
     button.style.fontWeight = 'normal';
     button.classList.remove(`${button.textContent.trim().toLowerCase()}-active`);
 }
+
+
+/**
+ * Changes the source of an image inside a button depending on the hover state.
+ *
+ * @param {HTMLElement} button - The button element containing the image to be changed.
+ * @param {string} state - The state of the button, either 'hover' or 'default'.
+ *                         'hover' changes the image to the hover state.
+ *                         'default' resets the image to the original state.
+ */
+function changeImage(button, state) {
+    const img = button.querySelector('img');
+    
+    if (state === 'hover') {
+        img.src = '../assets/img/close-blue.svg'; 
+    } else {
+        img.src = '../assets/img/close.svg'; 
+    }
+}

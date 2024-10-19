@@ -255,6 +255,81 @@ function clearValidationErrors() {
 
 
 /**
+ * Validates the input fields (name, email, phone) for the Edit Contact form.
+ * If all fields pass validation, the editContact function is called to save the changes.
+ */
+function validateEditContact() {
+    const name = document.getElementById('edit-name').value.trim();
+    const email = document.getElementById('edit-email').value.trim();
+    const phone = document.getElementById('edit-phone').value.trim();
+
+    let isValid = true;
+
+    if (!validateEditName(name)) isValid = false;
+    if (!validateEditEmail(email)) isValid = false;
+    if (!validateEditPhone(phone)) isValid = false;
+
+    if (isValid) {
+        editContact();  // Führe die Bearbeitung des Kontakts durch, wenn die Validierung erfolgreich ist
+    }
+}
+
+
+/**
+ * Validates the name field in the Edit Contact form.
+ * The name should only contain letters and spaces.
+ * 
+ * @param {string} name - The name input from the Edit Contact form.
+ * @returns {boolean} - Returns true if the name is valid, otherwise false.
+ */
+function validateEditName(name) {
+    if (!/^[A-Za-z\s]+$/.test(name)) {
+        displayError('edit-name', 'edit-name-error', 'Only text allowed.');
+        return false;
+    }
+    hideError('edit-name', 'edit-name-error');
+    return true;
+}
+
+
+/**
+ * Validates the email field in the Edit Contact form.
+ * The email must follow a standard email format.
+ * 
+ * @param {string} email - The email input from the Edit Contact form.
+ * @returns {boolean} - Returns true if the email is valid, otherwise false.
+ */
+function validateEditEmail(email) {
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailPattern.test(email)) {
+        displayError('edit-email', 'edit-email-error', 'Please enter a valid email.');
+        return false;
+    }
+    hideError('edit-email', 'edit-email-error');
+    return true;
+}
+
+
+/**
+ * Validates the phone field in the Edit Contact form.
+ * The phone number should contain only digits, spaces, or plus signs
+ * @param {string} phone - The phone input from the Edit Contact form.
+ * @returns {boolean} - Returns true if the phone number is valid, otherwise false.
+ */
+function validateEditPhone(phone) {
+    const cleanedPhone = phone.replace(/\D/g, '');
+
+    if (!/^[\d\s+]+$/.test(phone) || cleanedPhone.length < 5 || cleanedPhone.length > 15) {
+        displayError('edit-phone', 'edit-phone-error', 'Enter 5-15 digits only.');
+        return false;
+    }
+
+    hideError('edit-phone', 'edit-phone-error');
+    return true;
+}
+
+
+/**
  * Creates a popup element with the given message and appends it to the document body.
  * 
  * @param {string} message - The message to be displayed in the popup.
@@ -289,7 +364,6 @@ function stylePopup(popup) {
 
 /**
  * Displays a popup message for a duration of 3 seconds and then hides it.
- * 
  * @param {string} message - The message to be displayed in the popup.
  */
 function showPopup(message) {
@@ -300,7 +374,6 @@ function showPopup(message) {
 
 /**
  * Fades out the popup and removes it from the document.
- * 
  * @param {HTMLElement} popup - The popup element to hide and remove.
  */
 function hidePopup(popup) {
