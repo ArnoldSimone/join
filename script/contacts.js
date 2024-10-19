@@ -169,11 +169,14 @@ function toggleEditDelete() {
   }
 
 
-/**
- * Add a new contact and save it to the server.
- * @returns {Promise<boolean>} Whether the contact was added successfully.
+  /**
+ * Adds a new contact by validating the input, saving the contact to Firebase,
+ * and displaying a success message upon completion.
+ * 
+ * @async
+ * @returns {Promise<boolean>} Returns true if the contact was added successfully, false otherwise.
  */
-async function addNewContact() {
+  async function addNewContact() {
     const name = document.getElementById('add-name').value.trim();
     const email = document.getElementById('add-email').value.trim();
     const phone = document.getElementById('add-phone').value.trim();
@@ -186,9 +189,28 @@ async function addNewContact() {
         clearInputFields();
         hideOverlay();
         loadContacts();
+        showPopup('Contact added successfully');
         return true;
     }
     return false;
+}
+
+
+/**
+ * Saves a contact to Firebase by making a POST request to the Firebase contacts endpoint.
+ * 
+ * @async
+ * @param {Object} contact - The contact object to be saved.
+ * @returns {Promise<boolean>} Returns true if the contact was successfully saved, false otherwise.
+ */
+async function saveContact(contact) {
+    const response = await fetch(`${BASE_URL}/contacts.json`, {
+        method: 'POST',
+        body: JSON.stringify(contact),
+        headers: { 'Content-Type': 'application/json' }
+    });
+
+    return response.ok;
 }
 
 
@@ -199,22 +221,6 @@ function clearInputFields() {
     document.getElementById('add-name').value = '';
     document.getElementById('add-email').value = '';
     document.getElementById('add-phone').value = '';
-}
-
-
-/**
- * Save a new contact to the server.
- * @param {Object} contact - The contact object.
- * @returns {Promise<boolean>} Whether the contact was saved successfully.
- */
-async function saveContact(contact) {
-    const response = await fetch(`${BASE_URL}/contacts.json`, {
-        method: 'POST',
-        body: JSON.stringify(contact),
-        headers: { 'Content-Type': 'application/json' }
-    });
-
-    return response.ok;
 }
 
 
@@ -280,7 +286,7 @@ function handleContactUpdate(response, contactData) {
 function updateEditContactFields(id, name, email, phone, initials, color) {
     const nameField = document.getElementById('edit-name');
     nameField.value = name || '';
-    nameField.setAttribute('data-original-name', name); // Store the original name for comparison
+    nameField.setAttribute('data-original-name', name);
 
     document.getElementById('edit-email').value = email || '';
     document.getElementById('edit-phone').value = phone || '';
@@ -335,8 +341,11 @@ function getEditContactId() {
 
 
 /**
- * Delete a contact from the server.
- * @returns {Promise<boolean>} Whether the contact was deleted successfully.
+ * Deletes a contact from Firebase and updates the contact list.
+ * Displays a success popup upon deletion.
+ * 
+ * @async
+ * @returns {Promise<boolean>} Returns true if the contact was successfully deleted, false otherwise.
  */
 async function deleteContact() {
     const id = getEditContactId();
@@ -347,6 +356,7 @@ async function deleteContact() {
         hideOverlay();
         loadContacts();
         document.getElementById('contact-details').style.display = 'none';
+        showPopup('Contact successfully deleted'); // Pop-up beim Löschen
         return true;
     }
 

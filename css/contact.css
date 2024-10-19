@@ -200,7 +200,7 @@ form {
 
 input {
     display: block;
-    margin: 10px 0;
+    margin: 5px 0;
     padding: 10px 40px 10px 10px;
     width: 100%;
     border: 1px solid #ccc;
@@ -340,7 +340,3 @@ input {
 input.invalid {
     border: 1px solid red;
 }
-
-
- 
-  

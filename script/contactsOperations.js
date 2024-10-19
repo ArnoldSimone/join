@@ -194,15 +194,20 @@ function validateEmail(email) {
 
 
 /**
- * Validates the phone input to ensure only numbers, spaces, and '+' are allowed.
+ * Validates the phone input to ensure only numbers, spaces, and '+' are allowed,
+ * and the number of digits is between 5 and 15.
+ * 
  * @param {string} phone - The contact phone number to validate.
  * @returns {boolean} Whether the phone number is valid.
  */
 function validatePhone(phone) {
-    if (!/^[\d\s+]+$/.test(phone)) {
-        displayError('add-phone', 'phone-error', 'Only numbers allowed.');
+    const cleanedPhone = phone.replace(/\D/g, '');
+
+    if (!/^[\d\s+]+$/.test(phone) || cleanedPhone.length < 5 || cleanedPhone.length > 15) {
+        displayError('add-phone', 'phone-error', 'Enter 5-15 digits only.');
         return false;
     }
+
     hideError('add-phone', 'phone-error');
     return true;
 }
@@ -246,4 +251,59 @@ function clearValidationErrors() {
 
         inputElement.classList.remove('invalid');
     });
+}
+
+
+/**
+ * Creates a popup element with the given message and appends it to the document body.
+ * 
+ * @param {string} message - The message to be displayed in the popup.
+ * @returns {HTMLElement} The created popup element.
+ */
+function createPopupElement(message) {
+    const popup = document.createElement('div');
+    popup.className = 'popup';
+    popup.textContent = message;
+    stylePopup(popup);
+    document.body.appendChild(popup);
+    return popup;
+}
+
+
+/**
+ * Applies the necessary styles to the popup element.
+ * 
+ * @param {HTMLElement} popup - The popup element to style.
+ */
+function stylePopup(popup) {
+    popup.style.position = 'fixed';
+    popup.style.bottom = '400px';
+    popup.style.right = '20px';
+    popup.style.backgroundColor = 'var(--darkblue)';
+    popup.style.color = 'white';
+    popup.style.padding = '10px';
+    popup.style.borderRadius = '10px';
+    popup.style.zIndex = '1000';
+}
+
+
+/**
+ * Displays a popup message for a duration of 3 seconds and then hides it.
+ * 
+ * @param {string} message - The message to be displayed in the popup.
+ */
+function showPopup(message) {
+    const popup = createPopupElement(message);
+    setTimeout(() => hidePopup(popup), 3000);
+}
+
+
+/**
+ * Fades out the popup and removes it from the document.
+ * 
+ * @param {HTMLElement} popup - The popup element to hide and remove.
+ */
+function hidePopup(popup) {
+    popup.style.opacity = '0';
+    setTimeout(() => document.body.removeChild(popup), 300);
 }
