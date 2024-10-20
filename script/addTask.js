@@ -1,11 +1,3 @@
-let selectedPriority = '';
-let subtasks = [];
-let editingSubtaskIndex = null;
-let listOpen = false;
-let allContacts;
-let users = [];
-
-
 /**
  * Initializes the application by fetching contacts, setting the minimum date for the due date input, and setting the medium priority.
  */
