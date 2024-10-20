@@ -241,8 +241,8 @@ function hideError(inputId, errorId) {
  * Clears error messages and removes the red border from input fields.
  */
 function clearValidationErrors() {
-    const inputs = ['add-name', 'add-email', 'add-phone'];
-    const errorMessages = ['name-error', 'email-error', 'phone-error'];
+    const inputs = ['add-name', 'add-email', 'add-phone','edit-name', 'edit-email', 'edit-phone'];
+    const errorMessages = ['name-error', 'email-error', 'phone-error','edit-name-error', 'edit-email-error', 'edit-phone-error'];
 
     inputs.forEach((inputId, index) => {
         const inputElement = document.getElementById(inputId);
