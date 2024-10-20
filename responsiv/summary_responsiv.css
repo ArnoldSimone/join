@@ -2,7 +2,6 @@
 
     .greeting-summary {
         opacity: 1;
-        animation: showAndHide 2s forwards;
         height: calc(100vh - 300px);
         width: 100%;
     }
@@ -12,10 +11,20 @@
         padding: 0;
     }
 
-    #header-summary,
-    #ctn-tasks-summary {
+    .header-summary,
+    .ctn-tasks-summary {
         display: none;
-        opacity: 0;
+
+    }
+
+    .header-summary {
+        justify-content: flex-start;
+        align-items: flex-start;
+
+    }
+
+    .hidden {
+        display: none;
     }
 
     .summary-container {
@@ -50,6 +59,10 @@
 
     .fade-in {
         animation: fadeIn 0.3s ease-in-out forwards;
+    }
+
+    .greeting-hide {
+        animation: showAndHide 2s forwards;
     }
 
 }
@@ -139,7 +152,6 @@
 
     .text-counter {
         font-size: 16px;
-
     }
 
     .ctn-tasks {

@@ -36,7 +36,7 @@ function generateUserLetter() {
       userInitialRef.innerHTML = contactDetails.avatar.initials;
     }
   } else {
-    userInitialRef.innerHTML.innerHTML = "G";
+    userInitialRef.innerHTML = "G";
   }
 }
 

@@ -17,7 +17,6 @@
     <script defer src="../script/sidebar.js"></script>
     <script src="../script/summary.js"></script>
     <script src="../script/database.js"></script>
-    <script src="../script/include.js"></script>
     <script src="../script/header.js"></script>
     <script src="../script.js"></script>
 
@@ -25,7 +24,7 @@
     <title>Join - Summary</title>
 </head>
 
-<body onload="includeHTML(); onloadFuncSummary();">
+<body onresize="animationSummaryResponsive()" onload="includeHTML(); onloadFuncSummary()">
 
     <header>
         <div w3-include-html="header.html"></div>
@@ -44,7 +43,8 @@
             <div class="main-summary d-flex-y">
                 <div id="ctn-tasks-summary" class="ctn-tasks-summary d-flex">
                     <div class="main-summary-top d-flex">
-                        <a href="../html/board.html" class="summary-done d-flex ctn-tasks gap-20 ctn-task-middle">
+                        <a href="../html/board.html#ctn-cards-todo"
+                            class="summary-done d-flex ctn-tasks gap-20 ctn-task-middle">
                             <img id="img-pencil" class="img img-pencil" src="../assets/img/pencilDark.svg"
                                 alt="Image Pencil">
                             <div class="summary-task d-flex">
@@ -52,7 +52,8 @@
                                 <span class="text-counter">To-do</span>
                             </div>
                         </a>
-                        <a href="../html/board.html" class="summary-done d-flex ctn-tasks gap-20 ctn-task-middle">
+                        <a href="../html/board.html#ctn-cards-done"
+                            class="summary-done d-flex ctn-tasks gap-20 ctn-task-middle">
                             <img id="imgCheck" class="img img-check" src="../assets/img/checkDark.svg" alt="imageCheck">
                             <div class="summary-task d-flex">
                                 <span id="summary-done-counter" class="counter"></span>
@@ -81,19 +82,19 @@
                             <span id="tasks-in-board-counter" class="counter"></span>
                             <span class="text-counter">Tasks in <br>Board</span>
                         </a>
-                        <a href="../html/board.html"
+                        <a href="../html/board.html#ctn-cards-in-progress"
                             class="summary-tasks-in-progress d-flex ctn-tasks ctn-task-smal task-bottom-summary">
                             <span id="tasks-in-progress-counter" class="counter"></span>
                             <span class="text-counter">Tasks in<br>Progress</span>
                         </a>
-                        <a href="../html/board.html"
+                        <a href="../html/board.html#ctn-cards-await-feedback"
                             class="summary-feedback d-flex ctn-tasks ctn-task-smal task-bottom-summary">
                             <span id="feedback-counter" class="counter"></span>
                             <span class="text-counter">Awaiting<br>Feedback</span>
                         </a>
                     </div>
                 </div>
-                <div id="greeting-summary" class="greeting-summary d-flex">
+                <div id="greeting-summary" class="greeting-summary greeting-hide d-flex">
                     <div class="ctn-greeting d-flex-x">
                         <span id="daytime-greeting" class="daytime-greeting"></span>
                         <span id="user-greeting" class="user-greeting"></span>

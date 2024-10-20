@@ -2,16 +2,30 @@
  * Loads task and contact data from the database and initializes the summary page.
  * @async
  * @function onloadFuncSummary
- * @returns {Promise<void>}
+ * @returns {Promise<void>} - Resolves when data loading is complete.
  */
 async function onloadFuncSummary() {
     tasks = Object.values(await loadFromDatabase(`/tasks`));
     let contactsData = await loadFromDatabase(`/contacts`);
     contacts = Object.entries(contactsData).map(([id, contact]) => ({ id, ...contact }));
     getNumberOfTasks(tasks);
-    greetingUser();
-    greetingUserName();
     getUpcomingDeadline();
+    handleResponsiveLayout()
+}
+
+
+/**
+ * Adjusts the layout based on the window width.
+ * @function handleResponsiveLayout
+ * @returns {void}
+ */
+function handleResponsiveLayout() {
+    if (window.innerWidth < 1280) {
+        animationSummaryResponsive();
+    } else {
+        greetingUser();
+        greetingUserName();
+    }
 }
 
 
@@ -120,37 +134,95 @@ function formattingDate(dateString) {
 
 
 /**
- * Initializes animations when the DOM content is loaded.
- * @function animationSummaryResponsive
- * @returns {void}
- */
-// document.addEventListener('DOMContentLoaded', function () {
-//     animationSummaryResponsive();
-// });
-
-
-/**
- * Adds animation effects for responsive design on the summary page.
+ * Handles the responsive layout for the summary page by determining 
+ * whether to show a greeting animation or all elements based on screen width.
  * @function animationSummaryResponsive
  * @returns {void}
  */
 function animationSummaryResponsive() {
-    let greetingSummaryRef = document.querySelector('.greeting-summary');
-    let headerSummaryRef = document.querySelector('.header-summary');
-    let ctnTasksSummaryRef = document.querySelector('.ctn-tasks-summary');
-    if (window.innerWidth < 1280) {
-        greetingSummaryRef.addEventListener('animationend', function () {
-            greetingSummaryRef.style.display = 'none';
-            headerSummaryRef.style.display = 'flex';
-            ctnTasksSummaryRef.style.display = 'flex';
-            headerSummaryRef.classList.add('fade-in');
-            ctnTasksSummaryRef.classList.add('fade-in');
-            showAnimation = true;
-        });
+    const greetingSummary = document.getElementById("greeting-summary");
+    const headerSummary = document.getElementById("header-summary");
+    const tasksSummary = document.getElementById("ctn-tasks-summary");
+    const isAnimationDone = localStorage.getItem('greetingAnimationDone') === 'true';
+    greetingUser();
+    greetingUserName();
+    if (window.innerWidth <= 1280) {
+        handleAnimation(isAnimationDone, greetingSummary, headerSummary, tasksSummary);
+    } else {
+        showAllElements(greetingSummary, headerSummary, tasksSummary);
     }
 }
 
 
+/**
+ * Manages the animation display logic based on whether the greeting animation 
+ * has been completed or not.
+ * @function handleAnimation
+ * @param {boolean} isAnimationDone - Indicates if the greeting animation has been completed.
+ * @param {HTMLElement} greetingSummary - The element displaying the greeting message.
+ * @param {HTMLElement} headerSummary - The element for the header section.
+ * @param {HTMLElement} tasksSummary - The element for the tasks section.
+ * @returns {void}
+ */
+function handleAnimation(isAnimationDone, greetingSummary, headerSummary, tasksSummary) {
+    if (!isAnimationDone) {
+        handleAnimationStart(greetingSummary, headerSummary, tasksSummary);
+    } else {
+        handleAnimationComplete(greetingSummary, headerSummary, tasksSummary);
+    }
+}
 
+
+/**
+ * Initiates the greeting animation by hiding the header and tasks sections 
+ * and displaying the greeting message for a specified duration.
+ * @function handleAnimationStart
+ * @param {HTMLElement} greetingSummary - The element displaying the greeting message.
+ * @param {HTMLElement} headerSummary - The element for the header section.
+ * @param {HTMLElement} tasksSummary - The element for the tasks section.
+ * @returns {void}
+ */
+function handleAnimationStart(greetingSummary, headerSummary, tasksSummary) {
+    headerSummary.style.display = "none";
+    tasksSummary.style.display = "none";
+    greetingSummary.style.display = "flex";
+    setTimeout(() => {
+        greetingSummary.style.display = "none";
+        headerSummary.style.display = "flex";
+        tasksSummary.style.display = "flex";
+        localStorage.setItem('greetingAnimationDone', 'true');
+    }, 2000);
+}
+
+
+/**
+ * Completes the animation by hiding the greeting message and showing the 
+ * header and tasks sections.
+ * @function handleAnimationComplete
+ * @param {HTMLElement} greetingSummary - The element displaying the greeting message.
+ * @param {HTMLElement} headerSummary - The element for the header section.
+ * @param {HTMLElement} tasksSummary - The element for the tasks section.
+ * @returns {void}
+ */
+function handleAnimationComplete(greetingSummary, headerSummary, tasksSummary) {
+    greetingSummary.style.display = "none";
+    headerSummary.style.display = "flex";
+    tasksSummary.style.display = "flex";
+}
+
+
+/**
+ * Shows all elements in the summary layout.
+ * @function showAllElements
+ * @param {HTMLElement} greetingSummary - The element displaying the greeting message.
+ * @param {HTMLElement} headerSummary - The element for the header section.
+ * @param {HTMLElement} tasksSummary - The element for the tasks section.
+ * @returns {void}
+ */
+function showAllElements(greetingSummary, headerSummary, tasksSummary) {
+    greetingSummary.style.display = "flex";
+    headerSummary.style.display = "flex";
+    tasksSummary.style.display = "flex";
+}
 
 
