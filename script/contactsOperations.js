@@ -270,7 +270,7 @@ function validateEditContact() {
     if (!validateEditPhone(phone)) isValid = false;
 
     if (isValid) {
-        editContact();  // Führe die Bearbeitung des Kontakts durch, wenn die Validierung erfolgreich ist
+        editContact();
     }
 }
 
@@ -331,7 +331,6 @@ function validateEditPhone(phone) {
 
 /**
  * Creates a popup element with the given message and appends it to the document body.
- * 
  * @param {string} message - The message to be displayed in the popup.
  * @returns {HTMLElement} The created popup element.
  */
@@ -379,4 +378,23 @@ function showPopup(message) {
 function hidePopup(popup) {
     popup.style.opacity = '0';
     setTimeout(() => document.body.removeChild(popup), 300);
+}
+
+
+/**
+ * Changes the source of an image within a button element based on the hover state.
+ * 
+ * @param {HTMLButtonElement} button - The button element containing the image to be changed.
+ * @param {string} state - The current state of the button, either 'hover' or 'default'. 
+ */
+function changeCancelImage(button, state) {
+    const img = button.querySelector('img'); 
+
+    if (img) {
+        if (state === 'hover') {
+            img.src = '../assets/img/close-blue.svg'; 
+        } else {
+            img.src = '../assets/img/close.svg'; 
+        }
+    } 
 }

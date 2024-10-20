@@ -109,7 +109,10 @@
                         <span id="phone-error" class="error-message"></span>
                     </div>
                     <div class="contacts-button">
-                        <button type="button" class="cancel" onclick="clearValidationErrors(); clearInputFields(); hideOverlay()">Cancel<img src="../assets/img/close.svg" alt=""></button>
+                        <button type="button" class="cancel" 
+                        onmouseover="changeCancelImage(this, 'hover')" 
+                        onmouseout="changeCancelImage(this, 'default')" 
+                        onclick="clearValidationErrors(); clearInputFields(); hideOverlay()">Cancel<img src="../assets/img/close.svg" alt=""></button>
                         <button type="submit" class="create-contact">Create contact<img src="../assets/img/check-white.svg" alt=""></button>
                     </div>
                 </form>
@@ -143,7 +146,11 @@
                     </div>
                     <input type="hidden" id="edit-contact-id">
                     <div class="contacts-button">
-                        <button type="button" class="cancel" onclick="clearValidationErrors(); hideOverlay()">Cancel<img src="../assets/img/close.svg" alt=""></button>
+                        <button type="button" class="cancel"
+                        onmouseover="changeCancelImage(this, 'hover')" 
+                        onmouseout="changeCancelImage(this, 'default')" 
+                        onclick="clearValidationErrors(); hideOverlay()">
+                        Cancel<img src="../assets/img/close.svg" alt=""></button>
                         <button type="button" class="save-changes" onclick="validateEditContact()">Save<img src="../assets/img/check-white.svg" alt=""></button>
                     </div>
                 </form>

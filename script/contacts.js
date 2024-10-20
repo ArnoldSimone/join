@@ -257,6 +257,7 @@ function setContactAvatar(contactData) {
     }
 }
 
+
 /**
  * Handles the contact update process after an update request.
  * @param {Response} response - The response from the backend after attempting to update the contact.
@@ -316,6 +317,7 @@ function getContactData() {
 
     return { name, email, phone, avatar: { initials, color }, id };
 }
+
 
 /**
  * Update an existing contact on the server.
