@@ -21,5 +21,5 @@ async function includeHTML() {
         }
     }
     menuColor();
-    generateUserLetter();
+    await initializeUserFeatures();
 }
