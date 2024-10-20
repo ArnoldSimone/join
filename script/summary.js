@@ -92,6 +92,7 @@ function greetingUser() {
  * @returns {void}
  */
 function greetingUserName() {
+    let loggedInUser = JSON.parse(localStorage.getItem('currentUser'));
     if (loggedInUser) {
         let loggedInUserMail = loggedInUser.email;
         let contactDetails = contacts.find(c => c.email === loggedInUserMail);
