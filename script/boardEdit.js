@@ -273,8 +273,10 @@ function renderCurrentSubtasks(iSubtasks) {
 
 
 /**
- * Edits the specified subtask by enabling its input field and updating UI elements.
- * @param {number} iSubtasks - The index of the subtask to edit.
+ * Enables edit mode for a specific subtask.
+ * @param {number} iSubtasks - Index of the subtask to edit.
+ * This function displays the editing UI, focuses the input field, 
+ * and adds an event listener to exit edit mode on focus loss.
  */
 function editSubtask(iSubtasks) {
     let inputField = document.getElementById(`input-subtask-edit${iSubtasks}`);
@@ -285,6 +287,24 @@ function editSubtask(iSubtasks) {
     inputField.removeAttribute('disabled');
     inputField.focus();
     inputField.setSelectionRange(inputField.value.length, inputField.value.length);
+    inputField.addEventListener('focusout', () => {
+        exitEditMode(iSubtasks);
+    });
+}
+
+
+/**
+ * Exits edit mode for a specific subtask.
+ * @param {number} iSubtasks - Index of the subtask to exit edit mode for.
+ * This function restores the original UI and disables the input field.
+ */
+function exitEditMode(iSubtasks) {
+    let inputField = document.getElementById(`input-subtask-edit${iSubtasks}`);
+    document.getElementById(`subtask-icons-display-mode${iSubtasks}`).classList.remove('d-none');
+    document.getElementById(`subtask-icons-editing-mode${iSubtasks}`).classList.add('d-none');
+    document.getElementById(`edit-mode-subtask${iSubtasks}`).classList.remove('underlined');
+    document.getElementById(`subtask-item-edit${iSubtasks}`).classList.remove('no-hover-edit');
+    inputField.setAttribute('disabled', true);
 }
 
 
