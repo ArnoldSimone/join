@@ -16,8 +16,6 @@ async function includeHTML() {
         let resp = await fetch(file);
         if (resp.ok) {
             element.innerHTML = await resp.text();
-            onloadFuncHeader();
-            generateUserLetter();
         } else {
             element.innerHTML = 'Page not found';
         }

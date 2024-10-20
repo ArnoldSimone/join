@@ -10,9 +10,9 @@ let initial = [];
 async function initializeUserFeatures() {
   let loggedInUser = JSON.parse(localStorage.getItem('currentUser'));
   if (loggedInUser && loggedInUser.email) {
-    await onloadFuncHeader(loggedInUser);
+      await onloadFuncHeader(loggedInUser);
   } else {
-    await generateUserLetter();
+      await generateUserLetter();
   };
 }
 
@@ -33,7 +33,7 @@ async function onloadFuncHeader(loggedInUser) {
     initial = contactDetails.avatar.initials.toUpperCase();
     await generateUserLetter(initial);
   } catch (error) {
-    console.error(error);
+    console.error(error);   
   };
 }
 
@@ -55,7 +55,7 @@ async function generateUserLetter(initial) {
       userInitialRef.innerHTML = "G";
     };
   } catch (error) {
-    console.error(error);
+    console.error(error);    
   };
 }
 
@@ -117,24 +117,3 @@ function logOut() {
   localStorage.clear();
   window.location.replace('../index.html');
 }
-
-
-
-
-
-
-// async function generateUserLetter() {
-//   try {
-//     let userInitialRef = document.getElementById('user-initial');
-//     let loggedInUserMail = loggedInUser.email;
-//     let contactDetails = contacts.find(c => c.email == loggedInUserMail);
-//     let initial = contactDetails.avatar.initials.toUpperCase();
-//     if (loggedInUserMail) {
-//       userInitialRef.innerHTML = initial;
-//     } else {
-//       userInitialRef.innerHTML = "G"; 
-//       }   
-//   } catch (error) {
-//     console.error(error);    
-//   }
-// }
