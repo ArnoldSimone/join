@@ -247,4 +247,10 @@
     .email {
         font-size: 10px;
     } 
+
+    .contact-avatar {
+        width: 65px;
+        height: 65px;
+        font-size: 16px;
+    }
 }

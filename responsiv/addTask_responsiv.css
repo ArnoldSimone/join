@@ -28,6 +28,11 @@
     section {
         height: calc(100vH - 240px);
     }
+
+    .break-between {
+        padding: 10px;
+        background-color: var(--lightgrey);
+    }
 }
 
 @media (max-width: 580px) {
