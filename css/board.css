@@ -68,8 +68,9 @@ textarea:focus {
     border: none;
     font-size: 20px;
     height: 40px;
+    width: 40px;
     gap: 10px;
-    padding: 3px 12px 0 12px;
+    padding-left: 10px;
     font-weight: 600;
 }
 

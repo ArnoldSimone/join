@@ -114,19 +114,24 @@
 }
 
 
-
 @media (max-width: 500px) {
     main {
         padding: 0 16px;
     }
 
     h1.headline {
-        font-size: 48px;
+        font-size: 36px;
     }
 
-    /* .ctn-cards {
-        width: 100%;
-    } */
+    .btn-dark-responsive {
+        width: 30px;
+        height: 30px;
+        padding-left: 7px;
+    }
+
+    .image-plus-add-task {
+        height: 16px;
+    }
 
     .header-container {
         min-width: 100% !important;

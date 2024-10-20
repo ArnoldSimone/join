@@ -1,43 +1,62 @@
-// Retrieves the currently logged-in user from local storage and parses it from JSON.
-let loggedInUser = JSON.parse(localStorage.getItem('currentUser'));
+let initial = [];
 
 
 /**
- * Executes `onloadFuncHeader` after the DOM has fully loaded.
- */
-document.addEventListener("DOMContentLoaded", async function () {
-  await onloadFuncHeader();
-});
-
-
-/**
- * Loads contacts from the database and initializes user initials.
+ * Initializes user features based on the logged-in user's data.
  * @async
  * @function
- * @returns {Promise<void>}
+ * @returns {Promise<void>} 
  */
-async function onloadFuncHeader() {
-  let contactsData = await loadFromDatabase(`/contacts`);
-  contacts = Object.entries(contactsData).map(([id, contact]) => ({ id, ...contact }));
-  generateUserLetter();
+async function initializeUserFeatures() {
+  let loggedInUser = JSON.parse(localStorage.getItem('currentUser'));
+  if (loggedInUser && loggedInUser.email) {
+    await onloadFuncHeader(loggedInUser);
+  } else {
+    await generateUserLetter();
+  };
+}
+
+
+/**
+ * Loads contacts from the database and initializes user initials based on the logged-in user's email.
+ * @async
+ * @function
+ * @param {Object} loggedInUser - The currently logged-in user object.
+ * @returns {Promise<void>}
+ * @throws {Error} Throws an error if the contacts data cannot be loaded.
+ */
+async function onloadFuncHeader(loggedInUser) {
+  try {
+    let contactsData = await loadFromDatabase('/contacts');
+    contacts = Object.entries(contactsData).map(([id, contact]) => ({ id, ...contact }));
+    let contactDetails = contacts.find(c => c.email == loggedInUser.email);
+    initial = contactDetails.avatar.initials.toUpperCase();
+    await generateUserLetter(initial);
+  } catch (error) {
+    console.error(error);
+  };
 }
 
 
 /**
  * Displays the logged-in user's initials in the header.
- * Defaults to "G" if no user is logged in.
+ * If no user is logged in or no initials are provided, defaults to "G".
+ * @async
+ * @function
+ * @param {string} [initial] - The initials to display.
+ * @returns {Promise<void>}
  */
-function generateUserLetter() {
-  let userInitialRef = document.getElementById('user-initial');
-  if (loggedInUser) {
-    let loggedInUserMail = loggedInUser.email;
-    let contactDetails = contacts.find(c => c.email === loggedInUserMail);
-    if (contactDetails) {
-      userInitialRef.innerHTML = contactDetails.avatar.initials;
-    }
-  } else {
-    userInitialRef.innerHTML = "G";
-  }
+async function generateUserLetter(initial) {
+  try {
+    let userInitialRef = document.getElementById('user-initial');
+    if (userInitialRef && initial) {
+      userInitialRef.innerHTML = initial;
+    } else {
+      userInitialRef.innerHTML = "G";
+    };
+  } catch (error) {
+    console.error(error);
+  };
 }
 
 
@@ -51,7 +70,7 @@ function toggleUserMenu() {
     userMenu.classList.toggle('d-none');
   } else {
     mobilMenu();
-  }
+  };
 }
 
 
@@ -64,7 +83,7 @@ function mobilMenu() {
     openMobilMenu();
   } else {
     closeMobilMenu();
-  }
+  };
 }
 
 
