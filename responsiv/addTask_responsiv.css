@@ -2,7 +2,6 @@
     .task-container {
         width: 850px;
     }
-
 }
 
 @media (max-width: 1150px) {
@@ -18,6 +17,11 @@
         width: 100%;
     }
 
+    .selectedUser {
+        position: static;
+        padding-top: 8px;
+        padding-bottom: 8px;
+    }
 }
 
 @media (max-width: 1000px) {
@@ -62,5 +66,9 @@
 @media (max-width: 400px) {
     .prio {
         padding: 7px;
+    }
+
+    .headline {
+        font-size: 50px;
     }
 }

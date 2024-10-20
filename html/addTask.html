@@ -10,12 +10,16 @@
     <link rel="stylesheet" href="../css/sidebar.css">
     <link rel="stylesheet" href="../css/fonts.css">
     <link rel="stylesheet" href="../css/addTask.css">
+    <link rel="stylesheet" href="../css/addTask_assets.css">
     <link rel="stylesheet" href="../responsiv/addTask_responsiv.css">
     <link rel="stylesheet" href="../responsiv/header_responsiv.css">
     <link rel="stylesheet" href="../responsiv/sidebar_responsiv.css">
     <script defer src="../script/include.js"></script>
     <script defer src="../script/sidebar.js"></script>
+    <script defer src="../script/addTask_globalvariables.js"></script>
     <script defer src="../script/addTask.js"></script>
+    <script defer src="../script/addTask_utilities.js"></script>
+    <script defer src="../script/addTask_subtasks.js"></script>
     <script src="../templates/addTask_templates.js"></script>
     <script src="../script/database.js"></script>
     <script src="../script/header.js"></script>
@@ -38,17 +42,17 @@
                 <form name="taskForm">
                     <div class="form-left">
                         <div class="form-group">
-                            <label for="title">Title<span class="required">*</span></label>
+                            <span for="title">Title<span class="required">*</span></span>
                             <input type="text" id="title" name="title" placeholder="Enter a title">
                         </div>
         
                         <div class="form-group">
-                            <label for="description">Description</label>
+                            <span for="description">Description</span>
                             <textarea id="description" name="description" placeholder="Enter a Description"></textarea>
                         </div>
         
                         <div class="form-group">
-                            <label for="assigned">Assigned to</label>
+                            <span for="assigned">Assigned to</span>
                             <div id="inputAssigned" class="assigned-input d-flex-y">
                                 <input id="assignedInput" onclick="assignedListToogle()" onkeyup="assignedSearch(); inputValueCheck()" placeholder="Select contacts to assign" type="text">
                                 <img id="assignedImage" onclick="assignedListToogle()" src="../assets/icon/arrow_drop_downaa.svg" alt="Down">
@@ -64,12 +68,12 @@
                     <div class="break-between"></div>
                     <div class="form-right">
                         <div class="form-group">
-                            <label for="due-date">Due date<span class="required">*</span></label>
+                            <span for="due-date">Due date<span class="required">*</span></span>
                             <input type="date" id="due-date" name="due-date" placeholder="dd/mm/yyyy" oninput="validateDate()" required>
                         </div>
                    
                         <div class="form-group">
-                            <label>Prio</label>
+                            <span>Prio</span>
                             <div class="prio-group">
                                 <button onclick="changePrio('Urgent')" id="btn-urgent" type="button" class="prio d-flex">Urgent
                                     <img src="../assets/img/urgentsym.png" alt="">
@@ -84,7 +88,7 @@
                         </div>
                         
                         <div class="form-group">
-                            <label for="category">Category<span class="required">*</span></label>
+                            <span for="category">Category<span class="required">*</span></span>
                             <select id="category" name="category" required>
                                 <option value="" disabled selected>Select task category</option>
                                 <option>User Story</option>
@@ -93,7 +97,7 @@
                         </div>
         
                         <div class="form-group-subtask">
-                            <label for="subtasks">Subtasks</label>
+                            <span for="subtasks">Subtasks</span>
                             <div class="subtask-connect">
                                 <input type="text" id="subtasks" name="subtasks" placeholder="Add new subtask" onclick="showSubtaskActionButtons()">
                                 <div class="subtask-img">

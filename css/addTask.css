@@ -113,9 +113,13 @@ form {
 
 .selectedUser {
     display: flex;
-    padding-top: 8px;
     gap: 4px;
+    position: absolute;
+    top: 75px;
+    left: 0;
+    z-index: 10;
 }
+
 
 input[type="checkbox"] {
     display: none;
@@ -179,54 +183,6 @@ textarea {
     margin-left: 5px;
 }
 
-.prio-group button:hover{
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.19);
-    transform: translateY(-1px); 
-    transition: box-shadow 0.3s ease, transform 0.3s ease;
-}
-
-
-button.clear {
-    background-color: var(--lightgrey);
-    border: 2px solid var(--darkblue);
-    color: var(--darkblue);
-    padding: 13px 23px;
-    border-radius: 10px;
-    cursor: pointer;
-    font-size: 20px;
-    font-weight: 600;
-}
-
-button.clear:hover {
-    color: var(--lightblue);
-    border: 2px solid var(--lightblue);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.19);
-    transform: translateY(-1px); 
-    transition: box-shadow 0.3s ease, transform 0.3s ease;
-}
-
-.add-task-btn {
-    display: flex;
-}
-
-button.create-task {
-    background-color: var(--darkblue);
-    color: white;
-    padding: 13px 23px;
-    border-radius: 10px;
-    border: none;
-    cursor: pointer;
-    font-size: 20px;
-    font-weight: 600;
-}
-
-button.create-task:hover {
-    background-color: var(--lightblue);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.19);
-    transform: translateY(-1px); 
-    transition: box-shadow 0.3s ease, transform 0.3s ease;
-}
-
 .break-between {
     width: 1px;               
     background-color: var(--middlegrey);         
@@ -255,38 +211,6 @@ button.create-task:hover {
     padding-top: 90px;
 }
 
-.popup {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-}
-
-.popup-content {
-    background: var(--darkblue);
-    color: white;
-    padding: 20px;
-    border-radius: 8px;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: row;
-}
-
-.popup-content img {
-   height: 24px;
-   width: auto;
-   display: flex;
-   padding-left: 10px;
-}
-
 #assignedInput {
     border: none;
 }
@@ -304,18 +228,6 @@ button.create-task:hover {
 
 #subtask-list li {
     position: relative;
-}
-
-#subtask-list li.edit-mode button {
-    display: inline-block; 
-}
-
-#subtask-list li button {
-    display: none;
-}
-
-#subtask-list li:hover button {
-    display: inline-block;
 }
 
 .subtask-edit-container {
@@ -337,38 +249,6 @@ button.create-task:hover {
 
 .edit-subtask-input:hover {
     border: none;
-}
-
-.subtask-buttons {
-    position: absolute;
-    right: 10px; 
-    display: flex;
-}
-
-.subtask-buttons img {
-    height: 14px;
-    cursor: pointer;
-}
-
-.subtask-button {
-    border: inherit;
-}
-
-.subtask-edit-container button {
-    background-color: white !important;
-}
-
-.subtask-edit-container button:hover {
-    background-color: var(--middlegrey) !important;
-    border-radius: 50%;
-}
-
-.subtask-item:hover .subtask-buttons {
-    display: flex; 
-}
-
-.subtask-item button {
-    background-color: rgb(228, 228, 228);
 }
 
 .subtask-connect {
@@ -404,17 +284,12 @@ li:hover {
     background-color: rgb(228, 228, 228);
 }
 
-#subtask-action-buttons img{
-    height: 10px;
-    width: auto;
-}
-
-#subtask-action-buttons img:hover{
-    background-color: var(--middlegrey);
-    border-radius: 30%
-}
-
 .edit-check img{
     height: 10px;
     width: auto;
+}
+
+.extra-contacts-text {
+    color: var(--darkblue); 
+    font-weight: bold; 
 }
