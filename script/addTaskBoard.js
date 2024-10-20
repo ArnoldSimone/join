@@ -1,5 +1,6 @@
 let selectedPriority = '';
-let allContacts;
+// let allContacts;
+let users = [];
 let subtasks = [];
 let editingSubtaskIndex = null;
 let listOpen = false;
@@ -21,8 +22,8 @@ function init() {
  * @returns {Promise<void>}
  */
 async function fetchContacts() {
-    let contactsData = await loadFromDatabase("/contacts");
-    allContacts = Object.entries(contactsData).map(([id, contact]) => ({ id, ...contact }));
+    // let contactsData = await loadFromDatabase("/contacts");
+    // allContacts = Object.entries(contactsData).map(([id, contact]) => ({ id, ...contact }));
     renderAllContactsInAssignedTo();
 }
 

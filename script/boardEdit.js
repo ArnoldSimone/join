@@ -292,7 +292,6 @@ function editSubtask(iSubtasks) {
     });
 }
 
-
 /**
  * Exits edit mode for a specific subtask.
  * @param {number} iSubtasks - Index of the subtask to exit edit mode for.

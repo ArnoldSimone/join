@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="../css/fonts.css">
     <link rel="stylesheet" href="../css/board.css">
     <link rel="stylesheet" href="../css/board_editTask.css">
+    <link rel="stylesheet" href="../css/addTask.css">
     <link rel="stylesheet" href="../responsiv/board_responsiv.css">
     <link rel="stylesheet" href="../responsiv/header_responsiv.css">
     <link rel="stylesheet" href="../responsiv/sidebar_responsiv.css">
@@ -24,6 +25,9 @@
     <script defer src="../script/boardEdit_utilities.js"></script>
     <script defer src="../script/database.js"></script>
     <script defer src="../templates/board_templates.js"></script>
+    <script defer src="../script/boardAddTask.js"></script>
+    <script defer src="../script/addTaskBoard.js"></script>
+
 
     <title>Join - Board</title>
 
@@ -53,7 +57,7 @@
                             autocomplete="off" spellcheck="false" placeholder="Find Task">
                         <img class="search-image" src="../assets/img/search.svg" alt="imageSearch">
                     </div>
-                    <button class="btn-dark d-flex-y">Add Task
+                    <button id="addTaskBoard" onclick="addTaskBoard()" class="btn-dark d-flex-y">Add Task
                         <img class="image-plus-add-task" src="../assets/img/plus-white.svg" alt="Image Plus"></button>
 
                 </div>
@@ -120,6 +124,9 @@
             </div>
 
             <div onclick="closeDetailTaskOverlay()" id="overlay-board-edit" class="overlay-board d-flex d-none">
+            </div>
+
+            <div id="overlay-board-add-Task" class="overlay-board-add-Task d-flex">
             </div>
 
         </section>
