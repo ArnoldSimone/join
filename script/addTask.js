@@ -3,6 +3,8 @@ let allContacts;
 let users = [];
 let subtasks = [];
 let editingSubtaskIndex = null;
+let listOpen = false;
+
 
 /**
  * Initializes the application by fetching contacts, setting the minimum date for the due date input, and setting the medium priority.
@@ -112,16 +114,56 @@ function resetSearch() {
 function assignedListToogle() {
     let list = document.getElementById('assignedList');
     let users = document.getElementById('selectedUser');
+    
     if (list.classList.contains('d-none')) {
-        list.classList.remove('d-none');
-        users.classList.add('d-none');
+        openAssignedList(list, users);  // Auslagerung in eine separate Funktion
     } else { 
-        list.classList.add('d-none');
-        users.classList.remove('d-none');
-    };
+        closeAssignedList(list, users); // Auslagerung in eine separate Funktion
+    }
+    
     resetSearchValue();
     toogleInputImage();
     toogleInputBorderColor();
+}
+
+
+/**
+ * Opens the assigned list and hides the selected users list.
+ * @param {HTMLElement} list - The element containing the assigned list.
+ * @param {HTMLElement} users - The element containing the selected users list.
+ */
+function openAssignedList(list, users) {
+    list.classList.remove('d-none');
+    users.classList.add('d-none');
+    listOpen = true;
+    document.addEventListener('click', closeListOnClickOutside);
+}
+
+
+/**
+ * Closes the assigned list and shows the selected users list.
+ * @param {HTMLElement} list - The element containing the assigned list.
+ * @param {HTMLElement} users - The element containing the selected users list.
+ */
+function closeAssignedList(list, users) {
+    list.classList.add('d-none');
+    users.classList.remove('d-none');
+    listOpen = false;
+    document.removeEventListener('click', closeListOnClickOutside);
+}
+
+
+/**
+ * Closes the list when a click is detected outside the list.
+ * @param {Event} event - The click event.
+ */
+function closeListOnClickOutside(event) {
+    let listElement = document.getElementById('assignedList');
+    let assignedInput = document.getElementById('inputAssigned');
+
+    if (!listElement.contains(event.target) && !assignedInput.contains(event.target)) {
+        assignedListToogle(); 
+    }
 }
 
 
@@ -196,8 +238,15 @@ function selectionUser(id) {
  */
 function toggleUserCheckbox(id) {
     let checkbox = document.querySelector(`input[data-user-id="${id}"]`);
+    let assignedContent = document.getElementById(`assigned-content-${id}`);
+
     if (checkbox) {
         checkbox.checked = !checkbox.checked;
+        if (checkbox.checked) {
+            assignedContent.style.backgroundColor = 'var(--middlegrey';
+        } else {
+            assignedContent.style.backgroundColor = '';
+        }
     }
 }
 
@@ -606,19 +655,28 @@ function clearForm() {
     setFormValue("description", '');
     clearAssignedUsers();
     setFormValue("due-date", '');
+    mediumPriority();
+    setFormValue("category",'')
     clearSubtasks();
 }
 
 
 /**
- * Clears the selected users from the user list.
+ * Clears the selected users from the user list, unchecks all user checkboxes, and resets the background color.
  */
 function clearAssignedUsers() {
     const selectedUser = document.getElementById('selectedUser');
     if (selectedUser) {
         selectedUser.innerHTML = '';
-    }
+    }  
     document.getElementById('assignedInput').value = '';
+    const checkboxes = document.querySelectorAll('#assignedList input[type="checkbox"]');
+    checkboxes.forEach(checkbox => {checkbox.checked = false;
+        const assignedUserDiv = checkbox.closest('.assigned-content');
+        if (assignedUserDiv) {
+            assignedUserDiv.style.backgroundColor = 'white';
+        }
+    });
 }
 
 
@@ -638,9 +696,8 @@ function clearSubtasks() {
  * Sets the default priority to medium and retrieves it from local storage if available.
  */
 function mediumPriority() {
-    const savedPriority = localStorage.getItem('selectedPriority') || 'Medium';
-    changePrio(savedPriority);
-};
+    changePrio('Medium');
+}
 
 
 /**

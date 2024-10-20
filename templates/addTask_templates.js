@@ -1,6 +1,6 @@
 function generateCreateOption(name, initial, color, id, checked) {
   return `
-    <div class="assigned-content">
+    <div class="assigned-content" id="assigned-content-${id}" onclick="selectionUser('${id}')" style="${checked ? 'background-color: lightblue;' : ''}">
         <div class="assigned-user">
             <div class="assigned-initital d-flex" style="background-color: ${color};">
                 <p>${initial}</p>
@@ -8,8 +8,8 @@ function generateCreateOption(name, initial, color, id, checked) {
             <p>${name}</p>
         </div>
         <div id="userCheckbox">
-            <input type="checkbox" data-user-id="${id}" id="checkbox-${id}" ${checked}>
-            <img onclick="selectionUser('${id}')" class="user-checkbox" src="../assets/img/checkbox.png">
+            <input type="checkbox" data-user-id="${id}" id="checkbox-${id}" ${checked} onclick="event.stopPropagation();">
+            <img onclick="event.stopPropagation(); selectionUser('${id}')" class="user-checkbox" src="../assets/img/checkbox.png">
         </div>
     </div>
   `;
