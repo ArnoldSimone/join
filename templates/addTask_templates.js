@@ -1,3 +1,11 @@
+/**
+ * Generates the HTML for a user option in the assignment selection.
+ * @param {string} name - The name of the user.
+ * @param {string} initial - The initials of the user.
+ * @param {string} color - The background color for the initials.
+ * @param {string} id - The unique identifier for the user.
+ * @param {boolean} checked - Indicates if the checkbox should be checked.
+ */
 function generateCreateOption(name, initial, color, id, checked) {
   return `
     <div class="assigned-content" id="assigned-content-${id}" onclick="selectionUser('${id}')" style="${checked ? 'background-color: lightblue;' : ''}">
@@ -16,6 +24,12 @@ function generateCreateOption(name, initial, color, id, checked) {
 }
 
 
+
+/**
+ * Generates the HTML for displaying selected users' initials.
+ * @param {string} initial - The initials of the user.
+ * @param {string} color - The background color for the initials.
+ */
 function generateSelectedUsersHTML(initial, color) {
     return `
         <div class="assigned-initital d-flex" style="background-color: ${color};">
@@ -25,6 +39,24 @@ function generateSelectedUsersHTML(initial, color) {
 }
 
 
+/**
+ * Generates the HTML for displaying extra users in the assignment selection.
+ * @param {number} extraCount - The number of additional selected users.
+ */
+function generateExtraUsersHTML(extraCount) {
+    return `
+        <div class="assigned-initital d-flex extra-contacts">
+            <p class="extra-contacts-text">+${extraCount}</p>
+        </div>
+    `;
+}
+
+
+/**
+ * Generates the HTML for a subtask item.
+ * @param {number} subtaskId - The unique identifier for the subtask.
+ * @param {string} subtaskText - The text description of the subtask.
+ */
 function generateSubtaskHTML(subtaskId, subtaskText) {
     return `
         <li id="subtask-${subtaskId}" class="subtask-item" onmouseover="showButtons(${subtaskId})" onmouseout="hideButtons(${subtaskId})">
@@ -39,6 +71,11 @@ function generateSubtaskHTML(subtaskId, subtaskText) {
 }
 
 
+/**
+ * Generates the HTML for the edit subtask input and buttons.
+ * @param {number} index - The index of the subtask being edited.
+ * @param {string} title - The current title of the subtask.
+ */
 function generateEditSubtaskHTML(index, title) {
     return `
         <div class="subtask-edit-container">
@@ -53,6 +90,11 @@ function generateEditSubtaskHTML(index, title) {
 }
 
 
+/**
+ * Generates the HTML for a subtask item with its title and index.
+ * @param {string} title - The title of the subtask.
+ * @param {number} index - The index of the subtask.
+ */
 function generateSubtaskItemHTML(title, index) {
     return `
         <li class="subtask-item" onmouseover="showButtons(${index})" onmouseout="hideButtons(${index})">
