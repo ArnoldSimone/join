@@ -117,3 +117,24 @@ function logOut() {
   localStorage.clear();
   window.location.replace('../index.html');
 }
+
+
+
+
+
+
+// async function generateUserLetter() {
+//   try {
+//     let userInitialRef = document.getElementById('user-initial');
+//     let loggedInUserMail = loggedInUser.email;
+//     let contactDetails = contacts.find(c => c.email == loggedInUserMail);
+//     let initial = contactDetails.avatar.initials.toUpperCase();
+//     if (loggedInUserMail) {
+//       userInitialRef.innerHTML = initial;
+//     } else {
+//       userInitialRef.innerHTML = "G"; 
+//       }   
+//   } catch (error) {
+//     console.error(error);    
+//   }
+// }
