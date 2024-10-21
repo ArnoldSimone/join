@@ -46,9 +46,10 @@
     }
 
     .overlay-detail-task-board {
-        height: 75vh;
+        height: auto;
+        max-height: 75vh;
         width: 95%;
-        gap: 16px;
+        gap: 32px;
     }
 
     .overlay-edit-task-board {
@@ -150,17 +151,18 @@
     }
 
     .ctn-main-Detail-Task {
-        gap: 16px;
+        gap: 12px;
     }
 
     .overlay-detail-task-board {
-        height: 75vh;
+        height: auto;
+        max-height: 75vh;
         width: 95%;
-        gap: 16px;
+        gap: 24px;
     }
 
     p#task-title-detail {
-        font-size: 32px;
+        font-size: 24px;
     }
 
     .overlay-edit-task-board {

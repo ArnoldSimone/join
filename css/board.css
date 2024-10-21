@@ -334,7 +334,7 @@ progress {
 }
 
 .task-title-detail {
-    font-size: 40px;
+    font-size: 32px;
     font-weight: 700;
 }
 
@@ -342,11 +342,11 @@ progress {
     color: var(--textwhite);
 }
 
-
-
-
 .task-description-detail {
     font-size: 16px;
+    overflow: auto;
+    height: auto;
+    max-height: 200px !important;
 }
 
 .label {

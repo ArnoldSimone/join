@@ -71,6 +71,10 @@ label {
     font-weight: 400;
 }
 
+.label-overlay-template {
+    width: 100%;
+}
+
 .gap-8 {
     gap: 8px;
 }

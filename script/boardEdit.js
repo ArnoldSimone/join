@@ -1,49 +1,16 @@
-/**
- * An array that holds all contacts.
- * @type {Array<Object>}
- */
+//check
 let allContacts = [];
-
-
-/**
- * An array that holds contacts that are assigned to a specific task or context.
- * @type {Array<Object>}
- */
 let assignedContacts = [];
-
-
-/**
- * An array that holds currently selected contacts from the available contacts.
- * @type {Array<Object>}
- */
 let selectedContacts = [];
 
 
-/**
- * An array that holds filtered contacts based on search or selection criteria.
- * @type {Array<Object>}
- */
 let filteredContacts = [];
 
-
-/**
- * An array that holds all subtasks associated with a specific task or project.
- * @type {Array<Object>}
- */
 let allSubtasksArray = [];
 
-
-/**
- * An array that holds contacts that are currently being edited or modified.
- * @type {Array<Object>}
- */
 let editAssignedContacts = [];
 
-
-/**
- * Displays the edit task overlay for the specified task.
- * @param {number} taskId - The ID of the task to be edited.
- */
+//check
 function showEditTaskOverlay(taskId) {
     document.getElementById('overlay-board-detail').classList.add('d-none');
     let overlayBoardEditRef = document.getElementById('overlay-board-edit');
@@ -56,11 +23,7 @@ function showEditTaskOverlay(taskId) {
 }
 
 
-/**
- * Renders all contacts for the assigned section of the specified task.
- * @param {number} taskId - The ID of the task whose assigned contacts will be rendered.
- * @returns {string} The HTML content for assigned contacts.
- */
+//check
 function renderAllContactsInAssignedTo(taskId) {
     let task = tasks.find(t => t.id === taskId);
     let allContactsContent = "";
@@ -75,30 +38,26 @@ function renderAllContactsInAssignedTo(taskId) {
 }
 
 
-/**
- * Renders the contacts and generates the HTML content.
- * @returns {string} The HTML content for all contacts.
- */
+//check
 function renderContacts() {
     let contactsContent = '';
     for (let iContact = 0; iContact < contacts.length; iContact++) {
         let name = contacts[iContact].name;
         let initial = contacts[iContact].avatar.initials;
         let color = contacts[iContact].avatar.color;
-        allContacts.push({ contactId: iContact, name: name, initial: initial, color: color });
-        let isChecked = (assignedContacts.length > 0 && assignedContacts[0].includes(name)) ? 'checked' : '';
+        let id = contacts[iContact].id;
+        allContacts.push({ 'contactId': id, 'name': name, 'initial': initial, 'color': color });
+        let isChecked = (assignedContacts.length > 0 && assignedContacts[0].find(c => c.id === id)) ? 'checked' : '';
         if (isChecked) {
-            selectedContacts.push({ contactId: iContact, name: name, initial: initial, color: color });
+            selectedContacts.push({ 'contactId': id, 'name': name, 'initial': initial, 'color': color });
         }
-        contactsContent += getAssignedToEditTemplateOverlay(initial, color, name, iContact, isChecked);
+        contactsContent += getAssignedToEditTemplateOverlay(initial, color, name, id, isChecked);
     }
     return contactsContent;
 }
 
 
-/**
- * Searches for contacts based on the user input and filters the contact list.
- */
+
 function searchContact() {
     filteredContacts = [];
     let inputRef = document.getElementById('input-assigned-edit');
@@ -115,9 +74,7 @@ function searchContact() {
 }
 
 
-/**
- * Renders all contacts in the dropdown.
- */
+
 function renderAllContacts() {
     let dropdownContactsRef = document.getElementById("dropdown-contacts");
     dropdownContactsRef.innerHTML = "";
@@ -132,9 +89,7 @@ function renderAllContacts() {
 }
 
 
-/**
- * Renders the filtered contacts in the dropdown.
- */
+
 function renderFilteredContactsinAssignedTo() {
     let dropdownContactsRef = document.getElementById("dropdown-contacts");
     dropdownContactsRef.innerHTML = "";
@@ -149,9 +104,7 @@ function renderFilteredContactsinAssignedTo() {
 }
 
 
-/**
- * Updates the assigned contacts display based on the selected contacts.
- */
+//check
 function updateAssignedContacts() {
     let assignedContentRef = document.getElementById('assigned-content');
     assignedContentRef.innerHTML = '';
@@ -167,11 +120,7 @@ function updateAssignedContacts() {
 }
 
 
-/**
- * Renders all subtasks for the specified task.
- * @param {number} taskId - The ID of the task whose subtasks will be rendered.
- * @returns {string} The HTML content for all subtasks or a message indicating no subtasks.
- */
+
 function renderAllSubtasks(taskId) {
     allSubtasksArray = [];
     let task = tasks.find(t => t.id === taskId);
@@ -188,12 +137,7 @@ function renderAllSubtasks(taskId) {
 }
 
 
-/**
- * Processes a single subtask and returns the corresponding HTML content.
- * @param {Object} subtask - The subtask object containing title and completion status.
- * @param {number} iSubtask - The index of the subtask in the array.
- * @returns {string} The HTML content for the subtask.
- */
+
 function processSubtask(subtask, iSubtask) {
     let title = subtask.title;
     let checkCompleted = subtask.completed;
@@ -203,9 +147,6 @@ function processSubtask(subtask, iSubtask) {
 }
 
 
-/**
- * Adds a new subtask based on the input field value.
- */
 function addSubtask() {
     let ctnEditAllSubtasksRef = document.getElementById('ctn-edit-all-subtasks');
     let inputValueSubtaskRef = document.getElementById('subtasks-edit');
@@ -219,10 +160,7 @@ function addSubtask() {
 
 }
 
-/**
- * Clears the "no subtask" message if it exists and trims the input value.
- * @param {HTMLInputElement} inputValueSubtaskRef - The input field for the subtask title.
- */
+
 function clearNoSubtaskMessageAndInput(inputValueSubtaskRef) {
     let noSubtaskEditRef = document.getElementById('no-subtask-edit');
     if (noSubtaskEditRef) {
@@ -232,10 +170,6 @@ function clearNoSubtaskMessageAndInput(inputValueSubtaskRef) {
 }
 
 
-/**
- * Updates the display of all subtasks in the container.
- * @param {HTMLElement} container - The container element to update with subtasks.
- */
 function updateSubtaskDisplay(container) {
     for (let iSubtasks = 0; iSubtasks < allSubtasksArray.length; iSubtasks++) {
         let title = allSubtasksArray[iSubtasks].title;
@@ -244,20 +178,13 @@ function updateSubtaskDisplay(container) {
 }
 
 
-/**
- * Deletes a subtask by its index and renders the current subtasks.
- * @param {number} iSubtasks - The index of the subtask to delete.
- */
+
 function deleteSubtask(iSubtasks) {
     allSubtasksArray.splice(iSubtasks, 1);
     renderCurrentSubtasks(iSubtasks);
 }
 
 
-/**
- * Renders the current list of subtasks.
- * @param {number} iSubtasks - The index of the subtask to be rendered.
- */
 function renderCurrentSubtasks(iSubtasks) {
     let ctnEditAllSubtasksRef = document.getElementById('ctn-edit-all-subtasks');
     ctnEditAllSubtasksRef.innerHTML = "";
@@ -272,12 +199,6 @@ function renderCurrentSubtasks(iSubtasks) {
 }
 
 
-/**
- * Enables edit mode for a specific subtask.
- * @param {number} iSubtasks - Index of the subtask to edit.
- * This function displays the editing UI, focuses the input field, 
- * and adds an event listener to exit edit mode on focus loss.
- */
 function editSubtask(iSubtasks) {
     let inputField = document.getElementById(`input-subtask-edit${iSubtasks}`);
     document.getElementById(`subtask-icons-display-mode${iSubtasks}`).classList.add('d-none');
@@ -292,11 +213,7 @@ function editSubtask(iSubtasks) {
     });
 }
 
-/**
- * Exits edit mode for a specific subtask.
- * @param {number} iSubtasks - Index of the subtask to exit edit mode for.
- * This function restores the original UI and disables the input field.
- */
+
 function exitEditMode(iSubtasks) {
     let inputField = document.getElementById(`input-subtask-edit${iSubtasks}`);
     document.getElementById(`subtask-icons-display-mode${iSubtasks}`).classList.remove('d-none');
@@ -307,10 +224,7 @@ function exitEditMode(iSubtasks) {
 }
 
 
-/**
- * Saves the edited subtask and updates the UI.
- * @param {number} iSubtasks - The index of the subtask to save.
- */
+
 function saveSubtask(iSubtasks) {
     document.getElementById(`edit-mode-subtask${iSubtasks}`).classList.remove('underlined');
     document.getElementById(`subtask-item-edit${iSubtasks}`).classList.remove('no-hover-edit');
@@ -323,10 +237,6 @@ function saveSubtask(iSubtasks) {
 }
 
 
-/**
- * Updates the task with the provided ID based on the edited values.
- * @param {number} taskId - The ID of the task to update.
- */
 function updateTask(taskId) {
     let task = tasks.find(t => t.id === taskId);
     task.title = document.getElementById('title-edit').value;
@@ -342,9 +252,7 @@ function updateTask(taskId) {
 }
 
 
-/**
- * Closes the edit task overlay and resets UI elements.
- */
+
 function closeEditTaskOverlay() {
     document.body.style.overflow = '';
     let overlayBoardEditRef = document.getElementById('overlay-board-edit');
@@ -355,10 +263,7 @@ function closeEditTaskOverlay() {
     }, 200);
 }
 
-
-/**
- * Checks the input fields and updates the state of the update button.
- */
+//check
 function checkInputs() {
     let titleInput = document.getElementById('title-edit');
     let dueDateInput = document.getElementById('due-date-edit');
@@ -370,20 +275,17 @@ function checkInputs() {
 }
 
 
-/**
- * Retrieves the names of assigned contacts that are checked.
- * @returns {Array<string>} An array of names of assigned contacts.
- */
+
 function getAssignedTo() {
     editAssignedContacts = [];
-    const checkedContactsArray = Array.from(document.querySelectorAll('.contact.checked'));
-    checkedContactsArray.forEach(contact => {
-        const id = +contact.id.replace('contact', '');
-        const foundContact = allContacts.find(c => c.contactId === id);
-        if (foundContact) {
-            editAssignedContacts.push(foundContact.name);
-        }
-    });
+    for (let contactIdSelected = 0; contactIdSelected < selectedContacts.length; contactIdSelected++) {
+        console.log(contactIdSelected);
+        console.log(selectedContacts);
+
+        editAssignedContacts.push({ 'id': selectedContacts[contactIdSelected].contactId, 'name': selectedContacts[contactIdSelected].name });
+    }
+    console.log(editAssignedContacts);
+
     return editAssignedContacts;
 }
 

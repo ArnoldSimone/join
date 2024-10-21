@@ -153,10 +153,10 @@ function getTaskOverlayTemplate(task) {
         </div>
         <div class="ctn-delete-edit d-flex-y">
             <img id="btn-delete-task" class="btn-delete-task" onclick="deleteTask('${task.id}')" src="../assets/img/dustbinDarkText.svg" alt="Image Delete">
-                <span class="vertikalLine"></span>
-                <img onclick="showEditTaskOverlay('${task.id}')" class="btn-edit-task" src="../assets/img/editDarkText.svg" alt="Image Close">
-                </div>
-        </div>`
+            <span class="vertikalLine"></span>
+            <img onclick="showEditTaskOverlay('${task.id}')" class="btn-edit-task" src="../assets/img/editDarkText.svg" alt="Image Close">
+        </div>
+    </div>`
 }
 
 
@@ -188,7 +188,7 @@ function getSubtasksOverlayTemplate(indexSubTask, task) {
         <div class="subtask-item d-flex-y">
             <input onchange="updateSubtaskStatus(${indexSubTask}, '${task.id}')" type="checkbox" id="checkbox${indexSubTask}" class="subtask" ${(subtasksArray[indexSubTask].completed == true) ? "checked" : ""}>
             <span class="custom-checkbox" onclick="toggleCheckbox(${indexSubTask}, '${task.id}')"></span>
-            <label for="checkbox${indexSubTask}">${subtasksArray[indexSubTask].title}</label>
+            <label class="label-overlay-template" for="checkbox${indexSubTask}">${subtasksArray[indexSubTask].title}</label>
         </div>`
 }
 
@@ -215,7 +215,7 @@ function getEditOverlayTemplate(task) {
                     </div>
                     <div class="d-flex-x column gap-8">
                         <label for="description-edit">Description</label>
-                        <textarea id="description-edit" name="description">${task.description}</textarea>
+                        <textarea id="description-edit" name="description" rows="5">${task.description}</textarea>
                     </div>
                     <div class="d-flex-x column gap-8">
                         <label for="due-date-edit">Due date</label>
@@ -332,15 +332,15 @@ function getNoSubtaskInTaskTemplate() {
  * @param {boolean} isChecked - Indicates whether the contact is checked.
  * @returns {string} The HTML string for rendering the assigned contact in the overlay.
  */
-function getAssignedToEditTemplateOverlay(initial, color, name, iContact, isChecked) {
+function getAssignedToEditTemplateOverlay(initial, color, name, contactIdSelected, isChecked) {
     return `
-        <div class="contact d-flex-y ${isChecked}" id="contact${iContact}" onclick="toggleCheckboxContact(${iContact})">
+        <div class="contact d-flex-y ${isChecked}" id="contact${contactIdSelected}" onclick="toggleCheckboxContact('${contactIdSelected}')">
             <div class="contact-left d-flex-y">
                 <div class="assigned-to d-flex" style="background-color:${color};">${initial}</div>
-                <label for="checkboxContact${iContact}">${name}</label>
+                <label for="checkboxContact${contactIdSelected}">${name}</label>
             </div >
             <div class="contact-right">
-                <input type="checkbox" id="checkboxContact${iContact}" name="checkboxContact${iContact}" class="checkbox-contact"
+                <input type="checkbox" id="checkboxContact${contactIdSelected}" name="checkboxContact${contactIdSelected}" class="checkbox-contact"
                  ${isChecked ? 'checked' : ''} >
                 <span class="custom-checkbox-edit"></span>
             </div>
