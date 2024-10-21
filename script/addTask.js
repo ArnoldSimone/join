@@ -186,7 +186,11 @@ function gatherFormData() {
  * @returns {Array} - An array of selected user names.
  */
 function gatherSelectedUsers() {
+<<<<<<< Updated upstream
     return users.map(user => ({ 'id': user.id, 'name': user.name}));
+=======
+    return users.map(user => ({ 'id': user.id, 'name': user.name }));
+>>>>>>> Stashed changes
 }
 
 
