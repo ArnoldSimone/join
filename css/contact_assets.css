@@ -42,6 +42,43 @@ button.cancel:hover {
     transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
 
+button.delete {
+    background-color: white;
+    border: 2px solid var(--darkblue);
+    color: var(--darkblue);
+    padding: 10px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+button.delete img {
+    padding-left: 8px;
+}
+
+button.delete:hover {
+    color: var(--lightblue);
+    border: 2px solid var(--lightblue);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.19);
+    transform: translateY(-1px); 
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.close-black-icon {
+    height: 15px;
+    position: relative;
+    top: 40px;
+    left: 100px;
+}
+
+.close-black-add-icon {
+    height: 15px;
+    position: relative;
+    top: 40px;
+    left: 70px;
+}
+
 button.create-contact {
     background-color: var(--darkblue);
     color: white;

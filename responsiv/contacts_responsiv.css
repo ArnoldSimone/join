@@ -107,6 +107,26 @@
         display: block !important;
       }
   }
+
+@media (max-width: 880px) {
+    .close-black-add-icon {
+        left: 30px;
+    }
+}
+
+@media (max-width: 840px) {
+    .close-black-icon {
+        left: 70px;
+    }
+
+    .close-black-add-icon {
+        left: 0px;
+    }
+
+    input {
+        width: 80%;
+    }
+}
   
 
 @media (max-width: 800px){
@@ -115,6 +135,16 @@
     }
 
     .overlay-contact-middle img {
+        padding: 10px;
+    }
+}
+
+@media (max-width: 730px) {
+    button.create-contact {
+        padding: 10px;
+    }
+
+    button.cancel {
         padding: 10px;
     }
 }
@@ -183,6 +213,14 @@
     }
 
     button.cancel {
+        display: none;
+    }
+
+    .close-black-icon {
+        display: none;
+    }
+
+    .close-black-add-icon {
         display: none;
     }
 }

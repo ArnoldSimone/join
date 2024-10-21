@@ -116,7 +116,7 @@
                         <button type="submit" class="create-contact">Create contact<img src="../assets/img/check-white.svg" alt=""></button>
                     </div>
                 </form>
-                    
+                <img class="close-black-add-icon" onclick="clearValidationErrors(); clearInputFields(); hideOverlay()" src="../assets/img/close-black.svg" alt="">   
             </div>
         </div>
         <!-- Edit Contact Overlay -->
@@ -146,14 +146,15 @@
                     </div>
                     <input type="hidden" id="edit-contact-id">
                     <div class="contacts-button">
-                        <button type="button" class="cancel"
+                        <button type="button" class="delete"
                         onmouseover="changeCancelImage(this, 'hover')" 
                         onmouseout="changeCancelImage(this, 'default')" 
-                        onclick="clearValidationErrors(); hideOverlay()">
-                        Cancel<img src="../assets/img/close.svg" alt=""></button>
+                        onclick="clearValidationErrors(); deleteContact(); hideOverlay()">
+                        Delete<img src="../assets/img/close.svg" alt=""></button>
                         <button type="button" class="save-changes" onclick="validateEditContact()">Save<img src="../assets/img/check-white.svg" alt=""></button>
                     </div>
                 </form>
+                <img class="close-black-icon" onclick="clearValidationErrors(); hideOverlay()" src="../assets/img/close-black.svg" alt="">
                 
             </div>
         </div>
