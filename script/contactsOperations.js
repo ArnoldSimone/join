@@ -11,9 +11,14 @@ async function loadContacts() {
  * Fetch contacts from the server.
  * @returns {Promise<Object>} The contacts data.
  */
-async function fetchContacts() {
+async function fetchContacts(contactId) {
     const response = await fetch(`${BASE_URL}/contacts.json`);
-    return response.json();
+    const contacts = await response.json();
+    if (contactId) {
+        return contacts[contactId];
+    }
+    
+    return contacts;
 }
 
 

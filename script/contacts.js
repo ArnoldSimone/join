@@ -234,9 +234,48 @@ async function editContact() {
     if (!contactData) return false;
 
     setContactAvatar(contactData);
-    
     const response = await updateContact(contactData);
+    if (response.ok && contactData.name !== document.getElementById('edit-name').getAttribute('data-original-name')) {
+        await updateContactNameInTasks(contactData.id, contactData.name);
+    }
+
     return handleContactUpdate(response, contactData);
+}
+
+
+/**
+ * Updates the contact name in all tasks where the contact is assigned.
+ * @param {string} contactId - The contact ID.
+ * @param {string} newName - The new name of the contact.
+ */
+async function updateContactNameInTasks(contactId, newName) {
+    const tasksData = await fetchTasks();
+
+    for (const taskId in tasksData) {
+        const task = tasksData[taskId];
+        if (task.assignedTo && Array.isArray(task.assignedTo)) {
+            const assignedContact = task.assignedTo.find(contact => contact.id === contactId);
+            if (assignedContact) {
+                assignedContact.name = newName;
+                await patchAssignedToInTask(taskId, task.assignedTo);
+            }
+        }
+    }
+}
+
+
+/**
+ * Patches the assignedTo array in a specific task by sending a PATCH request to update Firebase.
+ * 
+ * @param {string} taskId - The ID of the task to update.
+ * @param {Array} assignedTo - The updated assignedTo array.
+ */
+async function patchAssignedToInTask(taskId, assignedTo) {
+    await fetch(`${BASE_URL}/tasks/${taskId}.json`, {
+        method: 'PATCH',
+        body: JSON.stringify({ assignedTo }),
+        headers: { 'Content-Type': 'application/json' }
+    });
 }
 
 
@@ -347,54 +386,63 @@ function getEditContactId() {
 async function deleteContact() {
     const id = getEditContactId();
     if (!id) return false;
-    const response = await fetch(`${BASE_URL}/contacts/${id}.json`, { method: 'DELETE' });
-    if (response.ok) {
-        await removeContactFromTasks(id);
-        hideOverlay();
-        loadContacts();
-        document.getElementById('contact-details').style.display = 'none';
-        showPopup('Contact successfully deleted');
-        return true;
+    const success = await removeContactFromTasks(id);
+    if (success) {
+        const response = await fetch(`${BASE_URL}/contacts/${id}.json`, { method: 'DELETE' });
+        if (response.ok) {
+            hideOverlay();
+            loadContacts();
+            document.getElementById('contact-details').style.display = 'none';
+            showPopup('Contact successfully deleted');
+            return true;
+        }
     }
-
     return false;
 }
 
-
 async function removeContactFromTasks(contactId) {
-    try {
-        const contactResponse = await fetch(`${BASE_URL}/contacts/${contactId}.json`);
-        const contactData = await contactResponse.json();
-        
-        if (!contactData || !contactData.name) {
-            console.error("Kontakt nicht in Firebase gefunden");
-            return;
+    const contactData = await fetchContacts(contactId);
+    if (!contactData) {
+        return false;
+    }
+    const contactName = contactData.name;
+    const tasksData = await fetchTasks();
+    let removed = false;
+    for (const taskId in tasksData) {
+        const task = tasksData[taskId];
+        if (task) {
+            removed = await updateTaskAssignedTo(task, contactId, contactName, taskId) || removed;
         }
+    }
+    return removed;
+}
 
-        const contactName = contactData.name;
-        console.log(`Kontaktname zum Entfernen: ${contactName}`);
-        const tasksResponse = await fetch(`${BASE_URL}/tasks/${taskId}/assignedTo.json`);
-        const tasksData = await tasksResponse.json();
+async function fetchTasks() {
+    const response = await fetch(`${BASE_URL}/tasks.json`);
+    if (!response.ok) {
+        return {};
+    }
+    return await response.json();
+}
 
-        for (const taskId in tasksData) {
-            const task = tasksData[taskId];
+async function updateTaskAssignedTo(task, contactId, contactName, taskId) {
+    if (task.assignedTo && Array.isArray(task.assignedTo)) {
+        const assignedContact = task.assignedTo.find(contact => contact.id === contactId);
+        if (assignedContact) {
+            const updatedAssignedTo = task.assignedTo.filter(contact => contact.id !== contactId);
+            const patchResponse = await fetch(`${BASE_URL}/tasks/${taskId}.json`, {
+                method: 'PATCH',
+                body: JSON.stringify({ assignedTo: updatedAssignedTo })
+            });
 
-            if (task.assignedTo && Array.isArray(task.assignedTo)) {
-                const contactIndex = task.assignedTo.indexOf(contactName);
-                
-                if (contactIndex !== -1) {
-                    console.log(`Entferne ${contactName} aus Task ${taskId}`);
-                    task.assignedTo.splice(contactIndex, 1);
-                    await fetch(`${BASE_URL}/tasks/${taskId}/assignedTo.json`, {
-                        method: 'PATCH',
-                        body: JSON.stringify({ assignedTo: task.assignedTo })
-                    });
-                }
+            if (patchResponse.ok) {
+                return true;
+            } else {
+                await patchResponse.text();
             }
         }
-    } catch (error) {
-        console.error("Fehler beim Entfernen des Kontakts aus den Aufgaben:", error);
     }
+    return false;
 }
 
 
