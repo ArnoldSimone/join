@@ -90,10 +90,14 @@ function getContactTemplate(assignedToArrayContact) {
 function closeDetailTaskOverlay() {
     document.body.style.overflow = '';
     let overlayBoardDetailRef = document.getElementById('overlay-board-detail');
+    let overlayBoardEditRef = document.getElementById('overlay-board-edit');
     overlayBoardDetailRef.classList.add('slide-out');
+    overlayBoardEditRef.classList.add('slide-out');
     setTimeout(() => {
         overlayBoardDetailRef.classList.add('d-none');
         overlayBoardDetailRef.classList.remove('slide-out');
+        overlayBoardEditRef.classList.add('d-none');
+        overlayBoardEditRef.classList.remove('slide-out');
     }, 200);
 }
 
