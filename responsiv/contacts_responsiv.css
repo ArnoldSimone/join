@@ -223,6 +223,10 @@
     .close-black-add-icon {
         display: none;
     }
+
+    input {
+        width: 100%;
+    }
 }
 
 @media (max-width: 580px) {
