@@ -58,7 +58,7 @@ function generateExtraUsersHTML(extraCount) {
  */
 function generateSubtaskHTML(subtaskId, subtaskText) {
     return `
-        <li id="subtask-${subtaskId}" class="subtask-item" onmouseover="showButtons(${subtaskId})" onmouseout="hideButtons(${subtaskId})">
+        <li id="subtask-${subtaskId}" onmouseover="showButtons(${subtaskId})" onmouseout="hideButtons(${subtaskId})">
             <span id="subtask-text-${subtaskId}">${subtaskText}</span>
             <span class="subtask-buttons" id="subtask-buttons-${subtaskId}" style="display: none;">
                 <button class="subtask-button" type="button" onclick="editSubtask(${subtaskId})"><img src="../assets/img/edit.png" alt=""></button>
@@ -96,7 +96,7 @@ function generateEditSubtaskHTML(index, title) {
  */
 function generateSubtaskItemHTML(title, index) {
     return `
-        <li class="subtask-item" onmouseover="showButtons(${index})" onmouseout="hideButtons(${index})">
+        <li onmouseover="showButtons(${index})" onmouseout="hideButtons(${index})">
             ${title}
             <span id="subtask-buttons-${index}" class="subtask-buttons" style="display:none;">
                 <button class="subtask-button" onclick="editSubtask(${index})"><img src="../assets/img/edit.png" alt=""></button>

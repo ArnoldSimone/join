@@ -226,7 +226,6 @@ textarea {
     left: 0;
     width: 90%;
     background-color: var(--lightgrey);
-    z-index: 10; 
     height: 70px; 
     overflow-y: auto; 
 }
@@ -309,4 +308,8 @@ li:hover {
 .text-input {
     padding: 10px 90px 10px 10px;
     width: 100%;
+}
+
+.user-checkbox{
+    margin: 0 !important;
 }

@@ -39,9 +39,27 @@
     }
 }
 
-@media (max-width: 580px) {
+@media (max-width: 620px) {
     button.clear {
         display: none;
+    }
+}
+
+@media (max-width: 500px) {
+    .subtask-buttons {
+        display: inline !important;
+    }
+
+    .subtask-button {
+        display: inline !important;
+    }
+
+    #subtask-list li button {
+        display: inline !important;
+    }
+
+    .headline {
+        font-size: 50px !important;
     }
 }
 
@@ -55,11 +73,9 @@
     section {
         height: calc(100vH - 200px);
     }
-}
 
-@media (max-width: 480px) {
     main {
-        padding: 10px;
+        padding: 12px;
     }
 }
 

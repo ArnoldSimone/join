@@ -125,6 +125,7 @@ button.create-task:hover {
 .subtask-button {
     border: inherit;
     padding: 0;
+    background-color: rgb(228, 228, 228);
 }
 
 .subtask-edit-container button {
@@ -132,7 +133,7 @@ button.create-task:hover {
 }
 
 .subtask-edit-container button:hover {
-    background-color: var(--middlegrey) !important;
+    background-color: rgb(228, 228, 228) !important;
     border-radius: 50%;
 }
 
@@ -150,7 +151,7 @@ button.create-task:hover {
 }
 
 #subtask-action-buttons img:hover{
-    background-color: var(--middlegrey);
+    background-color: rgb(228, 228, 228);
     border-radius: 30%;
 }
 
