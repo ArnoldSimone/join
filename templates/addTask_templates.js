@@ -15,14 +15,13 @@ function generateCreateOption(name, initial, color, id, checked) {
             </div>
             <p>${name}</p>
         </div>
-        <div id="userCheckbox">
-            <input type="checkbox" data-user-id="${id}" id="checkbox-${id}" ${checked} onclick="event.stopPropagation();">
-            <img onclick="event.stopPropagation(); selectionUser('${id}')" class="user-checkbox" src="../assets/img/checkbox.png">
+        <div id="userCheckbox" class="checkbox-container">
+            <input type="checkbox" data-user-id="${id}" id="checkbox-${id}" ${checked ? 'checked' : ''} onclick="event.stopPropagation();">
+            <label class="user-checkbox" for="checkbox-${id}" onclick="event.stopPropagation(); selectionUser('${id}')"></label>
         </div>
     </div>
   `;
 }
-
 
 
 /**

@@ -1,7 +1,6 @@
 /**
  * Check if the contact has a valid name.
  * @param {string} name - The name to validate.
- * @returns {boolean} Whether the name is valid.
  */
 function isValidContactName(name) {
     return name && typeof name === 'string';
@@ -11,7 +10,6 @@ function isValidContactName(name) {
 /**
  * Get the first letter of a name in uppercase.
  * @param {string} name - The name to process.
- * @returns {string} The first letter of the name.
  */
 function getFirstLetter(name) {
     return name[0].toUpperCase();
@@ -22,7 +20,6 @@ function getFirstLetter(name) {
  * Compare two contact names alphabetically.
  * @param {Object} a - The first contact object.
  * @param {Object} b - The second contact object.
- * @returns {number} The comparison result.
  */
 function compareNames(a, b) {
     return a.name.localeCompare(b.name);
@@ -172,9 +169,6 @@ function toggleEditDelete() {
   /**
  * Adds a new contact by validating the input, saving the contact to Firebase,
  * and displaying a success message upon completion.
- * 
- * @async
- * @returns {Promise<boolean>} Returns true if the contact was added successfully, false otherwise.
  */
   async function addNewContact() {
     const name = document.getElementById('add-name').value.trim();
@@ -201,7 +195,6 @@ function toggleEditDelete() {
  * 
  * @async
  * @param {Object} contact - The contact object to be saved.
- * @returns {Promise<boolean>} Returns true if the contact was successfully saved, false otherwise.
  */
 async function saveContact(contact) {
     const response = await fetch(`${BASE_URL}/contacts.json`, {
@@ -227,7 +220,6 @@ function clearInputFields() {
 /**
  * Edits a contact's details and updates the contact in the backend.
  * @async
- * @returns {Promise<boolean>} - Returns true if the contact is successfully updated, otherwise false.
  */
 async function editContact() {
     const contactData = getContactData();
@@ -240,42 +232,6 @@ async function editContact() {
     }
 
     return handleContactUpdate(response, contactData);
-}
-
-
-/**
- * Updates the contact name in all tasks where the contact is assigned.
- * @param {string} contactId - The contact ID.
- * @param {string} newName - The new name of the contact.
- */
-async function updateContactNameInTasks(contactId, newName) {
-    const tasksData = await fetchTasks();
-
-    for (const taskId in tasksData) {
-        const task = tasksData[taskId];
-        if (task.assignedTo && Array.isArray(task.assignedTo)) {
-            const assignedContact = task.assignedTo.find(contact => contact.id === contactId);
-            if (assignedContact) {
-                assignedContact.name = newName;
-                await patchAssignedToInTask(taskId, task.assignedTo);
-            }
-        }
-    }
-}
-
-
-/**
- * Patches the assignedTo array in a specific task by sending a PATCH request to update Firebase.
- * 
- * @param {string} taskId - The ID of the task to update.
- * @param {Array} assignedTo - The updated assignedTo array.
- */
-async function patchAssignedToInTask(taskId, assignedTo) {
-    await fetch(`${BASE_URL}/tasks/${taskId}.json`, {
-        method: 'PATCH',
-        body: JSON.stringify({ assignedTo }),
-        headers: { 'Content-Type': 'application/json' }
-    });
 }
 
 
@@ -301,7 +257,6 @@ function setContactAvatar(contactData) {
  * Handles the contact update process after an update request.
  * @param {Response} response - The response from the backend after attempting to update the contact.
  * @param {Object} contactData - The data of the contact being edited.
- * @returns {boolean} - Returns true if the update is successful, otherwise false.
  */
 function handleContactUpdate(response, contactData) {
     if (response.ok) {
@@ -340,7 +295,6 @@ function updateEditContactFields(id, name, email, phone, initials, color) {
 
 /**
  * Get contact data from the input fields for editing.
- * @returns {Object|null} The contact data or null if invalid.
  */
 function getContactData() {
     const name = document.getElementById('edit-name').value.trim();
@@ -361,7 +315,6 @@ function getContactData() {
 /**
  * Update an existing contact on the server.
  * @param {Object} contact - The contact object.
- * @returns {Promise<Response>} The fetch response.
  */
 async function updateContact({ name, email, phone, avatar, id }) {
     return await fetch(`${BASE_URL}/contacts/${id}.json`, {
@@ -374,7 +327,6 @@ async function updateContact({ name, email, phone, avatar, id }) {
 
 /**
  * Get the ID of the contact being edited.
- * @returns {string} The contact ID.
  */
 function getEditContactId() {
     const contactId = document.getElementById('edit-contact-id').value;
@@ -383,73 +335,47 @@ function getEditContactId() {
 }
 
 
+/**
+ * Deletes a contact by its ID. Removes the contact from all associated tasks
+ */
 async function deleteContact() {
     const id = getEditContactId();
     if (!id) return false;
-    const success = await removeContactFromTasks(id);
-    if (success) {
-        const response = await fetch(`${BASE_URL}/contacts/${id}.json`, { method: 'DELETE' });
-        if (response.ok) {
-            hideOverlay();
-            loadContacts();
-            document.getElementById('contact-details').style.display = 'none';
-            showPopup('Contact successfully deleted');
-            return true;
-        }
+    await removeContactFromTasks(id);
+    return await deleteContactFromDatabase(id);
+}
+
+
+/**
+ * Deletes a contact from the database using its ID.
+ * @param {string} contactId - The ID of the contact to be deleted.
+ */
+async function deleteContactFromDatabase(contactId) {
+    const response = await fetch(`${BASE_URL}/contacts/${contactId}.json`, { method: 'DELETE' });
+
+    if (response.ok) {
+        handleContactDeletionSuccess();
+        return true;
     }
+    
     return false;
 }
 
-async function removeContactFromTasks(contactId) {
-    const contactData = await fetchContacts(contactId);
-    if (!contactData) {
-        return false;
-    }
-    const contactName = contactData.name;
-    const tasksData = await fetchTasks();
-    let removed = false;
-    for (const taskId in tasksData) {
-        const task = tasksData[taskId];
-        if (task) {
-            removed = await updateTaskAssignedTo(task, contactId, contactName, taskId) || removed;
-        }
-    }
-    return removed;
-}
 
-async function fetchTasks() {
-    const response = await fetch(`${BASE_URL}/tasks.json`);
-    if (!response.ok) {
-        return {};
-    }
-    return await response.json();
-}
-
-async function updateTaskAssignedTo(task, contactId, contactName, taskId) {
-    if (task.assignedTo && Array.isArray(task.assignedTo)) {
-        const assignedContact = task.assignedTo.find(contact => contact.id === contactId);
-        if (assignedContact) {
-            const updatedAssignedTo = task.assignedTo.filter(contact => contact.id !== contactId);
-            const patchResponse = await fetch(`${BASE_URL}/tasks/${taskId}.json`, {
-                method: 'PATCH',
-                body: JSON.stringify({ assignedTo: updatedAssignedTo })
-            });
-
-            if (patchResponse.ok) {
-                return true;
-            } else {
-                await patchResponse.text();
-            }
-        }
-    }
-    return false;
+/**
+ * Handles the success of a contact deletion.
+ */
+function handleContactDeletionSuccess() {
+    hideOverlay();
+    loadContacts();
+    document.getElementById('contact-details').style.display = 'none';
+    showPopup('Contact successfully deleted');
 }
 
 
 /**
  * Generate an avatar object with initials and a random color.
  * @param {string} name - The contact name.
- * @returns {Object} The avatar object.
  */
 function generateAvatar(name) {
     return {

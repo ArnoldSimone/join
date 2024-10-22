@@ -134,8 +134,12 @@ input[type="checkbox"] {
     cursor: pointer;
 }
 
-input[type="checkbox"]:checked+.user-checkbox {
-    background-image: url('../assets/img/checkbox-checked.png');
+input[type="checkbox"]:checked +.user-checkbox {
+    background-image: url('../assets/img/checkbox-checked-white.png');
+}
+
+input#subtaks {
+    width: 70%;
 }
 
 label {
@@ -222,12 +226,13 @@ textarea {
     width: 90%;
     background-color: var(--lightgrey);
     z-index: 10; 
-    max-height: 70px; 
+    height: 70px; 
     overflow-y: auto; 
 }
 
 #subtask-list li {
     position: relative;
+    width: 100%;
 }
 
 .subtask-edit-container {
@@ -242,9 +247,9 @@ textarea {
     height: 16px;
     border: none;
     border-radius: 0% !important;
-    padding-right: 30px;
     box-sizing: border-box;
     outline: none;
+    padding: 10px 90px 10px 10px;
 }
 
 .edit-subtask-input:hover {
@@ -292,4 +297,9 @@ li:hover {
 .extra-contacts-text {
     color: var(--darkblue); 
     font-weight: bold; 
+}
+
+.text-input {
+    padding: 10px 90px 10px 10px;
+    width: 100%;
 }

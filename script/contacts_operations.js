@@ -201,7 +201,6 @@ function validateEmail(email) {
 /**
  * Validates the phone input to ensure only numbers, spaces, and '+' are allowed,
  * and the number of digits is between 5 and 15.
- * 
  * @param {string} phone - The contact phone number to validate.
  * @returns {boolean} Whether the phone number is valid.
  */
@@ -283,7 +282,6 @@ function validateEditContact() {
 /**
  * Validates the name field in the Edit Contact form.
  * The name should only contain letters and spaces.
- * 
  * @param {string} name - The name input from the Edit Contact form.
  * @returns {boolean} - Returns true if the name is valid, otherwise false.
  */
@@ -300,9 +298,7 @@ function validateEditName(name) {
 /**
  * Validates the email field in the Edit Contact form.
  * The email must follow a standard email format.
- * 
  * @param {string} email - The email input from the Edit Contact form.
- * @returns {boolean} - Returns true if the email is valid, otherwise false.
  */
 function validateEditEmail(email) {
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -317,9 +313,7 @@ function validateEditEmail(email) {
 
 /**
  * Validates the phone field in the Edit Contact form.
- * The phone number should contain only digits, spaces, or plus signs
  * @param {string} phone - The phone input from the Edit Contact form.
- * @returns {boolean} - Returns true if the phone number is valid, otherwise false.
  */
 function validateEditPhone(phone) {
     const cleanedPhone = phone.replace(/\D/g, '');
@@ -351,7 +345,6 @@ function createPopupElement(message) {
 
 /**
  * Applies the necessary styles to the popup element.
- * 
  * @param {HTMLElement} popup - The popup element to style.
  */
 function stylePopup(popup) {

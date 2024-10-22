@@ -70,9 +70,9 @@ function assignedListToogle() {
     let users = document.getElementById('selectedUser');
     
     if (list.classList.contains('d-none')) {
-        openAssignedList(list, users);  // Auslagerung in eine separate Funktion
+        openAssignedList(list, users);
     } else { 
-        closeAssignedList(list, users); // Auslagerung in eine separate Funktion
+        closeAssignedList(list, users);
     }
     
     resetSearchValue();
@@ -193,13 +193,16 @@ function selectionUser(id) {
 function toggleUserCheckbox(id) {
     let checkbox = document.querySelector(`input[data-user-id="${id}"]`);
     let assignedContent = document.getElementById(`assigned-content-${id}`);
-
     if (checkbox) {
         checkbox.checked = !checkbox.checked;
         if (checkbox.checked) {
-            assignedContent.style.backgroundColor = 'var(--middlegrey';
+            assignedContent.style.backgroundColor = 'var(--darkblue)';
+            assignedContent.style.color = 'white';
+            assignedContent.style.borderRadius = '10px';           
         } else {
             assignedContent.style.backgroundColor = '';
+            assignedContent.style.color = '';
+            assignedContent.style.borderRadius = '';
         }
     }
 }
@@ -211,7 +214,7 @@ function toggleUserCheckbox(id) {
 function renderSelectArray() {
     let listContent = document.getElementById('selectedUser');
     listContent.innerHTML = ''; 
-    const maxAvatars = 4; 
+    const maxAvatars = 7; 
     const extraUsersCount = users.length - maxAvatars;
     for (let index = 0; index < Math.min(users.length, maxAvatars); index++) {
         let initial = users[index].avatar.initials;

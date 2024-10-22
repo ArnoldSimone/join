@@ -25,6 +25,7 @@ async function fetchContacts() {
  */
 function renderAllContactsInAssignedTo() {
     let list = document.getElementById('assignedList');
+    list.innerHTML = '';
     for (let index = 0; index < allContacts.length; index++) {
         let name = allContacts[index].name;
         let initial = allContacts[index].avatar.initials;
@@ -263,8 +264,8 @@ function clearAssignedUsers() {
         const assignedUserDiv = checkbox.closest('.assigned-content');
         if (assignedUserDiv) {
             assignedUserDiv.style.backgroundColor = 'white';
-        }
-    });
+            assignedUserDiv.style.color = 'black';
+        } });
 }
 
 
