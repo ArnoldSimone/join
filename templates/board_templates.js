@@ -29,7 +29,7 @@ function getBoardTaskTemplate(task) {
         <div class="ctn-header-task d-flex-x">   
             ${getTaskCategoryTemplate(task.category)}
             <div id="move-to-responsive" class="move-to-responsive">
-                <a class="move-task d-flex" href="#" onclick="toggleMenuMoveTo('${task.id}'); handleClickMenu(event)"><img class="img-menu" src="../assets/icon/more.png" alt="More functions"></a>
+                <a class="move-task d-flex" onclick="toggleMenuMoveTo('${task.id}'); handleClickMenu(event)"><img class="img-menu" src="../assets/icon/more.png" alt="More functions"></a>
                 <div id="menu-${task.id}" class="menu-move-to d-flex-x d-none" onclick="handleClickMenu(event)">
                     <ul class="ul-move-to d-flex-x">
                         <li class="category-move-to" onclick="moveTaskResponsive('todo', '${task.id}')">To do</li>

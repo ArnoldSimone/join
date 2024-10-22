@@ -24,20 +24,24 @@ function toggleMenuMoveTo(taskId) {
 
 
 /**
- * Toggles the visibility of a task's dropdown menu.
- * Hides the menu if a click occurs outside of it.
- * @param {string} taskId - The ID of the task whose menu is toggled.
+ * Toggles the visibility of the move-to menu for a specific task.
+ * @param {string} taskId - The ID of the task for which to toggle the menu.
+ * @function toggleMenuMoveTo
  */
 function toggleMenuMoveTo(taskId) {
-    const menu = document.getElementById(`menu-${taskId}`);
-    const isVisible = !menu.classList.toggle('d-none');
-    if (isVisible) {
+    let menu = document.getElementById(`menu-${taskId}`);
+    let isVisible = !menu.classList.contains('d-none');
+    closeAllMenus();
+    if (!isVisible) {
+        menu.classList.remove('d-none');
         document.onclick = (event) => {
             if (!menu.contains(event.target)) {
                 menu.classList.add('d-none');
                 document.onclick = null;
             }
         };
+    } else {
+        menu.classList.add('d-none');
     }
 }
 
@@ -48,7 +52,20 @@ function toggleMenuMoveTo(taskId) {
  * @function handleClickMenu
  */
 function handleClickMenu(event) {
+    event.preventDefault();
     event.stopPropagation();
+}
+
+
+/**
+ * Closes all move-to menus by adding the 'd-none' class to each.
+ * @function closeAllMenus
+ */
+function closeAllMenus() {
+    let menus = document.querySelectorAll('.menu-move-to');
+    menus.forEach(menu => {
+        menu.classList.add('d-none');
+    });
 }
 
 
