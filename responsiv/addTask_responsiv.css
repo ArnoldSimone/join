@@ -52,6 +52,7 @@
 
     .subtask-button {
         display: inline !important;
+        background-color: var(--lightgrey);
     }
 
     #subtask-list li button {
