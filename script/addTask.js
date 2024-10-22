@@ -25,22 +25,37 @@ async function fetchContacts() {
  */
 function renderAllContactsInAssignedTo() {
     let list = document.getElementById('assignedList');
-    list.innerHTML = '';
-    for (let index = 0; index < allContacts.length; index++) {
-        let name = allContacts[index].name;
-        let initial = allContacts[index].avatar.initials;
-        let color = allContacts[index].avatar.color;
-        let id = allContacts[index].id;
-        let checked = users.find(user => user.id === id) ? 'checked' : '';
-        list.innerHTML += generateCreateOption(name, initial, color, id, checked);
-    };
+    clearListContent(list);
+    allContacts.forEach(contact => {
+        let { name, avatar: { initials, color }, id } = contact;
+        let checked = isUserAssigned(id) ? 'checked' : '';
+        list.innerHTML += generateCreateOption(name, initials, color, id, checked);
+    });
 }
+
+
+/**
+ * Clears the content of the provided list element.
+ * @param {HTMLElement} list - The list element to clear.
+ */
+function clearListContent(list) {
+    list.innerHTML = '';
+}
+
+
+/**
+ * Checks if a user is assigned based on their ID.
+ * @param {string} id - The ID of the contact to check.
+ */
+function isUserAssigned(id) {
+    return users.some(user => user.id === id);
+}
+
 
 
 /**
  * Adds a task to Firebase with the provided task data.
  * @param {Object} taskData - The task data to add to Firebase.
- * @returns {Promise<void>}
  */
 async function addTaskToFirebase(taskData) {
     const result = await postToDatabase("tasks", taskData);
@@ -94,7 +109,6 @@ function submitForm() {
  * @param {string} fieldId - The ID of the field to validate.
  * @param {string} value - The value of the field to validate.
  * @param {boolean} [isDate=false] - Indicates if the field is a date field.
- * @returns {boolean} - Returns true if the field is valid; otherwise, false.
  */
 function validateField(fieldId, value, isDate = false) {
     const input = document.getElementById(fieldId);
@@ -110,7 +124,6 @@ function validateField(fieldId, value, isDate = false) {
  * Gets or creates an error text element for a specific input field.
  * @param {string} fieldId - The ID of the field to get the error text for.
  * @param {HTMLInputElement} input - The input element associated with the field.
- * @returns {HTMLElement} - The error text element.
  */
 function getErrorText(fieldId, input) {
     let errorText = document.getElementById(`${fieldId}-error`);
@@ -166,7 +179,6 @@ function validateDate() {
 
 /**
  * Gathers all form data into an object for submission.
- * @returns {Object} - The collected form data.
  */
 function gatherFormData() {
     return {
@@ -184,7 +196,6 @@ function gatherFormData() {
 
 /**
  * Gathers the names of the selected users.
- * @returns {Array} - An array of selected user names.
  */
 function gatherSelectedUsers() {
     return users.map(user => ({ 'id': user.id, 'name': user.name}));
@@ -194,7 +205,6 @@ function gatherSelectedUsers() {
 /**
  * Retrieves the value of a specific form field by name.
  * @param {string} name - The name of the form field to get the value for.
- * @returns {string} - The value of the specified form field.
  */
 function getFormValue(name) {
     return document.forms["taskForm"][name].value;
@@ -251,22 +261,63 @@ function clearForm() {
 
 
 /**
- * Clears the selected users from the user list, unchecks all user checkboxes, and resets the background color.
+ * Clears all assigned users and resets the input field and checkboxes.
  */
 function clearAssignedUsers() {
+    clearSelectedUser();
+    resetAssignedInput();
+    resetCheckboxes();
+}
+
+
+/**
+ * Clears the content of the selected user display.
+ */
+function clearSelectedUser() {
     const selectedUser = document.getElementById('selectedUser');
     if (selectedUser) {
         selectedUser.innerHTML = '';
     }
+}
+
+
+/**
+ * Resets the value of the assigned input field.
+ */
+function resetAssignedInput() {
     document.getElementById('assignedInput').value = '';
+}
+
+
+/**
+ * Resets all checkboxes in the assigned list and their associated styles.
+ */
+function resetCheckboxes() {
     const checkboxes = document.querySelectorAll('#assignedList input[type="checkbox"]');
-    checkboxes.forEach(checkbox => {
-        checkbox.checked = false;
-        const assignedUserDiv = checkbox.closest('.assigned-content');
-        if (assignedUserDiv) {
-            assignedUserDiv.style.backgroundColor = 'white';
-            assignedUserDiv.style.color = 'black';
-        } });
+    checkboxes.forEach(resetCheckbox);
+}
+
+
+/**
+ * Resets a single checkbox and its associated content styles.
+ * @param {HTMLInputElement} checkbox - The checkbox element to reset.
+ */
+function resetCheckbox(checkbox) {
+    checkbox.checked = false;
+    const assignedUserDiv = checkbox.closest('.assigned-content');
+    if (assignedUserDiv) {
+        resetAssignedUserStyles(assignedUserDiv);
+    }
+}
+
+
+/**
+ * Resets the styles of the assigned user content.
+ * @param {HTMLElement} assignedUserDiv - The div containing the assigned user content.
+ */
+function resetAssignedUserStyles(assignedUserDiv) {
+    assignedUserDiv.style.backgroundColor = 'white';
+    assignedUserDiv.style.color = 'black';
 }
 
 

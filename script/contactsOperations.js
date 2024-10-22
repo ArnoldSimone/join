@@ -268,11 +268,9 @@ function validateEditContact() {
     const phone = document.getElementById('edit-phone').value.trim();
 
     let isValid = true;
-
     if (!validateEditName(name)) isValid = false;
     if (!validateEditEmail(email)) isValid = false;
     if (!validateEditPhone(phone)) isValid = false;
-
     if (isValid) {
         editContact();
     }

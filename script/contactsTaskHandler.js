@@ -104,7 +104,6 @@ async function updateTaskAssignedTo(task, contactId, contactName, taskId) {
             });
             if (patchResponse.ok) {return true;} 
             else {await patchResponse.text();}
-        }
-    }
+        }}
     return false;
 }

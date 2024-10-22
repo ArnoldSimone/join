@@ -132,7 +132,6 @@ function selectContact(id) {
 function checkButtonPositionAndSetColor() {
     var editBtn = document.getElementById('edit-btn');
     var deleteBtn = document.getElementById('delete-btn');
-  
     function updateButtonBackgroundColor() {
       if (getComputedStyle(editBtn).position === 'fixed') {
         editBtn.style.backgroundColor = 'white';
@@ -140,11 +139,8 @@ function checkButtonPositionAndSetColor() {
       } else {
         editBtn.style.backgroundColor = ''; 
         deleteBtn.style.backgroundColor = ''; 
-      }
-    }
-  
+      }}
     updateButtonBackgroundColor();
-
     window.addEventListener('resize', updateButtonBackgroundColor); 
 }
   
@@ -166,7 +162,7 @@ function toggleEditDelete() {
   }
 
 
-  /**
+/**
  * Adds a new contact by validating the input, saving the contact to Firebase,
  * and displaying a success message upon completion.
  */
@@ -174,18 +170,14 @@ function toggleEditDelete() {
     const name = document.getElementById('add-name').value.trim();
     const email = document.getElementById('add-email').value.trim();
     const phone = document.getElementById('add-phone').value.trim();
-
     if (!validateContactInput(name, email, phone)) return false;
-
     const contact = { name, email, phone, avatar: generateAvatar(name) };
     const response = await saveContact(contact);
     if (response) {
         clearInputFields();
         hideOverlay();
         loadContacts();
-        showPopup('Contact added successfully');
-        return true;
-    }
+        showPopup('Contact added successfully'); return true;}
     return false;
 }
 
@@ -303,7 +295,6 @@ function getContactData() {
     const id = document.getElementById('edit-contact-id').value;
 
     if (!name || !email || !phone) return null;
-
     const avatarElement = document.getElementById('edit-avatar');
     const initials = avatarElement.textContent;
     const color = avatarElement.style.backgroundColor;
@@ -330,7 +321,6 @@ async function updateContact({ name, email, phone, avatar, id }) {
  */
 function getEditContactId() {
     const contactId = document.getElementById('edit-contact-id').value;
-    console.log(`Kontakt-ID: ${contactId}`); 
     return contactId;
 }
 
