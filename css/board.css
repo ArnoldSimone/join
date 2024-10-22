@@ -5,11 +5,13 @@
 body,
 html {
     height: 100%;
+    width: 100%;
 }
 
 body {
     display: flex;
     flex-direction: column;
+    overflow-y: auto;
 }
 
 main {
@@ -17,7 +19,6 @@ main {
     padding: 32px 64px;
     max-width: 1440px;
     flex-grow: 1;
-    overflow-y: auto;
 }
 
 .ctn-input-search {
