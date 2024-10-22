@@ -245,6 +245,7 @@ function clearForm() {
     mediumPriority();
     setFormValue("category", '')
     clearSubtasks();
+    setFormValue("subtasks", '');
     resetValidations();
 }
 

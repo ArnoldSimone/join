@@ -112,9 +112,9 @@ button.create-task:hover {
 }
 
 .subtask-buttons {
-    position: absolute;
-    right: 10px; 
+    position: relative;
     display: flex;
+    left: 20px;
 }
 
 .subtask-buttons img {
@@ -124,6 +124,7 @@ button.create-task:hover {
 
 .subtask-button {
     border: inherit;
+    padding: 0;
 }
 
 .subtask-edit-container button {
@@ -150,5 +151,9 @@ button.create-task:hover {
 
 #subtask-action-buttons img:hover{
     background-color: var(--middlegrey);
-    border-radius: 30%
+    border-radius: 30%;
+}
+
+#subtask-list li.edit-mode button {
+    padding: 0;
 }

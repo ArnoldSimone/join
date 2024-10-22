@@ -297,7 +297,7 @@ li:hover {
 }
 
 .edit-check img{
-    height: 10px;
+    height: 10px !important;
     width: auto;
 }
 
