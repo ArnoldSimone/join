@@ -215,7 +215,7 @@ function getEditOverlayTemplate(task) {
                     </div>
                     <div class="d-flex-x column gap-8">
                         <label for="description-edit">Description</label>
-                        <textarea id="description-edit" name="description" rows="5">${task.description}</textarea>
+                        <textarea id="description-edit" name="description" rows="4">${task.description}</textarea>
                     </div>
                     <div class="d-flex-x column gap-8">
                         <label for="due-date-edit">Due date</label>
@@ -290,10 +290,11 @@ function getEditOverlayTemplate(task) {
  * @returns {string} The HTML string for rendering a subtask in edit mode.
  */
 function getAllSubtasksTemplate(iSubtasks, title) {
+    let trimmedTitle = title.trim();
     return `                     
         <ul id="edit-mode-subtask${iSubtasks}" class="">
             <li id="subtask-item-edit${iSubtasks}" ondblclick="editSubtask(${iSubtasks})" class="subtask-item-edit d-flex-y">
-                <input id="input-subtask-edit${iSubtasks}" class="input-subtask-edit" type="text" value="&bull; ${title}" disabled onkeydown="handleKeyDownEditSubtask(event, ${iSubtasks})">
+                <input id="input-subtask-edit${iSubtasks}" class="input-subtask-edit" type="text" value="&bull; ${trimmedTitle}" disabled onkeydown="handleKeyDownEditSubtask(event, ${iSubtasks})">
                 <div id="subtask-icons-display-mode${iSubtasks}" class="subtask-icons d-flex-x">
                     <img id="edit-subtask${iSubtasks}" class="img-edit-subtask" onclick="editSubtask(${iSubtasks})" src="../assets/img/pencilBlue.png" alt="Edit Subtask">
                     <span class="horizonal-line-subtask horizontal-line-hover"></span>

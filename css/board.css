@@ -20,68 +20,6 @@ main {
     overflow-y: auto;
 }
 
-input:focus,
-textarea:focus {
-    border: 1px solid var(--lightblue);
-    outline: none;
-}
-
-.input-field {
-    padding: 0 10px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    font-size: 20px;
-    height: 46px;
-    width: 264px;
-    font-weight: 200;
-}
-
-.input-field::placeholder {
-    font-size: 20px;
-    color: #E7E7E7;
-}
-
-.btn-dark {
-    background-color: var(--darkblue);
-    color: var(--textwhite);
-    border-radius: 10px;
-    border: none;
-    font-size: 20px;
-    height: 46px;
-    gap: 10px;
-    padding: 0 24px;
-    font-weight: 600;
-}
-
-.btn-dark:hover {
-    cursor: pointer;
-    background-color: var(--lightblue);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.19);
-    transform: translateY(-1px);
-    transition: box-shadow 0.3s ease, transform 0.3s ease;
-}
-
-.btn-dark-responsive {
-    background-color: var(--darkblue);
-    color: var(--textwhite);
-    border-radius: 10px;
-    border: none;
-    font-size: 20px;
-    height: 40px;
-    width: 40px;
-    gap: 10px;
-    padding-left: 10px;
-    font-weight: 600;
-}
-
-.btn-dark-responsive:hover {
-    cursor: pointer;
-    background-color: var(--lightblue);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.19);
-    transform: translateY(-1px);
-    transition: box-shadow 0.3s ease, transform 0.3s ease;
-}
-
 .ctn-input-search {
     position: relative;
 }
@@ -200,10 +138,6 @@ textarea:focus {
     -webkit-box-orient: vertical;
 }
 
-progress {
-    max-width: 50%;
-}
-
 .task-subtasks {
     gap: 6px;
     font-size: 12px;
@@ -222,7 +156,6 @@ progress {
 .mesh {
     margin-right: -12px;
 }
-
 
 .ctn-task-bottom {
     justify-content: space-between;
@@ -244,30 +177,10 @@ progress {
 
 }
 
-@keyframes slide-in {
-    0% {
-        opacity: 0;
-        transform: translateX(1000px);
-    }
-
-    100% {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-.slide-out {
-    animation: slide-in 0.2s ease-in-out 0s 1 reverse forwards;
-}
-
-.slide-in {
-    animation: slide-in 0.2s ease-in-out 0s 1 normal forwards;
-}
-
 .overlay-detail-task-board {
     padding: 24px;
     gap: 32px;
-    max-width: 380px;
+    max-width: 460px;
     font-size: 16px;
     max-height: 80vh;
 }
@@ -344,14 +257,13 @@ progress {
 
 .task-description-detail {
     font-size: 16px;
-    overflow: auto;
-    height: auto;
-    max-height: 200px !important;
-}
-
-.label {
-    color: var(--darkblue);
-    width: 100px;
+    display: flex;
+    max-height: 160px;
+    overflow-y: scroll;
+    padding: 0px 8px 8px 0px;
+    margin-bottom: 10px;
+    width: 95%;
+    flex-shrink: 0;
 }
 
 .ctn-category-close {
@@ -380,7 +292,6 @@ progress {
 
 .ctn-subtasks {
     flex-direction: column;
-    gap: 4px;
     padding-top: 8px;
     font-size: 14px;
     padding-left: 12px;
@@ -397,23 +308,6 @@ progress {
 .subtask-item:hover {
     background-color: var(--lightgrey);
     border-radius: 6px;
-}
-
-input[type="checkbox"] {
-    display: none;
-}
-
-.custom-checkbox {
-    display: inline-block;
-    width: 18px;
-    height: 18px;
-    background-image: url('../assets/img/checkbox.png');
-    background-size: cover;
-    cursor: pointer;
-}
-
-input[type="checkbox"]:checked+.custom-checkbox {
-    background-image: url('../assets/img/checkbox-checked.png');
 }
 
 .ctn-main-Detail-Task {
@@ -436,16 +330,6 @@ input[type="checkbox"]:checked+.custom-checkbox {
     width: 1px;
     height: 14px;
     background-color: var(--middlegrey);
-}
-
-.btn-delete-task:hover {
-    content: url('../assets/img/dustbinBlueText.svg');
-    cursor: pointer;
-}
-
-.btn-edit-task:hover {
-    content: url('../assets/img/editBlue.svg');
-    cursor: pointer;
 }
 
 .drag-area-highlight {

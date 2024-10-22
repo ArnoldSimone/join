@@ -10,37 +10,31 @@
     <link rel="stylesheet" href="../css/sidebar.css">
     <link rel="stylesheet" href="../css/fonts.css">
     <link rel="stylesheet" href="../css/board.css">
-    <link rel="stylesheet" href="../css/board_editTask.css">
+    <link rel="stylesheet" href="../css/boardAssets.css">
+    <link rel="stylesheet" href="../css/boardEditTask.css">
     <link rel="stylesheet" href="../responsiv/board_responsiv.css">
     <link rel="stylesheet" href="../responsiv/header_responsiv.css">
     <link rel="stylesheet" href="../responsiv/sidebar_responsiv.css">
     <script defer src="../script/include.js"></script>
     <script defer src="../script/sidebar.js"></script>
-    <script defer src="../script.js"></script>
+    <sc defer src="../script.js"></sc ript>
     <script defer src="../script/header.js"></script>
     <script defer src="../script/board.js"></script>
-    <script defer src="../script/board_utilities.js"></script>
+    <script defer src="../script/boardUtilities.js"></script>
     <script defer src="../script/boardEdit.js"></script>
-    <script defer src="../script/boardEdit_utilities.js"></script>
+    <script defer src="../script/boardEditUtilities.js"></script>
     <script defer src="../script/database.js"></script>
     <script defer src="../templates/board_templates.js"></script>
-    <script defer src="../script/boardAddTask.js"></script>
-
-
-
     <title>Join - Board</title>
-
 </head>
 
 <body onload="includeHTML(); onloadFuncBoard();">
-
     <header>
         <div w3-include-html="header.html"></div>
     </header>
     <aside>
         <div w3-include-html="sidebar.html"></div>
     </aside>
-
     <main>
         <section class="board-container">
             <div class="header-board d-flex-y">
@@ -58,7 +52,6 @@
                     </div>
                     <button id="addTaskBoard" onclick="addTaskBoard()" class="btn-dark d-flex-y">Add Task
                         <img class="image-plus-add-task" src="../assets/img/plus-white.svg" alt="Image Plus"></button>
-
                 </div>
             </div>
             <div class="main-board d-flex-x">
@@ -118,19 +111,12 @@
                     </div>
                 </div>
             </div>
-
             <div onclick="closeDetailTaskOverlay()" id="overlay-board-detail" class="overlay-board d-none d-flex">
             </div>
-
             <div onclick="closeDetailTaskOverlay()" id="overlay-board-edit" class="overlay-board d-flex d-none">
             </div>
-
-            <!-- <div id="overlay-board-add-Task" class="overlay-board-add-Task d-flex">
-            </div> -->
-
         </section>
     </main>
-
 </body>
 
 </html>
