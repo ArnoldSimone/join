@@ -10,11 +10,13 @@
     <link rel="stylesheet" href="../css/sidebar.css">
     <link rel="stylesheet" href="../css/fonts.css">
     <link rel="stylesheet" href="../css/board.css">
-    <link rel="stylesheet" href="../css/board_editTask.css">
     <link rel="stylesheet" href="../css/addTask.css">
+    <link rel="stylesheet" href="../css/addTask_assets.css">
+    <link rel="stylesheet" href="../css/addTask_overlay.css">
     <link rel="stylesheet" href="../responsiv/board_responsiv.css">
     <link rel="stylesheet" href="../responsiv/header_responsiv.css">
     <link rel="stylesheet" href="../responsiv/sidebar_responsiv.css">
+    <link rel="stylesheet" href="../responsiv/addTask_overlay_responsiv.css">
     <script defer src="../script/include.js"></script>
     <script defer src="../script/sidebar.js"></script>
     <script defer src="../script.js"></script>
@@ -25,15 +27,16 @@
     <script defer src="../script/boardEdit_utilities.js"></script>
     <script defer src="../script/database.js"></script>
     <script defer src="../templates/board_templates.js"></script>
-    <script defer src="../script/boardAddTask.js"></script>
-    <script defer src="../script/addTaskBoard.js"></script>
-
-
-    <title>Join - Board</title>
+    <script src="../script/addTask_globalvariables.js"></script>
+    <script defer src="../script/addTask.js"></script>
+    <script defer src="../script/addTask_utilities.js"></script>
+    <script defer src="../script/addTask_subtasks.js"></script>
+    <script src="../templates/addTask_templates.js"></script>
+    <title>Join</title>
 
 </head>
 
-<body onload="includeHTML(); onloadFuncBoard();">
+<body class="board" onload="includeHTML(); onloadFuncBoard(); init()">
 
     <header>
         <div w3-include-html="header.html"></div>
@@ -43,12 +46,12 @@
     </aside>
 
     <main>
-        <section class="board-container">
+        <section id="board-section" class="board-container">
             <div class="header-board d-flex-y">
                 <div class="header-board-left">
                     <h1 class="headline">Board</h1>
                     <button class="btn-dark-responsive d-flex d-none">
-                        <img class="image-plus-add-task d-flex" src="../assets/img/plus-white.svg"
+                        <img onclick="switchToAddTask()" class="image-plus-add-task d-flex" src="../assets/img/plus-white.svg"
                             alt="Image Plus"></button>
                 </div>
                 <div class="header-board-right d-flex">
@@ -57,16 +60,14 @@
                             autocomplete="off" spellcheck="false" placeholder="Find Task">
                         <img class="search-image" src="../assets/img/search.svg" alt="imageSearch">
                     </div>
-                    <button id="addTaskBoard" onclick="addTaskBoard()" class="btn-dark d-flex-y">Add Task
-                        <img class="image-plus-add-task" src="../assets/img/plus-white.svg" alt="Image Plus"></button>
-
+                    <button id="addTaskBoard" onclick="addTaskBoard()" class="btn-dark d-flex-y">Add Task<img class="image-plus-add-task" src="../assets/img/plus-white.svg" alt="Image Plus"></button>
                 </div>
             </div>
             <div class="main-board d-flex-x">
                 <div id="ctn-cards-todo" class="ctn-cards-todo ctn-cards">
                     <div class="header-container d-flex-y">
                         <span>To do</span>
-                        <img class="btn-add-task-smal" src="../assets/img/plusButtonDarkBlue.svg" alt="Image Plus">
+                        <img onclick="addTaskBoard()" class="btn-add-task-smal" src="../assets/img/plusButtonDarkBlue.svg" alt="Image Plus">
                     </div>
                     <div class="ctn-drag-area" ondrop="moveTo('todo')"
                         ondragover="allowDrop(event); highlight('highlight-todo')"
@@ -79,7 +80,7 @@
                 <div id="ctn-cards-in-progress" class="ctn-cards-in-progress ctn-cards">
                     <div class="header-container d-flex-y">
                         <span>In progress</span>
-                        <img class="btn-add-task-smal" src="../assets/img/plusButtonDarkBlue.svg" alt="Image Plus">
+                        <img onclick="addTaskBoard()" class="btn-add-task-smal" src="../assets/img/plusButtonDarkBlue.svg" alt="Image Plus">
                     </div>
                     <div class="ctn-drag-area" ondrop="moveTo('in progress')"
                         ondragover="allowDrop(event); highlight('highlight-in-progress')"
@@ -94,7 +95,7 @@
                 <div id="ctn-cards-await-feedback" class="ctn-cards-await-feedback ctn-cards">
                     <div class="header-container d-flex-y">
                         <span>Await feedback</span>
-                        <img class="btn-add-task-smal" src="../assets/img/plusButtonDarkBlue.svg" alt="Image Plus">
+                        <img onclick="addTaskBoard()" class="btn-add-task-smal" src="../assets/img/plusButtonDarkBlue.svg" alt="Image Plus">
                     </div>
                     <div class="ctn-drag-area" ondrop="moveTo('await feedback')"
                         ondragover="allowDrop(event); highlight('highlight-await-feedback')"
@@ -125,13 +126,106 @@
 
             <div onclick="closeDetailTaskOverlay()" id="overlay-board-edit" class="overlay-board d-flex d-none">
             </div>
-
-            <div id="overlay-board-add-Task" class="overlay-board-add-Task d-flex">
+        </section>
+        <section onclick="closeOverlay()" id="overlayAddTask" class="overlay-section-add-Task d-flex d-none">
+            <div onclick="stopEventPropagation(event)" class="overlay-container">
+                <div class="overlay-headline">
+                    <h1>Add Task</h1>
+                    <img onclick="closeOverlay()" src="../assets/img/close.svg" alt="Close">
+                </div>
+                <div class="form-container">
+                    <form class="overlay-form" name="taskForm">
+                        <div class="form-left">
+                            <div class="form-group">
+                                <label for="title">Title<span class="required">*</span></label>
+                                <input type="text" id="title" name="title" placeholder="Enter a title">
+                            </div>
+                    
+                            <div class="form-group">
+                                <label for="description">Description</label>
+                                <textarea id="description" name="description" placeholder="Enter a Description"></textarea>
+                            </div>
+                    
+                            <div class="form-group">
+                                <label for="assigned">Assigned to</label>
+                                <div id="inputAssigned" class="assigned-input d-flex-y">
+                                    <input id="assignedInput" onclick="assignedListToogle()" onkeyup="assignedSearch(); inputValueCheck()"
+                                        placeholder="Select contacts to assign" type="text">
+                                    <img id="assignedImage" onclick="assignedListToogle()" src="../assets/icon/arrow_drop_downaa.svg"
+                                        alt="Down">
+                                </div>
+                                <div id="assignedList" class="assigned-list d-none">
+                    
+                                </div>
+                                <div id="selectedUser" class="selectedUser d-none">
+                    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-right">
+                            <div class="form-group">
+                                <label for="due-date">Due date<span class="required">*</span></label>
+                                <input type="date" id="due-date" name="due-date" placeholder="dd/mm/yyyy" oninput="validateDate()" required>
+                            </div>
+                    
+                            <div class="form-group">
+                                <label>Prio</label>
+                                <div class="prio-group">
+                                    <button onclick="changePrio('Urgent')" id="btn-urgent" type="button" class="prio d-flex">Urgent
+                                        <img src="../assets/img/urgentsym.png" alt="">
+                                    </button>
+                                    <button onclick="changePrio('Medium')" id="btn-medium" type="button" class="prio d-flex">Medium
+                                        <img src="../assets/img/mediumsym.png" alt="">
+                                    </button>
+                                    <button onclick="changePrio('Low')" id="btn-low" type="button" class="prio d-flex">Low
+                                        <img src="../assets/img/lowsym.png" alt="">
+                                    </button>
+                                </div>
+                            </div>
+                    
+                            <div class="form-group">
+                                <label for="category">Category<span class="required">*</span></label>
+                                <select id="category" name="category" required>
+                                    <option value="" disabled selected>Select task category</option>
+                                    <option>User Story</option>
+                                    <option>Technical Task</option>
+                                </select>
+                            </div>
+                    
+                            <div class="form-group-subtask">
+                                <label for="subtasks">Subtasks</label>
+                                <div class="subtask-connect">
+                                    <input type="text" id="subtasks" name="subtasks" placeholder="Add new subtask"
+                                        onclick="showSubtaskActionButtons()">
+                                    <div class="subtask-img">
+                                        <img id="plus-icon" src="../assets/img/plusicon.png" alt="Add subtask"
+                                            onclick="showSubtaskActionButtons()">
+                                        <div id="subtask-action-buttons" style="display:none;">
+                                            <img src="../assets/img/check.png" alt="Save subtask" onclick="addSubtask()">
+                                            <div class="small-break-between"></div>
+                                            <img src="../assets/img/close.svg" alt="Clear input" onclick="clearSubtaskInput()">
+                                        </div>
+                                    </div>
+                                </div>
+                                <ul id="subtask-list"></ul>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="addtask-footer">
+                        <div><span class="required">*</span><span>This field is required</span></div>
+                        <div class="form-actions">
+                            <button type="button" class="clear" onmouseover="changeImage(this, 'hover')" onmouseout="changeImage(this, 'default')" onclick="clearForm()">Clear <img src="../assets/img/close.svg" alt=""></button>
+                            <button type="submit" class="create-task" onclick="submitForm()">Create Task <img src="../assets/img/check-white.svg" alt=""></button>
+                        </div>
+                    </div>
+                </div>
             </div>
-
+            <div id="success-popup" class="popup d-none">
+                <div class="popup-content">
+                    <p>Task added to board</p><img src="../assets/icon/board.png" alt="">
+                </div>
+            </div>
         </section>
     </main>
-
 </body>
-
 </html>

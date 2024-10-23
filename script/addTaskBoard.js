@@ -1,5 +1,5 @@
 let selectedPriority = '';
-// let allContacts;
+let allContacts;
 let users = [];
 let subtasks = [];
 let editingSubtaskIndex = null;

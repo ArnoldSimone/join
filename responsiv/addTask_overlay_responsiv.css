@@ -1,0 +1,27 @@
+@media (max-width: 1050px) {
+  .overlay-container {
+    padding: 17px 7px;
+  }
+  .prio-group {
+    flex-direction: column;
+  }
+
+  button.create-task {
+    padding: 0px 8px;
+  }
+
+  .addtask-footer {
+    padding-top: 20px;
+  }
+}
+
+@media (max-width: 400px) {
+  .mobile-prio-group{
+    flex-direction: column;
+  }
+
+  .mobile-addtask-footer {
+    flex-direction: column;
+    align-items: center;
+  }
+}

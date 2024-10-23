@@ -53,7 +53,7 @@
 }
 
 .animation-mobil-stopped .animation-content-mobil {
-  transform: translate(-42vw, -43vh);
+  transform: translate(-35vw, -40vh);
   transition: none;
   animation-play-state: paused;
 }
@@ -107,6 +107,6 @@
   }
 
   100% {
-    transform: translate(-42vw, -43vh);
+    transform: translate(-35vw, -40vh);
   }
 }

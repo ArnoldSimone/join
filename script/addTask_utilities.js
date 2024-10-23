@@ -70,9 +70,9 @@ function assignedListToogle() {
     let users = document.getElementById('selectedUser');
     
     if (list.classList.contains('d-none')) {
-        openAssignedList(list, users);  // Auslagerung in eine separate Funktion
+        openAssignedList(list, users);
     } else { 
-        closeAssignedList(list, users); // Auslagerung in eine separate Funktion
+        closeAssignedList(list, users);
     }
     
     resetSearchValue();
@@ -251,7 +251,7 @@ function mediumPriority() {
  * @param {string} priority - The new priority to set.
  */
 function changePrio(priority) {
-    const priorityConfig = getPriorityConfig();
+    const priorityConfig = getPriorityConfig();    
     const buttons = document.querySelectorAll('.prio');
     selectedPriority = priority;
 
@@ -301,6 +301,7 @@ function updateButtonStyle(button, selectedPriority, config) {
         resetButtonStyle(button, config[buttonPriority], img);
     }
 }
+
 
 
 /**

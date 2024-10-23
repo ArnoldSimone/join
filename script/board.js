@@ -286,3 +286,46 @@ function filterTasksBoard() {
 
     renderTasksBoard();
 }
+
+
+/**
+ * Displays the task addition overlay by starting an animation and removing its hidden state.
+ * It also selects the medium priority button within the overlay.
+ */
+function addTaskBoard() {
+    document.getElementById('overlayAddTask').classList.add('start-animation');
+    document.getElementById('overlayAddTask').classList.remove('d-none');
+    let mediumButton = document.querySelector('#overlayAddTask #btn-medium');
+    mediumPriority()
+}
+
+
+/**
+ * Closes the task addition overlay by triggering an end-animation and hiding it after a delay.
+ */
+function closeOverlay() {
+   let animation =  document.getElementById('overlayAddTask');
+   animation.classList.add('end-animation');
+   setTimeout(() => {
+    animation.classList.add('d-none');
+    animation.classList.remove('end-animation');
+   }, 700);
+}
+
+
+/**
+ * Stops the event from propagating further up the DOM tree.
+ * 
+ * @param {Event} event - The event object to stop propagation for.
+ */
+function stopEventPropagation(event) {
+    event.stopPropagation();
+}
+
+
+/**
+ * Redirects the user to the 'Add Task' page.
+ */
+function switchToAddTask() {
+    window.location.href = '/html/addTask.html';
+}
