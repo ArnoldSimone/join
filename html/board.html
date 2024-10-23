@@ -10,21 +10,20 @@
     <link rel="stylesheet" href="../css/sidebar.css">
     <link rel="stylesheet" href="../css/fonts.css">
     <link rel="stylesheet" href="../css/board.css">
-    <link rel="stylesheet" href="../css/addTask.css">
-    <link rel="stylesheet" href="../css/addTask_assets.css">
-    <link rel="stylesheet" href="../css/addTask_overlay.css">
+    <link rel="stylesheet" href="../css/boardAssets.css">
+    <link rel="stylesheet" href="../css/boardEditTask.css">
     <link rel="stylesheet" href="../responsiv/board_responsiv.css">
     <link rel="stylesheet" href="../responsiv/header_responsiv.css">
     <link rel="stylesheet" href="../responsiv/sidebar_responsiv.css">
     <link rel="stylesheet" href="../responsiv/addTask_overlay_responsiv.css">
     <script defer src="../script/include.js"></script>
     <script defer src="../script/sidebar.js"></script>
-    <script defer src="../script.js"></script>
+    <sc defer src="../script.js"></sc ript>
     <script defer src="../script/header.js"></script>
     <script defer src="../script/board.js"></script>
-    <script defer src="../script/board_utilities.js"></script>
+    <script defer src="../script/boardUtilities.js"></script>
     <script defer src="../script/boardEdit.js"></script>
-    <script defer src="../script/boardEdit_utilities.js"></script>
+    <script defer src="../script/boardEditUtilities.js"></script>
     <script defer src="../script/database.js"></script>
     <script defer src="../templates/board_templates.js"></script>
     <script src="../script/addTask_globalvariables.js"></script>
@@ -44,7 +43,6 @@
     <aside>
         <div w3-include-html="sidebar.html"></div>
     </aside>
-
     <main>
         <section id="board-section" class="board-container">
             <div class="header-board d-flex-y">
@@ -120,10 +118,8 @@
                     </div>
                 </div>
             </div>
-
             <div onclick="closeDetailTaskOverlay()" id="overlay-board-detail" class="overlay-board d-none d-flex">
             </div>
-
             <div onclick="closeDetailTaskOverlay()" id="overlay-board-edit" class="overlay-board d-flex d-none">
             </div>
         </section>

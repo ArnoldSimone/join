@@ -23,7 +23,7 @@
     <script src="../templates/addTask_templates.js"></script>
     <script src="../script/database.js"></script>
     <script src="../script/header.js"></script>
-    <title>Join</title>
+    <title>Join - Add Task</title>
 </head>
 
 <body onload="includeHTML(); init()">
@@ -99,7 +99,7 @@
                         <div class="form-group-subtask">
                             <span for="subtasks">Subtasks</span>
                             <div class="subtask-connect">
-                                <input type="text" id="subtasks" name="subtasks" placeholder="Add new subtask" onclick="showSubtaskActionButtons()">
+                                <input class="text-input" type="text" id="subtasks" name="subtasks" placeholder="Add new subtask" onclick="showSubtaskActionButtons()">
                                 <div class="subtask-img">
                                     <img id="plus-icon" src="../assets/img/plusicon.png" alt="Add subtask" onclick="showSubtaskActionButtons()">
                                     <div id="subtask-action-buttons" style="display:none;">

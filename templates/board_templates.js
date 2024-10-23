@@ -29,7 +29,7 @@ function getBoardTaskTemplate(task) {
         <div class="ctn-header-task d-flex-x">   
             ${getTaskCategoryTemplate(task.category)}
             <div id="move-to-responsive" class="move-to-responsive">
-                <a class="move-task d-flex" href="#" onclick="toggleMenuMoveTo('${task.id}'); handleClickMenu(event)"><img class="img-menu" src="../assets/icon/more.png" alt="More functions"></a>
+                <a class="move-task d-flex" onclick="toggleMenuMoveTo('${task.id}'); handleClickMenu(event)"><img class="img-menu" src="../assets/icon/more.png" alt="More functions"></a>
                 <div id="menu-${task.id}" class="menu-move-to d-flex-x d-none" onclick="handleClickMenu(event)">
                     <ul class="ul-move-to d-flex-x">
                         <li class="category-move-to" onclick="moveTaskResponsive('todo', '${task.id}')">To do</li>
@@ -153,10 +153,10 @@ function getTaskOverlayTemplate(task) {
         </div>
         <div class="ctn-delete-edit d-flex-y">
             <img id="btn-delete-task" class="btn-delete-task" onclick="deleteTask('${task.id}')" src="../assets/img/dustbinDarkText.svg" alt="Image Delete">
-                <span class="vertikalLine"></span>
-                <img onclick="showEditTaskOverlay('${task.id}')" class="btn-edit-task" src="../assets/img/editDarkText.svg" alt="Image Close">
-                </div>
-        </div>`
+            <span class="vertikalLine"></span>
+            <img onclick="showEditTaskOverlay('${task.id}')" class="btn-edit-task" src="../assets/img/editDarkText.svg" alt="Image Close">
+        </div>
+    </div>`
 }
 
 
@@ -188,7 +188,7 @@ function getSubtasksOverlayTemplate(indexSubTask, task) {
         <div class="subtask-item d-flex-y">
             <input onchange="updateSubtaskStatus(${indexSubTask}, '${task.id}')" type="checkbox" id="checkbox${indexSubTask}" class="subtask" ${(subtasksArray[indexSubTask].completed == true) ? "checked" : ""}>
             <span class="custom-checkbox" onclick="toggleCheckbox(${indexSubTask}, '${task.id}')"></span>
-            <label for="checkbox${indexSubTask}">${subtasksArray[indexSubTask].title}</label>
+            <label class="label-overlay-template" for="checkbox${indexSubTask}">${subtasksArray[indexSubTask].title}</label>
         </div>`
 }
 
@@ -215,7 +215,7 @@ function getEditOverlayTemplate(task) {
                     </div>
                     <div class="d-flex-x column gap-8">
                         <label for="description-edit">Description</label>
-                        <textarea id="description-edit" name="description">${task.description}</textarea>
+                        <textarea id="description-edit" name="description" rows="4">${task.description}</textarea>
                     </div>
                     <div class="d-flex-x column gap-8">
                         <label for="due-date-edit">Due date</label>
@@ -290,10 +290,11 @@ function getEditOverlayTemplate(task) {
  * @returns {string} The HTML string for rendering a subtask in edit mode.
  */
 function getAllSubtasksTemplate(iSubtasks, title) {
+    let trimmedTitle = title.trim();
     return `                     
         <ul id="edit-mode-subtask${iSubtasks}" class="">
             <li id="subtask-item-edit${iSubtasks}" ondblclick="editSubtask(${iSubtasks})" class="subtask-item-edit d-flex-y">
-                <input id="input-subtask-edit${iSubtasks}" class="input-subtask-edit" type="text" value="&bull; ${title}" disabled onkeydown="handleKeyDownEditSubtask(event, ${iSubtasks})">
+                <input id="input-subtask-edit${iSubtasks}" class="input-subtask-edit" type="text" value="&bull; ${trimmedTitle}" disabled onkeydown="handleKeyDownEditSubtask(event, ${iSubtasks})">
                 <div id="subtask-icons-display-mode${iSubtasks}" class="subtask-icons d-flex-x">
                     <img id="edit-subtask${iSubtasks}" class="img-edit-subtask" onclick="editSubtask(${iSubtasks})" src="../assets/img/pencilBlue.png" alt="Edit Subtask">
                     <span class="horizonal-line-subtask horizontal-line-hover"></span>
@@ -332,15 +333,15 @@ function getNoSubtaskInTaskTemplate() {
  * @param {boolean} isChecked - Indicates whether the contact is checked.
  * @returns {string} The HTML string for rendering the assigned contact in the overlay.
  */
-function getAssignedToEditTemplateOverlay(initial, color, name, iContact, isChecked) {
+function getAssignedToEditTemplateOverlay(initial, color, name, contactIdSelected, isChecked) {
     return `
-        <div class="contact d-flex-y ${isChecked}" id="contact${iContact}" onclick="toggleCheckboxContact(${iContact})">
+        <div class="contact d-flex-y ${isChecked}" id="contact${contactIdSelected}" onclick="toggleCheckboxContact('${contactIdSelected}')">
             <div class="contact-left d-flex-y">
                 <div class="assigned-to d-flex" style="background-color:${color};">${initial}</div>
-                <label for="checkboxContact${iContact}">${name}</label>
+                <label for="checkboxContact${contactIdSelected}">${name}</label>
             </div >
             <div class="contact-right">
-                <input type="checkbox" id="checkboxContact${iContact}" name="checkboxContact${iContact}" class="checkbox-contact"
+                <input type="checkbox" id="checkboxContact${contactIdSelected}" name="checkboxContact${contactIdSelected}" class="checkbox-contact"
                  ${isChecked ? 'checked' : ''} >
                 <span class="custom-checkbox-edit"></span>
             </div>

@@ -1,6 +1,7 @@
 /**
- * Changes the priority of the task based on the selected priority.
- * @param {string} selectedPrio - The selected priority, can be 'Urgent', 'Medium', or 'Low'.
+ * Changes the priority of a task based on the selected priority.
+ * @param {string} selectedPrio - The selected priority ('Urgent', 'Medium', or 'Low').
+ * @function changePrio
  */
 function changePrio(selectedPrio) {
     let btnUrgentRef = document.getElementById('btn-urgent');
@@ -18,10 +19,11 @@ function changePrio(selectedPrio) {
 
 
 /**
- * Changes the priority to urgent and updates the button states.
- * @param {HTMLElement} btnUrgentRef - The reference to the urgent button.
- * @param {HTMLElement} btnMediumRef - The reference to the medium button.
- * @param {HTMLElement} btnLowRef - The reference to the low button.
+ * Sets the visual state of the urgent priority button.
+ * @param {HTMLElement} btnUrgentRef - Reference to the urgent button.
+ * @param {HTMLElement} btnMediumRef - Reference to the medium button.
+ * @param {HTMLElement} btnLowRef - Reference to the low button.
+ * @function changePrioUrgent
  */
 function changePrioUrgent(btnUrgentRef, btnMediumRef, btnLowRef) {
     btnUrgentRef.classList.add('urgent-active');
@@ -32,10 +34,11 @@ function changePrioUrgent(btnUrgentRef, btnMediumRef, btnLowRef) {
 
 
 /**
- * Changes the priority to medium and updates the button states.
- * @param {HTMLElement} btnUrgentRef - The reference to the urgent button.
- * @param {HTMLElement} btnMediumRef - The reference to the medium button.
- * @param {HTMLElement} btnLowRef - The reference to the low button.
+ * Sets the visual state of the medium priority button.
+ * @param {HTMLElement} btnUrgentRef - Reference to the urgent button.
+ * @param {HTMLElement} btnMediumRef - Reference to the medium button.
+ * @param {HTMLElement} btnLowRef - Reference to the low button.
+ * @function changePrioMedium
  */
 function changePrioMedium(btnUrgentRef, btnMediumRef, btnLowRef) {
     btnMediumRef.classList.add('medium-active');
@@ -46,10 +49,11 @@ function changePrioMedium(btnUrgentRef, btnMediumRef, btnLowRef) {
 
 
 /**
- * Changes the priority to low and updates the button states.
- * @param {HTMLElement} btnUrgentRef - The reference to the urgent button.
- * @param {HTMLElement} btnMediumRef - The reference to the medium button.
- * @param {HTMLElement} btnLowRef - The reference to the low button.
+ * Sets the visual state of the low priority button.
+ * @param {HTMLElement} btnUrgentRef - Reference to the urgent button.
+ * @param {HTMLElement} btnMediumRef - Reference to the medium button.
+ * @param {HTMLElement} btnLowRef - Reference to the low button.
+ * @function changePrioLow
  */
 function changePrioLow(btnUrgentRef, btnMediumRef, btnLowRef) {
     btnLowRef.classList.add('low-active');
@@ -60,10 +64,11 @@ function changePrioLow(btnUrgentRef, btnMediumRef, btnLowRef) {
 
 
 /**
- * Removes all active states from priority buttons.
- * @param {HTMLElement} btnUrgentRef - The reference to the urgent button.
- * @param {HTMLElement} btnMediumRef - The reference to the medium button.
- * @param {HTMLElement} btnLowRef - The reference to the low button.
+ * Removes the active class from all priority buttons.
+ * @param {HTMLElement} btnUrgentRef - Reference to the urgent button.
+ * @param {HTMLElement} btnMediumRef - Reference to the medium button.
+ * @param {HTMLElement} btnLowRef - Reference to the low button.
+ * @function removeAllActivButtons
  */
 function removeAllActivButtons(btnUrgentRef, btnMediumRef, btnLowRef) {
     btnUrgentRef.classList.remove('urgent-active');
@@ -73,46 +78,45 @@ function removeAllActivButtons(btnUrgentRef, btnMediumRef, btnLowRef) {
 
 
 /**
- * Toggles the checkbox state for a contact and updates the selection.
- * @param {number} iContact - The index of the contact whose checkbox is being toggled.
- * This function gets the checkbox and contact element by their IDs,
- * updates the checkbox state, and calls the function to update the contact selection.
- * It also updates the assigned contacts after the selection change.
+ * Toggles the checkbox for a selected contact and updates the selection state.
+ * @param {string} contactIdSelected - The ID of the selected contact.
+ * @function toggleCheckboxContact
  */
-function toggleCheckboxContact(iContact) {
-    let checkbox = document.getElementById(`checkboxContact${iContact}`);
-    let contactRef = document.getElementById(`contact${iContact}`);
+function toggleCheckboxContact(contactIdSelected) {
+    let checkbox = document.getElementById(`checkboxContact${contactIdSelected}`);
+    let contactRef = document.getElementById(`contact${contactIdSelected}`);
     checkbox.checked = !checkbox.checked;
-    updateContactSelection(iContact, checkbox.checked, contactRef);
+    updateContactSelection(contactIdSelected, checkbox.checked, contactRef);
     updateAssignedContacts();
 }
 
 
 /**
- * Updates the selected contacts list based on the checkbox state.
- * @param {number} iContact - The index of the contact to be updated.
- * @param {boolean} isChecked - Indicates whether the checkbox is checked or not.
- * @param {HTMLElement} contactRef - The reference to the contact element in the DOM.
- * This function adds the contact to the selectedContacts array if the checkbox is checked
- * and removes it if the checkbox is unchecked. It also updates the contact element's class.
+ * Updates the selection state of a contact based on checkbox status.
+ * @param {string} contactIdSelected - The ID of the selected contact.
+ * @param {boolean} isChecked - The checked status of the contact's checkbox.
+ * @param {HTMLElement} contactRef - Reference to the contact element.
+ * @function updateContactSelection
  */
-function updateContactSelection(iContact, isChecked, contactRef) {
+function updateContactSelection(contactIdSelected, isChecked, contactRef) {
     if (isChecked) {
         contactRef.classList.add('checked');
-        if (!selectedContacts.some(contact => contact.contactId === iContact)) {
+        if (!selectedContacts.some(contact => contact.contactId === contactIdSelected)) {
+            let contact = contacts.find(c => c.id === contactIdSelected);
             selectedContacts.push({
-                contactId: iContact, name: contacts[iContact].name, initial: contacts[iContact].avatar.initials, color: contacts[iContact].avatar.color
+                contactId: contact.id, name: contact.name, initial: contact.avatar.initials, color: contact.avatar.color
             });
         }
     } else {
         contactRef.classList.remove('checked');
-        selectedContacts = selectedContacts.filter(c => c.contactId !== iContact);
+        selectedContacts = selectedContacts.filter(c => c.contactId !== contactIdSelected);
     }
 }
 
 
 /**
  * Toggles the visibility of the contacts dropdown.
+ * @function toggleDropdown
  */
 function toggleDropdown() {
     let dropdown = document.getElementById("dropdown-contacts");
@@ -126,8 +130,9 @@ function toggleDropdown() {
 
 
 /**
- * Changes the dropdown image based on its visibility.
- * @param {boolean} isOpened - Indicates if the dropdown is opened.
+ * Changes the dropdown arrow image based on its open state.
+ * @param {boolean} isOpened - Indicates if the dropdown is open or closed.
+ * @function changeDropdownImage
  */
 function changeDropdownImage(isOpened) {
     let dropdownImage = document.getElementById("input-assigned-edit");
@@ -140,8 +145,9 @@ function changeDropdownImage(isOpened) {
 
 
 /**
- * Handles the Enter keydown event to add a subtask.
- * @param {KeyboardEvent} event - The keyboard event.
+ * Handles key down events, triggering subtask addition on Enter key.
+ * @param {Event} event - The keydown event.
+ * @function handleKeyDown
  */
 function handleKeyDown(event) {
     if (event.key === "Enter") {
@@ -151,9 +157,10 @@ function handleKeyDown(event) {
 
 
 /**
- * Handles the Enter keydown event to save a subtask.
- * @param {KeyboardEvent} event - The keyboard event.
- * @param {number} iSubtasks - The index of the subtask to save.
+ * Handles key down events in the edit subtask input, saving the subtask on Enter key.
+ * @param {Event} event - The keydown event.
+ * @param {number} iSubtasks - The index of the subtask being edited.
+ * @function handleKeyDownEditSubtask
  */
 function handleKeyDownEditSubtask(event, iSubtasks) {
     if (event.key === "Enter") {
@@ -164,6 +171,7 @@ function handleKeyDownEditSubtask(event, iSubtasks) {
 
 /**
  * Activates the update button.
+ * @function buttonAktiv
  */
 function buttonAktiv() {
     document.getElementById("btn-update-task").classList.remove('btn-disabled');
@@ -174,6 +182,7 @@ function buttonAktiv() {
 
 /**
  * Deactivates the update button.
+ * @function buttonNotAktiv
  */
 function buttonNotAktiv() {
     document.getElementById("btn-update-task").classList.add('btn-disabled');
@@ -183,9 +192,10 @@ function buttonNotAktiv() {
 
 
 /**
- * Toggles the active state of the update button based on input validity.
+ * Updates the state of the update button based on title and due date input.
  * @param {string} title - The title input value.
  * @param {string} dueDate - The due date input value.
+ * @function updateButtonToggleActive
  */
 function updateButtonToggleActive(title, dueDate) {
     let updateButton = document.getElementById('btn-update-task');
@@ -202,9 +212,10 @@ function updateButtonToggleActive(title, dueDate) {
 
 
 /**
- * Checks if the title input is valid and updates the UI accordingly.
+ * Checks the title input for validity and displays an error if invalid.
  * @param {string} title - The title input value.
- * @param {HTMLElement} titleInput - The reference to the title input element.
+ * @param {HTMLElement} titleInput - Reference to the title input element.
+ * @function checkInputTitle
  */
 function checkInputTitle(title, titleInput) {
     let errorTitle = document.getElementById('error-title');
@@ -219,9 +230,10 @@ function checkInputTitle(title, titleInput) {
 
 
 /**
- * Checks if the due date input is valid and updates the UI accordingly.
+ * Checks the due date input for validity and displays an error if invalid.
  * @param {string} dueDate - The due date input value.
- * @param {HTMLElement} dueDateInput - The reference to the due date input element.
+ * @param {HTMLElement} dueDateInput - Reference to the due date input element.
+ * @function checkInputDueDate
  */
 function checkInputDueDate(dueDate, dueDateInput) {
     let errorDueDate = document.getElementById('error-due-date');
@@ -239,8 +251,9 @@ function checkInputDueDate(dueDate, dueDateInput) {
 
 
 /**
- * Gets the currently active priority from the priority buttons.
- * @returns {string|null} The active priority or null if none is active.
+ * Retrieves the currently active priority from the buttons.
+ * @returns {string|null} The active priority ('Urgent', 'Medium', 'Low'), or null if none is active.
+ * @function getActivePriority
  */
 function getActivePriority() {
     let btnUrgentRef = document.getElementById('btn-urgent');
@@ -258,7 +271,8 @@ function getActivePriority() {
 
 
 /**
- * Initiates the process of adding a new subtask by updating UI elements.
+ * Initializes the input for adding a subtask.
+ * @function inputStart
  */
 function inputStart() {
     document.getElementById('ctn-add-subtask').classList.add('d-none');
@@ -268,7 +282,8 @@ function inputStart() {
 
 
 /**
- * Clears the subtask input field and resets UI elements.
+ * Clears the input for adding a subtask and resets the display.
+ * @function clearInputSubtask
  */
 function clearInputSubtask() {
     document.getElementById('subtasks-edit').value = "";
@@ -278,7 +293,8 @@ function clearInputSubtask() {
 
 
 /**
- * Closes the contacts dropdown.
+ * Closes the contacts dropdown and resets the dropdown image.
+ * @function closeDropdown
  */
 function closeDropdown() {
     let dropdown = document.getElementById("dropdown-contacts");
@@ -288,7 +304,8 @@ function closeDropdown() {
 
 
 /**
- * Opens the contacts dropdown.
+ * Opens the contacts dropdown and sets the dropdown image accordingly.
+ * @function showDropdown
  */
 function showDropdown() {
     let dropdown = document.getElementById("dropdown-contacts");

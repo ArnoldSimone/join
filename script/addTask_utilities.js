@@ -191,18 +191,68 @@ function selectionUser(id) {
  * @param {string} id - The ID of the user whose checkbox state should be toggled.
  */
 function toggleUserCheckbox(id) {
-    let checkbox = document.querySelector(`input[data-user-id="${id}"]`);
-    let assignedContent = document.getElementById(`assigned-content-${id}`);
-
+    let checkbox = getCheckbox(id);
+    let assignedContent = getAssignedContent(id);
     if (checkbox) {
-        checkbox.checked = !checkbox.checked;
-        if (checkbox.checked) {
-            assignedContent.style.backgroundColor = 'var(--middlegrey';
-        } else {
-            assignedContent.style.backgroundColor = '';
-        }
+        toggleCheckbox(checkbox);
+        updateAssignedContentStyles(checkbox.checked, assignedContent);
     }
 }
+
+
+/**
+ * Retrieves the checkbox element for a specific user.
+ * @param {string} id - The unique identifier of the user.
+ */
+function getCheckbox(id) {
+    return document.querySelector(`input[data-user-id="${id}"]`);
+}
+
+
+/**
+ * Retrieves the assigned content element for a specific user.
+ * @param {string} id - The unique identifier of the user.
+ */
+function getAssignedContent(id) {
+    return document.getElementById(`assigned-content-${id}`);
+}
+
+
+/**
+ * Toggles the checked state of the given checkbox.
+ * @param {HTMLInputElement} checkbox - The checkbox element to toggle.
+ */
+function toggleCheckbox(checkbox) {
+    checkbox.checked = !checkbox.checked;
+}
+
+
+/**
+ * Updates the styles of the assigned content based on whether the checkbox is checked or not.
+ * @param {boolean} isChecked - The state of the checkbox (true if checked, false if not).
+ * @param {HTMLElement} assignedContent - The content element to update styles for.
+ */
+function updateAssignedContentStyles(isChecked, assignedContent) {
+    if (isChecked) {
+        assignedContent.style.backgroundColor = 'var(--darkblue)';
+        assignedContent.style.color = 'white';
+        assignedContent.style.borderRadius = '10px';        
+    } else {
+        resetAssignedContentStyles(assignedContent);
+    }
+}
+
+
+/**
+ * Resets the styles of the assigned content to their default state.
+ * @param {HTMLElement} assignedContent - The content element to reset styles for.
+ */
+function resetAssignedContentStyles(assignedContent) {
+    assignedContent.style.backgroundColor = '';
+    assignedContent.style.color = '';
+    assignedContent.style.borderRadius = '';
+}
+
 
 
 /**
@@ -211,7 +261,7 @@ function toggleUserCheckbox(id) {
 function renderSelectArray() {
     let listContent = document.getElementById('selectedUser');
     listContent.innerHTML = ''; 
-    const maxAvatars = 4; 
+    const maxAvatars = 7; 
     const extraUsersCount = users.length - maxAvatars;
     for (let index = 0; index < Math.min(users.length, maxAvatars); index++) {
         let initial = users[index].avatar.initials;

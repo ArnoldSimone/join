@@ -1,18 +1,18 @@
 .add-contact-btn {
     background-color: var(--darkblue);
     color: white;
-    padding: 10px 30px;
+    padding: 12px 30px;
     border-radius: 10px;
     cursor: pointer;
     margin-top: 20px;
     width: 360px;
     font-size: 20px;
     font-weight: 600;
+    border: none;
 }
 
 .add-contact-btn:hover {
     background-color: var(--lightblue);
-    border: 2px solid var(--lightblue);
 }
 
 .add-contact-btn img {

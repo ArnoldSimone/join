@@ -92,6 +92,7 @@ form {
     justify-content: space-between;
     align-items: center;
     padding: 2px 12px;
+    margin: 0.7px;
 }
 
 .assigned-content:hover {
@@ -134,8 +135,12 @@ input[type="checkbox"] {
     cursor: pointer;
 }
 
-input[type="checkbox"]:checked+.user-checkbox {
-    background-image: url('../assets/img/checkbox-checked.png');
+input[type="checkbox"]:checked +.user-checkbox {
+    background-image: url('../assets/img/checkbox-checked-white.png');
+}
+
+input#subtaks {
+    width: 70%;
 }
 
 label {
@@ -221,13 +226,19 @@ textarea {
     left: 0;
     width: 90%;
     background-color: var(--lightgrey);
-    z-index: 10; 
-    max-height: 70px; 
+    height: 70px; 
     overflow-y: auto; 
+}
+
+li {
+    max-width: auto;
+    overflow-wrap: break-word;
+    white-space: normal;
 }
 
 #subtask-list li {
     position: relative;
+    width: 100%;
 }
 
 .subtask-edit-container {
@@ -242,9 +253,9 @@ textarea {
     height: 16px;
     border: none;
     border-radius: 0% !important;
-    padding-right: 30px;
     box-sizing: border-box;
     outline: none;
+    padding: 10px 100px 10px 10px;
 }
 
 .edit-subtask-input:hover {
@@ -285,11 +296,20 @@ li:hover {
 }
 
 .edit-check img{
-    height: 10px;
+    height: 10px !important;
     width: auto;
 }
 
 .extra-contacts-text {
     color: var(--darkblue); 
     font-weight: bold; 
+}
+
+.text-input {
+    padding: 10px 90px 10px 10px;
+    width: 100%;
+}
+
+.user-checkbox{
+    margin: 0 !important;
 }

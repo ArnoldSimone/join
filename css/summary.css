@@ -7,6 +7,7 @@ html {
 body {
     display: flex;
     flex-direction: column;
+    overflow-y: auto;
 }
 
 main {
@@ -14,7 +15,6 @@ main {
     padding: 32px 64px;
     max-width: 1440px;
     flex-grow: 1;
-    overflow-y: auto;
 }
 
 a {
@@ -81,7 +81,6 @@ a {
 
 .ctn-tasks:hover .img-pencil {
     content: url('../assets/img/pencilLight.svg');
-
 }
 
 .ctn-tasks:hover .img-check {

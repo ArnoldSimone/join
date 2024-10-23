@@ -1,34 +1,40 @@
 /**
- * Currently dragged element ID.
- * @type {string}
+ * @module TaskBoard
  */
-let currentDraggedElement;
 
 
 /**
- * Array of tasks in the task management system.
+ * Holds the tasks data.
  * @type {Array<Object>}
  */
 let tasks;
 
 
 /**
- * Array of contacts associated with tasks.
+ * Holds the contacts data.
  * @type {Array<Object>}
  */
 let contacts;
 
 
 /**
- * Filtered array of tasks based on search criteria.
+ * Currently dragged element reference.
+ * @type {HTMLElement}
+ */
+let currentDraggedElement;
+
+
+/**
+ * Filtered search results for tasks.
  * @type {Array<Object>}
  */
 let filteredSearchTasks = [];
 
 
 /**
- * Loads tasks and contacts from the database on page load and renders the task board.
- * @function
+ * Initializes the task board on load by fetching tasks and contacts from the database.
+ * @async
+ * @function onloadFuncBoard
  */
 async function onloadFuncBoard() {
     let tasksData = await loadFromDatabase(`/tasks`);
@@ -40,8 +46,8 @@ async function onloadFuncBoard() {
 
 
 /**
- * Renders the task board by calling renderTasksByProgress for each task status.
- * @function
+ * Renders tasks grouped by their progress status on the board.
+ * @function renderTasksBoard
  */
 function renderTasksBoard() {
     renderTasksByProgress('todo', 'ctn-tasks-todo', 'No tasks To do');
@@ -53,10 +59,10 @@ function renderTasksBoard() {
 
 /**
  * Renders tasks based on their progress status into the specified container.
- * @function
- * @param {string} progressStatus - The progress status of the tasks to render.
+ * @param {string} progressStatus - The status of the tasks (e.g., 'todo', 'in progress', etc.).
  * @param {string} containerId - The ID of the container to render the tasks into.
- * @param {string} noTaskMessage - The message to display if no tasks exist in the specified progress status.
+ * @param {string} noTaskMessage - The message to display if there are no tasks.
+ * @function renderTasksByProgress
  */
 function renderTasksByProgress(progressStatus, containerId, noTaskMessage) {
     let containerRef = document.getElementById(containerId);
@@ -75,14 +81,31 @@ function renderTasksByProgress(progressStatus, containerId, noTaskMessage) {
 
 
 /**
- * Renders the "Assigned To" section for a task.
- * @function
- * @param {Array<string>|string} assignedTo - The list of assigned contacts or a single contact.
- * @returns {string} The HTML content for the assigned contacts.
+ * Renders a progress bar for the specified subtasks.
+ * @param {Array<Object>} subtasks - The subtasks of the task.
+ * @returns {string} The HTML string for the progress bar.
+ * @function renderTaskProgressBar
+ */
+function renderTaskProgressBar(subtasks) {
+    if (!subtasks || subtasks.length === 0) {
+        return '';
+    } else {
+        let totalSubtasks = subtasks.length;
+        let completedSubtasks = subtasks.filter(subtask => subtask.completed == true).length;
+        let progressBar = getTaskProgressBarTemplate(totalSubtasks, completedSubtasks);
+        return progressBar;
+    }
+}
+
+
+/**
+ * Renders the assigned contacts for a task.
+ * @param {Array<Object>|Object} assignedTo - The assigned contacts.
+ * @returns {string} The HTML string of assigned contacts.
+ * @function renderAssignedTo
  */
 function renderAssignedTo(assignedTo) {
     let assignedToArray = Array.isArray(assignedTo) ? assignedTo : [assignedTo];
-    if (!assignedToArray || assignedToArray.length === 0) return '';
     if (!assignedToArray || assignedToArray.length === 0 || assignedToArray == '') {
         return '';
     } else {
@@ -92,9 +115,10 @@ function renderAssignedTo(assignedTo) {
 
 
 /**
- * Processes the array of assigned contacts and generates HTML content.
- * @param {Array} assignedToArray - The array of assigned contacts.
- * @returns {string} - The HTML content for the assigned contacts.
+ * Processes the assigned contacts and generates their HTML representation.
+ * @param {Array<Object>} assignedToArray - Array of assigned contacts.
+ * @returns {string} The HTML string of assigned contacts.
+ * @function processAssignedToContacts
  */
 function processAssignedToContacts(assignedToArray) {
     let assignedToContent = '';
@@ -110,12 +134,13 @@ function processAssignedToContacts(assignedToArray) {
 
 
 /**
- * Generates the contact template for a given contact name.
- * @param {string} contactName - The name of the contact.
- * @returns {string} - The HTML content for the assigned contact.
+ * Generates the HTML template for a contact.
+ * @param {Object} assignedToArrayContact - The contact data.
+ * @returns {string} The HTML string of the contact.
+ * @function getContactTemplate
  */
-function getContactTemplate(contactName) {
-    let contact = contacts.find(c => c.name === contactName);
+function getContactTemplate(assignedToArrayContact) {
+    let contact = contacts.find(c => c.id === assignedToArrayContact.id);
     let initial = contact.avatar.initials;
     let color = contact.avatar.color;
     return getAssignedToTemplate(initial, color);
@@ -123,42 +148,28 @@ function getContactTemplate(contactName) {
 
 
 /**
- * Renders the progress bar for task subtasks.
- * @function
- * @param {Array<Object>} subtasks - The subtasks associated with the task.
- * @returns {string} The HTML content for the progress bar.
- */
-function renderTaskProgressBar(subtasks) {
-    if (!subtasks || subtasks.length === 0) {
-        return '';
-    } else {
-        let totalSubtasks = subtasks.length;
-        let completedSubtasks = subtasks.filter(subtask => subtask.completed == true).length;
-        let progressBar = getTaskProgressBarTemplate(totalSubtasks, completedSubtasks);
-        return progressBar;
-    }
-}
-
-
-/**
- * Closes the task detail overlay and removes it from the view.
- * @function
+ * Closes the task detail overlay.
+ * @function closeDetailTaskOverlay
  */
 function closeDetailTaskOverlay() {
     document.body.style.overflow = '';
     let overlayBoardDetailRef = document.getElementById('overlay-board-detail');
+    let overlayBoardEditRef = document.getElementById('overlay-board-edit');
     overlayBoardDetailRef.classList.add('slide-out');
+    overlayBoardEditRef.classList.add('slide-out');
     setTimeout(() => {
         overlayBoardDetailRef.classList.add('d-none');
         overlayBoardDetailRef.classList.remove('slide-out');
+        overlayBoardEditRef.classList.add('d-none');
+        overlayBoardEditRef.classList.remove('slide-out');
     }, 200);
 }
 
 
 /**
- * Displays the task detail overlay for a specific task.
- * @function
- * @param {string} taskId - The ID of the task to show in the detail overlay.
+ * Shows the task detail overlay for a specific task.
+ * @param {string} taskId - The ID of the task to display.
+ * @function showDetailTaskOverlay
  */
 function showDetailTaskOverlay(taskId) {
     document.body.style.overflow = 'hidden';
@@ -175,10 +186,56 @@ function showDetailTaskOverlay(taskId) {
 
 
 /**
- * Renders the subtasks section inside the task detail overlay.
- * @function
+ * Renders assigned contacts in the task detail overlay.
+ * @param {Array<Object>|Object} assignedTo - The assigned contacts.
+ * @returns {string} The HTML string of assigned contacts.
+ * @function renderAssignedToOverlay
+ */
+function renderAssignedToOverlay(assignedTo) {
+    let assignedToArray = Array.isArray(assignedTo) ? assignedTo : [assignedTo];
+    if (!assignedToArray || assignedToArray.length === 0 || assignedToArray == '') {
+        return 'No contact in Assign To';
+    } else {
+        return processAssignedToOverlay(assignedToArray);
+    }
+}
+
+
+/**
+ * Processes assigned contacts for the overlay and generates their HTML representation.
+ * @param {Array<Object>} assignedToArray - Array of assigned contacts.
+ * @returns {string} The HTML string of assigned contacts.
+ * @function processAssignedToOverlay
+ */
+function processAssignedToOverlay(assignedToArray) {
+    let assignedToContent = '';
+    for (let i = 0; i < assignedToArray.length; i++) {
+        assignedToContent += getContactOverlayTemplate(assignedToArray[i]);
+    }
+    return assignedToContent;
+}
+
+
+/**
+ * Generates the HTML template for a contact in the overlay.
+ * @param {Object} assignedToArrayContact - The contact data.
+ * @returns {string} The HTML string of the contact.
+ * @function getContactOverlayTemplate
+ */
+function getContactOverlayTemplate(assignedToArrayContact) {
+    let contact = contacts.find(c => c.id === assignedToArrayContact.id);
+    let initial = contact.avatar.initials;
+    let color = contact.avatar.color;
+    let name = assignedToArrayContact.name;
+    return getAssignedToTemplateOverlay(initial, color, name);
+}
+
+
+/**
+ * Renders the subtasks in the task detail overlay.
  * @param {Object} task - The task object containing subtasks.
- * @returns {string} The HTML content for the subtasks section.
+ * @returns {string} The HTML string of subtasks or a message if none exist.
+ * @function renderSubtasksOverlay
  */
 function renderSubtasksOverlay(task) {
     let subtasksArray = task.subtasks;
@@ -195,55 +252,11 @@ function renderSubtasksOverlay(task) {
 
 
 /**
- * Renders the assigned contacts for the overlay of a given task.
- * 
- * @param {Array|string} assignedTo - The assigned contacts, either as an array or a single string.
- * @returns {string} - The HTML content for assigned contacts or a message if none are present.
- */
-function renderAssignedToOverlay(assignedTo) {
-    let assignedToArray = Array.isArray(assignedTo) ? assignedTo : [assignedTo];
-    if (!assignedToArray || assignedToArray.length === 0 || assignedToArray == '') {
-        return 'No contact in Assign To';
-    } else {
-        return processAssignedToOverlay(assignedToArray);
-    }
-}
-
-
-/**
- * Processes the array of assigned contacts and generates HTML content for the overlay.
- * @param {Array} assignedToArray - The array of assigned contacts.
- * @returns {string} - The HTML content for the assigned contacts overlay.
- */
-function processAssignedToOverlay(assignedToArray) {
-    let assignedToContent = '';
-    for (let i = 0; i < assignedToArray.length; i++) {
-        assignedToContent += getContactOverlayTemplate(assignedToArray[i]);
-    }
-    return assignedToContent;
-}
-
-
-/**
- * Generates the overlay template for a given contact name.
- * @param {string} contactName - The name of the contact.
- * @returns {string} - The HTML content for the assigned contact overlay.
- */
-function getContactOverlayTemplate(contactName) {
-    let contact = contacts.find(c => c.name === contactName);
-    let initial = contact.avatar.initials;
-    let color = contact.avatar.color;
-    return getAssignedToTemplateOverlay(initial, color, contactName);
-}
-
-
-/**
- * Updates the completion status of a specific subtask and refreshes the task board.
+ * Updates the completion status of a subtask.
  * @async
- * @function
- * @param {number} indexSubTask - The index of the subtask in the subtasks array.
+ * @param {number} indexSubTask - The index of the subtask to update.
  * @param {string} taskId - The ID of the task containing the subtask.
- * @returns {Promise<void>}
+ * @function updateSubtaskStatus
  */
 async function updateSubtaskStatus(indexSubTask, taskId) {
     let task = tasks.find(t => t.id === taskId);
@@ -255,11 +268,10 @@ async function updateSubtaskStatus(indexSubTask, taskId) {
 
 
 /**
- * Deletes a task from the database and refreshes the task board.
+ * Deletes a task by its ID.
  * @async
- * @function
  * @param {string} taskId - The ID of the task to delete.
- * @returns {Promise<void>}
+ * @function deleteTask
  */
 async function deleteTask(taskId) {
     await deleteFromDatabase(`tasks/${taskId}`);
@@ -269,8 +281,8 @@ async function deleteTask(taskId) {
 
 
 /**
- * Filters the tasks on the task board based on the user's search input.
- * @function
+ * Filters tasks based on the input search term.
+ * @function filterTasksBoard
  */
 function filterTasksBoard() {
     filteredSearchTasks = [];
@@ -283,7 +295,6 @@ function filterTasksBoard() {
             filteredSearchTasks.push(tasks[i]);
         }
     }
-
     renderTasksBoard();
 }
 

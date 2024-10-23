@@ -15,14 +15,13 @@ function generateCreateOption(name, initial, color, id, checked) {
             </div>
             <p>${name}</p>
         </div>
-        <div id="userCheckbox">
-            <input type="checkbox" data-user-id="${id}" id="checkbox-${id}" ${checked} onclick="event.stopPropagation();">
-            <img onclick="event.stopPropagation(); selectionUser('${id}')" class="user-checkbox" src="../assets/img/checkbox.png">
+        <div id="userCheckbox" class="checkbox-container">
+            <input type="checkbox" data-user-id="${id}" id="checkbox-${id}" ${checked ? 'checked' : ''} onclick="event.stopPropagation();">
+            <label class="user-checkbox" for="checkbox-${id}" onclick="event.stopPropagation(); selectionUser('${id}')"></label>
         </div>
     </div>
   `;
 }
-
 
 
 /**
@@ -59,7 +58,7 @@ function generateExtraUsersHTML(extraCount) {
  */
 function generateSubtaskHTML(subtaskId, subtaskText) {
     return `
-        <li id="subtask-${subtaskId}" class="subtask-item" onmouseover="showButtons(${subtaskId})" onmouseout="hideButtons(${subtaskId})">
+        <li id="subtask-${subtaskId}" onmouseover="showButtons(${subtaskId})" onmouseout="hideButtons(${subtaskId})">
             <span id="subtask-text-${subtaskId}">${subtaskText}</span>
             <span class="subtask-buttons" id="subtask-buttons-${subtaskId}" style="display: none;">
                 <button class="subtask-button" type="button" onclick="editSubtask(${subtaskId})"><img src="../assets/img/edit.png" alt=""></button>
@@ -97,7 +96,7 @@ function generateEditSubtaskHTML(index, title) {
  */
 function generateSubtaskItemHTML(title, index) {
     return `
-        <li class="subtask-item" onmouseover="showButtons(${index})" onmouseout="hideButtons(${index})">
+        <li onmouseover="showButtons(${index})" onmouseout="hideButtons(${index})">
             ${title}
             <span id="subtask-buttons-${index}" class="subtask-buttons" style="display:none;">
                 <button class="subtask-button" onclick="editSubtask(${index})"><img src="../assets/img/edit.png" alt=""></button>
