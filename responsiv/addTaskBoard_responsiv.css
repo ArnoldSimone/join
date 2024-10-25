@@ -1,0 +1,196 @@
+@media (max-width: 1000px) {
+    * {
+        font-size: 14px;
+    }
+
+    body {
+        overflow: hidden !important;
+    }
+
+    form {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        overflow-y: scroll;
+        padding-right: 8px;
+    }
+
+    .addtask-footer {
+        display: flex;
+        justify-content: center;
+        align-items: center !important;
+        padding-top: 90px;
+        flex-direction: column;
+    }
+
+    h1 {
+        width: 100%;
+        text-align: left;
+    }
+
+    .form-left,
+    .form-right {
+        width: 100% !important;
+    }
+
+    .form-left {
+        margin-bottom: 20px;
+    }
+
+    .addtask-footer {
+
+        padding-top: 40px !important;
+    }
+
+    .selectedUser {
+        position: static !important;
+        padding-top: 8px !important;
+        padding-bottom: 8px !important;
+    }
+
+    #subtask-list {
+        /* max-height: 70px !important;
+        over */
+
+    }
+
+}
+
+
+
+
+
+
+
+
+@media (max-width: 500px) {
+
+
+    .prio-group {
+        display: flex;
+        flex-direction: column !important;
+        gap: 8px;
+    }
+
+    h1 {
+        font-size: 48px !important;
+    }
+
+    .clear,
+    .create-task {
+        font-size: 18px !important;
+        padding: 6px 12px !important;
+    }
+
+    .subtask-buttons {
+        display: inline !important;
+    }
+
+    .subtask-button {
+        display: inline !important;
+        background-color: var(--lightgrey);
+    }
+
+    #subtask-list li button {
+        display: inline !important;
+    }
+
+    .subtask-button {
+        background-color: white !important;
+    }
+
+    li:hover {
+        background-color: transparent !important;
+    }
+
+}
+
+
+
+/* @media (max-width: 1150px) {
+    form {
+        flex-direction: column;
+    }
+
+    .task-container {
+        width: auto;
+    }
+
+    .form-left,
+    .form-right,
+    .addtask-footer {
+        width: 100%;
+    }
+
+    .selectedUser {
+        position: static;
+        padding-top: 8px;
+        padding-bottom: 8px;
+    }
+}
+
+@media (max-width: 1000px) {
+    main {
+        margin-left: 0;
+    }
+
+    section {
+        height: calc(100vH - 142px);
+    }
+
+    .break-between {
+        padding: 10px;
+        background-color: var(--lightgrey);
+    }
+}
+
+@media (max-width: 620px) {
+    button.clear {
+        display: none;
+    }
+}
+
+@media (max-width: 500px) {
+    .subtask-buttons {
+        display: inline !important;
+    }
+
+    .subtask-button {
+        display: inline !important;
+        background-color: var(--lightgrey);
+    }
+
+    #subtask-list li button {
+        display: inline !important;
+    }
+
+    .headline {
+        font-size: 50px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .addtask-footer {
+        flex-direction: column;
+        align-items: flex-start;
+        padding-bottom: 80px;
+    }
+
+    section {
+        height: calc(100vH - 200px);
+    }
+
+    main {
+        padding: 12px;
+    }
+}
+
+@media (max-width: 400px) {
+    .prio {
+        padding: 7px;
+    }
+
+    .headline {
+        font-size: 50px;
+    }
+} */

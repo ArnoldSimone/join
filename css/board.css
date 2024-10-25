@@ -91,7 +91,7 @@ main {
     background-color: var(--textwhite);
     border-radius: 24px;
     transition: background-color 0.3s ease, transform 0.3s ease;
-    box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 20px 2px rgba(0, 0, 0, 0.1) inset;
     padding: 16px;
     flex-direction: column;
     gap: 8px;
@@ -357,4 +357,20 @@ main {
 #highlight-await-feedback,
 #highlight-done {
     min-height: 100px;
+}
+
+iframe {
+    width: 100%;
+    height: 100%;
+}
+
+.overlay-add-task-board-add {
+    background-color: var(--textwhite) !important;
+    margin: 0;
+    padding: 32px;
+    border-radius: 20px;
+    border: none;
+    width: 90%;
+    height: 80vh;
+    max-width: 1200px;
 }

@@ -83,6 +83,7 @@ function showPopup() {
     popup.querySelector('.popup-content').style.animation = 'popupEnter 0.5s forwards';
     setTimeout(() => {
         popup.querySelector('.popup-content').style.animation = 'popupExit 0.5s forwards';
+        parent.postMessage("closeAddTaskOverlay", "*");
         setTimeout(() => {
             popup.classList.add('d-none');
             window.location.href = 'board.html';
@@ -95,12 +96,30 @@ function showPopup() {
  * Submits the task form by validating the fields and adding the task to Firebase if valid.
  */
 function submitForm() {
-    const taskData = gatherFormData();
+    let progress = localStorage.getItem('progressStatus') || '';
+    let taskData = gatherFormData(progress);
     let valid = validateField("title", taskData.title) &&
         validateField("due-date", taskData.dueDate, true) &&
         validateField("category", taskData.category);
-
     if (valid) addTaskToFirebase(taskData);
+
+    // if (progress == '') {
+    //     if (valid) addTaskToFirebase(taskData, 'todo');
+    // }
+
+    // if (progress == 'todo') {
+    //     if (valid) addTaskToFirebase(taskData, 'todo');
+    // }
+
+    // if (progress == 'in progress') {
+    //     if (valid) addTaskToFirebase(taskData, 'in progress');
+    // }
+
+    // if (progress == 'await feedback') {
+    //     if (valid) addTaskToFirebase(taskData, 'await feedback');
+    // }
+
+
 }
 
 
@@ -180,7 +199,7 @@ function validateDate() {
 /**
  * Gathers all form data into an object for submission.
  */
-function gatherFormData() {
+function gatherFormData(progessStatus) {
     return {
         title: getFormValue("title"),
         description: getFormValue("description"),
@@ -188,7 +207,7 @@ function gatherFormData() {
         dueDate: getFormValue("due-date"),
         priority: selectedPriority,
         category: getFormValue("category"),
-        progress: "todo",
+        progress: progessStatus,
         subtasks: gatherSubtasks()
     };
 }
@@ -198,7 +217,7 @@ function gatherFormData() {
  * Gathers the names of the selected users.
  */
 function gatherSelectedUsers() {
-    return users.map(user => ({ 'id': user.id, 'name': user.name}));
+    return users.map(user => ({ 'id': user.id, 'name': user.name }));
 }
 
 
@@ -330,4 +349,17 @@ function clearSubtasks() {
         subtaskList.innerHTML = '';
     }
     subtasks = [];
+}
+
+
+function closeAddTaskOverlay() {
+    setTimeout(() => {
+        parent.postMessage("closeAddTaskOverlay", "*");
+    }, 2000);
+    let overlayBoardAddTaskRef = document.getElementById('overlay-board-add-task');
+    let iframeRef = document.getElementById('addTaskIframe');
+    overlayBoardAddTaskRef.classList.add('slide-out');
+    iframeRef.classList.add('slide-out');
+
+
 }

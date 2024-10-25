@@ -5,15 +5,31 @@
 }
 
 @media (max-width: 1150px) {
+    body {
+        overflow: hidden;
+    }
+
+    h1 {
+        margin-top: 16px;
+        font-size: 40px !important;
+    }
+
     form {
         flex-direction: column;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        max-height: 60vh;
+        padding-right: 16px;
+
     }
 
     .task-container {
-        width: auto;
+        width: 100%;
     }
 
-    .form-left, .form-right, .addtask-footer {
+    .form-left,
+    .form-right,
+    .addtask-footer {
         width: 100%;
     }
 
@@ -22,6 +38,12 @@
         padding-top: 8px;
         padding-bottom: 8px;
     }
+
+    .addtask-footer {
+
+        padding-top: 16px;
+        padding-right: 21px;
+    }
 }
 
 @media (max-width: 1000px) {
@@ -29,9 +51,21 @@
         margin-left: 0;
     }
 
-    section {
-        height: calc(100vH - 142px);
+    .addtask-footer {
+        /* padding-bottom: 200px !important; */
+        /* flex-direction: column; */
+        margin-top: 30px;
+        padding-top: 0;
+
     }
+
+    form {
+        max-height: 50vh;
+    }
+
+    /* section {
+        height: calc(100vH - 142px);
+    } */
 
     .break-between {
         padding: 10px;
@@ -39,11 +73,18 @@
     }
 }
 
-@media (max-width: 620px) {
-    button.clear {
-        display: none;
+@media (max-width: 660px) {
+
+    .addtask-footer {
+        /* padding-bottom: 200px !important; */
+        flex-direction: column;
+        /* margin-top: 30px;
+        padding-top: 0; */
+
     }
 }
+
+
 
 @media (max-width: 500px) {
     .subtask-buttons {
@@ -59,20 +100,33 @@
         display: inline !important;
     }
 
-    .headline {
-        font-size: 50px !important;
+    .clear,
+    .create-task {
+        font-size: 18px !important;
+        padding: 6px 12px !important;
     }
+
+    .form-actions {
+
+        margin-top: 8px;
+    }
+
+
+
+
 }
 
 @media (max-width: 480px) {
     .addtask-footer {
-        flex-direction: column;
-        align-items: flex-start;
-        padding-bottom: 80px;
+        padding-bottom: 30px;
+    }
+
+    .addtask-footer span {
+        font-size: 14px;
     }
 
     section {
-        height: calc(100vH - 200px);
+        height: calc(100vH - 142px);
     }
 
     main {
@@ -81,11 +135,11 @@
 }
 
 @media (max-width: 400px) {
-    .prio {
-        padding: 7px;
+    .prio-group {
+        flex-direction: column;
     }
 
-    .headline {
-        font-size: 50px;
+    h1 {
+        font-size: 36px !important;
     }
 }

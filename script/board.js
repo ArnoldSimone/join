@@ -297,3 +297,67 @@ function filterTasksBoard() {
     }
     renderTasksBoard();
 }
+
+
+
+function showAddTaskOverlay(progress) {
+
+    localStorage.setItem('progressStatus', progress);
+    // document.getElementById('overlay-board-add-task').classList.remove('d-none');
+    document.body.style.overflow = 'hidden';
+
+    let overlayBoardAddTaskRef = document.getElementById('overlay-board-add-task');
+    let iframeRef = document.getElementById('addTaskIframe');
+    overlayBoardAddTaskRef.classList.add('slide-in');
+    iframeRef.classList.add('slide-in');
+
+    setTimeout(() => {
+        overlayBoardAddTaskRef.classList.remove('d-none');
+        overlayBoardAddTaskRef.classList.add('slide-in');
+
+    }, 200);
+
+
+}
+
+function closeAddTaskOverlay() {
+
+    // document.getElementById('overlay-board-add-task').classList.add('d-none');
+    document.body.style.overflow = '';
+
+
+    let overlayBoardAddTaskRef = document.getElementById('overlay-board-add-task');
+    let iframeRef = document.getElementById('addTaskIframe');
+    overlayBoardAddTaskRef.classList.add('slide-out');
+    iframeRef.classList.add('slide-out');
+
+    setTimeout(() => {
+        overlayBoardAddTaskRef.classList.add('d-none');
+        overlayBoardAddTaskRef.classList.remove('slide-out');
+        iframeRef.classList.remove('slide-out');
+
+        const iframe = document.getElementById('addTaskIframe');
+        if (iframe) {
+            iframe.src = '';
+        }
+        onloadFuncBoard();
+        reloadIframe();
+
+    }, 1000);
+
+
+}
+
+
+function reloadIframe() {
+    const iframe = document.getElementById("addTaskIframe");
+    iframe.contentWindow.location.reload();
+}
+
+window.addEventListener("message", (event) => {
+    if (event.data === "closeAddTaskOverlay") {
+        closeAddTaskOverlay();
+    }
+});
+
+

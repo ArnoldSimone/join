@@ -307,6 +307,7 @@ function renderCurrentSubtasks(iSubtasks) {
  * @function editSubtask
  */
 function editSubtask(iSubtasks) {
+    saveSubtask(iSubtasks);
     let inputField = document.getElementById(`input-subtask-edit${iSubtasks}`);
     document.getElementById(`subtask-icons-display-mode${iSubtasks}`).classList.add('d-none');
     document.getElementById(`subtask-icons-editing-mode${iSubtasks}`).classList.remove('d-none');
@@ -315,41 +316,24 @@ function editSubtask(iSubtasks) {
     inputField.removeAttribute('disabled');
     inputField.focus();
     inputField.setSelectionRange(inputField.value.length, inputField.value.length);
-    inputField.addEventListener('focusout', () => {
-        exitEditMode(iSubtasks);
-    });
 }
 
 
 /**
- * Exits edit mode for the specified subtask.
- * @param {number} iSubtasks - The index of the subtask to exit edit mode.
- * @function exitEditMode
- */
-function exitEditMode(iSubtasks) {
-    let inputField = document.getElementById(`input-subtask-edit${iSubtasks}`);
-    document.getElementById(`subtask-icons-display-mode${iSubtasks}`).classList.remove('d-none');
-    document.getElementById(`subtask-icons-editing-mode${iSubtasks}`).classList.add('d-none');
-    document.getElementById(`edit-mode-subtask${iSubtasks}`).classList.remove('underlined');
-    document.getElementById(`subtask-item-edit${iSubtasks}`).classList.remove('no-hover-edit');
-    inputField.setAttribute('disabled', true);
-}
-
-
-/**
- * Saves the edited subtask.
- * @param {number} iSubtasks - The index of the subtask to save.
- * @function saveSubtask
+ * Saves or deletes a subtask based on the input field value.
+ * If the input is empty or contains only a placeholder, the subtask is deleted.
+ * Otherwise, the subtask's title is updated and rendered.
+ * @param {number} iSubtasks - The index of the subtask in the allSubtasksArray.
  */
 function saveSubtask(iSubtasks) {
-    document.getElementById(`edit-mode-subtask${iSubtasks}`).classList.remove('underlined');
-    document.getElementById(`subtask-item-edit${iSubtasks}`).classList.remove('no-hover-edit');
     let inputField = document.getElementById(`input-subtask-edit${iSubtasks}`);
-    inputField.setAttribute('disabled', 'true');
-    document.getElementById(`subtask-icons-display-mode${iSubtasks}`).classList.remove('d-none');
-    document.getElementById(`subtask-icons-editing-mode${iSubtasks}`).classList.add('d-none');
-    allSubtasksArray[iSubtasks].title = inputField.value.substring(2);
-    renderCurrentSubtasks(iSubtasks);
+    let inputFieldValue = inputField.value.replace(/^\s*•\s*/, '');
+    if (inputFieldValue == "" || inputFieldValue == 0) {
+        deleteSubtask(iSubtasks);
+    } else {
+        allSubtasksArray[iSubtasks].title = inputField.value.substring(2);
+        renderCurrentSubtasks(iSubtasks);
+    }
 }
 
 
