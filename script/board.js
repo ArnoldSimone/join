@@ -299,28 +299,38 @@ function filterTasksBoard() {
 }
 
 
-
 function showAddTaskOverlay(progress) {
     localStorage.setItem('progressStatus', progress);
     document.body.style.overflow = 'hidden';
+
     let overlayBoardAddTaskRef = document.getElementById('overlay-board-add-task');
     let iframeRef = document.getElementById('addTaskIframe');
-    overlayBoardAddTaskRef.classList.add('slide-in');
-    iframeRef.classList.add('slide-in');
-    setTimeout(() => {
-        overlayBoardAddTaskRef.classList.remove('d-none');
-        overlayBoardAddTaskRef.classList.add('slide-in');
 
-    }, 200);
+    if (overlayBoardAddTaskRef && iframeRef) {
+        overlayBoardAddTaskRef.classList.remove('slide-out', 'd-none');
+        overlayBoardAddTaskRef.classList.add('slide-in');
+        iframeRef.classList.add('slide-in');
+    }
 }
+
 
 function closeAddTaskOverlay() {
     document.body.style.overflow = '';
     localStorage.removeItem('progressStatus');
+
     let overlayBoardAddTaskRef = document.getElementById('overlay-board-add-task');
     let iframeRef = document.getElementById('addTaskIframe');
-    overlayBoardAddTaskRef.classList.add('slide-out');
-    iframeRef.classList.add('slide-out');
+
+    if (overlayBoardAddTaskRef && iframeRef) {
+        overlayBoardAddTaskRef.classList.remove('slide-in');
+        overlayBoardAddTaskRef.classList.add('slide-out');
+        iframeRef.classList.add('slide-out');
+
+        hideOverlay(overlayBoardAddTaskRef, iframeRef);
+    }
+}
+
+function hideOverlay(overlayBoardAddTaskRef, iframeRef) {
     setTimeout(() => {
         overlayBoardAddTaskRef.classList.add('d-none');
         overlayBoardAddTaskRef.classList.remove('slide-out');
@@ -330,10 +340,10 @@ function closeAddTaskOverlay() {
         if (iframe) {
             iframe.src = 'addTaskBoard.html';
         }
-        // reloadIframe();
-    }, 1000);
+    }, 200);
     onloadFuncBoard();
 }
+
 
 
 // function reloadIframe() {

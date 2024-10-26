@@ -341,11 +341,13 @@ function clearSubtasks() {
 function closeAddTaskOverlay() {
     setTimeout(() => {
         parent.postMessage("closeAddTaskOverlay", "*");
-    }, 2000);
+    }, 100);
+
     let overlayBoardAddTaskRef = document.getElementById('overlay-board-add-task');
     let iframeRef = document.getElementById('addTaskIframe');
-    overlayBoardAddTaskRef.classList.add('slide-out');
-    iframeRef.classList.add('slide-out');
 
-
+    if (overlayBoardAddTaskRef && iframeRef) {
+        overlayBoardAddTaskRef.classList.add('slide-out');
+        iframeRef.classList.add('slide-out');
+    }
 }
