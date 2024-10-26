@@ -86,7 +86,9 @@ function showPopup() {
         parent.postMessage("closeAddTaskOverlay", "*");
         setTimeout(() => {
             popup.classList.add('d-none');
-            window.location.href = 'board.html';
+            if (localStorage.getItem('progressStatus') === null || localStorage.getItem('progressStatus') === '') {
+                window.location.href = 'board.html';
+            }
         }, 500);
     }, 2000);
 }
@@ -102,24 +104,6 @@ function submitForm() {
         validateField("due-date", taskData.dueDate, true) &&
         validateField("category", taskData.category);
     if (valid) addTaskToFirebase(taskData);
-
-    // if (progress == '') {
-    //     if (valid) addTaskToFirebase(taskData, 'todo');
-    // }
-
-    // if (progress == 'todo') {
-    //     if (valid) addTaskToFirebase(taskData, 'todo');
-    // }
-
-    // if (progress == 'in progress') {
-    //     if (valid) addTaskToFirebase(taskData, 'in progress');
-    // }
-
-    // if (progress == 'await feedback') {
-    //     if (valid) addTaskToFirebase(taskData, 'await feedback');
-    // }
-
-
 }
 
 

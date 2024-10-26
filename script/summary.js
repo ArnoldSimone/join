@@ -6,8 +6,12 @@
  */
 async function onloadFuncSummary() {
     tasks = Object.values(await loadFromDatabase(`/tasks`));
-    let contactsData = await loadFromDatabase(`/contacts`);
-    contacts = Object.entries(contactsData).map(([id, contact]) => ({ id, ...contact }));
+    try {
+        let contactsData = await loadFromDatabase(`/contacts`);
+        contacts = Object.entries(contactsData).map(([id, contact]) => ({ id, ...contact }));
+    } catch (error) {
+        console.error("Fehler beim Laden der Kontakte:", error);
+    }
     getNumberOfTasks(tasks);
     getUpcomingDeadline();
     handleResponsiveLayout()
