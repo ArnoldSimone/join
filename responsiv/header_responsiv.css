@@ -33,6 +33,7 @@
 
   .show-logout-mobile {
     top: 77px;
+    z-index: 300;
   }
 
   h2#user-initial {

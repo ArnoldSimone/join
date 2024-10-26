@@ -205,7 +205,9 @@
         padding-top: 60px;
         display: flex;
         align-items: flex-start;
-        padding-left: 55px;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
     }
 
     .close-icon {
@@ -226,6 +228,13 @@
 
     input {
         width: 100%;
+    }
+
+    .input-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 80%;
     }
 }
 
@@ -298,17 +307,5 @@
         width: 65px;
         height: 65px;
         font-size: 16px;
-    }
-}
-
-@media (max-width: 340px){
-    form {
-        padding-left: 50px;
-    }
-}
-
-@media (max-width: 330px){
-    form {
-        padding-left: 45px;
     }
 }
