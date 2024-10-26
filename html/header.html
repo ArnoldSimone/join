@@ -17,30 +17,32 @@
 
 <body>
   <header>
-    <div class="header-content">
-      <div class="mobile-logo">
-        <img src="/assets/img/logo_blue.png" alt="Logo">
-      </div>
-      <div class="header-headline">
-        <p>Kanban Project Management Tool</p>
-      </div>
-      <div id="user" class="header-right">
-        <a href="/html/help.html"><img src="/assets/img/help.png" alt="Help" /></a>
-        <div id="user-letter" onclick="toggleUserMenu()" class="user-letter">
-          <h2 id="user-initial"></h2>
+    <div class="max-content">
+      <div class="header-content">
+        <div class="mobile-logo">
+          <img src="/assets/img/logo_blue.png" alt="Logo">
+        </div>
+        <div class="header-headline">
+          <p>Kanban Project Management Tool</p>
+        </div>
+        <div id="user" class="header-right">
+          <a href="/html/help.html"><img src="/assets/img/help.png" alt="Help" /></a>
+          <div id="user-letter" onclick="toggleUserMenu()" class="user-letter">
+            <h2 id="user-initial"></h2>
+          </div>
         </div>
       </div>
-    </div>
-    <div id="userMenu" class="logout-menu d-none">
-      <div class="logout"><a href="/html/legalnotice.html">Legal Notice</a></div>
-      <div class="logout"><a href="/html/privacy.html">Privacy Police</a></div>
-      <div onclick="logOut()" class="logout"><a href="#">Log Out</a></div>
-    </div>
-    <div id="userMobile" class="d-none">
-      <div class="logout"><a href="/html/help.html">Help</a></div>
-      <div class="logout"><a href="/html/legalnotice.html">Legal Notice</a></div>
-      <div class="logout"><a href="/html/privacy.html">Privacy Police</a></div>
-      <div onclick="logOut()" class="logout"><a href="#">Log Out</a></div>
+      <div id="userMenu" class="logout-menu d-none">
+        <div class="logout"><a href="/html/legalnotice.html">Legal Notice</a></div>
+        <div class="logout"><a href="/html/privacy.html">Privacy Police</a></div>
+        <div onclick="logOut()" class="logout"><a href="#">Log Out</a></div>
+      </div>
+      <div id="userMobile" class="d-none">
+        <div class="logout"><a href="/html/help.html">Help</a></div>
+        <div class="logout"><a href="/html/legalnotice.html">Legal Notice</a></div>
+        <div class="logout"><a href="/html/privacy.html">Privacy Police</a></div>
+        <div onclick="logOut()" class="logout"><a href="#">Log Out</a></div>
+      </div>
     </div>
   </header>
 </body>

@@ -1,4 +1,5 @@
 @media (max-width: 1000px) {
+
   .sidebar-section {
     position: fixed;
     bottom: 0;
@@ -11,7 +12,7 @@
   .sidebar-guest {
     display: none;
   }
-  
+
   .sidebar-content {
     position: absolute;
     bottom: 0;
@@ -73,18 +74,21 @@
 }
 
 @media (max-width: 780px) {
+
   .menu-content {
     width: 70%;
   }
 }
 
 @media (max-width: 500px) {
+
   .menu-content {
     width: 100%;
   }
 }
 
 @media (max-width: 400px) {
+
   .sidebar-menu {
     gap: 0;
   }

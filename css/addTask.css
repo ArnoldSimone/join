@@ -24,8 +24,6 @@ main {
     height: 100%;
 }
 
-
-
 form {
     display: flex;
     justify-content: space-between;
@@ -139,7 +137,6 @@ span {
     left: 0;
     z-index: 10;
 }
-
 
 input[type="checkbox"] {
     display: none;
@@ -261,8 +258,6 @@ li {
     border-radius: 4px;
     width: 100%;
 }
-
-
 
 #subtask-list li {
     position: relative;

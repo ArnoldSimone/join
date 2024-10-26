@@ -18,7 +18,6 @@ ul {
     height: auto;
     overflow-y: auto;
     width: 100% !important;
-
 }
 
 main {
@@ -51,9 +50,7 @@ h1 {
 
 form {
     gap: 0;
-
 }
-
 
 .ctn-board-add-task-overlay {
     justify-content: space-between;
@@ -79,9 +76,7 @@ form {
 
 li {
     width: 100% !important;
-
 }
-
 
 @keyframes slide-in {
     0% {

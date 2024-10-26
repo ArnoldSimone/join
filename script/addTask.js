@@ -56,7 +56,6 @@ function isUserAssigned(id) {
 }
 
 
-
 /**
  * Adds a task to Firebase with the provided task data.
  * @param {Object} taskData - The task data to add to Firebase.
@@ -121,7 +120,6 @@ function validateField(fieldId, value, isDate = false) {
     const input = document.getElementById(fieldId);
     const errorText = getErrorText(fieldId, input);
     const isValid = value && (!isDate || new Date(value) >= new Date());
-
     setFieldState(input, errorText, isValid);
     return isValid;
 }
@@ -174,7 +172,6 @@ function validateDate() {
     const input = document.getElementById("due-date");
     const selectedDate = new Date(input.value);
     const today = new Date();
-
     if (selectedDate < today) {
         input.setCustomValidity("Bitte wählen Sie ein zukünftiges Datum.");
         input.reportValidity();
@@ -236,11 +233,9 @@ function setFormValue(name, value) {
  */
 function resetValidations() {
     const fields = ["title", "description", "due-date", "category"];
-
     fields.forEach(fieldId => {
-        const input = document.getElementById(fieldId);
-        const errorText = document.getElementById(`${fieldId}-error`);
-
+        let input = document.getElementById(fieldId);
+        let errorText = document.getElementById(`${fieldId}-error`);
         if (input) {
             input.style.border = "";
             if (errorText) {
@@ -340,14 +335,17 @@ function clearSubtasks() {
 }
 
 
+/**
+ * Closes the "Add Task" overlay with a slide-out animation and notifies the parent window.
+ * @function closeAddTaskOverlay
+ * @returns {void}
+ */
 function closeAddTaskOverlay() {
+    let overlayBoardAddTaskRef = document.getElementById('overlay-board-add-task');
+    let iframeRef = document.getElementById('addTaskIframe');
     setTimeout(() => {
         parent.postMessage("closeAddTaskOverlay", "*");
     }, 100);
-
-    let overlayBoardAddTaskRef = document.getElementById('overlay-board-add-task');
-    let iframeRef = document.getElementById('addTaskIframe');
-
     if (overlayBoardAddTaskRef && iframeRef) {
         overlayBoardAddTaskRef.classList.add('slide-out');
         iframeRef.classList.add('slide-out');

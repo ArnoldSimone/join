@@ -25,7 +25,6 @@
     <script defer src="/script/boardEditUtilities.js"></script>
     <script defer src="/script/database.js"></script>
     <script defer src="/templates/board_templates.js"></script>
-    <!-- <script defer src="/script/boardAddTask.js"></script> -->
     <title>Join - Board</title>
 </head>
 
@@ -119,13 +118,10 @@
             </div>
             <div onclick="closeDetailTaskOverlay()" id="overlay-board-edit" class="overlay-board d-flex d-none">
             </div>
-
             <div onclick="closeAddTaskOverlay()" id="overlay-board-add-task" class="overlay-board d-flex d-none">
                 <iframe onclick="bubblingProtection(event)" id="addTaskIframe" class="overlay-add-task-board-add d-flex"
                     src="addTaskBoard.html"></iframe>
             </div>
-
-
         </section>
     </main>
 </body>

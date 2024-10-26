@@ -1,10 +1,12 @@
 @media (max-width: 1000px) {
+
     main {
         margin-left: 0px;
     }
 }
 
 @media (max-width: 470px) {
+
     .headline {
         font-size: 45px !important;
     }

@@ -1,10 +1,12 @@
 @media (max-width: 1300px) {
+
     .task-container {
         width: 850px;
     }
 }
 
 @media (max-width: 1150px) {
+
     body {
         overflow: hidden;
     }
@@ -20,7 +22,6 @@
         overflow-x: hidden;
         max-height: 60vh;
         padding-right: 16px;
-
     }
 
     .task-container {
@@ -40,32 +41,25 @@
     }
 
     .addtask-footer {
-
         padding-top: 16px;
         padding-right: 21px;
     }
 }
 
 @media (max-width: 1000px) {
+
     main {
         margin-left: 0;
     }
 
     .addtask-footer {
-        /* padding-bottom: 200px !important; */
-        /* flex-direction: column; */
         margin-top: 30px;
         padding-top: 0;
-
     }
 
     form {
         max-height: 50vh;
     }
-
-    /* section {
-        height: calc(100vH - 142px);
-    } */
 
     .break-between {
         padding: 10px;
@@ -76,17 +70,13 @@
 @media (max-width: 660px) {
 
     .addtask-footer {
-        /* padding-bottom: 200px !important; */
         flex-direction: column;
-        /* margin-top: 30px;
-        padding-top: 0; */
-
     }
 }
 
 
-
 @media (max-width: 500px) {
+
     .subtask-buttons {
         display: inline !important;
     }
@@ -111,13 +101,8 @@
     }
 
     .form-actions {
-
         margin-top: 8px;
     }
-
-
-
-
 }
 
 @media (max-width: 480px) {

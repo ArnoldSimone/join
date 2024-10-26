@@ -299,13 +299,17 @@ function filterTasksBoard() {
 }
 
 
+/**
+ * Displays the "Add Task" overlay and sets the progress status in local storage.
+ * @param {number} progress - The progress status to be saved.
+ * @function showAddTaskOverlay
+ * @returns {void}
+ */
 function showAddTaskOverlay(progress) {
     localStorage.setItem('progressStatus', progress);
     document.body.style.overflow = 'hidden';
-
     let overlayBoardAddTaskRef = document.getElementById('overlay-board-add-task');
     let iframeRef = document.getElementById('addTaskIframe');
-
     if (overlayBoardAddTaskRef && iframeRef) {
         overlayBoardAddTaskRef.classList.remove('slide-out', 'd-none');
         overlayBoardAddTaskRef.classList.add('slide-in');
@@ -314,28 +318,37 @@ function showAddTaskOverlay(progress) {
 }
 
 
+/**
+ * Closes the "Add Task" overlay, resets the progress status, and applies slide-out animation.
+ * @function closeAddTaskOverlay
+ * @returns {void}
+ */
 function closeAddTaskOverlay() {
     document.body.style.overflow = '';
     localStorage.removeItem('progressStatus');
-
     let overlayBoardAddTaskRef = document.getElementById('overlay-board-add-task');
     let iframeRef = document.getElementById('addTaskIframe');
-
     if (overlayBoardAddTaskRef && iframeRef) {
         overlayBoardAddTaskRef.classList.remove('slide-in');
         overlayBoardAddTaskRef.classList.add('slide-out');
         iframeRef.classList.add('slide-out');
-
         hideOverlay(overlayBoardAddTaskRef, iframeRef);
     }
 }
 
+
+/**
+ * Hides the overlay after a delay and resets the iframe source.
+ * @param {HTMLElement} overlayBoardAddTaskRef - The overlay element.
+ * @param {HTMLElement} iframeRef - The iframe element.
+ * @function hideOverlay
+ * @returns {void}
+ */
 function hideOverlay(overlayBoardAddTaskRef, iframeRef) {
     setTimeout(() => {
         overlayBoardAddTaskRef.classList.add('d-none');
         overlayBoardAddTaskRef.classList.remove('slide-out');
         iframeRef.classList.remove('slide-out');
-
         const iframe = document.getElementById('addTaskIframe');
         if (iframe) {
             iframe.src = 'addTaskBoard.html';
@@ -345,12 +358,10 @@ function hideOverlay(overlayBoardAddTaskRef, iframeRef) {
 }
 
 
-
-// function reloadIframe() {
-//     const iframe = document.getElementById("addTaskIframe");
-//     iframe.contentWindow.location.reload();
-// }
-
+/**
+ * Listens for messages from the parent window to close the overlay.
+ * @function
+ */
 window.addEventListener("message", (event) => {
     if (event.data === "closeAddTaskOverlay") {
         closeAddTaskOverlay();
