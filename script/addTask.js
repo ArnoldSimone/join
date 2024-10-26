@@ -90,6 +90,7 @@ function showPopup() {
         parent.postMessage("closeAddTaskOverlay", "*");
         setTimeout(() => {
             popup.classList.add('d-none');
+            if (window.location.pathname.includes('/addTask.html')) {
                 window.location.href = 'board.html';
             }
         }, 500);
