@@ -5,8 +5,12 @@ function init() {
     fetchContacts();
     setMinDate();
     mediumPriority();
+    progressToDo();
 }
 
+function progressToDo() {
+    localStorage.setItem('progressStatus', 'todo')
+}
 
 /**
  * Fetches the contacts from the database and renders them in the assigned list.
@@ -86,9 +90,7 @@ function showPopup() {
         parent.postMessage("closeAddTaskOverlay", "*");
         setTimeout(() => {
             popup.classList.add('d-none');
-            if (localStorage.getItem('progressStatus') === null || localStorage.getItem('progressStatus') === '') {
                 window.location.href = 'board.html';
-            }
         }, 500);
     }, 2000);
 }
