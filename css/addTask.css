@@ -247,7 +247,7 @@ textarea {
     position: absolute;
     top: 100%;
     left: 0;
-    width: calc(100% - 45px) !important;
+    width: 100%;
     background-color: var(--lightgrey);
     height: 70px;
     overflow-y: auto;
@@ -255,13 +255,11 @@ textarea {
 }
 
 li {
-    /* max-width: auto; */
     overflow-wrap: break-word;
     white-space: normal;
     padding: 4px;
     border-radius: 4px;
     width: 100%;
-
 }
 
 

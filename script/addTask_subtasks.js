@@ -121,13 +121,14 @@ function editSubtask(index) {
 
 
 /**
- * Saves changes made to a specific subtask.
+ * Saves changes made to a specific subtask. Deletes the subtask if the input field is empty.
  * @param {number} index - The index of the subtask to save.
  */
 function saveSubtask(index) {
     let newTitle = document.getElementById('edit-subtask-input').value.trim();
-
-    if (newTitle !== '') {
+    if (newTitle === '') {
+        deleteSubtask(index);
+    } else {
         subtasks[index].title = newTitle;
         renderSubtasks();
         editingSubtaskIndex = null;
