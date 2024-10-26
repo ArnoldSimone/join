@@ -91,6 +91,7 @@ function showPopup() {
         setTimeout(() => {
             popup.classList.add('d-none');
                 window.location.href = 'board.html';
+            }
         }, 500);
     }, 2000);
 }
