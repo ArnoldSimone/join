@@ -27,9 +27,9 @@ function changePrio(selectedPrio) {
  */
 function changePrioUrgent(btnUrgentRef, btnMediumRef, btnLowRef) {
     btnUrgentRef.classList.add('urgent-active');
-    btnUrgentRef.querySelector('img').src = '../assets/img/urgentwhitesym.png';
-    btnMediumRef.querySelector('img').src = '../assets/img/mediumsym.png';
-    btnLowRef.querySelector('img').src = '../assets/img/lowsym.png';
+    btnUrgentRef.querySelector('img').src = '/assets/img/urgentwhitesym.png';
+    btnMediumRef.querySelector('img').src = '/assets/img/mediumsym.png';
+    btnLowRef.querySelector('img').src = '/assets/img/lowsym.png';
 }
 
 
@@ -42,9 +42,9 @@ function changePrioUrgent(btnUrgentRef, btnMediumRef, btnLowRef) {
  */
 function changePrioMedium(btnUrgentRef, btnMediumRef, btnLowRef) {
     btnMediumRef.classList.add('medium-active');
-    btnMediumRef.querySelector('img').src = '../assets/img/mediumwhitesym.png';
-    btnUrgentRef.querySelector('img').src = '../assets/img/urgentsym.png';
-    btnLowRef.querySelector('img').src = '../assets/img/lowsym.png';
+    btnMediumRef.querySelector('img').src = '/assets/img/mediumwhitesym.png';
+    btnUrgentRef.querySelector('img').src = '/assets/img/urgentsym.png';
+    btnLowRef.querySelector('img').src = '/assets/img/lowsym.png';
 }
 
 
@@ -57,9 +57,9 @@ function changePrioMedium(btnUrgentRef, btnMediumRef, btnLowRef) {
  */
 function changePrioLow(btnUrgentRef, btnMediumRef, btnLowRef) {
     btnLowRef.classList.add('low-active');
-    btnLowRef.querySelector('img').src = '../assets/img/lowwhitesym.png';
-    btnUrgentRef.querySelector('img').src = '../assets/img/urgentsym.png';
-    btnMediumRef.querySelector('img').src = '../assets/img/mediumsym.png';
+    btnLowRef.querySelector('img').src = '/assets/img/lowwhitesym.png';
+    btnUrgentRef.querySelector('img').src = '/assets/img/urgentsym.png';
+    btnMediumRef.querySelector('img').src = '/assets/img/mediumsym.png';
 }
 
 
@@ -137,9 +137,9 @@ function toggleDropdown() {
 function changeDropdownImage(isOpened) {
     let dropdownImage = document.getElementById("input-assigned-edit");
     if (isOpened) {
-        dropdownImage.style.backgroundImage = "url('../assets/img/drop-up-arrow.png')";
+        dropdownImage.style.backgroundImage = "url('/assets/img/drop-up-arrow.png')";
     } else {
-        dropdownImage.style.backgroundImage = "url('../assets/img/drop-down-arrow.png')";
+        dropdownImage.style.backgroundImage = "url('/assets/img/drop-down-arrow.png')";
     }
 }
 

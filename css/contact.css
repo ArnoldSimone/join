@@ -221,15 +221,15 @@ input {
 }
 
 #add-name, #edit-name {
-    background-image: url('../assets/icon/person.svg');
+    background-image: url('/assets/icon/person.svg');
 }
 
 #add-email, #edit-email {
-    background-image: url('../assets/icon/mail.svg');
+    background-image: url('/assets/icon/mail.svg');
 }
 
 #add-phone, #edit-phone {
-    background-image: url('../assets/icon/phone.svg');
+    background-image: url('/assets/icon/phone.svg');
 }
 
 .contact-info-container {

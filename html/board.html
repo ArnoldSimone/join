@@ -4,28 +4,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="../assets/img/logo_white.png" />
-    <link rel="stylesheet" href="../standard.css">
-    <link rel="stylesheet" href="../css/header.css">
-    <link rel="stylesheet" href="../css/sidebar.css">
-    <link rel="stylesheet" href="../css/fonts.css">
-    <link rel="stylesheet" href="../css/board.css">
-    <link rel="stylesheet" href="../css/boardAssets.css">
-    <link rel="stylesheet" href="../css/boardEditTask.css">
-    <link rel="stylesheet" href="../responsiv/board_responsiv.css">
-    <link rel="stylesheet" href="../responsiv/header_responsiv.css">
-    <link rel="stylesheet" href="../responsiv/sidebar_responsiv.css">
-    <script defer src="../script/include.js"></script>
-    <script defer src="../script/sidebar.js"></script>
-    <sc defer src="../script.js"></sc ript>
-    <script defer src="../script/header.js"></script>
-    <script defer src="../script/board.js"></script>
-    <script defer src="../script/boardUtilities.js"></script>
-    <script defer src="../script/boardEdit.js"></script>
-    <script defer src="../script/boardEditUtilities.js"></script>
-    <script defer src="../script/database.js"></script>
-    <script defer src="../templates/board_templates.js"></script>
-    <!-- <script defer src="../script/boardAddTask.js"></script> -->
+    <link rel="icon" type="image/png" href="/assets/img/logo_white.png" />
+    <link rel="stylesheet" href="/standard.css">
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/fonts.css">
+    <link rel="stylesheet" href="/css/board.css">
+    <link rel="stylesheet" href="/css/boardAssets.css">
+    <link rel="stylesheet" href="/css/boardEditTask.css">
+    <link rel="stylesheet" href="/responsiv/board_responsiv.css">
+    <link rel="stylesheet" href="/responsiv/header_responsiv.css">
+    <link rel="stylesheet" href="/responsiv/sidebar_responsiv.css">
+    <script defer src="/script/include.js"></script>
+    <script defer src="/script/sidebar.js"></script>
+    <sc defer src="/script.js"></sc ript>
+    <script defer src="/script/header.js"></script>
+    <script defer src="/script/board.js"></script>
+    <script defer src="/script/boardUtilities.js"></script>
+    <script defer src="/script/boardEdit.js"></script>
+    <script defer src="/script/boardEditUtilities.js"></script>
+    <script defer src="/script/database.js"></script>
+    <script defer src="/templates/board_templates.js"></script>
+    <!-- <script defer src="/script/boardAddTask.js"></script> -->
     <title>Join - Board</title>
 </head>
 
@@ -42,17 +42,17 @@
                 <div class="header-board-left">
                     <h1 class="headline">Board</h1>
                     <button onclick="showAddTaskOverlay('todo')" class="btn-dark-responsive d-flex d-none">
-                        <img class="image-plus-add-task d-flex" src="../assets/img/plus-white.svg"
+                        <img class="image-plus-add-task d-flex" src="/assets/img/plus-white.svg"
                             alt="Image Plus"></button>
                 </div>
                 <div class="header-board-right d-flex">
                     <div class="ctn-input-search">
                         <input id="input-search-task" class="input-field" type="text" oninput="filterTasksBoard()"
                             autocomplete="off" spellcheck="false" placeholder="Find Task">
-                        <img class="search-image" src="../assets/img/search.svg" alt="imageSearch">
+                        <img class="search-image" src="/assets/img/search.svg" alt="imageSearch">
                     </div>
                     <button id="addTaskBoard" onclick="showAddTaskOverlay('todo')" class="btn-dark d-flex-y">Add Task
-                        <img class="image-plus-add-task" src="../assets/img/plus-white.svg" alt="Image Plus"></button>
+                        <img class="image-plus-add-task" src="/assets/img/plus-white.svg" alt="Image Plus"></button>
                 </div>
             </div>
             <div class="main-board d-flex-x">
@@ -60,7 +60,7 @@
                     <div class="header-container d-flex-y">
                         <span>To do</span>
                         <img onclick="showAddTaskOverlay('todo')" class="btn-add-task-smal"
-                            src="../assets/img/plusButtonDarkBlue.svg" alt="Image Plus">
+                            src="/assets/img/plusButtonDarkBlue.svg" alt="Image Plus">
                     </div>
                     <div class="ctn-drag-area" ondrop="moveTo('todo')"
                         ondragover="allowDrop(event); highlight('highlight-todo')"
@@ -74,7 +74,7 @@
                     <div class="header-container d-flex-y">
                         <span>In progress</span>
                         <img onclick="showAddTaskOverlay('in progress')" class="btn-add-task-smal"
-                            src="../assets/img/plusButtonDarkBlue.svg" alt="Image Plus">
+                            src="/assets/img/plusButtonDarkBlue.svg" alt="Image Plus">
                     </div>
                     <div class="ctn-drag-area" ondrop="moveTo('in progress')"
                         ondragover="allowDrop(event); highlight('highlight-in-progress')"
@@ -90,7 +90,7 @@
                     <div class="header-container d-flex-y">
                         <span>Await feedback</span>
                         <img onclick="showAddTaskOverlay('await feedback')" class="btn-add-task-smal"
-                            src="../assets/img/plusButtonDarkBlue.svg" alt="Image Plus">
+                            src="/assets/img/plusButtonDarkBlue.svg" alt="Image Plus">
                     </div>
                     <div class="ctn-drag-area" ondrop="moveTo('await feedback')"
                         ondragover="allowDrop(event); highlight('highlight-await-feedback')"

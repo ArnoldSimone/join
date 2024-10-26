@@ -148,9 +148,9 @@ function inputValueCheck() {
 function toogleInputImage() {
     let image = document.getElementById('assignedImage');
     if (image.src.includes('assets/icon/arrow_drop_downaa.svg')) {
-        image.src = '../assets/icon/arrow_drop_up.svg'
+        image.src = '/assets/icon/arrow_drop_up.svg'
     } else {
-        image.src = '../assets/icon/arrow_drop_downaa.svg'
+        image.src = '/assets/icon/arrow_drop_downaa.svg'
     };
 }
 
@@ -319,18 +319,18 @@ function getPriorityConfig() {
     return {
         'Urgent': {
             color: '#ff3e06',
-            activeImg: '../assets/img/urgentwhitesym.png',
-            defaultImg: '../assets/img/urgentsym.png'
+            activeImg: '/assets/img/urgentwhitesym.png',
+            defaultImg: '/assets/img/urgentsym.png'
         },
         'Medium': {
             color: '#ffaa18',
-            activeImg: '../assets/img/mediumwhitesym.png',
-            defaultImg: '../assets/img/mediumsym.png'
+            activeImg: '/assets/img/mediumwhitesym.png',
+            defaultImg: '/assets/img/mediumsym.png'
         },
         'Low': {
             color: '#7ee432',
-            activeImg: '../assets/img/lowwhitesym.png',
-            defaultImg: '../assets/img/lowsym.png'
+            activeImg: '/assets/img/lowwhitesym.png',
+            defaultImg: '/assets/img/lowsym.png'
         }
     };
 }
@@ -392,8 +392,8 @@ function changeImage(button, state) {
     const img = button.querySelector('img');
     
     if (state === 'hover') {
-        img.src = '../assets/img/close-blue.svg'; 
+        img.src = '/assets/img/close-blue.svg'; 
     } else {
-        img.src = '../assets/img/close.svg'; 
+        img.src = '/assets/img/close.svg'; 
     }
 }

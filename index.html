@@ -4,30 +4,30 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/png" href="../assets/img/logo_white.png" />
-  <link rel="stylesheet" href="./css/animation.css">
-  <link rel="stylesheet" href="../standard.css">
-  <link rel="stylesheet" href="../css/login.css">
-  <link rel="stylesheet" href="./css/signUp.css">
-  <link rel="stylesheet" href="./responsiv/login-responsiv.css">
-  <script defer src="./script/animation.js"></script>
+  <link rel="icon" type="image/png" href="/assets/img/logo_white.png" />
+  <link rel="stylesheet" href="/css/animation.css">
+  <link rel="stylesheet" href="/standard.css">
+  <link rel="stylesheet" href="/css/login.css">
+  <link rel="stylesheet" href="/css/signUp.css">
+  <link rel="stylesheet" href="/responsiv/login-responsiv.css">
+  <script defer src="/script/animation.js"></script>
   <script defer src="script.js"></script>
-  <script src="./script/database.js"></script>
-  <script src="./script/sidebar.js"></script>
+  <script src="/script/database.js"></script>
+  <script src="/script/sidebar.js"></script>
   <title>Join</title>
 </head>
 
 <body id="loginBody" onload="animationStartCheck(); getRemember()" onresize="checkWindowWitdh()">
   <section id="animation" class="animation">
     <div id="content" class="animation-content">
-      <img id="logo" src="./assets/img/logo_white.png" alt="Logo">
+      <img id="logo" src="/assets/img/logo_white.png" alt="Logo">
     </div>
   </section>
   <section id="login-header" class="login-header d-none">
     <div class="login-header">
       <div class="sign-up-content d-flex-y">
         <span>Not a Join user?</span>
-        <a href="./html/signUp.html">Sign up</a>
+        <a href="/html/signUp.html">Sign up</a>
       </div>
     </div>
   </section>
@@ -41,12 +41,12 @@
         <form onsubmit="login(); return false;">
           <div id="email-content" class="input-content">
             <input id="email" class="input" placeholder="Email" type="email" required>
-            <img src="./assets/icon/mail.svg" alt="Email">
+            <img src="/assets/icon/mail.svg" alt="Email">
           </div>
           <div>
             <div id="password-content" class="input-content">
               <input onkeyup="changeImage(); validateLogin()" id="password" class="input" placeholder="Password" type="password" required>
-              <img id="image" onclick="passwordVisibility()" src="./assets/icon/lock.svg" alt="lock">
+              <img id="image" onclick="passwordVisibility()" src="/assets/icon/lock.svg" alt="lock">
             </div>
             <div id="error" class="msg-box d-none ">
               <span>Check your email and password. Please try again</span>
@@ -60,7 +60,7 @@
           </div>
           <div class="login-buttons d-flex-x">
             <button class="login-in">Log in</button>
-            <a href="./html/summary.html" class="guest-log d-flex">Guest Log in</a>
+            <a href="/html/summary.html" class="guest-log d-flex">Guest Log in</a>
           </div>
         </form>
       </div>
@@ -70,12 +70,12 @@
     <div class="login-mobil d-none">
       <div class="sign-up-content d-flex-y">
         <span>Not a Join user?</span>
-        <a href="./html/signUp.html">Sign up</a>
+        <a href="/html/signUp.html">Sign up</a>
       </div>
     </div>
     <div class="info-notice d-flex">
-      <a href="./html/privacy-guest.html">Privacy Policy</a>
-      <a href="./html/legalnotice-guest.html">Legal notice</a>
+      <a href="/html/privacy-guest.html">Privacy Policy</a>
+      <a href="/html/legalnotice-guest.html">Legal notice</a>
     </div>
   </section>
 </body>

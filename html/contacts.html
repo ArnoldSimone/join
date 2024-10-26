@@ -4,23 +4,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="../assets/img/logo_white.png" />
-    <link rel="stylesheet" href="../standard.css">
-    <link rel="stylesheet" href="../css/header.css">
-    <link rel="stylesheet" href="../css/sidebar.css">
-    <link rel="stylesheet" href="../css/fonts.css">
-    <link rel="stylesheet" href="../css/contact.css">
-    <link rel="stylesheet" href="../css/contact_assets.css">
-    <link rel="stylesheet" href="../responsiv/contacts_responsiv.css">
-    <script defer src="../script/include.js"></script>
-    <script defer src="../script/sidebar.js"></script>
-    <script src="../script/database.js"></script>
-    <script defer src="../script/contactsOperations.js"></script>
-    <script defer src="../script/contacts.js"></script>
-    <script defer src="../script/contactsTaskHandler.js"></script>
-    <script defer src="../templates/contacts_templates.js"></script>
-    <script defer src="../script.js"></script>
-    <script src="../script/header.js"></script>
+    <link rel="icon" type="image/png" href="/assets/img/logo_white.png" />
+    <link rel="stylesheet" href="/standard.css">
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/fonts.css">
+    <link rel="stylesheet" href="/css/contact.css">
+    <link rel="stylesheet" href="/css/contact_assets.css">
+    <link rel="stylesheet" href="/responsiv/contacts_responsiv.css">
+    <script defer src="/script/include.js"></script>
+    <script defer src="/script/sidebar.js"></script>
+    <script src="/script/database.js"></script>
+    <script defer src="/script/contactsOperations.js"></script>
+    <script defer src="/script/contacts.js"></script>
+    <script defer src="/script/contactsTaskHandler.js"></script>
+    <script defer src="/templates/contacts_templates.js"></script>
+    <script defer src="/script.js"></script>
+    <script src="/script/header.js"></script>
     <title>Join - Contacts</title>
 </head>
 
@@ -38,13 +38,13 @@
             <div class="contact-list">
                 <div class="d-flex add-contact-container">
                     <button class="add-contact-btn d-flex" onclick="showAddContactOverlay()">Add new contact
-                        <img src="../assets/img/person_add.png" alt="">
+                        <img src="/assets/img/person_add.png" alt="">
                     </button>
                 </div>
                 <div class="contacts"></div>
             </div>
             <div class="contact-detail-container" id="contactDetail">
-                <button class="close-btn" onclick="hideContactDetails()"><img src="../assets/img/vector.png" alt=""></button>
+                <button class="close-btn" onclick="hideContactDetails()"><img src="/assets/img/vector.png" alt=""></button>
                 <div class="contact-rightheadline">
                     <div class="d-flex-y"></div>
                     <h1 class="headline padding-right20">Contacts</h1>
@@ -61,13 +61,13 @@
                                 <h2 class="margin0 padding-left20"><span class="contact-name"></span></h2>
                                 <div class="contact-actions">
                                     <button id="edit-points-btn" onclick="toggleEditDelete()">
-                                        <img src="../assets/img/edit-points.png" alt="Edit Options">
+                                        <img src="/assets/img/edit-points.png" alt="Edit Options">
                                       </button>
                                     <button id="edit-btn" class="edit-btn border-unset"
                                         onclick="showEditContact(document.getElementById('edit-contact-id').value, document.querySelector('.contact-name').textContent, document.getElementById('contact-email').textContent, document.getElementById('contact-phone').textContent)"><img
-                                            src="../assets/img/edit.png" alt="">Edit</button>
+                                            src="/assets/img/edit.png" alt="">Edit</button>
                                     <button id="delete-btn" class="delete-btn border-unset" onclick="deleteContact()"><img
-                                            src="../assets/img/delete.png" alt="">Delete</button>
+                                            src="/assets/img/delete.png" alt="">Delete</button>
                                 </div>
                             </div>
                         </div>
@@ -87,14 +87,14 @@
         <div id="add-contact-overlay" class="overlay" onclick="hideOverlay(event)">
             <div class="overlay-content" onclick="event.stopPropagation()">
                 <div class="overlay-left">
-                    <img src="../assets/img/close-white.svg" alt="Close" class="close-icon" onclick="clearValidationErrors(); clearInputFields(); hideOverlay()">
-                    <img src="../assets/img/logo_white.png" alt="">
+                    <img src="/assets/img/close-white.svg" alt="Close" class="close-icon" onclick="clearValidationErrors(); clearInputFields(); hideOverlay()">
+                    <img src="/assets/img/logo_white.png" alt="">
                     <h1>Add Contact</h1>
                     <p>Tasks are better with a team!</p>
                     <div class="horizontal-line-blue"></div>
                 </div>
                 <div class="d-flex overlay-contact-middle">
-                    <img src="../assets/img/addcontact.png" alt="">
+                    <img src="/assets/img/addcontact.png" alt="">
                 </div>
                 <form class="direction-column" onsubmit="addNewContact(); return false;">
                     <div class="input-container">
@@ -113,19 +113,19 @@
                         <button type="button" class="cancel" 
                         onmouseover="changeCancelImage(this, 'hover')" 
                         onmouseout="changeCancelImage(this, 'default')" 
-                        onclick="clearValidationErrors(); clearInputFields(); hideOverlay()">Cancel<img src="../assets/img/close.svg" alt=""></button>
-                        <button type="submit" class="create-contact">Create contact<img src="../assets/img/check-white.svg" alt=""></button>
+                        onclick="clearValidationErrors(); clearInputFields(); hideOverlay()">Cancel<img src="/assets/img/close.svg" alt=""></button>
+                        <button type="submit" class="create-contact">Create contact<img src="/assets/img/check-white.svg" alt=""></button>
                     </div>
                 </form>
-                <img class="close-black-add-icon" onclick="clearValidationErrors(); clearInputFields(); hideOverlay()" src="../assets/img/close-black.svg" alt="">   
+                <img class="close-black-add-icon" onclick="clearValidationErrors(); clearInputFields(); hideOverlay()" src="/assets/img/close-black.svg" alt="">   
             </div>
         </div>
         <!-- Edit Contact Overlay -->
         <div id="edit-contact-overlay" class="overlay slide-out" onclick="hideOverlay(event)">
             <div class="overlay-content" onclick="event.stopPropagation()">
                 <div class="overlay-left">
-                    <img src="../assets/img/close-white.svg" alt="Close" class="close-icon" onclick="clearValidationErrors(); clearInputFields(); hideOverlay()">
-                    <img src="../assets/img/logo_white.png" alt="">
+                    <img src="/assets/img/close-white.svg" alt="Close" class="close-icon" onclick="clearValidationErrors(); clearInputFields(); hideOverlay()">
+                    <img src="/assets/img/logo_white.png" alt="">
                     <h1>Edit Contact</h1>
                     <div class="horizontal-line-blue"></div>
                 </div>
@@ -151,11 +151,11 @@
                         onmouseover="changeCancelImage(this, 'hover')" 
                         onmouseout="changeCancelImage(this, 'default')" 
                         onclick="clearValidationErrors(); deleteContact(); hideOverlay()">
-                        Delete<img src="../assets/img/close.svg" alt=""></button>
-                        <button type="button" class="save-changes" onclick="validateEditContact()">Save<img src="../assets/img/check-white.svg" alt=""></button>
+                        Delete<img src="/assets/img/close.svg" alt=""></button>
+                        <button type="button" class="save-changes" onclick="validateEditContact()">Save<img src="/assets/img/check-white.svg" alt=""></button>
                     </div>
                 </form>
-                <img class="close-black-icon" onclick="clearValidationErrors(); hideOverlay()" src="../assets/img/close-black.svg" alt="">
+                <img class="close-black-icon" onclick="clearValidationErrors(); hideOverlay()" src="/assets/img/close-black.svg" alt="">
                 
             </div>
         </div>

@@ -61,9 +61,9 @@ function generateSubtaskHTML(subtaskId, subtaskText) {
         <li id="subtask-${subtaskId}" onmouseover="showButtons(${subtaskId})" onmouseout="hideButtons(${subtaskId})">
             <span id="subtask-text-${subtaskId}">${subtaskText}</span>
             <span class="subtask-buttons" id="subtask-buttons-${subtaskId}" style="display: none;">
-                <button class="subtask-button" type="button" onclick="editSubtask(${subtaskId})"><img src="../assets/img/edit.png" alt=""></button>
+                <button class="subtask-button" type="button" onclick="editSubtask(${subtaskId})"><img src="/assets/img/edit.png" alt=""></button>
                  <div class="small-break-between"></div>
-                <button class="subtask-button" type="button" onclick="deleteSubtask(${subtaskId})"><img src="../assets/img/dustbinDark.svg" alt=""></button>
+                <button class="subtask-button" type="button" onclick="deleteSubtask(${subtaskId})"><img src="/assets/img/dustbinDark.svg" alt=""></button>
             </span>
         </li>
     `;
@@ -80,9 +80,9 @@ function generateEditSubtaskHTML(index, title) {
         <div class="subtask-edit-container">
             <input type="text" id="edit-subtask-input" value="${title}" class="edit-subtask-input">
             <div class="subtask-buttons" style="display: inline;">
-                <button class="subtask-button edit-check" onclick="saveSubtask(${index})"><img src="../assets/img/check.png" alt="Save"></button>
+                <button class="subtask-button edit-check" onclick="saveSubtask(${index})"><img src="/assets/img/check.png" alt="Save"></button>
                 <div class="small-break-between"></div>
-                <button class="subtask-button" onclick="deleteSubtask(${index})"><img src="../assets/img/dustbinDark.svg" alt="Delete"></button>
+                <button class="subtask-button" onclick="deleteSubtask(${index})"><img src="/assets/img/dustbinDark.svg" alt="Delete"></button>
             </div>
         </div>
     `;
@@ -99,9 +99,9 @@ function generateSubtaskItemHTML(title, index) {
         <li onmouseover="showButtons(${index})" onmouseout="hideButtons(${index})">
             ${title}
             <span id="subtask-buttons-${index}" class="subtask-buttons" style="display:none;">
-                <button class="subtask-button" onclick="editSubtask(${index})"><img src="../assets/img/edit.png" alt=""></button>
+                <button class="subtask-button" onclick="editSubtask(${index})"><img src="/assets/img/edit.png" alt=""></button>
                  <div class="small-break-between"></div>
-                <button class="subtask-button" onclick="deleteSubtask(${index})"><img src="../assets/img/dustbinDark.svg" alt=""></button>
+                <button class="subtask-button" onclick="deleteSubtask(${index})"><img src="/assets/img/dustbinDark.svg" alt=""></button>
             </span>
         </li>
     `;

@@ -50,7 +50,7 @@ form {
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
-    background: url('../assets/icon/arrow_drop_downaa.svg') no-repeat right 10px;
+    background: url('/assets/icon/arrow_drop_downaa.svg') no-repeat right 10px;
     background-size: 25px;
     padding: 10px;
     border-radius: 10px;
@@ -149,13 +149,13 @@ input[type="checkbox"] {
     display: inline-block;
     width: 18px;
     height: 18px;
-    background-image: url('../assets/img/checkbox.png');
+    background-image: url('/assets/img/checkbox.png');
     background-size: cover;
     cursor: pointer;
 }
 
 input[type="checkbox"]:checked+.user-checkbox {
-    background-image: url('../assets/img/checkbox-checked-white.png');
+    background-image: url('/assets/img/checkbox-checked-white.png');
 }
 
 input#subtaks {

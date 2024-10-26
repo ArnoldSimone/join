@@ -115,5 +115,5 @@ function closeMobilMenu() {
  */
 function logOut() {
   localStorage.clear();
-  window.location.replace('../index.html');
+  window.location.replace('/index.html');
 }

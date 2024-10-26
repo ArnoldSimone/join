@@ -110,7 +110,7 @@ function determineInputValue(container, input, image) {
  */
 function standardInput(container, input, image) {
   input.type = "password";
-  image.src = "../assets/icon/lock.svg";
+  image.src = "/assets/icon/lock.svg";
   container.style.borderColor = 'lightgrey';
 }
 
@@ -122,7 +122,7 @@ function standardInput(container, input, image) {
  */
 function passwordInput(container, image) {
   container.style.borderColor = 'var(--bluehover)';
-  image.src = "../assets/icon/visibility_off.png";
+  image.src = "/assets/icon/visibility_off.png";
 }
 
 
@@ -133,7 +133,7 @@ function passwordInput(container, image) {
  */
 function textInput(container, image) {
   container.style.borderColor = 'var(--bluehover)';
-  image.src = "../assets/icon/visibility.png";
+  image.src = "/assets/icon/visibility.png";
 }
 
 
@@ -179,7 +179,7 @@ function currentStatus(input, passwordImage, confirmImage) {
  */
 function changeTypeAndImage(input, image) {
   input.type = "text";
-  image.src = "../assets/icon/visibility.png";
+  image.src = "/assets/icon/visibility.png";
 }
 
 
@@ -192,11 +192,11 @@ function resetTypeAndImage(input) {
   let confirmImage = document.getElementById('confirmPasswordImage');
   if (input.id == 'password') {
     input.type = "password";
-    passwordImage.src = "../assets/icon/visibility_off.png";
+    passwordImage.src = "/assets/icon/visibility_off.png";
   } else {
     if (input.id == 'confirmPassword') {
       input.type = "password";
-      confirmImage.src = "../assets/icon/visibility_off.png";
+      confirmImage.src = "/assets/icon/visibility_off.png";
     };
   };
 }
@@ -319,8 +319,8 @@ function registrationSuccesful() {
 
 /**
  * Redirects the user to the login page.
- * This function changes the current window location to '../index.html'.
+ * This function changes the current window location to '/index.html'.
  */
 function loginInForwarding() {
-  window.location.replace('../index.html');
+  window.location.replace('/index.html');
 }

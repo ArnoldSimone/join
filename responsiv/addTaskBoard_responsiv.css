@@ -47,25 +47,10 @@
         padding-top: 8px !important;
         padding-bottom: 8px !important;
     }
-
-    #subtask-list {
-        /* max-height: 70px !important;
-        over */
-
-    }
-
 }
 
 
-
-
-
-
-
-
 @media (max-width: 500px) {
-
-
     .prio-group {
         display: flex;
         flex-direction: column !important;

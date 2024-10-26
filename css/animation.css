@@ -59,16 +59,16 @@
 }
 
 .animation.stopped img {
-  content: url('../assets/img/logo_blue.png');
+  content: url('/assets/img/logo_blue.png');
 }
 
 @keyframes logo-Change {
   0% {
-    content: url('../assets/img/logo_white.png');
+    content: url('/assets/img/logo_white.png');
   }
 
   100% {
-    content: url('../assets/img/logo_blue.png');
+    content: url('/assets/img/logo_blue.png');
   }
 }
 
@@ -93,11 +93,11 @@
 
 @keyframes logo-Change-Mobil {
   0% {
-    content: url('../assets/img/logo_white.png');
+    content: url('/assets/img/logo_white.png');
   }
 
   100% {
-    content: url('../assets/img/logo_blue.png');
+    content: url('/assets/img/logo_blue.png');
   }
 }
 

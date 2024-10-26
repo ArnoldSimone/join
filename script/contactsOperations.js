@@ -388,9 +388,9 @@ function changeCancelImage(button, state) {
 
     if (img) {
         if (state === 'hover') {
-            img.src = '../assets/img/close-blue.svg'; 
+            img.src = '/assets/img/close-blue.svg'; 
         } else {
-            img.src = '../assets/img/close.svg'; 
+            img.src = '/assets/img/close.svg'; 
         }
     } 
 }

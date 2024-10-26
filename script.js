@@ -107,12 +107,12 @@ function changeImage() {
   let image = document.getElementById('image');
   if (input.value == 0) {
     input.type = "password";
-    image.src = "../assets/icon/lock.svg";
+    image.src = "/assets/icon/lock.svg";
   } else {
     if (input.type == "password" && input.value > 0) {
-      image.src = "../assets/icon/visibility_off.png";
+      image.src = "/assets/icon/visibility_off.png";
     } else {
-      image.src = "../assets/icon/visibility.png";
+      image.src = "/assets/icon/visibility.png";
     };
   };
 }
@@ -143,7 +143,7 @@ function passwordVisibility() {
  */
 function changeTypeAndImage(input, image) {
   input.type = "text";
-  image.src = "../assets/icon/visibility.png";
+  image.src = "/assets/icon/visibility.png";
 }
 
 
@@ -154,7 +154,7 @@ function changeTypeAndImage(input, image) {
  */
 function resetPasswort(input, image) {
   input.type = "password";
-  image.src = "../assets/icon/visibility_off.png";
+  image.src = "/assets/icon/visibility_off.png";
 }
 
 

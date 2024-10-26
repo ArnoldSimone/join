@@ -96,7 +96,7 @@ function checkWindowWitdh() {
  * classes and styles.
  */
 function desktopVersion() {
-  document.getElementById('logo').src = '../assets/img/logo_blue.png';
+  document.getElementById('logo').src = '/assets/img/logo_blue.png';
   document.getElementById('animation').classList.remove('animation-mobil');
   document.getElementById('animation').classList.remove('animation-mobil-stopped');
   document.getElementById('content').classList.remove('animation-content-mobil');
@@ -113,7 +113,7 @@ function desktopVersion() {
  * classes and styles.
  */
 function mobileVersion() {
-  document.getElementById('logo').src = '../assets/img/logo_blue.png';
+  document.getElementById('logo').src = '/assets/img/logo_blue.png';
   document.getElementById('animation').classList.remove('animation-stopped');
   document.getElementById('content').classList.remove('animation-content');
   document.getElementById('animation').classList.add('animation-mobil-stopped');
