@@ -155,6 +155,7 @@
 
     .overlay-board {
         width: 100%;
+        z-index: 500;
     }
 
     .ctn-main-Detail-Task {

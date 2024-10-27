@@ -215,6 +215,7 @@ button.btn-active:hover {
     padding: 4px 12px;
     gap: 2px;
     margin-bottom: 2px;
+    cursor: pointer;
 }
 
 .contact-left label {

@@ -233,7 +233,7 @@ main::-webkit-scrollbar {
     right: 0px;
     background-color: var(--darkblue);
     color: var(--middlegrey);
-    font-size: 12px;
+    font-size: 14px;
     padding: 8px;
     border-radius: 12px 0 12px 12px;
 }
