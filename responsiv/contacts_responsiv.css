@@ -162,7 +162,8 @@
     .overlay-content {
         flex-direction: column;
         width: 350px;
-        height: calc(100vh - 200px);
+        height: auto;
+        padding-bottom: 20px;
     }
 
     .overlay-left {
